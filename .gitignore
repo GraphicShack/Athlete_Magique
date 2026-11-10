@@ -1,0 +1,59 @@
+# ---------- Node.js ----------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.npm/
+.eslintcache
+*.tsbuildinfo
+
+# ---------- React / build ----------
+build/
+dist/
+.vite/
+.cache/
+coverage/
+
+# ---------- Secrets et configuration locale ----------
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# ---------- MySQL ----------
+*.sql.gz
+*.dump
+*.bak
+database/dumps/
+database/data/
+mysql-data/
+*.ibd
+*.frm
+*.myd
+*.myi
+
+# ---------- Journaux ----------
+logs/
+*.log
+
+# ---------- macOS ----------
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# ---------- Windows / Linux ----------
+Thumbs.db
+Desktop.ini
+*~
+
+# ---------- Éditeurs ----------
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.swp
+*.sublime-workspace
