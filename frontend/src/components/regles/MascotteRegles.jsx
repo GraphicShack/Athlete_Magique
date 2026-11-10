@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import imageMascotte from '../../assets/Mascotte.png';
 
 /** Mascotte de la page des règles, affichée en bas à droite. */
-function MascotteRegles() {
-  return <Image src={imageMascotte} alt="Mascotte de la page des règles" />;
+function MascotteRegles({ className }) {
+  return <Image className={className} src={imageMascotte} alt="Mascotte de la page des règles" />;
 }
 
 const Image = styled.img`

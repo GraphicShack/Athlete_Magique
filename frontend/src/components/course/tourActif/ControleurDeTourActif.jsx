@@ -33,7 +33,7 @@ function ControleurDeTourActif({
 }) {
   if (!personnage) {
     return (
-      <Panneau enEvidence>
+      <Panneau enEvidence teinte="tour" titre="Tour en cours">
         <MessageVide>En attente du début de la course.</MessageVide>
       </Panneau>
     );
@@ -50,14 +50,20 @@ function ControleurDeTourActif({
   );
 
   return (
-    <Panneau enEvidence aria-label="Tour en cours">
-      <EnTete>
-        <AvatarPersonnage id={personnage.id} initiales={personnage.initiales} taille="lg" />
-        <div>
-          <SurTitre>À toi de jouer, {joueur}</SurTitre>
-          <NomPersonnage>{personnage.nom}</NomPersonnage>
-        </div>
-      </EnTete>
+    <Panneau
+      enEvidence
+      teinte="tour"
+      aria-label="Tour en cours"
+      entete={
+        <EnTete>
+          <AvatarPersonnage id={personnage.id} initiales={personnage.initiales} taille="lg" />
+          <div>
+            <SurTitre>À toi de jouer, {joueur}</SurTitre>
+            <NomPersonnage>{personnage.nom}</NomPersonnage>
+          </div>
+        </EnTete>
+      }
+    >
 
       <EtapesTour etapeCourante={etapeCourante} />
 
@@ -85,7 +91,6 @@ const EnTete = styled.div`
   display: flex;
   align-items: center;
   gap: ${({ theme }) => theme.espace(4)};
-  margin-bottom: ${({ theme }) => theme.espace(4)};
 `;
 
 const SurTitre = styled.div`
@@ -113,7 +118,7 @@ const Pouvoir = styled.div`
   margin-top: ${({ theme }) => theme.espace(4)};
   padding: ${({ theme }) => theme.espace(4)};
   border-radius: ${({ theme }) => theme.rayons.sm};
-  background: ${({ theme }) => theme.couleurs.gris100};
+  background: color-mix(in srgb, var(--teinte) 25%, white); /* teinte du panneau, très diluée */
 
   p {
     margin-bottom: 0;

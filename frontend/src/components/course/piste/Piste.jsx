@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import CasePiste from './CasePiste.jsx';
 import Jeton from './Jeton.jsx';
-import { NOMBRE_CASES, COLONNES, RANGEES } from './dispositionPiste.js';
+import { COLONNES, RANGEES } from './dispositionPiste.js';
+import { NOMBRE_CASES, CASES_ETOILE } from '../../../donnees/piste.js';
 
 const NUMEROS = Array.from({ length: NOMBRE_CASES }, (_, i) => i + 1);
 
@@ -15,7 +16,7 @@ const NUMEROS = Array.from({ length: NOMBRE_CASES }, (_, i) => i + 1);
  * etoiles : numéros des cases Étoile
  * podium  : jetons arrivés, dans l'ordre (1er, 2e)
  */
-function Piste({ jetons = [], rochers = [], etoiles = [10, 20], podium = [] }) {
+function Piste({ jetons = [], rochers = [], etoiles = CASES_ETOILE, podium = [] }) {
   const jetonsSur = (position) => {
     const presents = jetons.filter((j) => j.position === position);
     return presents.length > 0 ? presents.map((j) => <Jeton key={j.id} {...j} />) : null;

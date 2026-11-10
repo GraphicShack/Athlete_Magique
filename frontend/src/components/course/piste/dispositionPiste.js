@@ -10,7 +10,6 @@
  *   [Arrivée ][ 30 ] … [ 17 ][ 16 ]  ← rangée du bas, de droite à gauche
  */
 
-export const NOMBRE_CASES = 30;
 export const COLONNES = 16;
 export const RANGEES = 4;
 

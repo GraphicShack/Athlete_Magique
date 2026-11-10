@@ -1,8 +1,9 @@
 /*
  * Charte visuelle d'Athlète Magique.
  *
- * Style : « rétro de jeu de société » — piste noire, cases de couleurs vives,
- * contours noirs épais et ombres décalées, comme des pièces en carton.
+ * Style : celui du livret de règles — pages noires, grands titres en capitales très grasses
+ * dont chaque lettre a sa couleur, cartes blanches à bandeau de couleur entourées de fins
+ * liserés colorés (cadre rétro), accroches en italique gras.
  *
  * Toutes les couleurs, polices et tailles de l'interface sont définies ici, une seule fois.
  * Dans un composant styled-components, on les lit avec la prop `theme` :
@@ -15,63 +16,131 @@
  * On n'écrit jamais une couleur ou une taille directement dans un composant.
  */
 
-// Teintes de base, réutilisées par plusieurs rôles ci-dessous.
-const NOIR = '#1b1b1f';
-const BLANC = '#ffffff';
-const BLEU = '#4a93e0';
+// Palette échantillonnée en sRGB dans How-to-play-MAGICAL-ATHLETE.pdf.
+// Couverture : rouge ; p. 2 : violet ; p. 4-6 : jaune, orange, magenta ;
+// p. 10-11 : couleurs de piste ; p. 12 et 27 : noir, blanc, gris et violet foncé.
+export const PALETTE = {
+  noir: '#000000',
+  blanc: '#ffffff',
+  rouge: '#ef3a1f',
+  orange: '#f37215',
+  jaune: '#f8dd04',
+  or: '#f8b418',
+  vert: '#278e3e',
+  vertPiste: '#46a337',
+  bleu: '#649ad7',
+  cyan: '#7dc9e5',
+  rose: '#d967b9',
+  magenta: '#ed2b9e',
+  violet: '#a67ec5',
+  violetFonce: '#8141a5',
+  gris: '#b2b0b2',
+};
+
+/*
+ * Comment la palette est utilisée (pour garder une interface cohérente) :
+ *   - noir                 : fond des pages (comme le livret) ; texte des cartes blanches
+ *   - blanc                : cartes, et texte posé directement sur le fond noir
+ *   - orange et rose       : liserés du cadre rétro autour des panneaux
+ *   - toutes les couleurs  : lettres des grands titres (titre arc-en-ciel)
+ *   - or (très dilué)      : fonds secondaires à l'intérieur des cartes
+ *   - une couleur par sujet: bandeau de titre des panneaux (voir « teintes » plus bas)
+ *   - rouge                : action principale et rideau entre les pages
+ *   - rose, or, vert de piste, bleu, jaune, gris : réservés à la piste
+ *   - magenta, violet, cyan, orange : réservés aux pions des joueurs
+ *   - vert, orange, rouge  : états des personnages (debout, tombé, éliminé)
+ * Ainsi, une couleur garde toujours le même sens d'un écran à l'autre.
+ */
+
+// Les nuances d'interface sont dérivées de la palette du livret.
+// melange(couleur, 20) = 20 % de la couleur et 80 % de blanc (un « lavis »).
+const melange = (couleur, proportion, fond = PALETTE.blanc) =>
+  `color-mix(in srgb, ${couleur} ${proportion}%, ${fond})`;
 
 const couleurs = {
-  // Neutres
-  encre: NOIR, // texte, contours, boutons principaux
-  encreDouce: '#34343b', // survol des boutons principaux
-  gris700: '#4d4f57', // texte secondaire
-  gris500: '#83868e', // texte discret, légendes
-  gris300: '#d4d3cc', // bordures fines
-  gris200: '#e6e4dc', // ligne mise en avant (événement le plus récent)
-  gris100: '#f1efe8', // fonds de panneaux secondaires
-  fond: '#f7f3e9', // fond des pages (crème, comme du carton)
-  surface: BLANC, // fond des panneaux et des cartes
-  table: '#5d635b', // fond de l'écran de course (la table de jeu)
+  encre: PALETTE.noir,
+  encreDouce: melange(PALETTE.noir, 80),
+  gris700: melange(PALETTE.noir, 75),
+  gris500: melange(PALETTE.noir, 60),
+  gris300: PALETTE.gris,
+  gris200: melange(PALETTE.or, 30), // fond un peu plus marqué (ligne mise en avant)
+  gris100: melange(PALETTE.or, 15), // fond secondaire léger (survol, panneau intérieur)
+  fond: melange(PALETTE.or, 12), // fond crème clair (intérieur de certaines cartes)
+  page: PALETTE.noir, // fond des pages, comme le livret
+  texteSurPage: PALETTE.blanc, // texte posé directement sur le fond noir
+  texteSurPageDoux: PALETTE.gris, // texte secondaire sur le fond noir
+  surface: PALETTE.blanc,
+  table: PALETTE.noir,
 
-  // Couleur d'accent : appels à l'action importants (« Jouer », « Lancer le dé »)
-  accent: '#ee5b3a',
-  accentFonce: '#cf4426',
+  accent: PALETTE.rouge,
+  accentFonce: melange(PALETTE.rouge, 92, PALETTE.noir),
 
-  // États des personnages
-  debout: '#2f9e4f',
-  tombe: '#f28c1b',
-  tombeFond: '#fff0dc',
-  elimine: '#d63031',
-  elimineFond: '#fde3e3',
+  debout: PALETTE.vert,
+  tombe: PALETTE.orange,
+  tombeFond: melange(PALETTE.orange, 15),
+  elimine: PALETTE.rouge,
+  elimineFond: melange(PALETTE.rouge, 12),
 };
 
-// La piste de course
 const piste = {
-  fond: NOIR, // la bande noire qui porte les cases
-  contour: BLANC, // le liseré blanc autour de la piste
-  // Les cases régulières alternent ces quatre couleurs, dans cet ordre.
-  cases: ['#f38cc8', '#f7a823', '#3fa34d', BLEU],
-  texteCase: NOIR,
-  // Une case sur cinq (5, 15, 25, 30) sert de repère et affiche son numéro.
-  repere: '#ef5a3c',
-  repereTexte: '#1d3f8f',
-  depart: BLEU,
-  departTexte: BLANC,
-  arrivee: NOIR, // damier de la ligne d'arrivée
-  arriveeDamier: BLANC,
-  jetonContour: BLANC, // contour intérieur des jetons, visible sur toutes les cases
-  etoile: '#ffd43b', // cases 10 et 20 (+1 pt)
-  etoileTexte: NOIR,
-  rocher: '#8a8073', // cases Rocher
-  rocherTexte: BLANC,
+  fond: PALETTE.noir,
+  contour: PALETTE.blanc,
+  cases: [PALETTE.rose, PALETTE.or, PALETTE.vertPiste, PALETTE.bleu],
+  texteCase: PALETTE.noir,
+  repere: PALETTE.rouge,
+  repereTexte: PALETTE.noir,
+  depart: PALETTE.bleu,
+  departTexte: PALETTE.noir,
+  arrivee: PALETTE.noir,
+  arriveeDamier: PALETTE.blanc,
+  jetonContour: PALETTE.blanc,
+  jetonTexte: PALETTE.noir,
+  etoile: PALETTE.jaune,
+  etoileTexte: PALETTE.noir,
+  rocher: PALETTE.gris,
+  rocherTexte: PALETTE.noir,
 };
 
-// Une couleur par joueur, dans l'ordre des joueurs (jetons, liste des joueurs).
-// Les jetons ont toujours un contour noir et blanc pour rester visibles sur toutes les cases.
-const joueurs = ['#e0352b', '#7b3fe4', '#0fa3a0', '#f2c200'];
+// Une couleur par joueur, choisie parmi celles que la piste n'utilise pas :
+// un pion ne se confond jamais avec la case sur laquelle il se trouve.
+// Toutes sont assez claires pour que les initiales en noir restent lisibles.
+const joueurs = [PALETTE.magenta, PALETTE.violet, PALETTE.cyan, PALETTE.orange];
+
+/*
+ * Teinte de chaque sujet : la couleur du bandeau de titre des panneaux.
+ * Un même sujet garde la même couleur sur tous les écrans
+ * (ex. tout ce qui parle du tour est or, de l'ordre des joueurs est cyan).
+ * Toutes ces couleurs restent lisibles avec un titre noir.
+ */
+const teintes = {
+  apercu: PALETTE.rose, // vue d'ensemble
+  preparation: PALETTE.bleu, // mise en place, avant la course
+  piste: PALETTE.vertPiste, // la piste et ses cases
+  tour: PALETTE.or, // le tour en cours, son déroulement
+  joueurs: PALETTE.cyan, // les joueurs et leur ordre
+  journal: PALETTE.violet, // l'historique des événements
+  personnages: PALETTE.magenta, // les personnages et leurs pouvoirs
+  pointage: PALETTE.orange, // points, résultats, classement
+  definitions: PALETTE.gris, // vocabulaire, informations neutres
+  regles: PALETTE.rouge, // la fenêtre des règles
+};
+
+// Couleurs des lettres des grands titres, dans l'ordre (voir TitreArcEnCiel).
+const arcEnCiel = [
+  PALETTE.violet,
+  PALETTE.rose,
+  PALETTE.jaune,
+  PALETTE.cyan,
+  PALETTE.vertPiste,
+  PALETTE.orange,
+  PALETTE.rouge,
+  PALETTE.bleu,
+  PALETTE.or,
+  PALETTE.magenta,
+];
 
 const polices = {
-  titre: "'Fredoka', 'Inter', system-ui, sans-serif", // logo, titres, numéros de cases
+  titre: "'Poppins', 'Inter', system-ui, sans-serif", // logo, titres, numéros de cases (très gras)
   texte: "'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif",
 };
 
@@ -103,16 +172,20 @@ const rayons = {
 };
 
 const bordures = {
-  fine: `1px solid ${couleurs.gris300}`, // panneaux ordinaires
-  contour: `2px solid ${NOIR}`, // boutons, étiquettes, avatars, dé, panneau mis en évidence
-  lisere: `2px solid ${BLANC}`, // traits blancs sur la piste noire (podium, bannière)
+  fine: `1px solid ${PALETTE.gris}`, // séparateurs discrets (tableaux, cartes)
+  contour: `2px solid ${PALETTE.noir}`, // boutons, étiquettes, avatars, dé, panneau mis en évidence
+  lisere: `2px solid ${PALETTE.blanc}`, // traits blancs sur la piste noire (podium, bannière)
 };
 
 const ombres = {
-  douce: `0 2px 8px color-mix(in srgb, ${NOIR} 10%, transparent)`,
+  douce: `0 2px 8px color-mix(in srgb, ${PALETTE.noir} 10%, transparent)`,
   // Ombre « carton » : décalée et sans flou
-  bloc: `4px 4px 0 ${NOIR}`,
-  blocPetit: `2px 2px 0 ${NOIR}`,
+  bloc: `4px 4px 0 ${PALETTE.noir}`,
+  blocPetit: `2px 2px 0 ${PALETTE.noir}`,
+  // Cadre rétro du livret : fins liserés de couleur autour d'une carte, séparés par du noir.
+  cadre: `0 0 0 3px ${PALETTE.noir}, 0 0 0 5px ${PALETTE.orange}, 0 0 0 7px ${PALETTE.noir}, 0 0 0 9px ${PALETTE.rose}`,
+  // Cadre de la carte la plus importante de l'écran : un liseré jaune de plus.
+  cadreFort: `0 0 0 3px ${PALETTE.noir}, 0 0 0 5px ${PALETTE.orange}, 0 0 0 7px ${PALETTE.noir}, 0 0 0 9px ${PALETTE.rose}, 0 0 0 11px ${PALETTE.noir}, 0 0 0 13px ${PALETTE.jaune}`,
 };
 
 // Points de rupture identiques à ceux de Bootstrap, pour que la grille et les composants s'accordent.
@@ -126,7 +199,10 @@ const ecrans = {
 const transition = '150ms ease';
 
 const theme = {
+  palette: PALETTE, // couleurs brutes, pour les illustrations (ex. icônes des personnages)
   couleurs,
+  teintes,
+  arcEnCiel,
   piste,
   joueurs,
   polices,

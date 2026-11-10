@@ -8,7 +8,7 @@ import LegendePiste from './LegendePiste.jsx';
  */
 function PanneauPiste(props) {
   return (
-    <Panneau titre="La piste" aside="Départ en haut à gauche, sens des aiguilles d'une montre.">
+    <Panneau titre="La piste" teinte="piste" aside="Départ en haut à gauche, sens des aiguilles d'une montre.">
       <Piste {...props} />
       <LegendePiste />
     </Panneau>

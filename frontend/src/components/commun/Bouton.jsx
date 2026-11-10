@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom';
 
 /**
  * Bouton de l'application.
- * variante : 'principal' (fond noir) | 'secondaire' (contour noir)
- * to       : adresse d'une page ; le bouton devient alors un lien de navigation.
+ * variante : 'principal' (fond rouge) | 'secondaire' (contour noir)
+ * to       : adresse d'une page ; le bouton devient alors un lien de navigation,
+ *            avec la transition « rideau » entre les pages (voir styles/animations.js).
  */
 function Bouton({ variante = 'principal', type = 'button', to, children, ...props }) {
-  const lien = to ? { as: Link, to } : { type };
+  const lien = to ? { as: Link, to, viewTransition: true } : { type };
   return (
     <Base $variante={variante} {...lien} {...props}>
       {children}
@@ -17,10 +18,10 @@ function Bouton({ variante = 'principal', type = 'button', to, children, ...prop
 
 const variantes = {
   principal: css`
-    background: ${({ theme }) => theme.couleurs.encre};
-    color: ${({ theme }) => theme.couleurs.surface};
+    background: ${({ theme }) => theme.couleurs.accent};
+    color: ${({ theme }) => theme.couleurs.encre};
     &:hover:not(:disabled) {
-      background: ${({ theme }) => theme.couleurs.encreDouce};
+      background: ${({ theme }) => theme.couleurs.accentFonce};
     }
   `,
   secondaire: css`

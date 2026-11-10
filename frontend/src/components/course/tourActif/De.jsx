@@ -10,16 +10,43 @@ const POINTS = {
   6: [0, 2, 3, 5, 6, 8],
 };
 
-/** Face d'un dé à 6 faces. */
+/*
+ * Forme d'éclat (étoile à 20 branches) posée derrière le dé, comme dans le livret.
+ * On calcule les points d'un polygone : un point loin du centre, puis un point plus proche,
+ * et ainsi de suite tout autour du cercle.
+ */
+function formeEclat(branches = 20) {
+  const points = [];
+  for (let i = 0; i < branches * 2; i += 1) {
+    const angle = (Math.PI * i) / branches;
+    const rayon = i % 2 === 0 ? 50 : 42; // en % : pointe, puis creux
+    points.push(`${50 + rayon * Math.cos(angle)}% ${50 + rayon * Math.sin(angle)}%`);
+  }
+  return `polygon(${points.join(', ')})`;
+}
+
+/** Face d'un dé à 6 faces, sur un éclat de couleur. */
 function De({ valeur }) {
   return (
-    <Face role="img" aria-label={`Dé : ${valeur}`}>
-      {Array.from({ length: 9 }, (_, i) => (
-        <Emplacement key={i}>{POINTS[valeur]?.includes(i) && <Point />}</Emplacement>
-      ))}
-    </Face>
+    <Eclat>
+      <Face role="img" aria-label={`Dé : ${valeur}`}>
+        {Array.from({ length: 9 }, (_, i) => (
+          <Emplacement key={i}>{POINTS[valeur]?.includes(i) && <Point />}</Emplacement>
+        ))}
+      </Face>
+    </Eclat>
   );
 }
+
+const Eclat = styled.div`
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 6.5rem;
+  height: 6.5rem;
+  background: ${({ theme }) => theme.palette.bleu};
+  clip-path: ${formeEclat()};
+`;
 
 const Face = styled.div`
   flex-shrink: 0;

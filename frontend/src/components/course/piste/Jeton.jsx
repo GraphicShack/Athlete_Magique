@@ -16,7 +16,7 @@ const Disque = styled.span`
   width: clamp(0.75rem, 3.4cqw, 1.9rem);
   height: clamp(0.75rem, 3.4cqw, 1.9rem);
   background: ${({ $couleur }) => $couleur};
-  color: ${({ theme }) => theme.piste.jetonContour};
+  color: ${({ theme }) => theme.piste.jetonTexte};
   font-family: ${({ theme }) => theme.polices.titre};
   font-size: clamp(0.3rem, 1.1cqw, 0.75rem);
   font-weight: ${({ theme }) => theme.graisses.tresForte};

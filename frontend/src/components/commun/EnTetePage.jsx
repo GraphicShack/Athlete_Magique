@@ -13,7 +13,11 @@ function EnTetePage({ lien, children }) {
         <Logo>Athlète Magique</Logo>
         {children}
       </Marque>
-      {lien && <Lien to={lien.to}>{lien.libelle}</Lien>}
+      {lien && (
+        <Lien to={lien.to} viewTransition>
+          {lien.libelle}
+        </Lien>
+      )}
     </Bandeau>
   );
 }
@@ -32,15 +36,20 @@ const Marque = styled.div`
   gap: ${({ theme }) => theme.espace(3)};
 `;
 
+// Logo blanc, capitales italiques très grasses, comme la couverture du livret.
 const Logo = styled.span`
   font-family: ${({ theme }) => theme.polices.titre};
   font-size: ${({ theme }) => theme.texte.xl};
-  font-weight: ${({ theme }) => theme.graisses.tresForte};
+  font-style: italic;
+  font-weight: 900;
   line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  color: ${({ theme }) => theme.couleurs.texteSurPage};
 `;
 
 const Lien = styled(Link)`
-  color: ${({ theme }) => theme.couleurs.encre};
+  color: ${({ theme }) => theme.couleurs.texteSurPage};
   font-weight: ${({ theme }) => theme.graisses.moyenne};
   text-underline-offset: 3px;
 `;

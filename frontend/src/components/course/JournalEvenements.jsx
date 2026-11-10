@@ -11,7 +11,7 @@ import MessageVide from '../commun/MessageVide.jsx';
  */
 function JournalEvenements({ evenements = [] }) {
   return (
-    <Panneau titre="Journal d'événements">
+    <Panneau titre="Journal d'événements" teinte="journal">
       {evenements.length === 0 ? (
         <MessageVide>Aucun événement pour l'instant.</MessageVide>
       ) : (
@@ -43,7 +43,8 @@ const Ligne = styled.li`
   align-items: baseline;
   padding: ${({ theme }) => theme.espace(2.5)} ${({ theme }) => theme.espace(4)};
   border-radius: ${({ theme }) => theme.rayons.sm};
-  background: ${({ theme, $recent }) => ($recent ? theme.couleurs.gris200 : theme.couleurs.gris100)};
+  /* Teinte du panneau diluée ; l'événement le plus récent est un peu plus marqué. */
+  background: ${({ $recent }) => ($recent ? 'color-mix(in srgb, var(--teinte) 40%, white)' : 'color-mix(in srgb, var(--teinte) 16%, white)')};
   font-size: ${({ theme }) => theme.texte.sm};
 `;
 

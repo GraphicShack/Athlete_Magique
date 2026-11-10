@@ -3,7 +3,7 @@ import Panneau from '../commun/Panneau.jsx';
 import AvatarPersonnage from '../commun/AvatarPersonnage.jsx';
 import Liste from '../commun/Liste.jsx';
 import MessageVide from '../commun/MessageVide.jsx';
-import { NOMBRE_CASES } from './piste/dispositionPiste.js';
+import { NOMBRE_CASES } from '../../donnees/piste.js';
 
 const ETATS = { tombe: 'tombé', elimine: 'éliminé' };
 
@@ -24,7 +24,7 @@ const textePoints = (points) => `${points} ${points > 1 ? 'pts' : 'pt'}`;
  */
 function OrdreDesJoueurs({ joueurs = [], idActif = null }) {
   return (
-    <Panneau titre="Joueurs">
+    <Panneau titre="Joueurs" teinte="joueurs">
       {joueurs.length === 0 ? (
         <MessageVide>Aucun joueur pour l'instant.</MessageVide>
       ) : (
@@ -64,7 +64,7 @@ const Ligne = styled.li`
   gap: ${({ theme }) => theme.espace(3)};
   padding: ${({ theme }) => theme.espace(1.5)} ${({ theme }) => theme.espace(2)};
   border-radius: ${({ theme }) => theme.rayons.sm};
-  background: ${({ theme, $actif }) => ($actif ? theme.couleurs.gris100 : 'transparent')};
+  background: ${({ $actif }) => ($actif ? 'color-mix(in srgb, var(--teinte) 30%, white)' : 'transparent')}; /* joueur actif */
 `;
 
 const Identite = styled.div`

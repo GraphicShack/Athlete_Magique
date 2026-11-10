@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import { transitionsDePage } from './animations.js';
 
 /*
  * Règles globales de l'application.
@@ -8,8 +9,8 @@ import { createGlobalStyle } from 'styled-components';
 const StyleGlobal = createGlobalStyle`
   :root {
     --bs-body-font-family: ${({ theme }) => theme.polices.texte};
-    --bs-body-color: ${({ theme }) => theme.couleurs.encre};
-    --bs-body-bg: ${({ theme }) => theme.couleurs.fond};
+    --bs-body-color: ${({ theme }) => theme.couleurs.texteSurPage};
+    --bs-body-bg: ${({ theme }) => theme.couleurs.page};
     --bs-secondary-color: ${({ theme }) => theme.couleurs.gris700};
     --bs-tertiary-color: ${({ theme }) => theme.couleurs.gris500};
     --bs-secondary-bg: ${({ theme }) => theme.couleurs.gris100};
@@ -18,8 +19,8 @@ const StyleGlobal = createGlobalStyle`
     --bs-border-radius: ${({ theme }) => theme.rayons.md};
     --bs-border-radius-sm: ${({ theme }) => theme.rayons.sm};
     --bs-border-radius-lg: ${({ theme }) => theme.rayons.lg};
-    --bs-link-color: ${({ theme }) => theme.couleurs.encre};
-    --bs-link-hover-color: ${({ theme }) => theme.couleurs.gris700};
+    --bs-link-color: ${({ theme }) => theme.couleurs.texteSurPage};
+    --bs-link-hover-color: ${({ theme }) => theme.couleurs.texteSurPageDoux};
     --bs-emphasis-color: ${({ theme }) => theme.couleurs.encre};
     --bs-focus-ring-color: color-mix(in srgb, ${({ theme }) => theme.couleurs.encre} 25%, transparent);
   }
@@ -31,11 +32,20 @@ const StyleGlobal = createGlobalStyle`
 
   h1, h2, h3, h4, h5, h6 {
     font-family: ${({ theme }) => theme.polices.titre};
-    font-weight: ${({ theme }) => theme.graisses.tresForte};
+    font-weight: 800;
+    letter-spacing: -0.01em;
   }
 
+  /* Quand une fenêtre (dialog) est ouverte, la page derrière ne défile plus. */
+  html:has(dialog[open]) {
+    overflow: hidden;
+  }
+
+  /* Rideau coloré entre les pages (voir animations.js). */
+  ${transitionsDePage}
+
   :focus-visible {
-    outline: ${({ theme }) => theme.bordures.contour};
+    outline: 2px solid ${({ theme }) => theme.palette.jaune}; /* visible sur le noir comme sur le blanc */
     outline-offset: 2px;
   }
 

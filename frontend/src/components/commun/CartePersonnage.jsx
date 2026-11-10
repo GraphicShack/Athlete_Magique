@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import banane from '../../assets/banane.png';
 import lievre from '../../assets/Lievre.png';
 import centaure from '../../assets/centaure.png';
@@ -24,15 +24,16 @@ const IMAGES = {
 };
 
 /**
- * Carte d'un personnage : avatar, nom et texte du pouvoir.
- * Utilisée par la page des règles ; servira aussi à la sélection des personnages.
+ * Carte d'un personnage : portrait, nom et texte du pouvoir.
  * personnage : { id, nom, pouvoir }
+ * format     : 'ligne'    — petit portrait à côté du nom (page des règles)
+ *              'portrait' — grand portrait au-dessus du nom (carrousel de sélection)
  */
-function CartePersonnage({ personnage, children }) {
+function CartePersonnage({ personnage, format = 'ligne', children }) {
   return (
     <Carte>
-      <EnTete>
-        <Portrait src={IMAGES[personnage.id]} alt="" aria-hidden="true" />
+      <EnTete $format={format}>
+        <Portrait $format={format} src={IMAGES[personnage.id]} alt="" aria-hidden="true" />
         <Nom>{personnage.nom}</Nom>
       </EnTete>
       <Pouvoir>{personnage.pouvoir}</Pouvoir>
@@ -47,6 +48,7 @@ const Carte = styled.article`
   gap: ${({ theme }) => theme.espace(3)};
   padding: ${({ theme }) => theme.espace(4)};
   background: ${({ theme }) => theme.couleurs.surface};
+  color: ${({ theme }) => theme.couleurs.encre};
   border: ${({ theme }) => theme.bordures.fine};
   border-radius: ${({ theme }) => theme.rayons.md};
 `;
@@ -55,6 +57,13 @@ const EnTete = styled.div`
   display: flex;
   align-items: center;
   gap: ${({ theme }) => theme.espace(3)};
+
+  ${({ $format }) =>
+    $format === 'portrait' &&
+    css`
+      flex-direction: column;
+      align-items: stretch;
+    `}
 `;
 
 const Portrait = styled.img`
@@ -64,6 +73,16 @@ const Portrait = styled.img`
   height: 4rem;
   object-fit: contain;
   border-radius: 50%;
+
+  ${({ $format }) =>
+    $format === 'portrait' &&
+    css`
+      width: 100%;
+      height: auto;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: ${({ theme }) => theme.rayons.sm};
+    `}
 `;
 
 const Nom = styled.h3`
