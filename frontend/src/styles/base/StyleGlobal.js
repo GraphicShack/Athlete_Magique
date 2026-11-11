@@ -1,12 +1,18 @@
-import { createGlobalStyle } from 'styled-components';
-import { transitionsDePage } from './animations.js';
-
 /*
- * Règles globales de l'application.
- * Les variables --bs-* adaptent Bootstrap à la charte : la grille, les formulaires
- * et les utilitaires de Bootstrap prennent ainsi les couleurs et polices du thème.
+ * StyleGlobal.js : les règles CSS qui s'appliquent à toute l'application.
+ *
+ * Responsabilités :
+ *   - adapter Bootstrap à la charte (variables --bs-*) : sa grille et ses utilitaires
+ *     prennent les couleurs et polices du thème ;
+ *   - fixer le style des titres, du focus clavier, et l'arrêt du défilement derrière une fenêtre ;
+ *   - brancher le rideau de couleur entre les pages (animations/rideau.js) ;
+ *   - réduire les animations si le joueur l'a demandé dans les réglages de son appareil.
  */
+import { createGlobalStyle } from 'styled-components';
+import { transitionsDePage } from '../animations/rideau.js';
+
 const StyleGlobal = createGlobalStyle`
+  /* Couleurs, police et arrondis de Bootstrap, remplacés par ceux du thème. */
   :root {
     --bs-body-font-family: ${({ theme }) => theme.polices.texte};
     --bs-body-color: ${({ theme }) => theme.couleurs.texteSurPage};
@@ -27,9 +33,10 @@ const StyleGlobal = createGlobalStyle`
 
   body {
     min-height: 100vh;
-    -webkit-font-smoothing: antialiased;
+    -webkit-font-smoothing: antialiased; /* texte plus net sur Mac */
   }
 
+  /* Tous les titres utilisent la police des titres, très grasse. */
   h1, h2, h3, h4, h5, h6 {
     font-family: ${({ theme }) => theme.polices.titre};
     font-weight: 800;
@@ -41,14 +48,16 @@ const StyleGlobal = createGlobalStyle`
     overflow: hidden;
   }
 
-  /* Rideau coloré entre les pages (voir animations.js). */
+  /* Rideau coloré entre les pages (voir animations/rideau.js). */
   ${transitionsDePage}
 
+  /* Contour jaune autour de l'élément choisi au clavier : visible sur le noir comme sur le blanc. */
   :focus-visible {
-    outline: 2px solid ${({ theme }) => theme.palette.jaune}; /* visible sur le noir comme sur le blanc */
+    outline: 2px solid ${({ theme }) => theme.palette.jaune};
     outline-offset: 2px;
   }
 
+  /* Le joueur a demandé moins d'animations : elles deviennent quasi instantanées. */
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
       transition-duration: 0.01ms !important;

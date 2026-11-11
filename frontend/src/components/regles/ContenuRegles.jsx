@@ -1,3 +1,12 @@
+/*
+ * ContenuRegles.jsx : toutes les sections des règles du jeu, tirées de la proposition de projet.
+ *
+ * Responsabilité : écrire le texte des règles une seule fois, dans des panneaux colorés,
+ * pour la page Règles et pour la fenêtre d'accès rapide (AccesRegles).
+ *
+ * Props :
+ *   children : éléments ajoutés à la fin de la grille (ex. la mascotte)
+ */
 import styled from 'styled-components';
 import Panneau from '../commun/Panneau.jsx';
 import CartePersonnage from '../commun/CartePersonnage.jsx';
@@ -5,11 +14,6 @@ import TableauPointage from './TableauPointage.jsx';
 import PERSONNAGES from '../../donnees/personnages.js';
 import POINTAGE from '../../donnees/pointage.js';
 
-/**
- * Toutes les sections des règles du jeu, tirées de la proposition de projet.
- * Affichées par la page Règles et par la fenêtre d'accès rapide (AccesRegles).
- * children : éléments ajoutés à la fin de la grille (ex. la mascotte de la page Règles).
- */
 function ContenuRegles({ children }) {
   return (
     <Grille>
@@ -113,6 +117,7 @@ function ContenuRegles({ children }) {
   );
 }
 
+// Une colonne, puis deux à partir d'un ordinateur portable.
 const Grille = styled.div`
   display: grid;
   gap: ${({ theme }) => theme.espace(6)};
@@ -122,16 +127,17 @@ const Grille = styled.div`
   }
 `;
 
+// Panneau qui occupe toute la largeur de la grille (les personnages).
 const PanneauLarge = styled(Panneau)`
   grid-column: 1 / -1;
 `;
 
+// Autant de colonnes de 15rem que la largeur le permet.
 const GrillePersonnages = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
   gap: ${({ theme }) => theme.espace(3)};
 `;
-
 
 // Mise en forme du texte des règles : paragraphes, listes et définitions.
 const Contenu = styled.div`
@@ -145,6 +151,7 @@ const Contenu = styled.div`
     margin: 0 0 ${({ theme }) => theme.espace(3)};
   }
 
+  /* Pas de marge sous le dernier élément. */
   > :last-child {
     margin-bottom: 0;
   }
@@ -167,6 +174,5 @@ const Contenu = styled.div`
     color: ${({ theme }) => theme.couleurs.gris700};
   }
 `;
-
 
 export default ContenuRegles;

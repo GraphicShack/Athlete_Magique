@@ -1,11 +1,14 @@
+/*
+ * PanneauPiste.jsx : le bloc « La piste » de l'écran de course.
+ *
+ * Responsabilité : mettre le plateau (Piste) et sa légende (LegendePiste) dans un panneau vert.
+ *
+ * Props : les mêmes que Piste (jetons, rochers, etoiles, podium), transmises telles quelles.
+ */
 import Panneau from '../../commun/Panneau.jsx';
 import Piste from './Piste.jsx';
 import LegendePiste from './LegendePiste.jsx';
 
-/**
- * Bloc « La piste » de l'écran de course : le plateau et sa légende dans un panneau.
- * Reçoit les mêmes données que Piste (jetons, rochers, etoiles, podium) et les lui transmet.
- */
 function PanneauPiste(props) {
   return (
     <Panneau titre="La piste" teinte="piste" aside="Départ en haut à gauche, sens des aiguilles d'une montre.">

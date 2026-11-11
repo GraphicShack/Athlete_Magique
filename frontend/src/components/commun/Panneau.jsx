@@ -1,25 +1,31 @@
-import styled from 'styled-components';
-
-/**
- * Carte encadrée, utilisée par toutes les sections d'écran, au style du livret de règles :
- * carte blanche, bandeau de titre coloré, et cadre rétro (fins liserés orange et rose).
+/*
+ * Panneau.jsx : la carte encadrée utilisée par toutes les sections d'écran,
+ * au style du livret : carte blanche, bandeau de titre coloré, cadre rétro (liserés orange et rose).
  *
- * titre      : texte du bandeau (optionnel)
- * aside      : petit texte à droite du titre (optionnel)
- * entete     : contenu libre du bandeau, à la place du titre (ex. avatar + nom)
- * teinte     : sujet du panneau, qui donne la couleur du bandeau (voir theme.teintes),
- *              ex. 'journal', 'joueurs', 'tour'… Sans teinte, le bandeau est blanc.
- * enEvidence : un liseré jaune de plus, pour la carte la plus importante de l'écran
- *
- * La teinte est aussi disponible pour le contenu dans la variable CSS --teinte :
- * une liste peut s'en servir pour colorer légèrement ses lignes.
+ * Responsabilités :
+ *   - dessiner la carte, son bandeau et son cadre ;
+ *   - choisir la couleur du bandeau selon le sujet (theme.teintes) ;
+ *   - partager cette couleur avec son contenu dans la variable CSS --teinte
+ *     (une liste peut s'en servir pour colorer légèrement ses lignes).
  *
  * Le panneau est une colonne flexible : s'il reçoit plus de hauteur que son contenu
  * (dans une mise en page fixe), son contenu peut s'étirer pour la remplir.
+ *
+ * Props :
+ *   titre      : texte du bandeau (optionnel)
+ *   aside      : petit texte à droite du titre (optionnel)
+ *   entete     : contenu libre du bandeau, à la place du titre, ex. avatar + nom (optionnel)
+ *   teinte     : sujet du panneau, ex. 'journal', 'tour'… (sans teinte, le bandeau est blanc)
+ *   enEvidence : un liseré jaune de plus, pour la carte la plus importante de l'écran
+ *   children   : le contenu de la carte
+ *   autres     : transmises à la balise <section> (ex. aria-label)
  */
+import styled from 'styled-components';
+
 function Panneau({ titre, aside, entete, teinte, enEvidence = false, children, ...props }) {
   return (
     <Cadre $teinte={teinte} $enEvidence={enEvidence} {...props}>
+      {/* Pas de bandeau si le panneau n'a ni titre ni en-tête. */}
       {(titre || entete) && (
         <Bandeau $teinte={teinte}>
           {entete ?? <Titre>{titre}</Titre>}
@@ -34,6 +40,7 @@ function Panneau({ titre, aside, entete, teinte, enEvidence = false, children, .
 // Couleur de la teinte, ou blanc si le panneau n'en a pas.
 const couleurTeinte = ({ theme, $teinte }) => theme.teintes[$teinte] ?? theme.couleurs.surface;
 
+// La carte : fond blanc, contour noir, coins arrondis et cadre rétro.
 const Cadre = styled.section`
   --teinte: ${couleurTeinte};
   display: flex;
@@ -47,6 +54,7 @@ const Cadre = styled.section`
   box-shadow: ${({ theme, $enEvidence }) => ($enEvidence ? theme.ombres.cadreFort : theme.ombres.cadre)};
 `;
 
+// Bandeau de titre, de la couleur du sujet ; le petit texte passe dessous s'il manque de place.
 const Bandeau = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -66,11 +74,13 @@ const Titre = styled.h2`
   font-weight: 900;
 `;
 
+// Petit texte à droite du titre.
 const Aside = styled.span`
   font-size: ${({ theme }) => theme.texte.xs};
   font-weight: ${({ theme }) => theme.graisses.moyenne};
 `;
 
+// Le contenu remplit le reste de la carte.
 const Contenu = styled.div`
   display: flex;
   flex-direction: column;

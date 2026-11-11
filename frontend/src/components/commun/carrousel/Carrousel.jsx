@@ -1,27 +1,30 @@
-import styled, { css } from 'styled-components';
-import useDefilement from './useDefilement.js';
-import { modulo, ecartCirculaire, placement } from './placement.js';
-
 /*
- * Carrousel en « coverflow » : la carte active est au centre, de face ;
+ * Carrousel.jsx : carrousel en « coverflow » ; la carte active est au centre, de face,
  * les autres sont empilées de chaque côté, tournées en perspective.
  * Il tourne en boucle : après la dernière carte vient la première.
  *
- * Le code est réparti en trois fichiers, chacun avec un seul rôle :
- *   - Carrousel.jsx    : l'affichage (ce fichier)
- *   - useDefilement.js : le glisser, le pavé tactile et le calage sur une carte
- *   - placement.js     : les calculs de position de chaque carte
+ * Responsabilités (ce fichier) :
+ *   - afficher les cartes à leur place, et les flèches ;
+ *   - changer de carte avec les flèches, le clavier ou un clic sur une carte.
+ * Le reste est confié à deux autres fichiers, chacun avec un seul rôle :
+ *   - useDefilement.js : le glisser, le pavé tactile et le calage sur une carte ;
+ *   - placement.js     : les calculs de position de chaque carte.
  *
  * Réutilisable pour n'importe quel contenu : la page fournit les éléments
- * et la façon d'afficher chacun (rendu).
+ * et la façon d'afficher chacun (rendu). Le carrousel ne sait pas qu'il montre des personnages.
  *
- * elements   : tableau d'éléments à afficher
- * indexActif : rang de l'élément au centre
- * onChange   : appelé avec le nouveau rang quand le joueur change de carte
- * rendu      : (element) => contenu d'une carte
- * libelle    : (element) => texte lu par les lecteurs d'écran (ex. le nom)
- * largeur    : largeur d'une carte (par défaut 17rem)
+ * Props :
+ *   elements   : tableau d'éléments à afficher
+ *   indexActif : rang de l'élément au centre
+ *   onChange   : appelé avec le nouveau rang quand le joueur change de carte
+ *   rendu      : (element) => contenu d'une carte
+ *   libelle    : (element) => texte lu par les lecteurs d'écran (ex. le nom)
+ *   largeur    : largeur d'une carte (par défaut 17rem)
  */
+import styled, { css } from 'styled-components';
+import useDefilement from './useDefilement.js';
+import { modulo, ecartCirculaire, placement } from './placement.js';
+import { COURBE } from '../../../styles/animations/animations.js';
 
 const CARTES_VISIBLES = 4; // nombre de cartes affichées de chaque côté du centre
 
@@ -29,9 +32,12 @@ function Carrousel({ elements, indexActif, onChange, rendu, libelle, largeur = '
   const total = elements.length;
   const { position, enMouvement, gestionnaires } = useDefilement({ indexActif, total, onChange });
 
+  // Aller à une carte ; modulo fait boucler (avant la première : la dernière).
   const aller = (rang) => onChange(modulo(rang, total));
+  // Carte la plus proche du centre en ce moment (même pendant un glisser).
   const rangAuCentre = modulo(Math.round(position), total);
 
+  // Flèches gauche et droite du clavier.
   function surClavier(evenement) {
     if (evenement.key === 'ArrowLeft') aller(indexActif - 1);
     if (evenement.key === 'ArrowRight') aller(indexActif + 1);
@@ -52,6 +58,7 @@ function Carrousel({ elements, indexActif, onChange, rendu, libelle, largeur = '
         aria-label={`${indexActif + 1} sur ${total} : ${libelle(elements[indexActif])}`}
       >
         {elements.map((element, rang) => {
+          // Distance de cette carte au centre, par le chemin le plus court sur la boucle.
           const ecart = ecartCirculaire(rang - position, total);
           const auCentre = rang === rangAuCentre;
           return (
@@ -67,8 +74,8 @@ function Carrousel({ elements, indexActif, onChange, rendu, libelle, largeur = '
                 transform: placement(ecart),
                 zIndex: Math.round(100 - Math.abs(ecart) * 10), // les plus proches passent devant
               }}
-              onClick={auCentre ? undefined : () => aller(rang)}
-              aria-hidden={!auCentre}
+              onClick={auCentre ? undefined : () => aller(rang)} // clic sur une carte de côté : elle vient au centre
+              aria-hidden={!auCentre} // les lecteurs d'écran ne lisent que la carte du centre
             >
               {rendu(element)}
             </Diapo>
@@ -83,6 +90,7 @@ function Carrousel({ elements, indexActif, onChange, rendu, libelle, largeur = '
   );
 }
 
+// Flèche gauche, scène, flèche droite.
 const Cadre = styled.div`
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
@@ -99,12 +107,12 @@ const Scene = styled.div`
   cursor: grab;
   touch-action: pan-y; /* sur téléphone, le glisser vertical fait défiler la page */
   overscroll-behavior-x: contain; /* le pavé tactile ne déclenche pas « page précédente » */
-  user-select: none;
+  user-select: none; /* le glisser ne sélectionne pas de texte */
+  border-radius: ${({ theme }) => theme.rayons.lg};
 
   &:active {
     cursor: grabbing;
   }
-  border-radius: ${({ theme }) => theme.rayons.lg};
 
   &:focus-visible {
     outline: ${({ theme }) => theme.bordures.contour};
@@ -112,6 +120,7 @@ const Scene = styled.div`
   }
 `;
 
+// Une carte : posée au centre de la scène, puis déplacée par « transform » (voir placement.js).
 const Diapo = styled.div`
   position: absolute;
   top: 50%;
@@ -126,7 +135,7 @@ const Diapo = styled.div`
   transition: ${({ $enMouvement }) =>
     $enMouvement
       ? 'opacity 300ms ease, filter 300ms ease'
-      : 'transform 550ms cubic-bezier(0.32, 0.72, 0, 1), opacity 300ms ease, filter 300ms ease'};
+      : `transform 550ms ${COURBE}, opacity 300ms ease, filter 300ms ease`};
   cursor: ${({ $auCentre }) => ($auCentre ? 'default' : 'pointer')};
 
   /* La carte remplit la diapositive. */
@@ -135,12 +144,14 @@ const Diapo = styled.div`
     box-shadow: ${({ theme }) => theme.ombres.douce};
   }
 
+  /* Les cartes de côté sont un peu plus sombres. */
   ${({ $auCentre }) =>
     !$auCentre &&
     css`
       filter: brightness(0.92);
     `}
 
+  /* Les cartes trop loin du centre sont invisibles et ne réagissent pas au clic. */
   ${({ $cachee }) =>
     $cachee &&
     css`
@@ -153,6 +164,7 @@ const Diapo = styled.div`
   }
 `;
 
+// Boutons ronds ‹ et ›.
 const Fleche = styled.button`
   width: 2.75rem;
   height: 2.75rem;

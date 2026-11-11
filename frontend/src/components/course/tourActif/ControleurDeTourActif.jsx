@@ -1,3 +1,23 @@
+/*
+ * ControleurDeTourActif.jsx : le panneau du tour en cours.
+ *
+ * Responsabilités :
+ *   - montrer qui joue et avec quel personnage ;
+ *   - montrer l'étape du tour, le dernier lancer de dé et ce qui vient de se passer ;
+ *   - proposer les choix possibles (pouvoir, duel…) et transmettre le choix du joueur.
+ * Il ne décide d'aucune règle : les choix possibles lui sont donnés dans « actions »,
+ * et un clic est simplement transmis par onAction(id).
+ *
+ * Props :
+ *   joueur        : ex. « Joueur 1 »
+ *   personnage    : { id, nom, initiales } ; sans personnage, le panneau attend le début de la course
+ *   etapeCourante : 1 à 4
+ *   resultatDe    : 1 à 6, ou null si le dé n'a pas encore été lancé
+ *   message       : texte expliquant ce qui vient de se passer
+ *   pouvoir       : { titre, description } ou null
+ *   actions       : [{ id, libelle, principal }]
+ *   onAction      : appelé avec l'id de l'action choisie
+ */
 import styled from 'styled-components';
 import Panneau from '../../commun/Panneau.jsx';
 import AvatarPersonnage from '../../commun/AvatarPersonnage.jsx';
@@ -6,21 +26,6 @@ import MessageVide from '../../commun/MessageVide.jsx';
 import De from './De.jsx';
 import EtapesTour from './EtapesTour.jsx';
 
-/**
- * Panneau du tour en cours : qui joue, à quelle étape, le dernier lancer,
- * et les choix proposés au joueur (pouvoir, duel…).
- *
- * Composant d'affichage : il ne décide d'aucune règle. Les choix possibles lui sont
- * donnés dans `actions`, et un clic est simplement transmis par `onAction(id)`.
- *
- * joueur        : 'Joueur 1'
- * personnage    : { id, nom, initiales } (id optionnel : affiche son icône)
- * etapeCourante : 1 à 4
- * resultatDe    : 1 à 6, ou null si le dé n'a pas encore été lancé
- * message       : texte expliquant ce qui vient de se passer
- * pouvoir       : { titre, description } ou null
- * actions       : [{ id, libelle, principal }]
- */
 function ControleurDeTourActif({
   joueur,
   personnage,
@@ -31,6 +36,7 @@ function ControleurDeTourActif({
   actions = [],
   onAction = () => {},
 }) {
+  // Avant le début de la course : un panneau vide qui garde sa place.
   if (!personnage) {
     return (
       <Panneau enEvidence teinte="tour" titre="Tour en cours">
@@ -39,6 +45,7 @@ function ControleurDeTourActif({
     );
   }
 
+  // Un bouton par action possible (rien s'il n'y en a aucune).
   const boutons = actions.length > 0 && (
     <Actions>
       {actions.map(({ id, libelle, principal }) => (
@@ -56,7 +63,7 @@ function ControleurDeTourActif({
       aria-label="Tour en cours"
       entete={
         <EnTete>
-          <AvatarPersonnage id={personnage.id} initiales={personnage.initiales} taille="lg" />
+          <AvatarPersonnage initiales={personnage.initiales} taille="lg" />
           <div>
             <SurTitre>À toi de jouer, {joueur}</SurTitre>
             <NomPersonnage>{personnage.nom}</NomPersonnage>
@@ -64,7 +71,6 @@ function ControleurDeTourActif({
         </EnTete>
       }
     >
-
       <EtapesTour etapeCourante={etapeCourante} />
 
       {(resultatDe || message) && (
@@ -74,6 +80,7 @@ function ControleurDeTourActif({
         </Resultat>
       )}
 
+      {/* Avec un pouvoir à utiliser, les boutons vont dans son encadré ; sinon, ils sont seuls. */}
       {pouvoir ? (
         <Pouvoir>
           <TitrePouvoir>{pouvoir.titre}</TitrePouvoir>
@@ -87,6 +94,7 @@ function ControleurDeTourActif({
   );
 }
 
+// Bandeau du panneau : avatar du personnage, puis « À toi de jouer » et son nom.
 const EnTete = styled.div`
   display: flex;
   align-items: center;
@@ -103,6 +111,7 @@ const NomPersonnage = styled.h2`
   font-size: ${({ theme }) => theme.texte.xl};
 `;
 
+// Le dé et le message, côte à côte.
 const Resultat = styled.div`
   display: flex;
   align-items: flex-start;
@@ -114,6 +123,7 @@ const Resultat = styled.div`
   }
 `;
 
+// Encadré du pouvoir à utiliser.
 const Pouvoir = styled.div`
   margin-top: ${({ theme }) => theme.espace(4)};
   padding: ${({ theme }) => theme.espace(4)};
@@ -132,6 +142,7 @@ const TitrePouvoir = styled.h3`
   margin-bottom: ${({ theme }) => theme.espace(2)};
 `;
 
+// Les boutons d'action, en colonnes d'au moins 8rem.
 const Actions = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));

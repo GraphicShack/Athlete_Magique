@@ -1,7 +1,13 @@
-/**
- * Les 10 personnages et le texte de leur pouvoir, tels qu'affichés au joueur.
- * Donnée d'affichage seulement : les règles des pouvoirs sont appliquées par le moteur de jeu.
- * Réutilisable par l'accueil, la sélection des personnages et la page des règles.
+/*
+ * personnages.js : les 10 personnages du jeu et le texte de leur pouvoir, tels qu'affichés au joueur.
+ *
+ * Responsabilité : être la seule source de ces textes, réutilisée par l'accueil,
+ * la sélection des personnages, la page des règles et l'écran de course.
+ * Donnée d'affichage seulement : les pouvoirs sont appliqués par le moteur de jeu, pas ici.
+ *
+ * Chaque personnage : { id, nom, initiales, pouvoir }
+ *   id         : identifiant fixe (sert à trouver son image)
+ *   initiales  : affichées sur son pion, sur la piste
  */
 const PERSONNAGES = [
   {

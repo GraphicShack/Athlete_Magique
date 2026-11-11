@@ -1,39 +1,26 @@
-import styled, { css } from 'styled-components';
-import banane from '../../assets/banane.png';
-import lievre from '../../assets/Lievre.png';
-import centaure from '../../assets/centaure.png';
-import flipflop from '../../assets/flip-flop.png';
-import hypnotiste from '../../assets/hypnotiste.png';
-import partyanimal from '../../assets/party-animal.png';
-import magicien from '../../assets/magicien.png';
-import scientifique from '../../assets/ScientifiqueFusee.png';
-import bouche from '../../assets/BOUCHE.png';
-import duelliste from '../../assets/dueliste.png';
-
-const IMAGES = {
-  banana: banane,
-  lievre,
-  centaure,
-  flipflop,
-  hypnotiste,
-  partyanimal,
-  magicien,
-  scientifique,
-  bouche,
-  duelliste,
-};
-
-/**
- * Carte d'un personnage : portrait, nom et texte du pouvoir.
- * personnage : { id, nom, pouvoir }
- * format     : 'ligne'    — petit portrait à côté du nom (page des règles)
- *              'portrait' — grand portrait au-dessus du nom (carrousel de sélection)
+/*
+ * CartePersonnage.jsx : la carte d'un personnage, avec son image, son nom et son pouvoir.
+ *
+ * Responsabilité : afficher un personnage de la même façon partout, en deux formats :
+ *   - 'ligne'    : petite image à côté du nom (page des règles) ;
+ *   - 'portrait' : grande image au-dessus du nom (carrousel de sélection).
+ *
+ * Props :
+ *   personnage : { id, nom, pouvoir } (voir donnees/personnages.js)
+ *   format     : 'ligne' (par défaut) ou 'portrait'
+ *   children   : contenu ajouté sous le pouvoir, ex. une étiquette « Choisi » (optionnel)
+ *   className  : ajoutée par styled(CartePersonnage), pour compléter le style de la carte
+ *                depuis l'extérieur (ex. la faire flotter dans la page Sélection)
  */
-function CartePersonnage({ personnage, format = 'ligne', children }) {
+import styled, { css } from 'styled-components';
+import IMAGES_PERSONNAGES from '../../donnees/imagesPersonnages.js';
+
+function CartePersonnage({ personnage, format = 'ligne', children, className }) {
   return (
-    <Carte>
+    <Carte className={className}>
       <EnTete $format={format}>
-        <Portrait $format={format} src={IMAGES[personnage.id]} alt="" aria-hidden="true" />
+        {/* alt vide : l'image est décorative, le nom est écrit juste à côté. */}
+        <Portrait $format={format} src={IMAGES_PERSONNAGES[personnage.id]} alt="" aria-hidden="true" />
         <Nom>{personnage.nom}</Nom>
       </EnTete>
       <Pouvoir>{personnage.pouvoir}</Pouvoir>
@@ -42,6 +29,7 @@ function CartePersonnage({ personnage, format = 'ligne', children }) {
   );
 }
 
+// Carte blanche à fine bordure grise.
 const Carte = styled.article`
   display: flex;
   flex-direction: column;
@@ -53,6 +41,7 @@ const Carte = styled.article`
   border-radius: ${({ theme }) => theme.rayons.md};
 `;
 
+// Image et nom : côte à côte (ligne) ou l'un au-dessus de l'autre (portrait).
 const EnTete = styled.div`
   display: flex;
   align-items: center;
@@ -66,6 +55,7 @@ const EnTete = styled.div`
     `}
 `;
 
+// Image ronde de 4rem (ligne), ou carrée sur toute la largeur de la carte (portrait).
 const Portrait = styled.img`
   display: block;
   flex-shrink: 0;
@@ -90,6 +80,7 @@ const Nom = styled.h3`
   font-size: ${({ theme }) => theme.texte.md};
 `;
 
+// Texte du pouvoir, plus petit et gris.
 const Pouvoir = styled.p`
   margin: 0;
   font-size: ${({ theme }) => theme.texte.sm};

@@ -1,7 +1,8 @@
-/**
- * Données de la piste tirées des règles du jeu.
- * Elles sont dans un seul fichier pour que l'affichage (la piste, la liste des joueurs…)
- * ne dépende pas des détails d'un autre composant.
+/*
+ * piste.js : les chiffres de la piste tirés des règles du jeu.
+ *
+ * Responsabilité : être la seule source de ces chiffres, pour que la piste,
+ * la liste des joueurs et leurs textes (« Case 15 », « Arrivé ») soient toujours d'accord.
  */
 
 // La piste compte 30 cases ; au-delà de la case 30, un personnage a franchi l'arrivée.

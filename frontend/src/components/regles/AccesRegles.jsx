@@ -1,3 +1,12 @@
+/*
+ * AccesRegles.jsx : l'accès rapide aux règles depuis n'importe quelle page.
+ *
+ * Responsabilités :
+ *   - afficher le bouton rouge « ? Règles », en bas à droite (voir App.jsx) ;
+ *   - ouvrir les règles dans une fenêtre, par-dessus la page (la partie n'est pas quittée) ;
+ *   - proposer un lien vers la page complète des règles.
+ * Le bouton est masqué sur la page des règles elle-même.
+ */
 import { useState } from 'react';
 import styled from 'styled-components';
 import { Link, useLocation } from 'react-router-dom';
@@ -7,15 +16,11 @@ import ContenuRegles from './ContenuRegles.jsx';
 import MascotteRegles from './MascotteRegles.jsx';
 import CHEMINS from '../../chemins.js';
 
-/**
- * Accès rapide aux règles depuis n'importe quelle page : un bouton flottant en bas à droite
- * ouvre les règles dans une fenêtre, par-dessus la page actuelle (la partie n'est pas quittée).
- * Le bouton est masqué sur la page des règles elle-même.
- */
 function AccesRegles() {
-  const [ouverte, setOuverte] = useState(false);
-  const { pathname } = useLocation();
+  const [ouverte, setOuverte] = useState(false); // la fenêtre est-elle ouverte ?
+  const { pathname } = useLocation(); // adresse de la page actuelle
 
+  // Sur la page des règles, le bouton ne sert à rien.
   if (pathname === CHEMINS.regles) return null;
 
   return (
@@ -44,11 +49,8 @@ function AccesRegles() {
   );
 }
 
+// Bouton rouge en forme de pilule, avec un petit rond blanc pour le « ? ».
 const BoutonFlottant = styled(Bouton)`
-  position: fixed;
-  right: ${({ theme }) => theme.espace(4)};
-  bottom: ${({ theme }) => theme.espace(4)};
-  z-index: 10;
   border-radius: ${({ theme }) => theme.rayons.rond};
   box-shadow: ${({ theme }) => theme.ombres.blocPetit};
 
@@ -66,6 +68,7 @@ const BoutonFlottant = styled(Bouton)`
   }
 `;
 
+// Dernière case de la grille des règles : la mascotte, en bas à droite.
 const EmplacementMascotte = styled.div`
   justify-self: end;
   align-self: end;
@@ -78,10 +81,12 @@ const EmplacementMascotte = styled.div`
   }
 `;
 
+// Dans la fenêtre, la mascotte prend toute la largeur de sa case.
 const MascotteModale = styled(MascotteRegles)`
   width: 100%;
 `;
 
+// Lien blanc souligné, sous les règles.
 const LienPage = styled(Link)`
   display: inline-block;
   margin-top: ${({ theme }) => theme.espace(6)};

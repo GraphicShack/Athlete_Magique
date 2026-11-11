@@ -1,17 +1,33 @@
+/*
+ * EtapesTour.jsx : la liste des 4 étapes d'un tour, avec l'étape en cours mise en évidence.
+ *
+ * Responsabilité : montrer où en est le tour (étapes passées en gris foncé,
+ * étape en cours en noir et en gras, étapes à venir en gris clair).
+ *
+ * Props :
+ *   etapeCourante : 1 à 4
+ */
 import styled from 'styled-components';
 import Liste from '../../commun/Liste.jsx';
-import { rondCentre } from '../../../styles/utilitaires.js';
+import { rondCentre } from '../../../styles/base/utilitaires.js';
 
-export const ETAPES_TOUR = ['Début du tour', 'Lancer du dé', 'Déplacement principal', 'Fin du déplacement'];
+const ETAPES_TOUR = ['Début du tour', 'Lancer du dé', 'Déplacement principal', 'Fin du déplacement'];
 
-/** Les 4 étapes d'un tour ; l'étape en cours (1 à 4) est mise en évidence. */
+// Statut d'une étape par rapport à l'étape en cours : 'passee', 'courante' ou 'avenir'.
+function statutEtape(numero, etapeCourante) {
+  if (numero === etapeCourante) return 'courante';
+  if (numero < etapeCourante) return 'passee';
+  return 'avenir';
+}
+
 function EtapesTour({ etapeCourante }) {
   return (
     <ListeEtapes>
       {ETAPES_TOUR.map((libelle, i) => {
         const numero = i + 1;
-        const statut = numero === etapeCourante ? 'courante' : numero < etapeCourante ? 'passee' : 'avenir';
+        const statut = statutEtape(numero, etapeCourante);
         return (
+          // aria-current : les lecteurs d'écran annoncent l'étape en cours.
           <Etape key={libelle} $statut={statut} aria-current={statut === 'courante' ? 'step' : undefined}>
             <Pastille $statut={statut}>{numero}</Pastille>
             {libelle}
@@ -22,11 +38,20 @@ function EtapesTour({ etapeCourante }) {
   );
 }
 
+// Couleur de la pastille numérotée selon le statut.
+const COULEURS_PASTILLE = {
+  passee: (theme) => theme.couleurs.gris700,
+  courante: (theme) => theme.couleurs.encre,
+  avenir: (theme) => theme.couleurs.gris300,
+};
+
+// Les étapes l'une sous l'autre.
 const ListeEtapes = styled(Liste)`
   display: grid;
   gap: ${({ theme }) => theme.espace(1.5)};
 `;
 
+// Une étape : sa pastille et son nom ; l'étape en cours est en noir et en gras.
 const Etape = styled.li`
   display: flex;
   align-items: center;
@@ -35,11 +60,12 @@ const Etape = styled.li`
   font-weight: ${({ theme, $statut }) => ($statut === 'courante' ? theme.graisses.tresForte : theme.graisses.normale)};
 `;
 
+// Petit rond avec le numéro de l'étape.
 const Pastille = styled.span`
   ${rondCentre}
   width: 1.5rem;
   height: 1.5rem;
-  background: ${({ theme, $statut }) => ($statut === 'avenir' ? theme.couleurs.gris300 : $statut === 'courante' ? theme.couleurs.encre : theme.couleurs.gris700)};
+  background: ${({ theme, $statut }) => COULEURS_PASTILLE[$statut](theme)};
   color: ${({ theme }) => theme.couleurs.surface};
   font-size: ${({ theme }) => theme.texte.xs};
   font-weight: ${({ theme }) => theme.graisses.forte};

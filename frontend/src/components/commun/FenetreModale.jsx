@@ -1,25 +1,33 @@
+/*
+ * FenetreModale.jsx : une fenêtre qui s'ouvre par-dessus la page actuelle, sans la remplacer
+ * (règles, paramètres).
+ *
+ * Responsabilités :
+ *   - ouvrir et fermer la fenêtre selon la prop « ouverte » ;
+ *   - la fermer par le bouton ×, la touche Échap ou un clic à l'extérieur, en jouant l'animation ;
+ *   - l'animer : elle grandit depuis le coin en bas à droite (où sont les boutons),
+ *     le × arrive en tournant et le contenu apparaît en cascade.
+ *
+ * Elle utilise l'élément HTML <dialog> : le navigateur gère lui-même le focus dans la fenêtre
+ * et le fond assombri.
+ *
+ * Props :
+ *   ouverte  : true pour l'afficher
+ *   onFermer : appelé quand la fenêtre est fermée
+ *   titre    : titre affiché dans le bandeau
+ *   teinte   : couleur du bandeau (voir theme.teintes), rouge des règles par défaut
+ *   children : le contenu de la fenêtre
+ */
 import { useEffect, useId, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
-import { COURBE, fondu, apparaitre, tourner, grandir, retrecir } from '../../styles/animations.js';
+import { COURBE, fondu, apparaitre, tourner, grandir, retrecir } from '../../styles/animations/animations.js';
 
-/**
- * Fenêtre qui s'ouvre par-dessus la page actuelle, sans la remplacer.
- * Basée sur l'élément HTML <dialog> : le navigateur gère lui-même la touche Échap,
- * le focus dans la fenêtre et le fond assombri.
- *
- * ouverte  : true pour l'afficher
- * onFermer : appelé quand la fenêtre est fermée (bouton ×, Échap ou clic à l'extérieur)
- * titre    : titre affiché en haut de la fenêtre
- *
- * Animation (en CSS, avec les animations de styles/animations.js) : la fenêtre grandit depuis le coin en bas à droite,
- * où se trouve le bouton « Règles », le × arrive en tournant et le contenu apparaît en cascade.
- */
 const DUREE_FERMETURE = 250; // ms, doit correspondre à l'animation « retrecir »
 
-function FenetreModale({ ouverte, onFermer, titre, children }) {
-  const dialogue = useRef(null);
-  const [enFermeture, setEnFermeture] = useState(false);
-  const idTitre = useId();
+function FenetreModale({ ouverte, onFermer, titre, teinte = 'regles', children }) {
+  const dialogue = useRef(null); // l'élément <dialog> de la page
+  const [enFermeture, setEnFermeture] = useState(false); // true pendant l'animation de fermeture
+  const idTitre = useId(); // relie la fenêtre à son titre, pour les lecteurs d'écran
 
   // Ouvrir ou fermer le <dialog> quand la page change « ouverte ».
   useEffect(() => {
@@ -33,7 +41,7 @@ function FenetreModale({ ouverte, onFermer, titre, children }) {
     if (enFermeture) return;
     setEnFermeture(true);
     setTimeout(() => {
-      dialogue.current.close();
+      dialogue.current?.close(); // « ?. » : rien à fermer si la fenêtre a déjà quitté la page
       setEnFermeture(false);
       onFermer();
     }, DUREE_FERMETURE);
@@ -59,7 +67,7 @@ function FenetreModale({ ouverte, onFermer, titre, children }) {
       aria-labelledby={idTitre}
     >
       <Cadre>
-        <EnTete>
+        <EnTete $teinte={teinte}>
           <Titre id={idTitre}>{titre}</Titre>
           <BoutonFermer type="button" onClick={fermer} aria-label="Fermer">
             ×
@@ -71,8 +79,6 @@ function FenetreModale({ ouverte, onFermer, titre, children }) {
   );
 }
 
-// --- Animations : définies dans styles/animations.js ---
-
 // Chaque bloc du contenu apparaît 45 ms après le précédent (8 premiers blocs).
 function apparitionEnCascade() {
   let regles = '';
@@ -82,6 +88,7 @@ function apparitionEnCascade() {
   return regles;
 }
 
+// La fenêtre elle-même : grandit à l'ouverture, rétrécit à la fermeture.
 const Dialogue = styled.dialog`
   --couleur-bouton: ${({ theme }) => theme.couleurs.encre};
   transform-origin: bottom right; /* grandit depuis le coin du bouton « Règles » */
@@ -95,6 +102,7 @@ const Dialogue = styled.dialog`
   color: inherit;
   box-shadow: ${({ theme }) => theme.ombres.cadreFort}; /* cadre rétro, comme les cartes */
 
+  /* Le fond assombri derrière la fenêtre. */
   &::backdrop {
     background: color-mix(in srgb, ${({ theme }) => theme.couleurs.encre} 55%, transparent);
   }
@@ -132,6 +140,7 @@ const Cadre = styled.div`
   animation: ${fondu} 200ms 120ms backwards; /* le contenu apparaît une fois la fenêtre lancée */
 `;
 
+// Bandeau du haut : titre à gauche, × à droite.
 const EnTete = styled.div`
   display: flex;
   align-items: center;
@@ -139,7 +148,7 @@ const EnTete = styled.div`
   gap: ${({ theme }) => theme.espace(4)};
   padding: ${({ theme }) => theme.espace(4)} ${({ theme }) => theme.espace(6)};
   border-bottom: ${({ theme }) => theme.bordures.contour};
-  background: ${({ theme }) => theme.teintes.regles}; /* même rouge que le bouton « Règles » */
+  background: ${({ theme, $teinte }) => theme.teintes[$teinte]}; /* même couleur que le bouton qui l'ouvre */
 `;
 
 // Même style que les bandeaux des cartes : italique très gras.
@@ -150,6 +159,7 @@ const Titre = styled.h2`
   font-weight: 900;
 `;
 
+// Bouton rond ×, qui arrive en tournant.
 const BoutonFermer = styled.button`
   width: 2.5rem;
   height: 2.5rem;

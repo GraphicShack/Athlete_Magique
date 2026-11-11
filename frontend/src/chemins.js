@@ -1,10 +1,13 @@
-/**
- * Adresse de chaque page, définie une seule fois.
- * Les pages s'en servent pour leurs liens (« Commencer », « Retour à l'accueil »…),
- * routes.js pour associer chaque adresse à sa page.
+/*
+ * chemins.js : l'adresse de chaque page, écrite une seule fois.
  *
- * Parcours du joueur : Accueil → Configuration → Sélection → Course → Classement → Accueil
- * Depuis l'accueil, on peut aussi consulter les Règles.
+ * Responsabilités :
+ *   - fournir les adresses aux liens des pages (« Commencer », « Retour à l'accueil »…) ;
+ *   - fournir les adresses au routeur (routes.jsx).
+ * Changer une adresse ici la change partout.
+ *
+ * Parcours du joueur : Accueil → Configuration → Sélection → Course → Classement → Accueil.
+ * Les Règles sont accessibles depuis toutes les pages.
  */
 const CHEMINS = {
   accueil: '/',

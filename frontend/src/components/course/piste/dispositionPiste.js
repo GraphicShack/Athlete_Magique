@@ -1,6 +1,8 @@
 /*
- * Géométrie de la piste : où se place chaque case dans la grille.
- * Aucune règle de jeu ici, seulement de l'affichage.
+ * dispositionPiste.js : la géométrie de la piste, c'est-à-dire où se place chaque case dans la grille.
+ *
+ * Responsabilité : calculer la colonne, la rangée, le coin et la couleur de chaque case.
+ * Aucune règle de jeu ici, seulement de l'affichage. Ce sont des fonctions « pures ».
  *
  * La piste fait une boucle, dans le sens des aiguilles d'une montre :
  *
@@ -10,6 +12,7 @@
  *   [Arrivée ][ 30 ] … [ 17 ][ 16 ]  ← rangée du bas, de droite à gauche
  */
 
+// Taille de la grille du plateau.
 export const COLONNES = 16;
 export const RANGEES = 4;
 
@@ -44,7 +47,7 @@ export function estRepere(numero) {
   return numero % 5 === 0;
 }
 
-/** Indice de couleur (0 à 3) d'une case régulière : rose, orange, vert, bleu, puis repère. */
+/** Indice de couleur d'une case : 0 à 3 pour rose, or, vert, bleu (theme.piste.cases) ; 4 tombe sur un repère. */
 export function indiceCouleur(numero) {
   return (numero - 1) % 5;
 }

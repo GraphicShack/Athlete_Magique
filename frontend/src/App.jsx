@@ -1,20 +1,53 @@
-import { Outlet } from 'react-router-dom';
-import AccesRegles from './components/regles/AccesRegles.jsx';
-
-/**
- * Cadre commun à toutes les pages.
- * La page demandée s'affiche à l'endroit de <Outlet /> (voir routes.jsx).
+/*
+ * App.jsx : cadre commun à toutes les pages.
+ *
+ * Responsabilités :
+ *   - afficher la page demandée à l'endroit de <Outlet /> (choisie par routes.jsx) ;
+ *   - garder les boutons « Règles » et « Paramètres » en bas à droite, sur toutes les pages ;
+ *   - garder la musique des menus (MusiqueMenu) d'une page à l'autre ;
+ *   - retenir les réglages du son (musique oui / non, volume), partagés entre la musique
+ *     et la fenêtre des paramètres.
  */
+import { useState } from 'react';
+import { Outlet } from 'react-router-dom';
+import styled from 'styled-components';
+import AccesParametres from './components/parametres/AccesParametres.jsx';
+import AccesRegles from './components/regles/AccesRegles.jsx';
+import MusiqueMenu from './components/son/MusiqueMenu.jsx';
+
 function App() {
+  // Réglages du son : gardés ici, le plus proche parent commun de la musique et des paramètres.
+  const [musiqueActive, setMusiqueActive] = useState(true);
+  const [volume, setVolume] = useState(40); // 0 à 100
+  const son = { musiqueActive, setMusiqueActive, volume, setVolume };
+
   return (
-    // La page occupe toute la hauteur de la fenêtre et peut remplir l'espace restant.
-    <main className="container-xxl py-4 min-vh-100 d-flex flex-column">
+    // Classes Bootstrap : largeur maximale centrée, marges intérieures,
+    // et au moins toute la hauteur de l'écran (la page peut remplir l'espace restant).
+    <main className="container-xxl px-4 py-4 min-vh-100 d-flex flex-column">
       <Outlet />
 
-      {/* Bouton « Règles » présent sur toutes les pages */}
-      <AccesRegles />
+      {/* Musique de fond des menus (n'affiche rien) */}
+      <MusiqueMenu active={musiqueActive} volume={volume} />
+
+      {/* « Règles » puis « Paramètres » (tout à droite) */}
+      <CoinFlottant>
+        <AccesRegles />
+        <AccesParametres son={son} />
+      </CoinFlottant>
     </main>
   );
 }
+
+// Coin en bas à droite de l'écran, qui reste en place quand la page défile.
+const CoinFlottant = styled.div`
+  position: fixed;
+  right: ${({ theme }) => theme.espace(4)};
+  bottom: ${({ theme }) => theme.espace(4)};
+  z-index: 10; /* passe par-dessus le contenu de la page */
+  display: flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.espace(2)};
+`;
 
 export default App;

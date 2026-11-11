@@ -1,15 +1,23 @@
+/*
+ * CasePiste.jsx : une case de la piste.
+ *
+ * Responsabilités :
+ *   - se placer elle-même dans la grille selon son numéro (dispositionPiste.js) ;
+ *   - prendre la couleur de son type (normale, étoile, rocher, repère) ;
+ *   - afficher son numéro, et les jetons qu'on lui donne en enfants.
+ *
+ * Props :
+ *   numero   : 1 à 30
+ *   type     : 'normale' (par défaut), 'etoile' ou 'rocher'
+ *   children : les jetons posés sur la case
+ */
 import styled, { css } from 'styled-components';
 import { positionCase, estRepere, indiceCouleur, coinCase } from './dispositionPiste.js';
 
-/**
- * Une case de la piste. Elle se place elle-même dans la grille selon son numéro
- * et affiche les jetons qu'on lui donne en enfants.
- * type : 'normale' | 'etoile' | 'rocher'
- */
 function CasePiste({ numero, type = 'normale', children }) {
   const { colonne, rangee } = positionCase(numero);
   const repere = estRepere(numero);
-  const afficherNumero = repere || type === 'etoile';
+  const afficherNumero = repere || type === 'etoile'; // gros numéro ; sinon un petit dans le coin
 
   return (
     <Carre
@@ -35,6 +43,7 @@ function CasePiste({ numero, type = 'normale', children }) {
   );
 }
 
+// Fond et texte de la case selon son type (le thème donne toutes les couleurs de la piste).
 const couleurs = ({ theme, $type, $repere, $indice }) => {
   if ($type === 'etoile') return css`background: ${theme.piste.etoile}; color: ${theme.piste.etoileTexte};`;
   if ($type === 'rocher') return css`background: ${theme.piste.rocher}; color: ${theme.piste.rocherTexte};`;
@@ -48,6 +57,7 @@ const ARRONDIS = {
   basDroite: 'border-bottom-right-radius: var(--coin-piste);',
 };
 
+// La case : un carré placé dans la grille du plateau.
 const Carre = styled.div`
   grid-column: ${({ $colonne }) => $colonne};
   grid-row: ${({ $rangee }) => $rangee};
@@ -61,6 +71,7 @@ const Carre = styled.div`
   ${couleurs}
 `;
 
+// Gros numéro (repères et étoiles) ; sa taille suit la largeur du plateau (cqw).
 const Numero = styled.span`
   font-family: ${({ theme }) => theme.polices.titre};
   font-size: clamp(0.5rem, 2cqw, 1.6rem);
@@ -69,6 +80,7 @@ const Numero = styled.span`
   white-space: nowrap;
 `;
 
+// Petit numéro discret, en haut à gauche des autres cases.
 const PetitNumero = styled.span`
   position: absolute;
   top: 6%;
@@ -78,6 +90,7 @@ const PetitNumero = styled.span`
   opacity: 0.55;
 `;
 
+// Mot « Rocher » en bas de la case.
 const Mention = styled.span`
   position: absolute;
   bottom: 6%;
@@ -86,6 +99,7 @@ const Mention = styled.span`
   text-transform: uppercase;
 `;
 
+// Les jetons, centrés par-dessus la case.
 const Jetons = styled.div`
   position: absolute;
   inset: 0;

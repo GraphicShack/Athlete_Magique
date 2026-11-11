@@ -1,14 +1,21 @@
 <!doctype html>
+<!--
+  index.html : la seule page HTML de l'application.
+  React remplit la balise <div id="root"> (voir src/main.jsx) ; ce fichier ne charge que
+  les polices du livret (Inter pour le texte, Poppins pour les titres) et le script principal.
+-->
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Polices Google : Inter (texte) et Poppins (titres, en italique très gras) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:ital,wght@0,700;0,800;0,900;1,800;1,900&display=swap" rel="stylesheet" />
     <title>Athlète Magique</title>
   </head>
   <body>
+    <!-- React affiche toute l'application ici -->
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

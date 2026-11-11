@@ -1,27 +1,37 @@
+/*
+ * Piste.jsx : le plateau de course, une boucle de 30 cases autour d'une bannière centrale,
+ * avec le Départ, l'Arrivée et le podium.
+ *
+ * Responsabilités :
+ *   - placer les 30 cases, le Départ, le podium, la bannière et l'Arrivée ;
+ *   - poser chaque jeton sur sa case ;
+ *   - rétrécir avec l'écran sans jamais déborder.
+ * Affichage seulement : il reçoit l'état à montrer et ne calcule aucune règle.
+ *
+ * Props :
+ *   jetons  : [{ id, position, couleur, initiales, tombe, actif }]
+ *             position 0 = Départ, 1 à 30 = cases, plus de 30 = arrivé
+ *   rochers : numéros des cases Rocher de la course
+ *   etoiles : numéros des cases Étoile (10 et 20 par défaut)
+ *   podium  : jetons arrivés, dans l'ordre (1er, 2e)
+ */
 import styled from 'styled-components';
 import CasePiste from './CasePiste.jsx';
 import Jeton from './Jeton.jsx';
 import { COLONNES, RANGEES } from './dispositionPiste.js';
 import { NOMBRE_CASES, CASES_ETOILE } from '../../../donnees/piste.js';
 
+// [1, 2, 3, …, 30]
 const NUMEROS = Array.from({ length: NOMBRE_CASES }, (_, i) => i + 1);
 
-/**
- * Le plateau de course : une boucle de 30 cases autour d'une bannière centrale.
- * Composant d'affichage uniquement : il reçoit l'état à montrer et ne calcule aucune règle.
- *
- * jetons : [{ id, position, couleur, initiales, tombe, actif }]
- *          position 0 = Départ, 1 à 30 = cases, plus de 30 = arrivé
- * rochers : numéros des cases Rocher de la course
- * etoiles : numéros des cases Étoile
- * podium  : jetons arrivés, dans l'ordre (1er, 2e)
- */
 function Piste({ jetons = [], rochers = [], etoiles = CASES_ETOILE, podium = [] }) {
+  // Les jetons posés sur une case (ou null s'il n'y en a aucun).
   const jetonsSur = (position) => {
     const presents = jetons.filter((j) => j.position === position);
     return presents.length > 0 ? presents.map((j) => <Jeton key={j.id} {...j} />) : null;
   };
 
+  // Type d'une case selon son numéro.
   const typeCase = (numero) => {
     if (etoiles.includes(numero)) return 'etoile';
     if (rochers.includes(numero)) return 'rocher';
@@ -85,6 +95,7 @@ const Plateau = styled.div`
     inset 0 0 0 ${BORDURE_DEBUT + BORDURE_EPAISSEUR}px ${({ theme }) => theme.piste.contour};
 `;
 
+// Case Départ, sur 3 colonnes en haut à gauche.
 const Depart = styled.div`
   grid-column: 1 / span 3;
   grid-row: 1;
@@ -103,6 +114,7 @@ const Depart = styled.div`
   text-transform: uppercase;
 `;
 
+// Les jetons au départ, en bas de la case Départ.
 const Jetons = styled.div`
   position: absolute;
   bottom: 4px;
@@ -110,6 +122,7 @@ const Jetons = styled.div`
   gap: 2px;
 `;
 
+// Le podium (1er et 2e), à gauche de la bannière.
 const Podium = styled.div`
   grid-column: 1 / span 2;
   grid-row: 2 / span 2;
@@ -120,6 +133,7 @@ const Podium = styled.div`
   padding: 6%;
 `;
 
+// Une marche du podium : sa place et le jeton arrivé.
 const Marche = styled.div`
   display: flex;
   align-items: center;
@@ -135,6 +149,7 @@ const Marche = styled.div`
   font-weight: ${({ theme }) => theme.graisses.tresForte};
 `;
 
+// Le centre du plateau, avec le nom du jeu.
 const Banniere = styled.div`
   grid-column: 3 / span 13;
   grid-row: 2 / span 2;

@@ -1,6 +1,12 @@
 /*
- * Calculs du carrousel. Ce sont des fonctions « pures » : elles reçoivent des nombres
- * et renvoient un résultat, sans rien modifier. On peut donc les tester facilement.
+ * placement.js : les calculs de position des cartes du carrousel.
+ *
+ * Responsabilités :
+ *   - faire « boucler » les rangs (après la dernière carte vient la première) ;
+ *   - calculer où et comment chaque carte est affichée selon sa distance au centre.
+ *
+ * Ce sont des fonctions « pures » : elles reçoivent des nombres et renvoient un résultat,
+ * sans rien modifier ni afficher. On peut donc les tester facilement.
  */
 
 // Disposition des cartes (en % de la largeur d'une carte)

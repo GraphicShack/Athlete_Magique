@@ -1,10 +1,16 @@
+/*
+ * LegendePiste.jsx : la légende des symboles de la piste, affichée sous le plateau.
+ *
+ * Responsabilité : expliquer chaque symbole avec un exemple dessiné
+ * (case étoile, rocher, pion tombé, pion actif).
+ */
 import styled, { useTheme } from 'styled-components';
 import Jeton from './Jeton.jsx';
 import Liste from '../../commun/Liste.jsx';
 
-/** Légende des symboles de la piste, affichée sous le plateau. */
 function LegendePiste() {
   const theme = useTheme();
+  // Un élément de légende : un exemple à gauche, son explication à droite.
   const elements = [
     { id: 'etoile', exemple: <Carre $couleur={theme.piste.etoile} />, texte: 'Case étoile : +1 pt' },
     { id: 'rocher', exemple: <Carre $couleur={theme.piste.rocher} />, texte: 'Rocher : on trébuche' },
@@ -24,6 +30,7 @@ function LegendePiste() {
   );
 }
 
+// Les éléments côte à côte, qui passent à la ligne si besoin.
 const ListeLegende = styled(Liste)`
   margin-top: ${({ theme }) => theme.espace(4)};
   display: flex;
@@ -39,6 +46,7 @@ const Element = styled.li`
   gap: ${({ theme }) => theme.espace(2)};
 `;
 
+// Petit carré de couleur, comme une case de la piste.
 const Carre = styled.span`
   width: 1rem;
   height: 1rem;

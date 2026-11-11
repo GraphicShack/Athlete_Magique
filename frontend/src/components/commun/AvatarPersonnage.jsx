@@ -1,42 +1,38 @@
-import styled, { useTheme } from 'styled-components';
-import { rondCentre } from '../../styles/utilitaires.js';
-import ICONES from './iconesPersonnages.jsx';
+/*
+ * AvatarPersonnage.jsx : le rond qui représente un personnage (carte joueur, tour actif).
+ *
+ * Responsabilité : afficher les initiales du personnage (« MA », « DU »…) dans un rond.
+ *
+ * Props :
+ *   initiales : les lettres à afficher
+ *   taille    : 'md' (par défaut) ou 'lg'
+ */
+import styled from 'styled-components';
+import { rondCentre } from '../../styles/base/utilitaires.js';
 
+// Diamètre du rond pour chaque taille.
 const TAILLES = { md: '2.75rem', lg: '4rem' };
 
-/**
- * Rond qui représente un personnage : son icône si on connaît son identifiant,
- * sinon ses initiales (« MA », « DU »…).
- * id : identifiant du personnage (voir donnees/personnages.js), optionnel.
- */
-function AvatarPersonnage({ id, initiales, taille = 'md' }) {
-  const theme = useTheme();
-  const icone = ICONES[id];
-
+function AvatarPersonnage({ initiales, taille = 'md' }) {
   return (
-    <Rond $taille={TAILLES[taille]} $fond={icone?.fond(theme)} aria-hidden="true">
-      {icone ? (
-        <svg viewBox="0 0 48 48" width="100%" height="100%">
-          {icone.dessin(theme)}
-        </svg>
-      ) : (
-        initiales
-      )}
+    // aria-hidden : décoratif, le nom du personnage est toujours écrit à côté.
+    <Rond $taille={TAILLES[taille]} aria-hidden="true">
+      {initiales}
     </Rond>
   );
 }
 
+// Rond blanc à contour noir.
 const Rond = styled.span`
   ${rondCentre}
   flex-shrink: 0;
-  overflow: hidden;
   width: ${({ $taille }) => $taille};
   height: ${({ $taille }) => $taille};
   border: ${({ theme }) => theme.bordures.contour};
-  background: ${({ theme, $fond }) => $fond ?? theme.couleurs.surface};
+  background: ${({ theme }) => theme.couleurs.surface};
   font-family: ${({ theme }) => theme.polices.titre};
   font-weight: ${({ theme }) => theme.graisses.tresForte};
-  font-size: calc(${({ $taille }) => $taille} * 0.34);
+  font-size: calc(${({ $taille }) => $taille} * 0.34); /* les initiales suivent la taille du rond */
 `;
 
 export default AvatarPersonnage;
