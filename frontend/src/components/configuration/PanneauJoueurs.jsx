@@ -9,11 +9,11 @@
  * (2 humains et 1 bot) et ne suivent pas encore le nombre choisi.
  */
 import { useId } from 'react';
-import styled, { useTheme } from 'styled-components';
-import Panneau from '../commun/Panneau.jsx';
-import Liste from '../commun/Liste.jsx';
-import BarreChoix from '../commun/reglages/BarreChoix.jsx';
+import { useTheme } from 'styled-components';
+import Panneau from '@/components/commun/ui/Panneau.jsx';
+import BarreChoix from '@/components/commun/ui/reglages/BarreChoix.jsx';
 import LigneJoueur from './LigneJoueur.jsx';
+import { Aide, SousTitre, ListePlaces } from './PanneauJoueurs.styles.js';
 
 // Provisoire : places d'exemple, en attendant que le nombre de joueurs soit branché.
 const PLACES_EXEMPLE = [
@@ -42,29 +42,5 @@ function PanneauJoueurs() {
     </Panneau>
   );
 }
-
-// Petite phrase d'explication sous le nombre de joueurs.
-const Aide = styled.p`
-  margin: ${({ theme }) => theme.espace(2)} 0 ${({ theme }) => theme.espace(6)};
-  font-size: ${({ theme }) => theme.texte.sm};
-  color: ${({ theme }) => theme.couleurs.gris700};
-`;
-
-// « Nombre de joueurs » et « Qui joue ? », en italique très gras comme les titres du livret.
-const SousTitre = styled.h3`
-  margin: 0 0 ${({ theme }) => theme.espace(3)};
-  font-size: ${({ theme }) => theme.texte.lg};
-  font-style: italic;
-  font-weight: 900;
-`;
-
-// Les places l'une sous l'autre.
-// La liste prend la hauteur restante du panneau.
-const ListePlaces = styled(Liste)`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.espace(3)};
-`;
 
 export default PanneauJoueurs;

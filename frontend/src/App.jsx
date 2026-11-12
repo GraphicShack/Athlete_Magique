@@ -10,10 +10,10 @@
  */
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import styled from 'styled-components';
 import AccesParametres from './components/parametres/AccesParametres.jsx';
 import AccesRegles from './components/regles/AccesRegles.jsx';
 import MusiqueMenu from './components/son/MusiqueMenu.jsx';
+import { CoinFlottant } from './App.styles.js';
 
 function App() {
   // Réglages du son : gardés ici, le plus proche parent commun de la musique et des paramètres.
@@ -38,16 +38,5 @@ function App() {
     </main>
   );
 }
-
-// Coin en bas à droite de l'écran, qui reste en place quand la page défile.
-const CoinFlottant = styled.div`
-  position: fixed;
-  right: ${({ theme }) => theme.espace(4)};
-  bottom: ${({ theme }) => theme.espace(4)};
-  z-index: 10; /* passe par-dessus le contenu de la page */
-  display: flex;
-  align-items: center;
-  gap: ${({ theme }) => theme.espace(2)};
-`;
 
 export default App;

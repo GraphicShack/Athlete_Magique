@@ -8,12 +8,12 @@
  *   - en bas, sur toute la largeur : les 10 personnages (ApercuPersonnages).
  * Sur téléphone, les blocs s'empilent dans cet ordre.
  */
-import EnTetePage from '../components/commun/EnTetePage.jsx';
-import Accroche from '../components/accueil/Accroche.jsx';
-import ApercuPersonnages from '../components/accueil/ApercuPersonnages.jsx';
-import PanneauConnexion from '../components/accueil/PanneauConnexion.jsx';
-import CHEMINS from '../chemins.js';
-import { Page, Grille, Zone } from '../styles/pages/AccueilPage.styles.js';
+import EnTetePage from '@/components/commun/ui/EnTetePage.jsx';
+import Accroche from '@/components/accueil/Accroche.jsx';
+import ApercuPersonnages from '@/components/accueil/ApercuPersonnages.jsx';
+import PanneauConnexion from '@/components/accueil/PanneauConnexion.jsx';
+import CHEMINS from '@/chemins.js';
+import { Page, Grille, Zone } from './AccueilPage.styles.js';
 
 function AccueilPage() {
   return (

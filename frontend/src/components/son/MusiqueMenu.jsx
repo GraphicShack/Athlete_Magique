@@ -16,8 +16,8 @@
  */
 import { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
-import musique from '../../assets/musique/musique-menu.mp3';
-import CHEMINS from '../../chemins.js';
+import musique from '@/assets/musique/musique-menu.mp3';
+import CHEMINS from '@/chemins.js';
 
 function MusiqueMenu({ active, volume }) {
   const lecteur = useRef(null); // le lecteur audio, créé une seule fois

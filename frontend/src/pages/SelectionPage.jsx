@@ -12,15 +12,19 @@
  * et l'ordre de choix, et recevra le personnage choisi.
  */
 import { useState } from 'react';
-import EnTetePage from '../components/commun/EnTetePage.jsx';
-import EtapesPartie from '../components/commun/EtapesPartie.jsx';
-import Carrousel from '../components/commun/carrousel/Carrousel.jsx';
-import Etiquette from '../components/commun/Etiquette.jsx';
-import Bouton from '../components/commun/Bouton.jsx';
-import PERSONNAGES from '../donnees/personnages.js';
-import CHEMINS from '../chemins.js';
-import TitreArcEnCiel from '../components/commun/TitreArcEnCiel.jsx';
-import { Page, CarteFlottante, Consigne, Barre, Resume, Actions } from '../styles/pages/SelectionPage.styles.js';
+import EnTetePage from '@/components/commun/ui/EnTetePage.jsx';
+import EtapesPartie from '@/components/commun/jeu/EtapesPartie.jsx';
+import Carrousel from '@/components/commun/ui/carrousel/Carrousel.jsx';
+import Etiquette from '@/components/commun/ui/Etiquette.jsx';
+import Confettis from '@/components/commun/ui/Confettis.jsx';
+import Bouton from '@/components/commun/ui/Bouton.jsx';
+import { obtenirPersonnages } from '@/services/personnages.js';
+import CHEMINS from '@/chemins.js';
+import TitreArcEnCiel from '@/components/commun/ui/TitreArcEnCiel.jsx';
+import { Page, CarteFlottante, Consigne, Barre, Resume, Actions } from './SelectionPage.styles.js';
+
+// Les personnages, fournis par le service (plus tard : par le serveur).
+const PERSONNAGES = obtenirPersonnages();
 
 function SelectionPage() {
   const [indexActif, setIndexActif] = useState(0); // rang de la carte au centre du carrousel
@@ -50,10 +54,14 @@ function SelectionPage() {
         rendu={(personnage) => (
           // Seule la carte du centre flotte.
           <CarteFlottante personnage={personnage} format="portrait" $flotte={personnage.id === personnageActif.id}>
+            {/* La carte choisie : l'étiquette « Choisi » et une explosion de confettis. */}
             {personnage.id === idChoisi && (
-              <div>
-                <Etiquette>Choisi</Etiquette>
-              </div>
+              <>
+                <div>
+                  <Etiquette>Choisi</Etiquette>
+                </div>
+                <Confettis declencheur={idChoisi} />
+              </>
             )}
           </CarteFlottante>
         )}

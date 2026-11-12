@@ -5,12 +5,15 @@
  * Responsabilité : afficher le résumé. Les chiffres (courses, cases, étoiles) viennent
  * des fichiers de données : changer une règle là-bas met ce texte à jour.
  */
-import Panneau from '../commun/Panneau.jsx';
-import Bouton from '../commun/Bouton.jsx';
-import POINTAGE from '../../donnees/pointage.js';
-import { NOMBRE_CASES, CASES_ETOILE } from '../../donnees/piste.js';
-import { PointsResume, ActionsResume } from '../commun/MiseEnPage.js';
-import CHEMINS from '../../chemins.js';
+import Panneau from '@/components/commun/ui/Panneau.jsx';
+import Bouton from '@/components/commun/ui/Bouton.jsx';
+import { obtenirPointage, obtenirPiste } from '@/services/regles.js';
+import { PointsResume, ActionsResume } from '@/components/commun/ui/MiseEnPage.js';
+import CHEMINS from '@/chemins.js';
+
+// Les chiffres des règles, fournis par le service.
+const POINTAGE = obtenirPointage();
+const PISTE = obtenirPiste();
 
 // Un point du résumé : un titre et une explication.
 const POINTS_RESUME = [
@@ -23,8 +26,8 @@ const POINTS_RESUME = [
     texte: 'À 2 joueurs : 2 personnages chacun, donc 4 pions sur la piste.',
   },
   {
-    titre: `Piste de ${NOMBRE_CASES} cases`,
-    texte: `Étoiles aux cases ${CASES_ETOILE.join(' et ')} (+1 pt). Trois rochers placés au hasard entre les cases 5 et 25.`,
+    titre: `Piste de ${PISTE.nombreCases} cases`,
+    texte: `Étoiles aux cases ${PISTE.casesEtoile.join(' et ')} (+1 pt). Trois rochers placés au hasard entre les cases 5 et 25.`,
   },
   {
     titre: 'Ordre de jeu',

@@ -12,10 +12,9 @@
  *   type        : 'Humain' ou 'Bot', le choix coché au départ
  *   placeholder : texte d'exemple du champ, ex. « Pseudo 1 » ou « Bot 1 »
  */
-import styled from 'styled-components';
-import ChampTexte from '../commun/ChampTexte.jsx';
-import BarreChoix from '../commun/reglages/BarreChoix.jsx';
-import { rondCentre } from '../../styles/base/utilitaires.js';
+import ChampTexte from '@/components/commun/ui/ChampTexte.jsx';
+import BarreChoix from '@/components/commun/ui/reglages/BarreChoix.jsx';
+import { Carte, NomJoueur, Pseudo, Pastille } from './LigneJoueur.styles.js';
 
 function LigneJoueur({ numero, couleur, type, placeholder }) {
   return (
@@ -36,45 +35,5 @@ function LigneJoueur({ numero, couleur, type, placeholder }) {
     </Carte>
   );
 }
-
-// Carte blanche sur une ligne, avec une bande épaisse à gauche à la couleur du pion
-// (comme CarteJoueur en course). Les éléments passent à la ligne s'ils manquent de place.
-const Carte = styled.li`
-  flex: 1; /* les lignes se partagent la hauteur de la liste… */
-  max-height: 7rem; /* … sans devenir trop hautes */
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: ${({ theme }) => theme.espace(3)} ${({ theme }) => theme.espace(4)};
-  padding: ${({ theme }) => theme.espace(3)} ${({ theme }) => theme.espace(4)};
-  border: ${({ theme }) => theme.bordures.contour};
-  border-left: 10px solid ${({ $couleur }) => $couleur};
-  border-radius: ${({ theme }) => theme.rayons.md};
-  background: ${({ theme }) => theme.couleurs.surface};
-`;
-
-// La pastille et « Joueur N », côte à côte.
-const NomJoueur = styled.span`
-  display: inline-flex;
-  align-items: center;
-  gap: ${({ theme }) => theme.espace(2)};
-  font-weight: ${({ theme }) => theme.graisses.tresForte};
-  white-space: nowrap;
-`;
-
-// Le champ prend toute la place libre au milieu (au moins 10rem).
-const Pseudo = styled.div`
-  flex: 1 1 10rem;
-`;
-
-// Rond numéroté, à la couleur du pion.
-const Pastille = styled.span`
-  ${rondCentre}
-  width: 2rem;
-  height: 2rem;
-  border: ${({ theme }) => theme.bordures.contour};
-  background: ${({ $couleur }) => $couleur};
-  font-family: ${({ theme }) => theme.polices.titre};
-`;
 
 export default LigneJoueur;

@@ -7,13 +7,13 @@
  *   - à gauche : les joueurs (PanneauJoueurs) ;
  *   - à droite : le résumé de la partie et le bouton suivant (ResumePartie).
  */
-import EnTetePage from '../components/commun/EnTetePage.jsx';
-import EtapesPartie from '../components/commun/EtapesPartie.jsx';
-import TitreArcEnCiel from '../components/commun/TitreArcEnCiel.jsx';
-import { Page, GrilleDeuxColonnes } from '../components/commun/MiseEnPage.js';
-import PanneauJoueurs from '../components/configuration/PanneauJoueurs.jsx';
-import ResumePartie from '../components/configuration/ResumePartie.jsx';
-import CHEMINS from '../chemins.js';
+import EnTetePage from '@/components/commun/ui/EnTetePage.jsx';
+import EtapesPartie from '@/components/commun/jeu/EtapesPartie.jsx';
+import TitreArcEnCiel from '@/components/commun/ui/TitreArcEnCiel.jsx';
+import { Page, GrilleDeuxColonnes } from '@/components/commun/ui/MiseEnPage.js';
+import PanneauJoueurs from '@/components/configuration/PanneauJoueurs.jsx';
+import ResumePartie from '@/components/configuration/ResumePartie.jsx';
+import CHEMINS from '@/chemins.js';
 
 function ConfigurationPage() {
   return (

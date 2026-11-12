@@ -12,13 +12,13 @@
  * Props :
  *   son : { musiqueActive, setMusiqueActive, volume, setVolume } (voir App.jsx)
  */
-import styled from 'styled-components';
-import Panneau from '../commun/Panneau.jsx';
-import Bouton from '../commun/Bouton.jsx';
-import ChampTexte from '../commun/ChampTexte.jsx';
-import Interrupteur from '../commun/reglages/Interrupteur.jsx';
-import Curseur from '../commun/reglages/Curseur.jsx';
-import ChoixSegmente from '../commun/reglages/ChoixSegmente.jsx';
+import Panneau from '@/components/commun/ui/Panneau.jsx';
+import Bouton from '@/components/commun/ui/Bouton.jsx';
+import ChampTexte from '@/components/commun/ui/ChampTexte.jsx';
+import Interrupteur from '@/components/commun/ui/reglages/Interrupteur.jsx';
+import Curseur from '@/components/commun/ui/reglages/Curseur.jsx';
+import ChoixSegmente from '@/components/commun/ui/reglages/ChoixSegmente.jsx';
+import { Grille, ChampsCompte, Actions } from './ContenuParametres.styles.js';
 
 function ContenuParametres({ son }) {
   return (
@@ -72,33 +72,5 @@ function ContenuParametres({ son }) {
     </>
   );
 }
-
-// Une colonne sur téléphone, deux à partir de la tablette.
-// L'espace laisse la place aux liserés colorés autour des panneaux.
-const Grille = styled.div`
-  display: grid;
-  gap: ${({ theme }) => theme.espace(8)};
-  padding: ${({ theme }) => theme.espace(2)};
-
-  @media (min-width: ${({ theme }) => theme.ecrans.md}) {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-`;
-
-// Le champ du pseudo et le choix de la langue, l'un sous l'autre.
-const ChampsCompte = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.espace(4)};
-`;
-
-// Les deux boutons du bas, à droite.
-const Actions = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: ${({ theme }) => theme.espace(3)};
-  margin-top: ${({ theme }) => theme.espace(8)};
-`;
 
 export default ContenuParametres;

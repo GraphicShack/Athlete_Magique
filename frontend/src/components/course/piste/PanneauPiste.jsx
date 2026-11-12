@@ -5,7 +5,7 @@
  *
  * Props : les mêmes que Piste (jetons, rochers, etoiles, podium), transmises telles quelles.
  */
-import Panneau from '../../commun/Panneau.jsx';
+import Panneau from '@/components/commun/ui/Panneau.jsx';
 import Piste from './Piste.jsx';
 import LegendePiste from './LegendePiste.jsx';
 

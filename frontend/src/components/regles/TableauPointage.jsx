@@ -4,9 +4,9 @@
  * Responsabilité : afficher le barème reçu, une ligne par course.
  *
  * Props :
- *   pointage : [{ course, premiere, deuxieme }] (voir donnees/pointage.js)
+ *   pointage : [{ course, premiere, deuxieme }] (voir services/regles.js)
  */
-import styled from 'styled-components';
+import { Tableau } from './TableauPointage.styles.js';
 
 function TableauPointage({ pointage }) {
   return (
@@ -33,28 +33,5 @@ function TableauPointage({ pointage }) {
     </Tableau>
   );
 }
-
-// Tableau sur toute la largeur, lignes séparées par un trait fin.
-const Tableau = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-  font-size: ${({ theme }) => theme.texte.sm};
-
-  th,
-  td {
-    padding: ${({ theme }) => theme.espace(2)} ${({ theme }) => theme.espace(3)};
-    text-align: left;
-    border-bottom: ${({ theme }) => theme.bordures.fine};
-  }
-
-  thead th {
-    color: ${({ theme }) => theme.couleurs.gris700};
-    font-weight: ${({ theme }) => theme.graisses.forte};
-  }
-
-  tbody th {
-    font-weight: ${({ theme }) => theme.graisses.forte};
-  }
-`;
 
 export default TableauPointage;

@@ -7,9 +7,7 @@
  * Props :
  *   etapeCourante : 1 à 4
  */
-import styled from 'styled-components';
-import Liste from '../../commun/Liste.jsx';
-import { rondCentre } from '../../../styles/base/utilitaires.js';
+import { ListeEtapes, Etape, Pastille } from './EtapesTour.styles.js';
 
 const ETAPES_TOUR = ['Début du tour', 'Lancer du dé', 'Déplacement principal', 'Fin du déplacement'];
 
@@ -37,38 +35,5 @@ function EtapesTour({ etapeCourante }) {
     </ListeEtapes>
   );
 }
-
-// Couleur de la pastille numérotée selon le statut.
-const COULEURS_PASTILLE = {
-  passee: (theme) => theme.couleurs.gris700,
-  courante: (theme) => theme.couleurs.encre,
-  avenir: (theme) => theme.couleurs.gris300,
-};
-
-// Les étapes l'une sous l'autre.
-const ListeEtapes = styled(Liste)`
-  display: grid;
-  gap: ${({ theme }) => theme.espace(1.5)};
-`;
-
-// Une étape : sa pastille et son nom ; l'étape en cours est en noir et en gras.
-const Etape = styled.li`
-  display: flex;
-  align-items: center;
-  gap: ${({ theme }) => theme.espace(3)};
-  color: ${({ theme, $statut }) => ($statut === 'courante' ? theme.couleurs.encre : theme.couleurs.gris500)};
-  font-weight: ${({ theme, $statut }) => ($statut === 'courante' ? theme.graisses.tresForte : theme.graisses.normale)};
-`;
-
-// Petit rond avec le numéro de l'étape.
-const Pastille = styled.span`
-  ${rondCentre}
-  width: 1.5rem;
-  height: 1.5rem;
-  background: ${({ theme, $statut }) => COULEURS_PASTILLE[$statut](theme)};
-  color: ${({ theme }) => theme.couleurs.surface};
-  font-size: ${({ theme }) => theme.texte.xs};
-  font-weight: ${({ theme }) => theme.graisses.forte};
-`;
 
 export default EtapesTour;

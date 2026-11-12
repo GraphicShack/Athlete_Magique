@@ -9,9 +9,9 @@
  *   son : réglages du son venus d'App.jsx, transmis tels quels à ContenuParametres
  */
 import { useState } from 'react';
-import styled from 'styled-components';
-import FenetreModale from '../commun/FenetreModale.jsx';
+import FenetreModale from '@/components/commun/ui/FenetreModale.jsx';
 import ContenuParametres from './ContenuParametres.jsx';
+import { BoutonRond } from './AccesParametres.styles.js';
 
 function AccesParametres({ son }) {
   const [ouverte, setOuverte] = useState(false); // la fenêtre est-elle ouverte ?
@@ -47,31 +47,5 @@ function RoueDentee() {
     </svg>
   );
 }
-
-// Bouton rond jaune à contour noir et ombre « carton ».
-const BoutonRond = styled.button`
-  --fond-bouton: ${({ theme }) => theme.teintes.parametres};
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  /* Aussi haut que le bouton « Règles », et parfaitement rond. */
-  width: 3.25rem;
-  height: 3.25rem;
-  padding: 0;
-  border: ${({ theme }) => theme.bordures.contour};
-  border-radius: ${({ theme }) => theme.rayons.rond};
-  background: var(--fond-bouton);
-  color: ${({ theme }) => theme.couleurs.encre};
-  box-shadow: ${({ theme }) => theme.ombres.blocPetit};
-
-  svg {
-    transition: rotate 400ms ease;
-  }
-
-  /* Au survol, la roue tourne d'une dent et demie. */
-  &:hover svg {
-    rotate: 68deg;
-  }
-`;
 
 export default AccesParametres;

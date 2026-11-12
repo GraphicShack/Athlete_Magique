@@ -4,9 +4,9 @@
  * Responsabilité : expliquer chaque symbole avec un exemple dessiné
  * (case étoile, rocher, pion tombé, pion actif).
  */
-import styled, { useTheme } from 'styled-components';
+import { useTheme } from 'styled-components';
 import Jeton from './Jeton.jsx';
-import Liste from '../../commun/Liste.jsx';
+import { ListeLegende, Element, Carre } from './LegendePiste.styles.js';
 
 function LegendePiste() {
   const theme = useTheme();
@@ -29,29 +29,5 @@ function LegendePiste() {
     </ListeLegende>
   );
 }
-
-// Les éléments côte à côte, qui passent à la ligne si besoin.
-const ListeLegende = styled(Liste)`
-  margin-top: ${({ theme }) => theme.espace(4)};
-  display: flex;
-  flex-wrap: wrap;
-  gap: ${({ theme }) => theme.espace(2)} ${({ theme }) => theme.espace(5)};
-  font-size: ${({ theme }) => theme.texte.sm};
-  color: ${({ theme }) => theme.couleurs.gris700};
-`;
-
-const Element = styled.li`
-  display: flex;
-  align-items: center;
-  gap: ${({ theme }) => theme.espace(2)};
-`;
-
-// Petit carré de couleur, comme une case de la piste.
-const Carre = styled.span`
-  width: 1rem;
-  height: 1rem;
-  border-radius: 3px;
-  background: ${({ $couleur }) => $couleur};
-`;
 
 export default LegendePiste;

@@ -14,12 +14,12 @@
  * Sur téléphone, les blocs s'empilent dans le même ordre ; le bandeau des joueurs défile de côté.
  * Les blocs n'ont pas encore de données : ils affichent leur état « en attente ».
  */
-import EnTeteCourse from '../components/course/EnTeteCourse.jsx';
-import BandeauJoueurs from '../components/course/joueurs/BandeauJoueurs.jsx';
-import PanneauPiste from '../components/course/piste/PanneauPiste.jsx';
-import ControleurDeTourActif from '../components/course/tourActif/ControleurDeTourActif.jsx';
-import JournalEvenements from '../components/course/JournalEvenements.jsx';
-import { Ecran, Zone } from '../styles/pages/CoursePage.styles.js';
+import EnTeteCourse from '@/components/course/EnTeteCourse.jsx';
+import BandeauJoueurs from '@/components/course/joueurs/BandeauJoueurs.jsx';
+import PanneauPiste from '@/components/course/piste/PanneauPiste.jsx';
+import ControleurDeTourActif from '@/components/course/tourActif/ControleurDeTourActif.jsx';
+import JournalEvenements from '@/components/course/JournalEvenements.jsx';
+import { Ecran, Zone } from './CoursePage.styles.js';
 
 function CoursePage() {
   return (

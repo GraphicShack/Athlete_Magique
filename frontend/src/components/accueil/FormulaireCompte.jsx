@@ -5,9 +5,9 @@
  * Provisoire : visuel seulement, les boutons ne font rien. La connexion sera branchée
  * plus tard sur le serveur, à travers un service dans src/services/.
  */
-import styled from 'styled-components';
-import ChampTexte from '../commun/ChampTexte.jsx';
-import Bouton from '../commun/Bouton.jsx';
+import ChampTexte from '@/components/commun/ui/ChampTexte.jsx';
+import Bouton from '@/components/commun/ui/Bouton.jsx';
+import { Bloc, LienCreer } from './FormulaireCompte.styles.js';
 
 function FormulaireCompte() {
   return (
@@ -19,24 +19,5 @@ function FormulaireCompte() {
     </Bloc>
   );
 }
-
-// Les éléments l'un sous l'autre.
-const Bloc = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.espace(3)};
-`;
-
-// Bouton qui ressemble à un lien (pas encore de page de création de compte).
-const LienCreer = styled.button`
-  align-self: center;
-  padding: 0;
-  border: none;
-  background: none;
-  color: ${({ theme }) => theme.couleurs.encre};
-  font-size: ${({ theme }) => theme.texte.sm};
-  text-decoration: underline;
-  text-underline-offset: 3px;
-`;
 
 export default FormulaireCompte;

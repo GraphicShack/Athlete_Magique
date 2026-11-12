@@ -7,12 +7,16 @@
  * Props :
  *   children : éléments ajoutés à la fin de la grille (ex. la mascotte)
  */
-import styled from 'styled-components';
-import Panneau from '../commun/Panneau.jsx';
-import CartePersonnage from '../commun/CartePersonnage.jsx';
+import Panneau from '@/components/commun/ui/Panneau.jsx';
+import CartePersonnage from '@/components/commun/jeu/CartePersonnage.jsx';
 import TableauPointage from './TableauPointage.jsx';
-import PERSONNAGES from '../../donnees/personnages.js';
-import POINTAGE from '../../donnees/pointage.js';
+import { obtenirPersonnages } from '@/services/personnages.js';
+import { obtenirPointage } from '@/services/regles.js';
+import { Grille, PanneauLarge, GrillePersonnages, Contenu } from './ContenuRegles.styles.js';
+
+// Les personnages et le barème, fournis par les services (plus tard : par le serveur).
+const PERSONNAGES = obtenirPersonnages();
+const POINTAGE = obtenirPointage();
 
 function ContenuRegles({ children }) {
   return (
@@ -116,63 +120,5 @@ function ContenuRegles({ children }) {
     </Grille>
   );
 }
-
-// Une colonne, puis deux à partir d'un ordinateur portable.
-const Grille = styled.div`
-  display: grid;
-  gap: ${({ theme }) => theme.espace(6)};
-
-  @media (min-width: ${({ theme }) => theme.ecrans.lg}) {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-`;
-
-// Panneau qui occupe toute la largeur de la grille (les personnages).
-const PanneauLarge = styled(Panneau)`
-  grid-column: 1 / -1;
-`;
-
-// Autant de colonnes de 15rem que la largeur le permet.
-const GrillePersonnages = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
-  gap: ${({ theme }) => theme.espace(3)};
-`;
-
-// Mise en forme du texte des règles : paragraphes, listes et définitions.
-const Contenu = styled.div`
-  font-size: ${({ theme }) => theme.texte.sm};
-
-  p,
-  ul,
-  ol,
-  dl,
-  table {
-    margin: 0 0 ${({ theme }) => theme.espace(3)};
-  }
-
-  /* Pas de marge sous le dernier élément. */
-  > :last-child {
-    margin-bottom: 0;
-  }
-
-  ul,
-  ol {
-    padding-left: ${({ theme }) => theme.espace(5)};
-  }
-
-  li + li {
-    margin-top: ${({ theme }) => theme.espace(1.5)};
-  }
-
-  dt {
-    font-weight: ${({ theme }) => theme.graisses.forte};
-  }
-
-  dd {
-    margin: 0 0 ${({ theme }) => theme.espace(2)};
-    color: ${({ theme }) => theme.couleurs.gris700};
-  }
-`;
 
 export default ContenuRegles;

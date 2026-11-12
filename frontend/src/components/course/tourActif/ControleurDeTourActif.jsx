@@ -18,13 +18,13 @@
  *   actions       : [{ id, libelle, principal }]
  *   onAction      : appelé avec l'id de l'action choisie
  */
-import styled from 'styled-components';
-import Panneau from '../../commun/Panneau.jsx';
-import AvatarPersonnage from '../../commun/AvatarPersonnage.jsx';
-import Bouton from '../../commun/Bouton.jsx';
-import MessageVide from '../../commun/MessageVide.jsx';
+import Panneau from '@/components/commun/ui/Panneau.jsx';
+import AvatarPersonnage from '@/components/commun/jeu/AvatarPersonnage.jsx';
+import Bouton from '@/components/commun/ui/Bouton.jsx';
+import MessageVide from '@/components/commun/ui/MessageVide.jsx';
 import De from './De.jsx';
 import EtapesTour from './EtapesTour.jsx';
+import { EnTete, SurTitre, NomPersonnage, Resultat, Pouvoir, TitrePouvoir, Actions } from './ControleurDeTourActif.styles.js';
 
 function ControleurDeTourActif({
   joueur,
@@ -93,61 +93,5 @@ function ControleurDeTourActif({
     </Panneau>
   );
 }
-
-// Bandeau du panneau : avatar du personnage, puis « À toi de jouer » et son nom.
-const EnTete = styled.div`
-  display: flex;
-  align-items: center;
-  gap: ${({ theme }) => theme.espace(4)};
-`;
-
-const SurTitre = styled.div`
-  font-size: ${({ theme }) => theme.texte.sm};
-  font-weight: ${({ theme }) => theme.graisses.forte};
-`;
-
-const NomPersonnage = styled.h2`
-  margin: 0;
-  font-size: ${({ theme }) => theme.texte.xl};
-`;
-
-// Le dé et le message, côte à côte.
-const Resultat = styled.div`
-  display: flex;
-  align-items: flex-start;
-  gap: ${({ theme }) => theme.espace(4)};
-  margin-top: ${({ theme }) => theme.espace(4)};
-
-  p {
-    margin: 0;
-  }
-`;
-
-// Encadré du pouvoir à utiliser.
-const Pouvoir = styled.div`
-  margin-top: ${({ theme }) => theme.espace(4)};
-  padding: ${({ theme }) => theme.espace(4)};
-  border-radius: ${({ theme }) => theme.rayons.sm};
-  background: color-mix(in srgb, var(--teinte) 25%, white); /* teinte du panneau, très diluée */
-
-  p {
-    margin-bottom: 0;
-    font-size: ${({ theme }) => theme.texte.sm};
-  }
-`;
-
-const TitrePouvoir = styled.h3`
-  font-family: ${({ theme }) => theme.polices.texte};
-  font-size: ${({ theme }) => theme.texte.md};
-  margin-bottom: ${({ theme }) => theme.espace(2)};
-`;
-
-// Les boutons d'action, en colonnes d'au moins 8rem.
-const Actions = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
-  gap: ${({ theme }) => theme.espace(2)};
-  margin-top: ${({ theme }) => theme.espace(3)};
-`;
 
 export default ControleurDeTourActif;

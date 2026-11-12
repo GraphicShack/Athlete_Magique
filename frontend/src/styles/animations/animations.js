@@ -5,7 +5,7 @@
  * (comme base/theme.js pour les couleurs).
  *
  * Un composant importe une animation puis l'utilise dans son style :
- *   import { fondu, COURBE } from '../../styles/animations/animations.js';
+ *   import { fondu, COURBE } from '@/styles/animations/animations.js';
  *   const Bloc = styled.div` animation: ${fondu} 200ms ${COURBE}; `;
  *
  * Une animation plus complète (avec son propre réglage) a son propre fichier, ex. flottement.js ;

@@ -9,7 +9,7 @@
  *   - réduire les animations si le joueur l'a demandé dans les réglages de son appareil.
  */
 import { createGlobalStyle } from 'styled-components';
-import { transitionsDePage } from '../animations/rideau.js';
+import { transitionsDePage } from '@/styles/animations/rideau.js';
 
 const StyleGlobal = createGlobalStyle`
   /* Couleurs, police et arrondis de Bootstrap, remplacés par ceux du thème. */
