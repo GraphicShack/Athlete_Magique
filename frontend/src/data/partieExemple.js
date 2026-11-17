@@ -8,8 +8,7 @@
  * Seuls les services (dossier services/) lisent ce fichier : les composants passent par eux.
  * Les personnages sont donnés par leur id ; le service les remplace par le personnage complet.
  *
- * Le moment choisi : course 2 sur 3, Félix (Magicien) vient de lancer le dé et obtient 2.
- * Il peut garder ce résultat ou relancer grâce à son pouvoir.
+ * Le moment choisi : course 2 sur 3, c'est au tour de Félix (Magicien) de lancer le dé.
  */
 const PARTIE_EXEMPLE = {
   course: { numero: 2, nombreCourses: 3 },
@@ -28,22 +27,11 @@ const PARTIE_EXEMPLE = {
   // Le joueur dont c'est le tour.
   idActif: 'j1',
 
-  // Le tour en cours. etape : 1 à 4 (voir EtapesTour.jsx). resultatDe : null si pas encore lancé.
-  // Une action avec avecValeurDe : true reçoit la valeur du dé à la fin de son libellé
-  // (« Garder le » → « Garder le 2 », voir utils/textesTour.js).
-  tour: {
-    etape: 2,
-    resultatDe: 2,
-    message: 'Félix a obtenu 2. Il peut garder ce résultat ou relancer le dé grâce au pouvoir du Magicien.',
-    actions: [
-      { id: 'relancer', libelle: 'Relancer le dé (1 sur 2)', principal: true },
-      { id: 'garder', libelle: 'Garder le', avecValeurDe: true, principal: false },
-    ],
-  },
+  // Le tour en cours (étape, dé, consigne, boutons) dépend du personnage du joueur actif :
+  // voir data/pouvoirsAuLancer.js.
 
   // Le plus récent en premier.
   evenements: [
-    { id: 'e6', tour: 5, texte: 'Félix (Magicien) lance le dé : 2.' },
     { id: 'e5', tour: 4, texte: 'Alexis (GOAT) (Banana) avance de 3 cases, jusqu’à la case 6.' },
     { id: 'e4', tour: 4, texte: 'Alec (Centaure) s’arrête sur le rocher de la case 13 et tombe.' },
     { id: 'e3', tour: 4, texte: 'Angie (Lièvre) avance de 4 + 2 cases grâce à son pouvoir, jusqu’à la case 17.' },

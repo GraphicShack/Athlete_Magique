@@ -19,10 +19,14 @@
  * seul le journal (un historique) défile à l'intérieur de son panneau.
  * Sur téléphone, les blocs s'empilent dans l'ordre : en-tête, piste, joueurs, tour, journal.
  * Pour l'instant, la partie est un exemple (data/partieExemple.js) et l'écran sert à essayer
- * l'affichage. Seule démo : « Relancer le dé » fait rouler le dé (hook useLancerDe), puis le
- * message et le bouton « Garder » affichent la valeur obtenue (utils/textesTour.js).
+ * l'affichage. Démo du tour (hook useTourDemo) : « Lancer » et « Relancer » font rouler le dé,
+ * puis « Avancer », « Garder », « Doubler » ou « Échanger » terminent l'étape avec un message.
+ * Pour essayer un autre personnage, ajouter ?personnage=… à l'adresse (ex. scientifique,
+ * flipflop, lievre). Magicien, Scientifique Fusé et Flip Flop montrent leur case Pouvoir ;
+ * les autres, la simple case de lancer de dé (voir data/pouvoirsAuLancer.js).
  */
 import { useTheme } from 'styled-components';
+import { useSearchParams } from 'react-router-dom';
 import EnTeteCourse from '@/components/course/EnTeteCourse.jsx';
 import ListeJoueurs from '@/components/course/joueurs/ListeJoueurs.jsx';
 import PanneauPiste from '@/components/course/piste/PanneauPiste.jsx';
@@ -30,33 +34,21 @@ import ControleurDeTourActif from '@/components/course/tourActif/ControleurDeTou
 import JournalEvenements from '@/components/course/JournalEvenements.jsx';
 import { obtenirPartie } from '@/services/partie.js';
 import { jetonsDesJoueurs } from '@/utils/jetons.js';
-import { messageLancer, actionsAvecValeur } from '@/utils/textesTour.js';
-import useLancerDe from '@/hooks/useLancerDe.js';
+import useTourDemo from '@/hooks/useTourDemo.js';
 import { Ecran, EnTete, Colonne, Bloc } from './CoursePage.styles.js';
 
 function CoursePage() {
   const theme = useTheme();
-  const { course, rochers, joueurs, idActif, tour, evenements } = obtenirPartie();
+  // Pour essayer un autre personnage : /course?personnage=scientifique (ou flipflop, lievre…).
+  const [parametres] = useSearchParams();
+  const { course, rochers, joueurs, idActif, tour, evenements } = obtenirPartie(parametres.get('personnage'));
 
   // Chaque joueur reçoit la couleur de son pion, selon sa place dans l'ordre de jeu.
   // La même couleur sert à sa carte et à son jeton sur la piste.
   const joueursColores = joueurs.map((joueur, rang) => ({ ...joueur, couleur: theme.joueurs[rang] }));
 
-  // Démo du lancer de dé (l'état et le tirage sont dans le hook et le service).
-  const lancer = useLancerDe(tour.resultatDe);
-
-  // Ce que fait chaque bouton du tour, selon son id. Pour l'instant, seul « relancer » agit.
-  const reactions = { relancer: lancer.relancer };
-  const surAction = (id) => reactions[id]?.();
-
-  // Les textes du tour suivent le dé (voir utils/textesTour.js).
-  const message = messageLancer({
-    messageDepart: tour.message,
-    joueur: tour.joueur,
-    lancers: lancer.lancers,
-    obtenu: lancer.obtenu,
-  });
-  const actions = actionsAvecValeur(tour.actions, lancer.obtenu);
+  // Démo du tour : dé, message, boutons et choix du joueur (voir hooks/useTourDemo.js).
+  const tourDemo = useTourDemo(tour);
 
   return (
     <Ecran>
@@ -82,17 +74,17 @@ function CoursePage() {
       {/* Colonne de droite : le tour à sa taille, le journal prend le reste. */}
       <Colonne $cote="droite">
         <Bloc $taille="contenu">
-            <ControleurDeTourActif
+          <ControleurDeTourActif
             joueur={tour.joueur}
             personnage={tour.personnage}
-            etapeCourante={tour.etape}
-            resultatDe={lancer.valeur}
-            lancerDe={lancer.lancers}
-            onArretDe={lancer.surArret}
-            message={message}
+            etapeCourante={tourDemo.etape}
+            resultatDe={tourDemo.lancer.valeur}
+            lancerDe={tourDemo.lancer.lancers}
+            onArretDe={tourDemo.lancer.surArret}
+            message={tourDemo.message}
             pouvoir={tour.pouvoir}
-            actions={actions}
-            onAction={surAction}
+            actions={tourDemo.actions}
+            onAction={tourDemo.surAction}
           />
         </Bloc>
         <Bloc $taille="remplit">

@@ -32,7 +32,8 @@ export const Colonnes = styled.div`
   gap: ${({ theme }) => theme.espace(4)} ${({ theme }) => theme.espace(5)};
 `;
 
-// Le dé et le message, côte à côte.
+// Le dé et le message, côte à côte. Le message a toujours la place de 3 lignes,
+// pour que le panneau ne change pas de hauteur quand le texte change.
 export const Resultat = styled.div`
   display: flex;
   align-items: flex-start;
@@ -41,31 +42,15 @@ export const Resultat = styled.div`
 
   p {
     margin: 0;
+    min-height: 3lh; /* lh : la hauteur d'une ligne de texte */
   }
 `;
 
-// Encadré du pouvoir à utiliser.
-export const Pouvoir = styled.div`
-  padding: ${({ theme }) => theme.espace(3)};
-  border-radius: ${({ theme }) => theme.rayons.sm};
-  background: color-mix(in srgb, var(--teinte) 25%, white); /* teinte du panneau, très diluée */
-
-  p {
-    margin-bottom: 0;
-    font-size: ${({ theme }) => theme.texte.xs};
-  }
-`;
-
-export const TitrePouvoir = styled.h3`
-  font-family: ${({ theme }) => theme.polices.texte};
-  font-size: ${({ theme }) => theme.texte.md};
-  margin-bottom: ${({ theme }) => theme.espace(2)};
-`;
-
-// Les boutons d'action, en colonnes d'au moins 8rem.
-export const Actions = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
-  gap: ${({ theme }) => theme.espace(2)};
-  margin-top: ${({ theme }) => theme.espace(3)};
+// La place du dé avant le premier lancer : un rond pointillé de la taille du dé (5rem, voir De.styles.js).
+export const PlaceDe = styled.div`
+  flex-shrink: 0;
+  width: 5rem;
+  height: 5rem;
+  border: 2px dashed color-mix(in srgb, currentColor 30%, transparent);
+  border-radius: 50%;
 `;

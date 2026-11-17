@@ -16,17 +16,18 @@
  *   lancerDe      : augmente à chaque lancer, pour faire rouler le dé (0 : pas d'animation)
  *   onArretDe     : appelé avec la valeur quand le dé a fini de rouler (optionnel)
  *   message       : texte expliquant ce qui vient de se passer
- *   pouvoir       : { titre, description } ou null
+ *   pouvoir       : { titre, description } ou null (null : simple case de lancer de dé)
  *   actions       : [{ id, libelle, principal }]
  *   onAction      : appelé avec l'id de l'action choisie
  */
 import Panneau from '@/components/commun/ui/Panneau.jsx';
 import AvatarPersonnage from '@/components/commun/jeu/AvatarPersonnage.jsx';
-import Bouton from '@/components/commun/ui/Bouton.jsx';
 import MessageVide from '@/components/commun/ui/MessageVide.jsx';
 import De from '@/components/commun/jeu/de/De.jsx';
 import EtapesTour from './EtapesTour.jsx';
-import { EnTete, SurTitre, NomPersonnage, Colonnes, Resultat, Pouvoir, TitrePouvoir, Actions } from './ControleurDeTourActif.styles.js';
+import CasePouvoir from './CasePouvoir.jsx';
+import CaseLancerDe from './CaseLancerDe.jsx';
+import { EnTete, SurTitre, NomPersonnage, Colonnes, Resultat, PlaceDe } from './ControleurDeTourActif.styles.js';
 
 function ControleurDeTourActif({
   joueur,
@@ -49,16 +50,9 @@ function ControleurDeTourActif({
     );
   }
 
-  // Un bouton par action possible (rien s'il n'y en a aucune).
-  const boutons = actions.length > 0 && (
-    <Actions>
-      {actions.map(({ id, libelle, principal }) => (
-        <Bouton key={id} variante={principal ? 'principal' : 'secondaire'} onClick={() => onAction(id)}>
-          {libelle}
-        </Bouton>
-      ))}
-    </Actions>
-  );
+  // La case du bas : celle du pouvoir si le personnage en a un à utiliser, sinon le lancer simple.
+  // Les deux cases ont les mêmes props, donc on peut prendre l'une ou l'autre.
+  const CaseDuTour = pouvoir ? CasePouvoir : CaseLancerDe;
 
   return (
     <Panneau
@@ -81,24 +75,19 @@ function ControleurDeTourActif({
         <div>
           <EtapesTour etapeCourante={etapeCourante} />
 
-          {(resultatDe || message) && (
-            <Resultat>
-              {resultatDe && <De valeur={resultatDe} lancer={lancerDe} onArret={onArretDe} />}
-              {message && <p>{message}</p>}
-            </Resultat>
-          )}
+          {/* Toujours affiché, même avant le lancer (place vide pour le dé) :
+              le panneau garde ainsi la même hauteur pendant tout le tour. */}
+          <Resultat>
+            {resultatDe ? (
+              <De valeur={resultatDe} lancer={lancerDe} onArret={onArretDe} />
+            ) : (
+              <PlaceDe aria-hidden="true" />
+            )}
+            {message && <p>{message}</p>}
+          </Resultat>
         </div>
 
-        {/* Avec un pouvoir à utiliser, les boutons vont dans son encadré ; sinon, ils sont seuls. */}
-        {pouvoir ? (
-          <Pouvoir>
-            <TitrePouvoir>{pouvoir.titre}</TitrePouvoir>
-            <p>{pouvoir.description}</p>
-            {boutons}
-          </Pouvoir>
-        ) : (
-          boutons
-        )}
+        <CaseDuTour pouvoir={pouvoir} actions={actions} onAction={onAction} />
       </Colonnes>
     </Panneau>
   );
