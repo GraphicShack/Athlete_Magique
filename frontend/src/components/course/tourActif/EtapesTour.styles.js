@@ -6,7 +6,7 @@
  */
 import styled from 'styled-components';
 import Liste from '@/components/commun/ui/Liste.jsx';
-import { rondCentre } from '@/styles/base/utilitaires.js';
+import { rondCentre, cacheVisuellement } from '@/styles/base/utilitaires.js';
 
 // Couleur de la pastille numérotée selon le statut.
 const COULEURS_PASTILLE = {
@@ -15,9 +15,11 @@ const COULEURS_PASTILLE = {
   avenir: (theme) => theme.couleurs.gris300,
 };
 
-// Les étapes l'une sous l'autre.
+// Les étapes côte à côte, sur une ligne.
 export const ListeEtapes = styled(Liste)`
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
   gap: ${({ theme }) => theme.espace(1.5)};
 `;
 
@@ -39,4 +41,9 @@ export const Pastille = styled.span`
   color: ${({ theme }) => theme.couleurs.surface};
   font-size: ${({ theme }) => theme.texte.xs};
   font-weight: ${({ theme }) => theme.graisses.forte};
+`;
+
+// Le nom de l'étape ; caché à l'écran (mais lu par les lecteurs d'écran) si $cache est vrai.
+export const Libelle = styled.span`
+  ${({ $cache }) => $cache && cacheVisuellement}
 `;

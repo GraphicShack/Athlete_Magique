@@ -6,7 +6,7 @@
  */
 import styled from 'styled-components';
 
-// L'en-tête, puis le fil des étapes dessous (même écart que sur les autres pages).
+// L'en-tête de la course (le fil des étapes y est inclus, à droite).
 export const Bloc = styled.div`
   display: flex;
   flex-direction: column;

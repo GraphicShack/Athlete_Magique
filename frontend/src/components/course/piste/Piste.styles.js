@@ -7,116 +7,81 @@
 import styled from 'styled-components';
 import { COLONNES, RANGEES } from '@/utils/dispositionPiste.js';
 
-// La bordure blanche est tracée à 6 px du bord ; les cases commencent à 14 px,
-// et les cases de coin reprennent l'arrondi du plateau moins cet écart (--coin-piste).
-const BORDURE_DEBUT = 6;
-const BORDURE_EPAISSEUR = 2;
-const MARGE_INTERIEURE = 14;
-
-// Le plateau rétrécit avec l'écran au lieu de déborder : les textes et les jetons
-// sont dimensionnés en « cqw » (pourcentage de la largeur du plateau).
+// Le plateau garde toujours les proportions de la grille (8 colonnes sur 4 rangées).
+// Sa largeur : toute la place disponible, mais jamais plus que ce que la hauteur permet
+// (100cqh = hauteur de la zone qui le contient, voir PanneauPiste.styles.js) : il ne déborde pas.
+// Il est lui-même un « conteneur » : les textes et jetons à l'intérieur se mesurent en cqw
+// (pourcentage de la largeur du plateau).
+// Fond noir et cadre blanc à l'intérieur, comme la piste du livret.
 export const Plateau = styled.div`
-  /* L'arrondi du plateau diminue sur les petits écrans pour rester proportionnel aux cases. */
-  --rayon-piste: clamp(1rem, 3.2vw, ${({ theme }) => theme.rayons.piste});
-  --coin-piste: max(calc(var(--rayon-piste) - ${MARGE_INTERIEURE}px), 2px);
   container-type: inline-size;
+  width: 100%;
+  max-width: calc(100cqh * ${COLONNES} / ${RANGEES});
+  aspect-ratio: ${COLONNES} / ${RANGEES};
   display: grid;
-  /* minmax(0, 1fr) : toutes les colonnes ont exactement la même largeur,
-     même si un contenu (texte « Départ », jetons) voudrait les élargir. */
+  /* minmax(0, 1fr) : toutes les colonnes (et rangées) ont exactement la même taille,
+     même si un contenu (jetons) voudrait les agrandir. */
   grid-template-columns: repeat(${COLONNES}, minmax(0, 1fr));
-  grid-template-rows: repeat(${RANGEES}, auto);
-  gap: clamp(2px, 0.4vw, 4px);
-  padding: ${MARGE_INTERIEURE}px;
+  grid-template-rows: repeat(${RANGEES}, minmax(0, 1fr));
+  gap: 0.8%;
+  padding: 1.6%;
   background: ${({ theme }) => theme.piste.fond};
-  border-radius: var(--rayon-piste);
-  box-shadow: inset 0 0 0 ${BORDURE_DEBUT}px ${({ theme }) => theme.piste.fond},
-    inset 0 0 0 ${BORDURE_DEBUT + BORDURE_EPAISSEUR}px ${({ theme }) => theme.piste.contour};
+  border-radius: ${({ theme }) => theme.rayons.lg};
+  box-shadow: inset 0 0 0 4px ${({ theme }) => theme.piste.fond},
+    inset 0 0 0 6px ${({ theme }) => theme.piste.contour};
 `;
 
-// Case Départ, sur 3 colonnes en haut à gauche.
-export const Depart = styled.div`
-  grid-column: 1 / span 3;
-  grid-row: 1;
+// Ce qui est commun au Départ et à l'Arrivée : une case de la grille, à la place donnée.
+const PlaceSpeciale = styled.div`
+  grid-column: ${({ $colonne }) => $colonne};
+  grid-row: ${({ $rangee }) => $rangee};
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: ${({ theme }) => theme.piste.depart};
-  color: ${({ theme }) => theme.piste.departTexte};
-  border-radius: var(--coin-piste) ${({ theme }) => theme.rayons.sm}
-    ${({ theme }) => theme.rayons.sm} ${({ theme }) => theme.rayons.sm};
-  font-family: ${({ theme }) => theme.polices.titre};
-  font-size: clamp(0.55rem, 2.8cqw, 2.2rem);
-  font-weight: ${({ theme }) => theme.graisses.tresForte};
-  font-style: italic;
-  text-transform: uppercase;
-`;
-
-// Les jetons au départ, en bas de la case Départ.
-export const Jetons = styled.div`
-  position: absolute;
-  bottom: 4px;
-  display: flex;
-  gap: 2px;
-`;
-
-// Le podium (1er et 2e), à gauche de la bannière.
-export const Podium = styled.div`
-  grid-column: 1 / span 2;
-  grid-row: 2 / span 2;
+  min-width: 0;
+  min-height: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 8%;
-  padding: 6%;
-`;
-
-// Une marche du podium : sa place et le jeton arrivé.
-export const Marche = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex: 1;
-  max-height: 3rem;
-  padding: 0 8%;
-  font-size: clamp(0.5rem, 1.4cqw, 1rem);
-  background: ${({ theme }) => theme.piste.etoile};
-  border: ${({ theme }) => theme.bordures.lisere};
-  border-radius: ${({ theme }) => theme.rayons.md};
-  font-family: ${({ theme }) => theme.polices.titre};
-  font-weight: ${({ theme }) => theme.graisses.tresForte};
-`;
-
-// Le centre du plateau, avec le nom du jeu.
-export const Banniere = styled.div`
-  grid-column: 3 / span 13;
-  grid-row: 2 / span 2;
-  display: flex;
   align-items: center;
   justify-content: center;
-  margin: 4%;
-  border: ${({ theme }) => theme.bordures.lisere};
-  border-radius: ${({ theme }) => theme.rayons.md};
+  border-radius: min(${({ theme }) => theme.rayons.sm}, 15%);
 `;
 
-export const Titre = styled.span`
-  color: ${({ theme }) => theme.piste.contour};
-  font-family: ${({ theme }) => theme.polices.titre};
-  font-size: clamp(0.8rem, 5cqw, 3.5rem);
-  font-weight: ${({ theme }) => theme.graisses.tresForte};
-  letter-spacing: 0.02em;
+// Case Départ, bleue.
+export const Depart = styled(PlaceSpeciale)`
+  background: ${({ theme }) => theme.piste.depart};
+  color: ${({ theme }) => theme.piste.departTexte};
 `;
 
-// Damier noir et blanc, comme une ligne d'arrivée.
-export const Arrivee = styled.div`
-  grid-column: 1;
-  grid-row: ${RANGEES};
-  aspect-ratio: 1;
-  border-radius: ${({ theme }) => theme.rayons.sm} ${({ theme }) => theme.rayons.sm}
-    ${({ theme }) => theme.rayons.sm} var(--coin-piste);
+// Case Arrivée : damier noir et blanc, comme une ligne d'arrivée.
+export const Arrivee = styled(PlaceSpeciale)`
   background: repeating-conic-gradient(
       ${({ theme }) => theme.piste.arrivee} 0% 25%,
       ${({ theme }) => theme.piste.arriveeDamier} 0% 50%
     )
     0 0 / 50% 50%;
+`;
+
+// « Départ » ou « Arrivée », en haut de la case. Une étiquette blanche le rend lisible
+// par-dessus le damier.
+export const Nom = styled.span`
+  position: absolute;
+  top: 6%;
+  padding: 1px 5px;
+  border-radius: ${({ theme }) => theme.rayons.sm};
+  background: ${({ theme }) => theme.piste.arriveeDamier};
+  color: ${({ theme }) => theme.piste.departTexte};
+  font-family: ${({ theme }) => theme.polices.titre};
+  font-size: clamp(0.45rem, 1.6cqw, 0.85rem);
+  font-weight: ${({ theme }) => theme.graisses.tresForte};
+  font-style: italic;
+  text-transform: uppercase;
+`;
+
+// Les jetons posés sur le Départ ou l'Arrivée, en bas de la case.
+export const Jetons = styled.div`
+  position: absolute;
+  bottom: 6%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2px;
 `;

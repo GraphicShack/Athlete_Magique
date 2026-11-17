@@ -23,6 +23,15 @@ export const NomPersonnage = styled.h2`
   font-size: ${({ theme }) => theme.texte.xl};
 `;
 
+// Le contenu du panneau en deux colonnes d’au moins 16rem chacune ; s’il manque de place,
+// la deuxième passe sous la première.
+export const Colonnes = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  align-items: start;
+  gap: ${({ theme }) => theme.espace(4)} ${({ theme }) => theme.espace(5)};
+`;
+
 // Le dé et le message, côte à côte.
 export const Resultat = styled.div`
   display: flex;
@@ -37,14 +46,13 @@ export const Resultat = styled.div`
 
 // Encadré du pouvoir à utiliser.
 export const Pouvoir = styled.div`
-  margin-top: ${({ theme }) => theme.espace(4)};
-  padding: ${({ theme }) => theme.espace(4)};
+  padding: ${({ theme }) => theme.espace(3)};
   border-radius: ${({ theme }) => theme.rayons.sm};
   background: color-mix(in srgb, var(--teinte) 25%, white); /* teinte du panneau, très diluée */
 
   p {
     margin-bottom: 0;
-    font-size: ${({ theme }) => theme.texte.sm};
+    font-size: ${({ theme }) => theme.texte.xs};
   }
 `;
 

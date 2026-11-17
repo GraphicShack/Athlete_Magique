@@ -6,16 +6,19 @@
  *
  * Props :
  *   lien     : { libelle, to }, ex. « Retour à l'accueil », « Quitter la partie »
+ *   logo     : false pour ne pas afficher le logo (ex. l'accueil, qui l'affiche en grand) ; true par défaut
  *   actions  : éléments libres affichés à droite, avant le lien (optionnel)
  *   children : éléments affichés à côté du logo, ex. « Course 1 sur 3 » (optionnel)
  */
+import imageLogo from '@/assets/images/logo.webp';
 import { Bandeau, Marque, Droite, Logo, Lien } from './EnTetePage.styles.js';
 
-function EnTetePage({ lien, actions, children }) {
+function EnTetePage({ lien, actions, logo = true, children }) {
   return (
     <Bandeau>
       <Marque>
-        <Logo>Athlète Magique</Logo>
+        {/* alt : le nom du jeu, lu par les lecteurs d'écran à la place de l'image. */}
+        {logo && <Logo src={imageLogo} alt="Athlète Magique" />}
         {children}
       </Marque>
       <Droite>

@@ -10,14 +10,24 @@ import styled from 'styled-components';
 export const Bloc = styled.section`
   display: flex;
   flex-direction: column;
-  gap: ${({ theme }) => theme.espace(5)};
+  gap: ${({ theme }) => theme.espace(4)};
 `;
 
-// Grand slogan en italique très gras ; sa taille suit la largeur de l'écran.
+// Le logo du jeu, en haut de l'accroche : plus grand que dans l'en-tête des autres pages,
+// mais à l'échelle du slogan. Entre 11rem et 15rem selon la largeur de l'écran ;
+// la hauteur suit (height: auto) pour garder ses proportions.
+export const GrandLogo = styled.img`
+  display: block;
+  width: clamp(11rem, 20vw, 15rem);
+  height: auto;
+`;
+
+// Grand slogan en italique très gras ; sa taille suit la largeur de l'écran (au plus 3,25rem,
+// pour que « Faites trébucher les autres. » tienne sur une ligne sur un écran d'ordinateur).
 export const Slogan = styled.h1`
   margin: 0;
   font-family: ${({ theme }) => theme.polices.titre};
-  font-size: clamp(2.5rem, 6vw, 4.25rem);
+  font-size: clamp(2.25rem, 4.2vw, 3.25rem);
   font-style: italic;
   font-weight: 900;
   line-height: 1;

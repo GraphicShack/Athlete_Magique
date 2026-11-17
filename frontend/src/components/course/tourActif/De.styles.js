@@ -26,8 +26,8 @@ export const Eclat = styled.div`
   flex-shrink: 0;
   display: grid;
   place-items: center;
-  width: 6.5rem;
-  height: 6.5rem;
+  width: 5rem;
+  height: 5rem;
   background: ${({ theme }) => theme.palette.bleu};
   clip-path: ${formeEclat()};
 `;
@@ -38,9 +38,9 @@ export const Face = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
-  width: 4.5rem;
-  height: 4.5rem;
-  padding: ${({ theme }) => theme.espace(2)};
+  width: 3.5rem;
+  height: 3.5rem;
+  padding: ${({ theme }) => theme.espace(1.5)};
   border: ${({ theme }) => theme.bordures.contour};
   border-radius: ${({ theme }) => theme.rayons.sm};
   background: ${({ theme }) => theme.couleurs.surface};

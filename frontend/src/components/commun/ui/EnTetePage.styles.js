@@ -31,16 +31,13 @@ export const Droite = styled.div`
   gap: ${({ theme }) => theme.espace(4)};
 `;
 
-// Logo blanc, capitales italiques très grasses, comme la couverture du livret.
-export const Logo = styled.span`
-  font-family: ${({ theme }) => theme.polices.titre};
-  font-size: ${({ theme }) => theme.texte.xl};
-  font-style: italic;
-  font-weight: 900;
-  line-height: 1;
-  text-transform: uppercase;
-  letter-spacing: -0.02em;
-  color: ${({ theme }) => theme.couleurs.texteSurPage};
+// Le logo dessiné (assets/images/logo.webp), sur deux lignes : on fixe sa hauteur,
+// la largeur suit (width: auto) pour garder ses proportions.
+// La hauteur suit la largeur de l'écran (8vw), entre 2,75rem et 4rem.
+export const Logo = styled.img`
+  display: block;
+  height: clamp(2.75rem, 8vw, 4rem);
+  width: auto;
 `;
 
 // Lien blanc souligné, posé sur le fond noir de la page.

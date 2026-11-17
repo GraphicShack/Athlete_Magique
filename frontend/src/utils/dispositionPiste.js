@@ -1,45 +1,38 @@
 /*
  * dispositionPiste.js : la géométrie de la piste, c'est-à-dire où se place chaque case dans la grille.
  *
- * Responsabilité : calculer la colonne, la rangée, le coin et la couleur de chaque case.
+ * Responsabilité : calculer la colonne, la rangée et la couleur de chaque case.
  * Aucune règle de jeu ici, seulement de l'affichage. Ce sont des fonctions « pures ».
  *
- * La piste fait une boucle, dans le sens des aiguilles d'une montre :
+ * La piste serpente sur 4 rangées de 8 : les rangées 2 et 4 se lisent de droite à gauche.
  *
- *   [ Départ ][ 1 ][ 2 ] … [ 13 ]   ← rangée du haut, de gauche à droite
- *   [ Podium ][   Bannière   ][ 14 ]
- *   [ Podium ][   Bannière   ][ 15 ]
- *   [Arrivée ][ 30 ] … [ 17 ][ 16 ]  ← rangée du bas, de droite à gauche
+ *   [Départ ][  1 ][  2 ][  3 ][  4 ][  5 ][  6 ][  7 ]   →
+ *   [  15   ][ 14 ][ 13 ][ 12 ][ 11 ][ 10 ][  9 ][  8 ]   ←
+ *   [  16   ][ 17 ][ 18 ][ 19 ][ 20 ][ 21 ][ 22 ][ 23 ]   →
+ *   [Arrivée][ 30 ][ 29 ][ 28 ][ 27 ][ 26 ][ 25 ][ 24 ]   ←
  */
 
 // Taille de la grille du plateau.
-export const COLONNES = 16;
+export const COLONNES = 8;
 export const RANGEES = 4;
 
-const DERNIERE_CASE_DU_HAUT = 13; // cases 1 à 13
-const DERNIERE_CASE_DE_DROITE = 15; // cases 14 et 15
-const LARGEUR_DEPART = 3; // la case Départ occupe 3 colonnes
+// Rang de chaque place sur le parcours : 0 pour le Départ, 1 à 30 pour les cases,
+// et la dernière place de la grille (31) pour l'Arrivée.
+export const RANG_DEPART = 0;
+export const RANG_ARRIVEE = COLONNES * RANGEES - 1;
 
-/** Position { colonne, rangee } d'une case numérotée de 1 à 30 (grille CSS, à partir de 1). */
-export function positionCase(numero) {
-  if (numero <= DERNIERE_CASE_DU_HAUT) {
-    return { colonne: LARGEUR_DEPART + numero, rangee: 1 };
-  }
-  if (numero <= DERNIERE_CASE_DE_DROITE) {
-    return { colonne: COLONNES, rangee: numero - DERNIERE_CASE_DU_HAUT + 1 };
-  }
-  return { colonne: COLONNES - (numero - DERNIERE_CASE_DE_DROITE - 1), rangee: RANGEES };
+/** Position { colonne, rangee } (grille CSS, à partir de 1) d'une place du parcours, selon son rang. */
+export function positionSurPiste(rang) {
+  const rangee = Math.floor(rang / COLONNES) + 1;
+  const place = rang % COLONNES; // 0 à 7, dans le sens de lecture de la rangée
+  // Rangées 1 et 3 : de gauche à droite. Rangées 2 et 4 : de droite à gauche.
+  const colonne = rangee % 2 === 1 ? place + 1 : COLONNES - place;
+  return { colonne, rangee };
 }
 
-/**
- * Coin du plateau occupé par une case, ou null.
- * Les cases de coin sont arrondies pour suivre la bordure de la piste.
- * (Le Départ occupe le coin en haut à gauche, l'Arrivée celui en bas à gauche.)
- */
-export function coinCase(numero) {
-  if (numero === DERNIERE_CASE_DU_HAUT) return 'hautDroite';
-  if (numero === DERNIERE_CASE_DE_DROITE + 1) return 'basDroite';
-  return null;
+/** Position { colonne, rangee } d'une case numérotée de 1 à 30 (son rang est son numéro). */
+export function positionCase(numero) {
+  return positionSurPiste(numero);
 }
 
 /** Une case sur cinq est un repère qui affiche son numéro. */

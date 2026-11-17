@@ -11,7 +11,7 @@ export const Separateur = styled.p`
   display: flex;
   align-items: center;
   gap: ${({ theme }) => theme.espace(3)};
-  margin: ${({ theme }) => theme.espace(5)} 0;
+  margin: ${({ theme }) => theme.espace(3)} 0;
   color: ${({ theme }) => theme.couleurs.gris700};
   font-size: ${({ theme }) => theme.texte.sm};
 

@@ -6,15 +6,16 @@
  */
 import { useTheme } from 'styled-components';
 import Jeton from './Jeton.jsx';
-import { ListeLegende, Element, Carre } from './LegendePiste.styles.js';
+import imageRocher from '@/assets/images/rocher.png';
+import { ListeLegende, Element, Exemple, Carre, Image } from './LegendePiste.styles.js';
 
 function LegendePiste() {
   const theme = useTheme();
   // Un élément de légende : un exemple à gauche, son explication à droite.
   const elements = [
-    { id: 'etoile', exemple: <Carre $couleur={theme.piste.etoile} />, texte: 'Case étoile : +1 pt' },
-    { id: 'rocher', exemple: <Carre $couleur={theme.piste.rocher} />, texte: 'Rocher : on trébuche' },
-    { id: 'tombe', exemple: <Jeton couleur={theme.couleurs.gris500} initiales="" tombe />, texte: 'Tombé : saute son prochain déplacement' },
+    { id: 'etoile', exemple: <Carre $couleur={theme.piste.etoile} />, texte: 'Étoile : +1 pt' },
+    { id: 'rocher', exemple: <Image src={imageRocher} alt="" />, texte: 'Rocher : on trébuche' },
+    { id: 'tombe', exemple: <Jeton couleur={theme.couleurs.gris500} initiales="" tombe />, texte: 'Tombé : passe son prochain déplacement' },
     { id: 'actif', exemple: <Jeton couleur={theme.couleurs.gris500} initiales="" actif />, texte: 'Pion actif' },
   ];
 
@@ -22,7 +23,7 @@ function LegendePiste() {
     <ListeLegende as="ul">
       {elements.map(({ id, exemple, texte }) => (
         <Element key={id}>
-          {exemple}
+          <Exemple>{exemple}</Exemple>
           {texte}
         </Element>
       ))}

@@ -19,7 +19,7 @@ function CarteJoueur({ joueur, actif = false }) {
   return (
     // aria-current : les lecteurs d'écran annoncent le joueur dont c'est le tour.
     <Carte $couleur={couleur} $actif={actif} aria-current={actif ? 'true' : undefined}>
-      <AvatarPersonnage initiales={personnage.initiales} />
+      <AvatarPersonnage initiales={personnage.initiales} image={personnage.image} />
       <Infos>
         <Nom>
           {nom}

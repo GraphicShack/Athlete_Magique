@@ -11,6 +11,7 @@ import { rondCentre } from '@/styles/base/utilitaires.js';
 export const Rond = styled.span`
   ${rondCentre}
   flex-shrink: 0;
+  overflow: hidden; /* l'image suit le rond */
   width: ${({ $taille }) => $taille};
   height: ${({ $taille }) => $taille};
   border: ${({ theme }) => theme.bordures.contour};
@@ -18,4 +19,12 @@ export const Rond = styled.span`
   font-family: ${({ theme }) => theme.polices.titre};
   font-weight: ${({ theme }) => theme.graisses.tresForte};
   font-size: calc(${({ $taille }) => $taille} * 0.34); /* les initiales suivent la taille du rond */
+`;
+
+// L'image du personnage, qui remplit le rond.
+export const Image = styled.img`
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 `;

@@ -11,11 +11,11 @@ export const Carte = styled.li`
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
-  gap: ${({ theme }) => theme.espace(3)};
-  padding: ${({ theme }) => theme.espace(3)};
+  gap: ${({ theme }) => theme.espace(2.5)};
+  padding: ${({ theme }) => theme.espace(2)} ${({ theme }) => theme.espace(3)};
   /* Bande épaisse à gauche, à la couleur du pion du joueur sur la piste. */
   border: ${({ theme }) => theme.bordures.contour};
-  border-left: 10px solid ${({ $couleur }) => $couleur};
+  border-left: 8px solid ${({ $couleur }) => $couleur};
   border-radius: ${({ theme }) => theme.rayons.md};
   background: ${({ theme }) => theme.couleurs.surface};
   color: ${({ theme }) => theme.couleurs.encre};
@@ -28,6 +28,7 @@ export const Infos = styled.div`
 
 // Nom du joueur ; « … » s'il est trop long.
 export const Nom = styled.div`
+  font-size: ${({ theme }) => theme.texte.sm};
   font-weight: ${({ theme }) => theme.graisses.tresForte};
   white-space: nowrap;
   overflow: hidden;
@@ -46,7 +47,7 @@ export const Detail = styled.div`
 // Les points, en grand, italique très gras.
 export const Points = styled.div`
   font-family: ${({ theme }) => theme.polices.titre};
-  font-size: ${({ theme }) => theme.texte.lg};
+  font-size: ${({ theme }) => theme.texte.md};
   font-style: italic;
   font-weight: 900;
   white-space: nowrap;

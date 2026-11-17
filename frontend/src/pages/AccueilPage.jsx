@@ -2,7 +2,7 @@
  * AccueilPage.jsx : la page d'accueil (adresse « / »).
  *
  * Responsabilité : placer les blocs de l'accueil, sans rien afficher elle-même :
- *   - en haut : le logo et le lien vers le tableau d'honneur ;
+ *   - en haut : le lien vers le tableau d'honneur (le logo, lui, est en grand dans l'accroche) ;
  *   - à gauche : la présentation du jeu (Accroche) ;
  *   - à droite : la carte pour commencer une partie (PanneauConnexion) ;
  *   - en bas, sur toute la largeur : les 10 personnages (ApercuPersonnages).
@@ -18,7 +18,8 @@ import { Page, Grille, Zone } from './AccueilPage.styles.js';
 function AccueilPage() {
   return (
     <Page>
-      <EnTetePage lien={{ libelle: "Tableau d'honneur", to: CHEMINS.classement }} />
+      {/* Sans logo dans l'en-tête : l'accroche l'affiche en grand, juste en dessous. */}
+      <EnTetePage logo={false} lien={{ libelle: "Tableau d'honneur", to: CHEMINS.classement }} />
 
       <Grille>
         <Zone $zone="accroche">

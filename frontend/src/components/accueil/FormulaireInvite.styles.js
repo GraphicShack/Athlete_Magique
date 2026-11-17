@@ -10,7 +10,7 @@ import styled from 'styled-components';
 export const Bloc = styled.div`
   display: flex;
   flex-direction: column;
-  gap: ${({ theme }) => theme.espace(3)};
+  gap: ${({ theme }) => theme.espace(2)};
 `;
 
 // « Jouer en invité »

@@ -8,10 +8,11 @@
 import styled from 'styled-components';
 
 // La page : l'en-tête, puis la grille, l'un sous l'autre.
+// Espaces serrés : l'accueil doit tenir dans un écran d'ordinateur portable, sans défiler.
 export const Page = styled.div`
   display: flex;
   flex-direction: column;
-  gap: ${({ theme }) => theme.espace(8)};
+  gap: ${({ theme }) => theme.espace(4)};
 `;
 
 // Sur téléphone : une colonne. Dès la taille tablette : deux colonnes, puis les personnages en dessous.
@@ -29,7 +30,7 @@ export const Grille = styled.div`
       'personnages personnages';
     align-items: center;
     column-gap: ${({ theme }) => theme.espace(10)};
-    row-gap: ${({ theme }) => theme.espace(8)};
+    row-gap: ${({ theme }) => theme.espace(5)};
   }
 `;
 

@@ -24,7 +24,7 @@ import Bouton from '@/components/commun/ui/Bouton.jsx';
 import MessageVide from '@/components/commun/ui/MessageVide.jsx';
 import De from './De.jsx';
 import EtapesTour from './EtapesTour.jsx';
-import { EnTete, SurTitre, NomPersonnage, Resultat, Pouvoir, TitrePouvoir, Actions } from './ControleurDeTourActif.styles.js';
+import { EnTete, SurTitre, NomPersonnage, Colonnes, Resultat, Pouvoir, TitrePouvoir, Actions } from './ControleurDeTourActif.styles.js';
 
 function ControleurDeTourActif({
   joueur,
@@ -63,7 +63,7 @@ function ControleurDeTourActif({
       aria-label="Tour en cours"
       entete={
         <EnTete>
-          <AvatarPersonnage initiales={personnage.initiales} taille="lg" />
+          <AvatarPersonnage initiales={personnage.initiales} image={personnage.image} />
           <div>
             <SurTitre>À toi de jouer, {joueur}</SurTitre>
             <NomPersonnage>{personnage.nom}</NomPersonnage>
@@ -71,25 +71,31 @@ function ControleurDeTourActif({
         </EnTete>
       }
     >
-      <EtapesTour etapeCourante={etapeCourante} />
+      {/* Deux colonnes s'il y a la place (étapes et dé à gauche, pouvoir et boutons à droite),
+          sinon l'une sous l'autre. */}
+      <Colonnes>
+        <div>
+          <EtapesTour etapeCourante={etapeCourante} />
 
-      {(resultatDe || message) && (
-        <Resultat>
-          {resultatDe && <De valeur={resultatDe} />}
-          {message && <p>{message}</p>}
-        </Resultat>
-      )}
+          {(resultatDe || message) && (
+            <Resultat>
+              {resultatDe && <De valeur={resultatDe} />}
+              {message && <p>{message}</p>}
+            </Resultat>
+          )}
+        </div>
 
-      {/* Avec un pouvoir à utiliser, les boutons vont dans son encadré ; sinon, ils sont seuls. */}
-      {pouvoir ? (
-        <Pouvoir>
-          <TitrePouvoir>{pouvoir.titre}</TitrePouvoir>
-          <p>{pouvoir.description}</p>
-          {boutons}
-        </Pouvoir>
-      ) : (
-        boutons
-      )}
+        {/* Avec un pouvoir à utiliser, les boutons vont dans son encadré ; sinon, ils sont seuls. */}
+        {pouvoir ? (
+          <Pouvoir>
+            <TitrePouvoir>{pouvoir.titre}</TitrePouvoir>
+            <p>{pouvoir.description}</p>
+            {boutons}
+          </Pouvoir>
+        ) : (
+          boutons
+        )}
+      </Colonnes>
     </Panneau>
   );
 }

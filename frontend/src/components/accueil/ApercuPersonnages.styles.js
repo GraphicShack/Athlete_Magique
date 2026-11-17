@@ -22,7 +22,7 @@ export const Grille = styled.ul`
   @media (min-width: ${({ theme }) => theme.ecrans.lg}) {
     grid-template-columns: repeat(10, 1fr);
   }
-  gap: ${({ theme }) => theme.espace(4)};
+  gap: ${({ theme }) => theme.espace(2)};
 `;
 
 // Un bouton sans apparence de bouton : il rend le personnage cliquable et accessible au clavier.
@@ -30,9 +30,9 @@ export const Personnage = styled.button`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: ${({ theme }) => theme.espace(2)};
+  gap: ${({ theme }) => theme.espace(1)};
   width: 100%;
-  padding: ${({ theme }) => theme.espace(2)} ${({ theme }) => theme.espace(1)};
+  padding: ${({ theme }) => theme.espace(1)};
   border: 2px solid transparent;
   border-radius: ${({ theme }) => theme.rayons.md};
   background: transparent;
@@ -59,8 +59,8 @@ export const Personnage = styled.button`
 
 export const Portrait = styled.img`
   display: block;
-  width: 4rem;
-  height: 4rem;
+  width: 3.25rem;
+  height: 3.25rem;
   object-fit: contain;
   border-radius: 50%;
 `;

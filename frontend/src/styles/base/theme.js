@@ -159,14 +159,12 @@ const rayons = {
   sm: '0.375rem',
   md: '0.75rem',
   lg: '1.25rem',
-  piste: '2.5rem', // coins arrondis de la piste
   rond: '999px', // forme de pilule ou de cercle
 };
 
 const bordures = {
   fine: `1px solid ${PALETTE.gris}`, // séparateurs discrets (tableaux, réglages)
   contour: `2px solid ${PALETTE.noir}`, // boutons, étiquettes, avatars, dé, cartes
-  lisere: `2px solid ${PALETTE.blanc}`, // traits blancs sur la piste noire (podium, bannière)
 };
 
 const ombres = {

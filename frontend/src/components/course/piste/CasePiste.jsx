@@ -11,8 +11,9 @@
  *   type     : 'normale' (par défaut), 'etoile' ou 'rocher'
  *   children : les jetons posés sur la case
  */
-import { positionCase, estRepere, indiceCouleur, coinCase } from '@/utils/dispositionPiste.js';
-import { Carre, Numero, PetitNumero, Mention, Jetons } from './CasePiste.styles.js';
+import { positionCase, estRepere, indiceCouleur } from '@/utils/dispositionPiste.js';
+import imageRocher from '@/assets/images/rocher.png';
+import { Carre, Numero, PetitNumero, Rocher, Jetons } from './CasePiste.styles.js';
 
 function CasePiste({ numero, type = 'normale', children }) {
   const { colonne, rangee } = positionCase(numero);
@@ -26,8 +27,7 @@ function CasePiste({ numero, type = 'normale', children }) {
       $type={type}
       $repere={repere}
       $indice={indiceCouleur(numero)}
-      $coin={coinCase(numero)}
-      aria-label={`Case ${numero}`}
+      aria-label={type === 'rocher' ? `Case ${numero}, rocher` : `Case ${numero}`}
     >
       {afficherNumero ? (
         <Numero>
@@ -37,7 +37,8 @@ function CasePiste({ numero, type = 'normale', children }) {
       ) : (
         <PetitNumero>{numero}</PetitNumero>
       )}
-      {type === 'rocher' && <Mention>Rocher</Mention>}
+      {/* Case Rocher : le dessin du rocher (décoratif, « rocher » est dans aria-label). */}
+      {type === 'rocher' && <Rocher src={imageRocher} alt="" />}
       {children && <Jetons>{children}</Jetons>}
     </Carre>
   );
