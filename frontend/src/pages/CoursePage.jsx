@@ -33,6 +33,7 @@ import ControleurDeTourActif from '@/components/course/tourActif/ControleurDeTou
 import JournalEvenements from '@/components/course/JournalEvenements.jsx';
 import { obtenirPartie } from '@/services/partie.js';
 import { jetonsDesJoueurs } from '@/utils/piste/jetons.js';
+import { deplacerJoueur } from '@/utils/piste/deplacerJoueur.js';
 import useTourDemo from '@/hooks/tour/useTourDemo.js';
 import useJournal from '@/hooks/journal/useJournal.js';
 import { Ecran, EnTete, Colonne, Bloc } from './CoursePage.styles.js';
@@ -43,15 +44,18 @@ function CoursePage() {
   const [parametres] = useSearchParams();
   const { course, rochers, joueurs, idActif, tour } = obtenirPartie(parametres.get('personnage'));
 
+  // Démo du tour : dé, message, boutons et choix du joueur (voir hooks/tour/useTourDemo.js).
+  const tourDemo = useTourDemo(tour);
+
+  // Le joueur actif est posé sur sa case du moment (elle change quand il confirme son déplacement).
+  const joueursAJour = deplacerJoueur(joueurs, idActif, tourDemo.position);
+
   // Chaque joueur reçoit la couleur de son pion, selon sa place dans l'ordre de jeu.
   // La même couleur sert à sa carte et à son jeton sur la piste.
-  const joueursColores = joueurs.map((joueur, rang) => ({ ...joueur, couleur: theme.joueurs[rang] }));
+  const joueursColores = joueursAJour.map((joueur, rang) => ({ ...joueur, couleur: theme.joueurs[rang] }));
 
   // Le journal se remplit au fil des événements reçus (voir hooks/journal/useJournal.js).
   const evenements = useJournal(joueurs);
-
-  // Démo du tour : dé, message, boutons et choix du joueur (voir hooks/tour/useTourDemo.js).
-  const tourDemo = useTourDemo(tour);
 
   return (
     <Ecran>

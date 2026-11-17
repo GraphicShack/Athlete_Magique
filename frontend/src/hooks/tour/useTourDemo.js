@@ -19,6 +19,7 @@
  * Utilisation :
  *   const tourDemo = useTourDemo(tour);
  *   <ControleurDeTourActif etapeCourante={tourDemo.etape} pouvoir={tourDemo.pouvoir} … />
+ *   tourDemo.position : la case du joueur actif, mise à jour après la confirmation du déplacement
  */
 import useLancerDe from '@/hooks/tour/useLancerDe.js';
 import useChoixTour from '@/hooks/tour/useChoixTour.js';
@@ -109,13 +110,18 @@ function useTourDemo(tour) {
       journaliser(evenementEchanger(tour));
       choix.passerA(4); // l'échange remplace le lancer et le déplacement
     },
-    // 3. Déplacement
-    confirmer: () => choix.passerA(4),
+    // 3. Déplacement : le pion avance, puis on passe à la fin du tour.
+    confirmer: () => {
+      choix.avancer(cases);
+      choix.passerA(4);
+    },
     avancerLievre: () => {
+      choix.avancer(cases + 2);
       journaliser(evenementDeplacementPouvoir(tour, cases + 2));
       choix.passerA(4);
     },
     avancerCentaure: () => {
+      choix.avancer(cases);
       journaliser(evenementDeplacementPouvoir(tour, cases));
       choix.passerA(4);
     },
@@ -136,6 +142,8 @@ function useTourDemo(tour) {
     etape,
     pouvoir: aUnPouvoirIci && phase !== 'termine' ? tour.pouvoir : null,
     titreEtape: TITRES_ETAPES[etape],
+    // La case du joueur actif : sa case de départ, plus les cases avancées (0 avant la confirmation).
+    position: tour.position + choix.avance,
     message: messageDuTour(phase, etat),
     actions: boutonsDuTour(phase, etat),
     surAction,
