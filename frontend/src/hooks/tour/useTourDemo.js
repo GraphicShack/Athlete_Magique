@@ -7,50 +7,61 @@
  *   - phaseTour      : où en est le tour ;
  *   - messageTour    : le message affiché ;
  *   - boutonsTour    : les boutons affichés ;
- *   - evenementsTour + journal : chaque action du joueur est ajoutée au journal.
+ *   - evenementsTour + journal : le début et la fin du tour, et les actions qui changent la
+ *     partie (pouvoirs, dé) sont ajoutés au journal. « Confirmer » (sans pouvoir) ne l'est pas.
  *
- * Les phases, par exemple pour le Magicien :
- *   1. « Lancer le dé »
- *   2. « Relancer le dé (1 sur 2) » et « Garder le N »
- *   3. « Avancer de N » (commun à tous)
+ * Les 4 étapes, chacune avec son pouvoir si le personnage en a un à ce moment :
+ *   1. Début du tour  : « Commencer le tour »      (Hypnotiste, Party Animal : leur pouvoir)
+ *   2. Lancer du dé   : « Lancer le dé »           (Magicien, Scientifique Fusé, Flip Flop)
+ *   3. Déplacement    : « Confirmer : avancer de N » (Lièvre, Centaure)
+ *   4. Fin du tour    : « Fin du tour »
  *
  * Utilisation :
  *   const tourDemo = useTourDemo(tour);
- *   <ControleurDeTourActif etapeCourante={tourDemo.etape} message={tourDemo.message}
- *     actions={tourDemo.actions} onAction={tourDemo.surAction} resultatDe={tourDemo.lancer.valeur} … />
+ *   <ControleurDeTourActif etapeCourante={tourDemo.etape} pouvoir={tourDemo.pouvoir} … />
  */
 import useLancerDe from '@/hooks/tour/useLancerDe.js';
 import useChoixTour from '@/hooks/tour/useChoixTour.js';
-import { phaseDuTour } from '@/utils/tour/phaseTour.js';
+import { phaseDuTour, ETAPE_DE_PHASE, CLES_ETAPES } from '@/utils/tour/phaseTour.js';
 import { messageDuTour } from '@/utils/tour/messageTour.js';
 import { boutonsDuTour } from '@/utils/tour/boutonsTour.js';
 import { journaliser } from '@/services/journal/journal.js';
 import {
+  evenementDebutTour,
+  evenementFinTour,
+  evenementHypnose,
+  evenementRassemblement,
   evenementLancer,
   evenementRelance,
   evenementGarder,
   evenementDoubler,
   evenementEchanger,
-  evenementAvancer,
+  evenementDeplacementPouvoir,
 } from '@/utils/tour/evenementsTour.js';
+
+// Le titre de la case quand il n'y a pas de pouvoir à cette étape.
+const TITRES_ETAPES = { 1: 'Début du tour', 2: 'Lancer de dé', 3: 'Déplacement', 4: 'Fin du tour' };
 
 function useTourDemo(tour) {
   const lancer = useLancerDe(null);
   const choix = useChoixTour();
+  const { apresLancer } = tour.etapes.lancer;
 
   // Le premier lancer ne compte pas comme une relance.
   const relances = Math.max(lancer.lancers - 1, 0);
   // Le nombre de relances permises (ex. 2 pour le Magicien), s'il y en a.
-  const maximum = tour.apresLancer.find((bouton) => bouton.maximum)?.maximum;
+  const maximum = apresLancer.find((bouton) => bouton.maximum)?.maximum;
 
   const phase = phaseDuTour({
-    fini: choix.fini,
+    etape: choix.etape,
+    termine: choix.termine,
     lancers: lancer.lancers,
     obtenu: lancer.obtenu,
     choixFait: choix.deplacement !== null,
-    aUnPouvoir: tour.apresLancer.length > 0,
+    aUnPouvoir: apresLancer.length > 0,
     plusDeRelance: maximum !== undefined && relances >= maximum,
   });
+  const etape = ETAPE_DE_PHASE[phase];
 
   // Le nombre de cases à avancer : celui choisi, sinon la valeur du dé.
   const cases = choix.deplacement ?? lancer.obtenu;
@@ -65,8 +76,25 @@ function useTourDemo(tour) {
     );
   };
 
-  // Ce que fait chaque bouton, selon son id. Chaque choix est aussi ajouté au journal.
+  // Quitter l'étape 1 : le tour commence (journalisé), puis on passe au lancer du dé.
+  const commencer = () => {
+    journaliser(evenementDebutTour(tour));
+    choix.passerA(2);
+  };
+
+  // Ce que fait chaque bouton, selon son id.
   const reactions = {
+    // 1. Début du tour
+    commencer,
+    hypnotiser: () => {
+      commencer();
+      journaliser(evenementHypnose(tour));
+    },
+    rassembler: () => {
+      commencer();
+      journaliser(evenementRassemblement(tour));
+    },
+    // 2. Lancer du dé
     lancer: lancer.relancer,
     relancer: lancer.relancer,
     garder: () => {
@@ -77,23 +105,38 @@ function useTourDemo(tour) {
       choix.choisirDeplacement(lancer.obtenu * 2);
       journaliser(evenementDoubler(tour, lancer.obtenu * 2));
     },
-    avancer: () => {
-      choix.terminer();
-      journaliser(evenementAvancer(tour, cases));
-    },
     echanger: () => {
-      choix.terminer(`${tour.joueur} choisit avec qui échanger sa place.`);
       journaliser(evenementEchanger(tour));
+      choix.passerA(4); // l'échange remplace le lancer et le déplacement
+    },
+    // 3. Déplacement
+    confirmer: () => choix.passerA(4),
+    avancerLievre: () => {
+      journaliser(evenementDeplacementPouvoir(tour, cases + 2));
+      choix.passerA(4);
+    },
+    avancerCentaure: () => {
+      journaliser(evenementDeplacementPouvoir(tour, cases));
+      choix.passerA(4);
+    },
+    // 4. Fin du tour
+    finir: () => {
+      journaliser(evenementFinTour(tour));
+      choix.terminer();
     },
   };
   const surAction = (id) => reactions[id]?.();
 
+  // Le pouvoir n'est montré qu'à l'étape où il s'utilise.
+  const aUnPouvoirIci = tour.etapes[CLES_ETAPES[etape]].pouvoir === true;
   const etat = { tour, obtenu: lancer.obtenu, relances, deplacement: cases };
 
   return {
     lancer: { ...lancer, surArret },
-    etape: phase === 'fini' ? tour.etape + 1 : tour.etape,
-    message: choix.messageFin ?? messageDuTour(phase, etat),
+    etape,
+    pouvoir: aUnPouvoirIci && phase !== 'termine' ? tour.pouvoir : null,
+    titreEtape: TITRES_ETAPES[etape],
+    message: messageDuTour(phase, etat),
     actions: boutonsDuTour(phase, etat),
     surAction,
   };

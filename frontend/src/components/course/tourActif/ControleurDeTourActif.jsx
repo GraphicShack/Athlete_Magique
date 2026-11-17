@@ -16,7 +16,8 @@
  *   lancerDe      : augmente à chaque lancer, pour faire rouler le dé (0 : pas d'animation)
  *   onArretDe     : appelé avec la valeur quand le dé a fini de rouler (optionnel)
  *   message       : texte expliquant ce qui vient de se passer
- *   pouvoir       : { titre, description } ou null (null : simple case de lancer de dé)
+ *   pouvoir       : { titre, description } si le pouvoir s'utilise à cette étape, sinon null
+ *   titreEtape    : le nom de l'étape, affiché quand il n'y a pas de pouvoir (ex. « Début du tour »)
  *   actions       : [{ id, libelle, principal }]
  *   onAction      : appelé avec l'id de l'action choisie
  */
@@ -26,7 +27,7 @@ import MessageVide from '@/components/commun/ui/MessageVide.jsx';
 import De from '@/components/commun/jeu/de/De.jsx';
 import EtapesTour from './EtapesTour.jsx';
 import CasePouvoir from './CasePouvoir.jsx';
-import CaseLancerDe from './CaseLancerDe.jsx';
+import CaseSansPouvoir from './CaseSansPouvoir.jsx';
 import { EnTete, SurTitre, NomPersonnage, Colonnes, Resultat, PlaceDe } from './ControleurDeTourActif.styles.js';
 
 function ControleurDeTourActif({
@@ -38,6 +39,7 @@ function ControleurDeTourActif({
   onArretDe,
   message,
   pouvoir = null,
+  titreEtape,
   actions = [],
   onAction = () => {},
 }) {
@@ -50,9 +52,9 @@ function ControleurDeTourActif({
     );
   }
 
-  // La case du bas : celle du pouvoir si le personnage en a un à utiliser, sinon le lancer simple.
+  // La case du bas : celle du pouvoir s'il s'utilise à cette étape, sinon la case de l'étape.
   // Les deux cases ont les mêmes props, donc on peut prendre l'une ou l'autre.
-  const CaseDuTour = pouvoir ? CasePouvoir : CaseLancerDe;
+  const CaseDuTour = pouvoir ? CasePouvoir : CaseSansPouvoir;
 
   return (
     <Panneau
@@ -87,7 +89,7 @@ function ControleurDeTourActif({
           </Resultat>
         </div>
 
-        <CaseDuTour pouvoir={pouvoir} actions={actions} onAction={onAction} />
+        <CaseDuTour pouvoir={pouvoir} titre={titreEtape} actions={actions} onAction={onAction} />
       </Colonnes>
     </Panneau>
   );

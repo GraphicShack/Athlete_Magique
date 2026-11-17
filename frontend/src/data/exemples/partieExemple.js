@@ -31,7 +31,7 @@ const PARTIE_EXEMPLE = {
   numeroTour: 5,
 
   // Le tour en cours (étape, dé, consigne, boutons) dépend du personnage du joueur actif :
-  // voir data/exemples/pouvoirsAuLancer.js.
+  // voir data/exemples/deroulementTour.js.
 
   // Le journal d'événements arrive à part, au fil de la partie : voir data/exemples/evenementsExemple.js.
 };

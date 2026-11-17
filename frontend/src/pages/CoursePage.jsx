@@ -19,11 +19,10 @@
  * seul le journal (un historique) défile à l'intérieur de son panneau.
  * Sur téléphone, les blocs s'empilent dans l'ordre : en-tête, piste, joueurs, tour, journal.
  * Pour l'instant, la partie est un exemple (data/exemples/partieExemple.js) et l'écran sert à essayer
- * l'affichage. Démo du tour (hook useTourDemo) : « Lancer » et « Relancer » font rouler le dé,
- * puis « Avancer », « Garder », « Doubler » ou « Échanger » terminent l'étape avec un message.
- * Pour essayer un autre personnage, ajouter ?personnage=… à l'adresse (ex. scientifique,
- * flipflop, lievre). Magicien, Scientifique Fusé et Flip Flop montrent leur case Pouvoir ;
- * les autres, la simple case de lancer de dé (voir data/exemples/pouvoirsAuLancer.js).
+ * l'affichage. Démo du tour (hook useTourDemo) : les 4 étapes du tour, chacune avec un bouton,
+ * ou avec le pouvoir du personnage s'il s'utilise à ce moment.
+ * Pour essayer un autre personnage, ajouter ?personnage=… à l'adresse (ex. hypnotiste,
+ * scientifique, lievre). Voir data/exemples/deroulementTour.js.
  */
 import { useTheme } from 'styled-components';
 import { useSearchParams } from 'react-router-dom';
@@ -86,7 +85,8 @@ function CoursePage() {
             lancerDe={tourDemo.lancer.lancers}
             onArretDe={tourDemo.lancer.surArret}
             message={tourDemo.message}
-            pouvoir={tour.pouvoir}
+            pouvoir={tourDemo.pouvoir}
+            titreEtape={tourDemo.titreEtape}
             actions={tourDemo.actions}
             onAction={tourDemo.surAction}
           />

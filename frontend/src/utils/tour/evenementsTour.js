@@ -1,6 +1,6 @@
 /*
  * evenementsTour.js : crée les événements du journal pour les actions du tour en cours
- * (lancer, relancer, garder, doubler, échanger, avancer).
+ * (pouvoirs de début de tour, lancer, relancer, garder, doubler, échanger, déplacement avec pouvoir).
  *
  * Responsabilité unique : construire chaque événement au format standard
  * (voir data/exemples/evenementsExemple.js). Il ne l’envoie pas (voir journaliser dans services/journal/journal.js)
@@ -15,6 +15,26 @@ const base = (tour, etape) => ({ tour: tour.numero, etape, acteur: tour.idJoueur
 
 // La cause « pouvoir du personnage actif » (ex. Magicien qui relance).
 const parPouvoir = (tour) => ({ genre: 'pouvoir', id: tour.personnage.id });
+
+// Le début du tour du joueur.
+export const evenementDebutTour = (tour) => ({ ...base(tour, 'debut'), type: 'TOUR_DEBUT' });
+
+// La fin du tour du joueur.
+export const evenementFinTour = (tour) => ({ ...base(tour, 'fin'), type: 'TOUR_FIN' });
+
+// Hypnotiste : il va téléporter un personnage sur sa case.
+export const evenementHypnose = (tour) => ({
+  ...base(tour, 'debut'),
+  type: 'HYPNOSE',
+  cause: parPouvoir(tour),
+});
+
+// Party Animal : les autres personnages se rapprochent de 1 case.
+export const evenementRassemblement = (tour) => ({
+  ...base(tour, 'debut'),
+  type: 'RASSEMBLEMENT',
+  cause: parPouvoir(tour),
+});
 
 // Le premier lancer du dé.
 export const evenementLancer = (tour, valeur) => ({
@@ -54,10 +74,11 @@ export const evenementEchanger = (tour) => ({
   cause: parPouvoir(tour),
 });
 
-// Le déplacement principal : de la position actuelle, de « cases » cases.
-export const evenementAvancer = (tour, cases) => ({
+// Le déplacement principal avec un pouvoir (ex. Lièvre +2, Centaure) : de la position actuelle,
+// de « cases » cases. Un déplacement sans pouvoir n'est pas journalisé.
+export const evenementDeplacementPouvoir = (tour, cases) => ({
   ...base(tour, 'deplacement'),
   type: 'DEPLACEMENT',
-  cause: { genre: 'de' },
+  cause: parPouvoir(tour),
   details: { de: tour.position, a: tour.position + cases, cases },
 });

@@ -13,6 +13,10 @@ import { nombreDeCases } from '@/utils/nombreDeCases.js';
 export const PHRASES = {
   COURSE_DEBUT: ({ d }) => `La course ${d.numero} commence.`,
   COURSE_FIN: ({ d }) => `La course ${d.numero} est terminée.`,
+  TOUR_DEBUT: ({ acteur }) => `Début du tour de ${acteur}.`,
+  TOUR_FIN: ({ acteur }) => `Fin du tour de ${acteur}.`,
+  HYPNOSE: ({ acteur }) => `${acteur} va téléporter un personnage sur sa case.`,
+  RASSEMBLEMENT: ({ acteur }) => `Tous les autres personnages se rapprochent de 1 case de ${acteur}.`,
   DE_LANCE: ({ d, acteur }) => `${acteur} lance le dé : ${d.valeur}.`,
   DE_RELANCE: ({ d, acteur }) => `${acteur} relance le dé (${d.relance} sur ${d.maximum}) : ${d.valeur}.`,
   DE_GARDE: ({ d, acteur }) => `${acteur} garde le ${d.valeur}.`,

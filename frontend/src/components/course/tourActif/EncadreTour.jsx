@@ -1,7 +1,7 @@
 /*
  * EncadreTour.jsx : l'encadré du bas du tour en cours, avec un titre, un court texte et les boutons.
  *
- * Responsabilité : donner la même forme aux « cases » du tour (CasePouvoir, CaseLancerDe),
+ * Responsabilité : donner la même forme aux « cases » du tour (CasePouvoir, CaseSansPouvoir),
  * pour qu'elles se ressemblent et qu'on puisse les échanger sans rien changer autour.
  *
  * Props :

@@ -1,9 +1,9 @@
 /*
  * CasePouvoir.jsx : la case du tour quand le personnage a un pouvoir à utiliser au lancer
- * (Magicien, Scientifique Fusé, Flip Flop).
+ * à l'étape en cours.
  *
  * Responsabilité : montrer le pouvoir et ses boutons.
- * Elle a les mêmes props que CaseLancerDe : on peut mettre l'une à la place de l'autre.
+ * Elle a les mêmes props que CaseSansPouvoir : on peut mettre l'une à la place de l'autre.
  *
  * Props :
  *   pouvoir  : { titre, description }

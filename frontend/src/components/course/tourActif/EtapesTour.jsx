@@ -10,7 +10,7 @@
  */
 import { ListeEtapes, Etape, Pastille, Libelle } from './EtapesTour.styles.js';
 
-const ETAPES_TOUR = ['Début du tour', 'Lancer du dé', 'Déplacement principal', 'Fin du déplacement'];
+const ETAPES_TOUR = ['Début du tour', 'Lancer du dé', 'Déplacement principal', 'Fin du tour'];
 
 // Statut d'une étape par rapport à l'étape en cours : 'passee', 'courante' ou 'avenir'.
 function statutEtape(numero, etapeCourante) {

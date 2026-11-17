@@ -12,10 +12,10 @@ export const Encadre = styled.div`
   background: ${({ $neutre }) =>
     $neutre ? 'color-mix(in srgb, black 6%, white)' : 'color-mix(in srgb, var(--teinte) 25%, white)'};
 
-  /* Le texte a toujours la place de 2 lignes, même s'il est plus court (hauteur fixe). */
+  /* Le texte a toujours la place de 3 lignes (le plus long pouvoir), même s’il est plus court (hauteur fixe). */
   p {
     margin-bottom: 0;
-    min-height: 2lh;
+    min-height: 3lh;
     font-size: ${({ theme }) => theme.texte.xs};
   }
 `;
