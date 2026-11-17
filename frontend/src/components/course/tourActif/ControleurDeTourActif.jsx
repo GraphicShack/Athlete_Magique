@@ -13,6 +13,8 @@
  *   personnage    : { id, nom, initiales } ; sans personnage, le panneau attend le début de la course
  *   etapeCourante : 1 à 4
  *   resultatDe    : 1 à 6, ou null si le dé n'a pas encore été lancé
+ *   lancerDe      : augmente à chaque lancer, pour faire rouler le dé (0 : pas d'animation)
+ *   onArretDe     : appelé avec la valeur quand le dé a fini de rouler (optionnel)
  *   message       : texte expliquant ce qui vient de se passer
  *   pouvoir       : { titre, description } ou null
  *   actions       : [{ id, libelle, principal }]
@@ -31,6 +33,8 @@ function ControleurDeTourActif({
   personnage,
   etapeCourante = 1,
   resultatDe = null,
+  lancerDe = 0,
+  onArretDe,
   message,
   pouvoir = null,
   actions = [],
@@ -79,7 +83,7 @@ function ControleurDeTourActif({
 
           {(resultatDe || message) && (
             <Resultat>
-              {resultatDe && <De valeur={resultatDe} />}
+              {resultatDe && <De valeur={resultatDe} lancer={lancerDe} onArret={onArretDe} />}
               {message && <p>{message}</p>}
             </Resultat>
           )}

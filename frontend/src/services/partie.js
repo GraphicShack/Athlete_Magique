@@ -2,8 +2,10 @@
  * partie.js (service) : le seul endroit où les composants vont chercher l'état de la partie
  * (joueurs, piste, tour en cours, journal).
  *
- * Responsabilité : fournir l'état de la partie déjà prêt à afficher, sous la forme attendue
- * par les composants de l'écran de course.
+ * Responsabilités :
+ *   - fournir l'état de la partie déjà prêt à afficher, sous la forme attendue par les
+ *     composants de l'écran de course ;
+ *   - lancer le dé (lancerDe).
  *
  * Aujourd'hui, l'état vient d'une course d'exemple (data/partieExemple.js) et il est renvoyé
  * tout de suite (synchrone). Plus tard, il viendra du serveur et changera pendant la partie :
@@ -43,4 +45,11 @@ export function obtenirPartie() {
       pouvoir: { titre: `Pouvoir : ${actif.personnage.nom}`, description: actif.personnage.pouvoir },
     },
   };
+}
+
+// Lance le dé : renvoie une valeur de 1 à 6.
+// Provisoire : tirage au hasard ici, pour essayer l'animation. Plus tard, c'est le serveur
+// (le moteur de jeu) qui décidera du résultat, et ce service ira le lui demander.
+export function lancerDe() {
+  return 1 + Math.floor(Math.random() * 6);
 }

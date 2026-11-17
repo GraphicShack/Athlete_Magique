@@ -11,6 +11,10 @@
  *
  * On déplace le calque avec « transform » (et pas « background-position ») : c'est la carte
  * graphique qui fait le travail, sans redessiner la page à chaque image.
+ *
+ * Inspiration : CodePen « CSS Animated Loop Background Image » de Jeong Geum-dam
+ * (https://codepen.io/fkaus/pen/mdJVeOz), pour l'idée d'un motif qui se répète et glisse en
+ * boucle. Le code et le motif ont été refaits pour le projet.
  */
 import { css, keyframes } from 'styled-components';
 

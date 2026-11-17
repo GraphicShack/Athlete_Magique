@@ -18,8 +18,9 @@
  * se partagent la hauteur chacune de leur côté. Les joueurs sont toujours tous visibles ;
  * seul le journal (un historique) défile à l'intérieur de son panneau.
  * Sur téléphone, les blocs s'empilent dans l'ordre : en-tête, piste, joueurs, tour, journal.
- * Pour l'instant, la partie est un exemple (data/partieExemple.js) : les boutons du tour
- * ne font rien, l'écran sert à essayer l'affichage.
+ * Pour l'instant, la partie est un exemple (data/partieExemple.js) et l'écran sert à essayer
+ * l'affichage. Seule démo : « Relancer le dé » fait rouler le dé (hook useLancerDe), puis le
+ * message et le bouton « Garder » affichent la valeur obtenue (utils/textesTour.js).
  */
 import { useTheme } from 'styled-components';
 import EnTeteCourse from '@/components/course/EnTeteCourse.jsx';
@@ -29,6 +30,8 @@ import ControleurDeTourActif from '@/components/course/tourActif/ControleurDeTou
 import JournalEvenements from '@/components/course/JournalEvenements.jsx';
 import { obtenirPartie } from '@/services/partie.js';
 import { jetonsDesJoueurs } from '@/utils/jetons.js';
+import { messageLancer, actionsAvecValeur } from '@/utils/textesTour.js';
+import useLancerDe from '@/hooks/useLancerDe.js';
 import { Ecran, EnTete, Colonne, Bloc } from './CoursePage.styles.js';
 
 function CoursePage() {
@@ -38,6 +41,22 @@ function CoursePage() {
   // Chaque joueur reçoit la couleur de son pion, selon sa place dans l'ordre de jeu.
   // La même couleur sert à sa carte et à son jeton sur la piste.
   const joueursColores = joueurs.map((joueur, rang) => ({ ...joueur, couleur: theme.joueurs[rang] }));
+
+  // Démo du lancer de dé (l'état et le tirage sont dans le hook et le service).
+  const lancer = useLancerDe(tour.resultatDe);
+
+  // Ce que fait chaque bouton du tour, selon son id. Pour l'instant, seul « relancer » agit.
+  const reactions = { relancer: lancer.relancer };
+  const surAction = (id) => reactions[id]?.();
+
+  // Les textes du tour suivent le dé (voir utils/textesTour.js).
+  const message = messageLancer({
+    messageDepart: tour.message,
+    joueur: tour.joueur,
+    lancers: lancer.lancers,
+    obtenu: lancer.obtenu,
+  });
+  const actions = actionsAvecValeur(tour.actions, lancer.obtenu);
 
   return (
     <Ecran>
@@ -63,15 +82,17 @@ function CoursePage() {
       {/* Colonne de droite : le tour à sa taille, le journal prend le reste. */}
       <Colonne $cote="droite">
         <Bloc $taille="contenu">
-          {/* onAction absent : les boutons ne font rien pour l'instant (affichage seulement). */}
-          <ControleurDeTourActif
+            <ControleurDeTourActif
             joueur={tour.joueur}
             personnage={tour.personnage}
             etapeCourante={tour.etape}
-            resultatDe={tour.resultatDe}
-            message={tour.message}
+            resultatDe={lancer.valeur}
+            lancerDe={lancer.lancers}
+            onArretDe={lancer.surArret}
+            message={message}
             pouvoir={tour.pouvoir}
-            actions={tour.actions}
+            actions={actions}
+            onAction={surAction}
           />
         </Bloc>
         <Bloc $taille="remplit">

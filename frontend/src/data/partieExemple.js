@@ -29,13 +29,15 @@ const PARTIE_EXEMPLE = {
   idActif: 'j1',
 
   // Le tour en cours. etape : 1 à 4 (voir EtapesTour.jsx). resultatDe : null si pas encore lancé.
+  // Une action avec avecValeurDe : true reçoit la valeur du dé à la fin de son libellé
+  // (« Garder le » → « Garder le 2 », voir utils/textesTour.js).
   tour: {
     etape: 2,
     resultatDe: 2,
     message: 'Félix a obtenu 2. Il peut garder ce résultat ou relancer le dé grâce au pouvoir du Magicien.',
     actions: [
       { id: 'relancer', libelle: 'Relancer le dé (1 sur 2)', principal: true },
-      { id: 'garder', libelle: 'Garder le 2', principal: false },
+      { id: 'garder', libelle: 'Garder le', avecValeurDe: true, principal: false },
     ],
   },
 
