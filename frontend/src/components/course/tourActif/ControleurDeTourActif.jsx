@@ -24,7 +24,7 @@ import Panneau from '@/components/commun/ui/Panneau.jsx';
 import AvatarPersonnage from '@/components/commun/jeu/AvatarPersonnage.jsx';
 import Bouton from '@/components/commun/ui/Bouton.jsx';
 import MessageVide from '@/components/commun/ui/MessageVide.jsx';
-import De from './De.jsx';
+import De from '@/components/commun/jeu/de/De.jsx';
 import EtapesTour from './EtapesTour.jsx';
 import { EnTete, SurTitre, NomPersonnage, Colonnes, Resultat, Pouvoir, TitrePouvoir, Actions } from './ControleurDeTourActif.styles.js';
 

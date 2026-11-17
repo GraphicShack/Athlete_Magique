@@ -1,5 +1,5 @@
 /*
- * Jeton.jsx : le pion d'un personnage sur la piste : un disque avec l'image du personnage,
+ * Jeton.jsx : le pion d'un personnage (sur la piste, dans la légende…) : un disque avec son image,
  * entouré de la couleur du joueur (ou ses initiales s'il n'y a pas d'image).
  *
  * Responsabilité : montrer l'état du pion : couché s'il est tombé, entouré de rouge

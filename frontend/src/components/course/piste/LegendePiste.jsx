@@ -5,7 +5,7 @@
  * (case étoile, rocher, pion tombé, pion actif).
  */
 import { useTheme } from 'styled-components';
-import Jeton from './Jeton.jsx';
+import Jeton from '@/components/commun/jeu/Jeton.jsx';
 import imageRocher from '@/assets/images/rocher.png';
 import { ListeLegende, Element, Exemple, Carre, Image } from './LegendePiste.styles.js';
 

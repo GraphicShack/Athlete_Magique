@@ -16,7 +16,7 @@
  *   podium  : jetons arrivés, dans l'ordre (1er, 2e) ; sinon, les jetons au-delà de la case 30
  */
 import CasePiste from './CasePiste.jsx';
-import Jeton from './Jeton.jsx';
+import Jeton from '@/components/commun/jeu/Jeton.jsx';
 import { obtenirPiste } from '@/services/regles.js';
 import { positionSurPiste, RANG_DEPART, RANG_ARRIVEE } from '@/utils/dispositionPiste.js';
 import { Plateau, Depart, Arrivee, Nom, Jetons } from './Piste.styles.js';
