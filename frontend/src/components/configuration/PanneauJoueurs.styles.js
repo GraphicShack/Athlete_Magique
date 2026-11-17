@@ -30,3 +30,13 @@ export const ListePlaces = styled(Liste)`
   flex-direction: column;
   gap: ${({ theme }) => theme.espace(3)};
 `;
+
+// Le bouton du bas, sur toute la largeur.
+export const Actions = styled.div`
+  display: flex;
+  margin-top: ${({ theme }) => theme.espace(6)};
+
+  & > * {
+    flex: 1;
+  }
+`;

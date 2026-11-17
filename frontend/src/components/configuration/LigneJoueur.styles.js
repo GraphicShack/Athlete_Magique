@@ -10,12 +10,11 @@ import { rondCentre } from '@/styles/base/utilitaires.js';
 // Carte blanche sur une ligne, avec une bande épaisse à gauche à la couleur du pion
 // (comme CarteJoueur en course). Les éléments passent à la ligne s'ils manquent de place.
 export const Carte = styled.li`
-  flex: 1; /* les lignes se partagent la hauteur de la liste… */
-  max-height: 7rem; /* … sans devenir trop hautes */
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: ${({ theme }) => theme.espace(3)} ${({ theme }) => theme.espace(4)};
+  min-height: 4rem;
   padding: ${({ theme }) => theme.espace(3)} ${({ theme }) => theme.espace(4)};
   border: ${({ theme }) => theme.bordures.contour};
   border-left: 10px solid ${({ $couleur }) => $couleur};
@@ -23,18 +22,13 @@ export const Carte = styled.li`
   background: ${({ theme }) => theme.couleurs.surface};
 `;
 
-// La pastille et « Joueur N », côte à côte.
+// La pastille et le nom, côte à côte.
 export const NomJoueur = styled.span`
   display: inline-flex;
   align-items: center;
   gap: ${({ theme }) => theme.espace(2)};
   font-weight: ${({ theme }) => theme.graisses.tresForte};
   white-space: nowrap;
-`;
-
-// Le champ prend toute la place libre au milieu (au moins 10rem).
-export const Pseudo = styled.div`
-  flex: 1 1 10rem;
 `;
 
 // Rond numéroté, à la couleur du pion.
@@ -45,4 +39,24 @@ export const Pastille = styled.span`
   border: ${({ theme }) => theme.bordures.contour};
   background: ${({ $couleur }) => $couleur};
   font-family: ${({ theme }) => theme.polices.titre};
+`;
+
+// « Prêt » (point vert) ou « En attente » (point gris), poussé à droite.
+export const Statut = styled.span`
+  display: inline-flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.espace(2)};
+  margin-left: auto;
+  font-size: ${({ theme }) => theme.texte.sm};
+  font-weight: ${({ theme }) => theme.graisses.forte};
+  color: ${({ theme, $pret }) => ($pret ? theme.couleurs.encre : theme.couleurs.gris500)};
+
+  &::before {
+    content: '';
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 50%;
+    border: 2px solid ${({ theme }) => theme.couleurs.encre};
+    background: ${({ theme, $pret }) => ($pret ? theme.palette.vert : theme.couleurs.gris300)};
+  }
 `;

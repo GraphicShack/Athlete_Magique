@@ -1,44 +1,81 @@
 /*
- * PanneauJoueurs.jsx : le panneau « Les joueurs » de la page Configuration.
+ * PanneauJoueurs.jsx : le panneau « Les joueurs » de la salle d'attente.
  *
- * Responsabilités :
- *   - proposer le nombre de joueurs (2, 3 ou 4) ;
- *   - afficher une LigneJoueur par place (humain ou bot, et son pseudo).
+ * Responsabilité : afficher. Il ne calcule et ne retient rien : tout lui est donné.
+ *   - le nombre de joueurs : l'hôte le choisit (2, 3 ou 4), les autres le voient ;
+ *   - une LigneJoueur par joueur arrivé, puis une PlaceLibre par place vide.
+ * Chaque clic est transmis au parent (onChoisirPlaces, onRetirer, onAjouterBot).
+ * En bas : le bouton donné par le parent (children), ex. <BoutonLancer />.
  *
- * Visuel seulement pour l'instant : les places affichées sont un exemple fixe
- * (2 humains et 1 bot) et ne suivent pas encore le nombre choisi.
+ * Props :
+ *   joueurs         : [{ id, nom, bot, pret, hote }], dans l'ordre d'arrivée
+ *   placesMax       : nombre de places choisi
+ *   libres          : numéros des places vides, ex. [4]
+ *   nombres         : choix possibles du nombre de places, ex. ['2', '3', '4']
+ *   impossibles     : choix grisés, ex. ['2'] s'il y a déjà 3 joueurs
+ *   estHote         : true si c'est moi l'hôte (je peux tout régler)
+ *   onChoisirPlaces : appelé avec le nombre choisi (un nombre)
+ *   onRetirer       : appelé avec l'id du joueur à retirer
+ *   onAjouterBot    : appelé au clic sur « Ajouter un bot »
  */
 import { useId } from 'react';
 import { useTheme } from 'styled-components';
 import Panneau from '@/components/commun/ui/Panneau.jsx';
 import BarreChoix from '@/components/commun/ui/reglages/BarreChoix.jsx';
 import LigneJoueur from './LigneJoueur.jsx';
-import { Aide, SousTitre, ListePlaces } from './PanneauJoueurs.styles.js';
+import PlaceLibre from './PlaceLibre.jsx';
+import { Aide, SousTitre, ListePlaces, Actions } from './PanneauJoueurs.styles.js';
 
-// Provisoire : places d'exemple, en attendant que le nombre de joueurs soit branché.
-const PLACES_EXEMPLE = [
-  { numero: 1, type: 'Humain', placeholder: 'Pseudo 1' },
-  { numero: 2, type: 'Humain', placeholder: 'Pseudo 2' },
-  { numero: 3, type: 'Bot', placeholder: 'Bot 1' },
-];
-
-function PanneauJoueurs() {
+function PanneauJoueurs({
+  joueurs,
+  placesMax,
+  libres,
+  nombres,
+  impossibles,
+  estHote,
+  onChoisirPlaces,
+  onRetirer,
+  onAjouterBot,
+  children,
+}) {
   const theme = useTheme();
   const idNombre = useId(); // relie la barre 2 · 3 · 4 à son titre
 
   return (
-    <Panneau titre="Les joueurs" teinte="joueurs" enEvidence>
+    <Panneau titre="Les joueurs" teinte="joueurs" aside={`${joueurs.length} sur ${placesMax}`} enEvidence>
       <SousTitre id={idNombre}>Nombre de joueurs</SousTitre>
-      <BarreChoix options={['2', '3', '4']} valeurParDefaut="3" aria-labelledby={idNombre} />
-      <Aide>Complétez avec des bots si des joueurs manquent. Au moins un joueur humain.</Aide>
+      {estHote ? (
+        <BarreChoix
+          options={nombres}
+          valeurParDefaut={String(placesMax)}
+          onChange={(n) => onChoisirPlaces(Number(n))}
+          inactifs={impossibles}
+          aria-labelledby={idNombre}
+        />
+      ) : (
+        <Aide>{placesMax} joueurs. C’est l’hôte qui choisit.</Aide>
+      )}
+      {estHote && <Aide>Complète avec des bots si des joueurs manquent.</Aide>}
 
       <SousTitre>Qui joue ?</SousTitre>
       <ListePlaces>
-        {PLACES_EXEMPLE.map((place, rang) => (
-          // Chaque place prend la couleur de pion du thème selon son rang.
-          <LigneJoueur key={place.numero} {...place} couleur={theme.joueurs[rang]} />
+        {joueurs.map((joueur, rang) => (
+          // Chaque joueur prend la couleur de pion du thème selon son rang.
+          <LigneJoueur
+            key={joueur.id}
+            numero={rang + 1}
+            couleur={theme.joueurs[rang]}
+            {...joueur}
+            peutRetirer={estHote && !joueur.hote}
+            onRetirer={() => onRetirer(joueur.id)}
+          />
+        ))}
+        {libres.map((numero) => (
+          <PlaceLibre key={numero} numero={numero} peutAjouter={estHote} onAjouter={onAjouterBot} />
         ))}
       </ListePlaces>
+
+      <Actions>{children}</Actions>
     </Panneau>
   );
 }

@@ -45,6 +45,16 @@ export const Segment = styled.label`
     font-weight: ${({ theme }) => theme.graisses.tresForte};
   }
 
+  /* Choix impossible : grisé, et on ne peut pas cliquer dessus. */
+  &:has(input:disabled) {
+    cursor: not-allowed;
+  }
+  input:disabled + span {
+    color: ${({ theme }) => theme.couleurs.gris500};
+    background: ${({ theme }) => theme.couleurs.gris100};
+    text-decoration: line-through;
+  }
+
   /* Choix atteint au clavier : contour à l'intérieur du segment. */
   input:focus-visible + span {
     outline: 2px solid ${({ theme }) => theme.couleurs.encre};

@@ -8,12 +8,14 @@
  * Props :
  *   options         : textes des choix, ex. ['Humain', 'Bot']
  *   valeurParDefaut : le choix coché au départ
+ *   onChange        : appelé avec le texte du choix quand on en coche un autre (optionnel)
+ *   inactifs        : les choix qu'on ne peut pas cocher, grisés (optionnel), ex. ['2']
  *   autres          : transmises au groupe (aria-label ou aria-labelledby, pour lui donner un nom)
  */
 import { useId } from 'react';
 import { Segments, Segment } from './BarreChoix.styles.js';
 
-function BarreChoix({ options, valeurParDefaut, ...props }) {
+function BarreChoix({ options, valeurParDefaut, onChange, inactifs = [], ...props }) {
   // Les boutons radio d'un même groupe doivent partager un nom unique.
   const nom = useId();
 
@@ -21,7 +23,14 @@ function BarreChoix({ options, valeurParDefaut, ...props }) {
     <Segments role="radiogroup" {...props}>
       {options.map((option) => (
         <Segment key={option}>
-          <input type="radio" name={nom} value={option} defaultChecked={option === valeurParDefaut} />
+          <input
+            type="radio"
+            name={nom}
+            value={option}
+            defaultChecked={option === valeurParDefaut}
+            disabled={inactifs.includes(option)}
+            onChange={() => onChange?.(option)}
+          />
           <span>{option}</span>
         </Segment>
       ))}
