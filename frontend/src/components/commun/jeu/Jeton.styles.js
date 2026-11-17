@@ -6,6 +6,7 @@
  */
 import styled from 'styled-components';
 import { rondCentre } from '@/styles/base/utilitaires.js';
+import { sautJeton } from '@/styles/animations/sautJeton.js';
 
 // Disque à contour blanc, puis un anneau noir (ou rouge s'il est actif).
 // Avec une image : le contour prend la couleur du joueur, pour reconnaître son pion.
@@ -29,6 +30,9 @@ export const Disque = styled.span`
   transform: ${({ $tombe }) => ($tombe ? 'rotate(90deg) scaleX(0.7)' : 'none')};
   opacity: ${({ $tombe }) => ($tombe ? 0.75 : 1)};
   transition: transform ${({ theme }) => theme.transition};
+
+  /* Le pion qui avance saute en arc depuis la case précédente. */
+  ${({ $saute }) => $saute && sautJeton}
 `;
 
 // L'image du personnage, qui remplit le rond.

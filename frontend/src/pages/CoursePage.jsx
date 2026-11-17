@@ -50,6 +50,9 @@ function CoursePage() {
   // Le joueur actif est posé sur sa case du moment (elle change quand il confirme son déplacement).
   const joueursAJour = deplacerJoueur(joueurs, idActif, tourDemo.position);
 
+  // Le pion qui saute en ce moment (et la case qu'il quitte), pour l'animation en arc.
+  const mouvement = tourDemo.depuis !== null ? { id: idActif, depuis: tourDemo.depuis } : null;
+
   // Chaque joueur reçoit la couleur de son pion, selon sa place dans l'ordre de jeu.
   // La même couleur sert à sa carte et à son jeton sur la piste.
   const joueursColores = joueursAJour.map((joueur, rang) => ({ ...joueur, couleur: theme.joueurs[rang] }));
@@ -69,7 +72,7 @@ function CoursePage() {
           <PanneauPiste
             numeroCourse={course.numero}
             nombreCourses={course.nombreCourses}
-            jetons={jetonsDesJoueurs(joueursColores, idActif)}
+            jetons={jetonsDesJoueurs(joueursColores, idActif, mouvement)}
             rochers={rochers}
           />
         </Bloc>

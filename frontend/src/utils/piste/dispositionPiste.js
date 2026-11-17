@@ -44,3 +44,15 @@ export function estRepere(numero) {
 export function indiceCouleur(numero) {
   return (numero - 1) % 5;
 }
+
+/**
+ * Le saut d'une place à la suivante : de combien de colonnes (dx) et de rangées (dy)
+ * se trouve la place de départ par rapport à la place d'arrivée.
+ * Ex. de la case 7 à la case 8 (fin de rangée) : { dx: 0, dy: -1 } (la case 7 est au-dessus).
+ * Au-delà de la dernière case, le pion est sur l'Arrivée.
+ */
+export function sautEntre(depuis, vers) {
+  const a = positionSurPiste(Math.min(depuis, RANG_ARRIVEE));
+  const b = positionSurPiste(Math.min(vers, RANG_ARRIVEE));
+  return { dx: a.colonne - b.colonne, dy: a.rangee - b.rangee };
+}

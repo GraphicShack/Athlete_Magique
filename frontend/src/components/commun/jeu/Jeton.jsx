@@ -14,7 +14,7 @@
  */
 import { Disque, Image } from './Jeton.styles.js';
 
-function Jeton({ couleur, initiales, image, tombe = false, actif = false }) {
+function Jeton({ couleur, initiales, image, tombe = false, actif = false, saut = null }) {
   return (
     // title : texte affiché quand on laisse la souris sur le pion.
     <Disque
@@ -22,6 +22,9 @@ function Jeton({ couleur, initiales, image, tombe = false, actif = false }) {
       $avecImage={Boolean(image)}
       $tombe={tombe}
       $actif={actif}
+      $saute={saut !== null}
+      // saut : d'où vient le pion ({ dx, dy } en cases), pour l'animation (voir sautJeton.js).
+      style={saut ? { '--dx': saut.dx, '--dy': saut.dy } : undefined}
       title={tombe ? `${initiales} (tombé)` : initiales}
     >
       {/* alt vide : l'image est décorative, les initiales sont dans « title ». */}

@@ -4,6 +4,7 @@
  * C'est un fichier qui connecte : il ne fait rien lui-même, il relie
  *   - useLancerDe    : le dé ;
  *   - useChoixTour   : les choix du joueur ;
+ *   - useDeplacementAnime : le pion qui avance case par case après la confirmation ;
  *   - phaseTour      : où en est le tour ;
  *   - messageTour    : le message affiché ;
  *   - boutonsTour    : les boutons affichés ;
@@ -19,10 +20,13 @@
  * Utilisation :
  *   const tourDemo = useTourDemo(tour);
  *   <ControleurDeTourActif etapeCourante={tourDemo.etape} pouvoir={tourDemo.pouvoir} … />
- *   tourDemo.position : la case du joueur actif, mise à jour après la confirmation du déplacement
+ *   tourDemo.position    : la case où dessiner le pion du joueur actif (il avance case par case)
+ *   tourDemo.depuis      : la case qu'il vient de quitter (pour le saut en arc), ou null
+ *   tourDemo.enMouvement : true pendant que le pion avance
  */
 import useLancerDe from '@/hooks/tour/useLancerDe.js';
 import useChoixTour from '@/hooks/tour/useChoixTour.js';
+import useDeplacementAnime from '@/hooks/tour/useDeplacementAnime.js';
 import { phaseDuTour, ETAPE_DE_PHASE, CLES_ETAPES } from '@/utils/tour/phaseTour.js';
 import { messageDuTour } from '@/utils/tour/messageTour.js';
 import { boutonsDuTour } from '@/utils/tour/boutonsTour.js';
@@ -46,6 +50,8 @@ const TITRES_ETAPES = { 1: 'Début du tour', 2: 'Lancer de dé', 3: 'Déplacemen
 function useTourDemo(tour) {
   const lancer = useLancerDe(null);
   const choix = useChoixTour();
+  // La case du pion : il avance case par case jusqu'à sa case de départ + les cases avancées.
+  const pion = useDeplacementAnime(tour.position + choix.avance);
   const { apresLancer } = tour.etapes.lancer;
 
   // Le premier lancer ne compte pas comme une relance.
@@ -137,15 +143,21 @@ function useTourDemo(tour) {
   const aUnPouvoirIci = tour.etapes[CLES_ETAPES[etape]].pouvoir === true;
   const etat = { tour, obtenu: lancer.obtenu, relances, deplacement: cases };
 
+  // Pendant que le pion avance, les boutons sont grisés (on attend qu'il soit arrivé).
+  const boutons = boutonsDuTour(phase, etat);
+  const actions = pion.enMouvement ? boutons.map((b) => ({ ...b, inactif: true })) : boutons;
+
   return {
     lancer: { ...lancer, surArret },
     etape,
     pouvoir: aUnPouvoirIci && phase !== 'termine' ? tour.pouvoir : null,
     titreEtape: TITRES_ETAPES[etape],
-    // La case du joueur actif : sa case de départ, plus les cases avancées (0 avant la confirmation).
-    position: tour.position + choix.avance,
+    // La case où dessiner le pion du joueur actif, celle qu'il vient de quitter, et s'il avance.
+    position: pion.position,
+    depuis: pion.depuis,
+    enMouvement: pion.enMouvement,
     message: messageDuTour(phase, etat),
-    actions: boutonsDuTour(phase, etat),
+    actions,
     surAction,
   };
 }
