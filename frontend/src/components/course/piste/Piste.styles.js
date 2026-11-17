@@ -5,7 +5,7 @@
  * Piste.jsx, lui, s'occupe seulement de ce qui est affiché et de son comportement.
  */
 import styled from 'styled-components';
-import { COLONNES, RANGEES } from '@/utils/dispositionPiste.js';
+import { COLONNES, RANGEES } from '@/utils/piste/dispositionPiste.js';
 
 // Le plateau garde toujours les proportions de la grille (8 colonnes sur 4 rangées).
 // Sa largeur : toute la place disponible, mais jamais plus que ce que la hauteur permet

@@ -9,8 +9,8 @@
  * et les composants devront gérer l'attente (chargement) et les erreurs. Ils continueront
  * quand même de passer par ce service.
  */
-import POINTAGE from '@/data/pointage.js';
-import { NOMBRE_CASES, CASES_ETOILE } from '@/data/piste.js';
+import POINTAGE from '@/data/regles/pointage.js';
+import { NOMBRE_CASES, CASES_ETOILE } from '@/data/regles/piste.js';
 
 // Les points de chaque course : [{ course, premiere, deuxieme }, …]
 export function obtenirPointage() {

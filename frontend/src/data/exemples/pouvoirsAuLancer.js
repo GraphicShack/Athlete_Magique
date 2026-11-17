@@ -8,10 +8,10 @@
  *
  * Seul le service partie.js lit ce fichier.
  *
- * Le tour se fait en 3 phases (voir hooks/useTourDemo.js) :
+ * Le tour se fait en 3 phases (voir hooks/tour/useTourDemo.js) :
  *   1. avant le lancer : boutons avantLancer (toujours « Lancer le dé », parfois un autre choix) ;
  *   2. après le lancer : boutons apresLancer, s'il y en a (le pouvoir à utiliser) ;
- *   3. commune à tous : « Avancer de N », ajouté par utils/textesTour.js.
+ *   3. commune à tous : « Avancer de N », ajouté par utils/tour/boutonsTour.js.
  *
  * Champs :
  *   consigneAvant : message avant le lancer

@@ -12,8 +12,8 @@
  * Ce qui ne changera pas : les composants passeront toujours par ce service, jamais
  * directement par data/ ou par le réseau.
  */
-import PERSONNAGES from '@/data/personnages.js';
-import IMAGES_PERSONNAGES from '@/data/imagesPersonnages.js';
+import PERSONNAGES from '@/data/personnages/personnages.js';
+import IMAGES_PERSONNAGES from '@/data/personnages/imagesPersonnages.js';
 
 // La liste des personnages : [{ id, nom, initiales, pouvoir }, …]
 export function obtenirPersonnages() {

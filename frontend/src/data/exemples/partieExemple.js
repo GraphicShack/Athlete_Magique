@@ -3,7 +3,7 @@
  * avant que le serveur et le moteur de jeu existent.
  *
  * Responsabilité : fournir des valeurs d'exemple réalistes et cohérentes entre elles
- * (positions, journal, tour en cours). Rien n'est calculé ici.
+ * (positions, joueurs). Rien n'est calculé ici.
  *
  * Seuls les services (dossier services/) lisent ce fichier : les composants passent par eux.
  * Les personnages sont donnés par leur id ; le service les remplace par le personnage complet.
@@ -13,7 +13,7 @@
 const PARTIE_EXEMPLE = {
   course: { numero: 2, nombreCourses: 3 },
 
-  // Cases Rocher de cette course (les cases Étoile, elles, sont fixes : voir data/piste.js).
+  // Cases Rocher de cette course (les cases Étoile, elles, sont fixes : voir data/regles/piste.js).
   rochers: [7, 13, 22],
 
   // Dans l'ordre de jeu. position : 0 = Départ, 1 à 30 = cases. etat : null, 'tombe' ou 'elimine'.
@@ -27,17 +27,13 @@ const PARTIE_EXEMPLE = {
   // Le joueur dont c'est le tour.
   idActif: 'j1',
 
-  // Le tour en cours (étape, dé, consigne, boutons) dépend du personnage du joueur actif :
-  // voir data/pouvoirsAuLancer.js.
+  // Le numéro du tour en cours (les événements d'exemple s'arrêtent au tour 4).
+  numeroTour: 5,
 
-  // Le plus récent en premier.
-  evenements: [
-    { id: 'e5', tour: 4, texte: 'Alexis (GOAT) (Banana) avance de 3 cases, jusqu’à la case 6.' },
-    { id: 'e4', tour: 4, texte: 'Alec (Centaure) s’arrête sur le rocher de la case 13 et tombe.' },
-    { id: 'e3', tour: 4, texte: 'Angie (Lièvre) avance de 4 + 2 cases grâce à son pouvoir, jusqu’à la case 17.' },
-    { id: 'e2', tour: 4, texte: 'Félix (Magicien) avance de 5 cases, jusqu’à la case 12.' },
-    { id: 'e1', tour: 1, texte: 'La course 2 commence.' },
-  ],
+  // Le tour en cours (étape, dé, consigne, boutons) dépend du personnage du joueur actif :
+  // voir data/exemples/pouvoirsAuLancer.js.
+
+  // Le journal d'événements arrive à part, au fil de la partie : voir data/exemples/evenementsExemple.js.
 };
 
 export default PARTIE_EXEMPLE;

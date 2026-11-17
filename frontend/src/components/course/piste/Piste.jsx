@@ -3,7 +3,7 @@
  * du Départ (en haut à gauche) à l'Arrivée (en bas à gauche).
  *
  * Responsabilités :
- *   - placer le Départ, les 30 cases et l'Arrivée (géométrie : utils/dispositionPiste.js) ;
+ *   - placer le Départ, les 30 cases et l'Arrivée (géométrie : utils/piste/dispositionPiste.js) ;
  *   - poser chaque jeton sur sa case, et les jetons arrivés sur l'Arrivée ;
  *   - rétrécir avec l'écran sans jamais déborder.
  * Affichage seulement : il reçoit l'état à montrer et ne calcule aucune règle.
@@ -18,7 +18,7 @@
 import CasePiste from './CasePiste.jsx';
 import Jeton from '@/components/commun/jeu/Jeton.jsx';
 import { obtenirPiste } from '@/services/regles.js';
-import { positionSurPiste, RANG_DEPART, RANG_ARRIVEE } from '@/utils/dispositionPiste.js';
+import { positionSurPiste, RANG_DEPART, RANG_ARRIVEE } from '@/utils/piste/dispositionPiste.js';
 import { Plateau, Depart, Arrivee, Nom, Jetons } from './Piste.styles.js';
 
 // Les chiffres de la piste, fournis par le service.

@@ -18,12 +18,12 @@
  * se partagent la hauteur chacune de leur côté. Les joueurs sont toujours tous visibles ;
  * seul le journal (un historique) défile à l'intérieur de son panneau.
  * Sur téléphone, les blocs s'empilent dans l'ordre : en-tête, piste, joueurs, tour, journal.
- * Pour l'instant, la partie est un exemple (data/partieExemple.js) et l'écran sert à essayer
+ * Pour l'instant, la partie est un exemple (data/exemples/partieExemple.js) et l'écran sert à essayer
  * l'affichage. Démo du tour (hook useTourDemo) : « Lancer » et « Relancer » font rouler le dé,
  * puis « Avancer », « Garder », « Doubler » ou « Échanger » terminent l'étape avec un message.
  * Pour essayer un autre personnage, ajouter ?personnage=… à l'adresse (ex. scientifique,
  * flipflop, lievre). Magicien, Scientifique Fusé et Flip Flop montrent leur case Pouvoir ;
- * les autres, la simple case de lancer de dé (voir data/pouvoirsAuLancer.js).
+ * les autres, la simple case de lancer de dé (voir data/exemples/pouvoirsAuLancer.js).
  */
 import { useTheme } from 'styled-components';
 import { useSearchParams } from 'react-router-dom';
@@ -33,21 +33,25 @@ import PanneauPiste from '@/components/course/piste/PanneauPiste.jsx';
 import ControleurDeTourActif from '@/components/course/tourActif/ControleurDeTourActif.jsx';
 import JournalEvenements from '@/components/course/JournalEvenements.jsx';
 import { obtenirPartie } from '@/services/partie.js';
-import { jetonsDesJoueurs } from '@/utils/jetons.js';
-import useTourDemo from '@/hooks/useTourDemo.js';
+import { jetonsDesJoueurs } from '@/utils/piste/jetons.js';
+import useTourDemo from '@/hooks/tour/useTourDemo.js';
+import useJournal from '@/hooks/journal/useJournal.js';
 import { Ecran, EnTete, Colonne, Bloc } from './CoursePage.styles.js';
 
 function CoursePage() {
   const theme = useTheme();
   // Pour essayer un autre personnage : /course?personnage=scientifique (ou flipflop, lievre…).
   const [parametres] = useSearchParams();
-  const { course, rochers, joueurs, idActif, tour, evenements } = obtenirPartie(parametres.get('personnage'));
+  const { course, rochers, joueurs, idActif, tour } = obtenirPartie(parametres.get('personnage'));
 
   // Chaque joueur reçoit la couleur de son pion, selon sa place dans l'ordre de jeu.
   // La même couleur sert à sa carte et à son jeton sur la piste.
   const joueursColores = joueurs.map((joueur, rang) => ({ ...joueur, couleur: theme.joueurs[rang] }));
 
-  // Démo du tour : dé, message, boutons et choix du joueur (voir hooks/useTourDemo.js).
+  // Le journal se remplit au fil des événements reçus (voir hooks/journal/useJournal.js).
+  const evenements = useJournal(joueurs);
+
+  // Démo du tour : dé, message, boutons et choix du joueur (voir hooks/tour/useTourDemo.js).
   const tourDemo = useTourDemo(tour);
 
   return (
