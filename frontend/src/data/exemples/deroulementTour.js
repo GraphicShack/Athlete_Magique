@@ -1,6 +1,9 @@
 // Responsabilité : les boutons pis les consignes de chaque étape du tour, par perso (en attendant le moteur).
 // Utilisé dans : partie
 
+// Options d'un bouton : effet (ce qu'il fait, voir utils/tour/actionsTour.js), journal (événement à noter),
+// parPouvoir, bonus, multiplicateur, pis pour le libellé : avecRelances, avecValeurDe, avecDeplacement.
+
 // Les boutons communs à tous.
 const COMMENCER = { id: 'commencer', libelle: 'Commencer le tour', principal: true, effet: 'commencer' };
 const LANCER = { id: 'lancer', libelle: 'Lancer le dé', principal: true, effet: 'lancer' };
@@ -62,9 +65,10 @@ export const POUVOIRS_PAR_ETAPE = {
       pouvoir: true,
       consigneAvant: 'Lance le dé. Tu pourras ensuite le relancer jusqu’à 2 fois.',
       consigneApres: 'Tu peux garder ce résultat ou relancer le dé.',
+      relancesMax: 2,
       avantLancer: [LANCER],
       apresLancer: [
-        { id: 'relancer', libelle: 'Relancer le dé', maximum: 2, principal: true, effet: 'lancer' },
+        { id: 'relancer', libelle: 'Relancer le dé', avecRelances: true, principal: true, effet: 'lancer' },
         { id: 'garder', libelle: 'Garder le', avecValeurDe: true, effet: 'fixer', multiplicateur: 1, journal: 'DE_GARDE' },
       ],
     },

@@ -10,7 +10,7 @@ import CasePouvoir from './CasePouvoir.jsx';
 import CaseSansPouvoir from './CaseSansPouvoir.jsx';
 import { EnTete, SurTitre, NomPersonnage, Colonnes, Resultat, PlaceDe } from './ControleurDeTourActif.styles.js';
 
-// Affiche le tour en cours ; un clic sur un bouton est juste renvoyé avec onAction(id).
+// Affiche le tour en cours ; un clic sur un bouton est juste renvoyé avec onAction(bouton).
 function ControleurDeTourActif({
   joueur,
   personnage,

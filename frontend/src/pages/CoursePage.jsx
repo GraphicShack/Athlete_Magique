@@ -23,7 +23,7 @@ function CoursePage() {
   const tourDemo = useTourDemo(tour);
 
   // Les joueurs (positions à jour, couleurs) pis leurs jetons (voir hooks/useJoueursCourse.js).
-  const { joueurs: joueursColores, jetons } = useJoueursCourse(joueurs, idActif, tourDemo);
+  const { joueurs: joueursColores, jetons } = useJoueursCourse(joueurs, idActif, tourDemo.pion);
 
   // Le journal se remplit au fil des événements reçus (voir hooks/journal/useJournal.js).
   const evenements = useJournal(joueurs);
@@ -54,9 +54,9 @@ function CoursePage() {
             joueur={tour.joueur}
             personnage={tour.personnage}
             etapeCourante={tourDemo.etape}
-            resultatDe={tourDemo.lancer.valeur}
-            lancerDe={tourDemo.lancer.lancers}
-            onArretDe={tourDemo.lancer.surArret}
+            resultatDe={tourDemo.de.valeur}
+            lancerDe={tourDemo.de.lancers}
+            onArretDe={tourDemo.de.surArret}
             message={tourDemo.message}
             pouvoir={tourDemo.pouvoir}
             titreEtape={tourDemo.titreEtape}

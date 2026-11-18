@@ -1,4 +1,4 @@
-// Responsabilité : un bouton par action du tour ; le clic est juste renvoyé avec onAction(id).
+// Responsabilité : un bouton par action du tour ; le clic est juste renvoyé avec onAction(bouton).
 // Utilisé dans : CasePouvoir, CaseSansPouvoir
 
 import Bouton from '@/components/commun/ui/Bouton.jsx';
@@ -9,14 +9,14 @@ function BoutonsAction({ actions = [], onAction = () => {} }) {
   // Sans action (ex. le joueur a fini), la rangée reste là, vide, pour garder sa place.
   return (
     <Actions>
-      {actions.map(({ id, libelle, principal, inactif }) => (
+      {actions.map((action) => (
         <Bouton
-          key={id}
-          variante={principal ? 'principal' : 'secondaire'}
-          disabled={inactif}
-          onClick={() => onAction(id)}
+          key={action.id}
+          variante={action.principal ? 'principal' : 'secondaire'}
+          disabled={action.inactif}
+          onClick={() => onAction(action)}
         >
-          {libelle}
+          {action.libelle}
         </Bouton>
       ))}
     </Actions>

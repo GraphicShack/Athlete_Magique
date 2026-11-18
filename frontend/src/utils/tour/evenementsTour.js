@@ -1,5 +1,5 @@
 // Responsabilité : crée les événements du journal pour le tour.
-// Utilisé dans : effetsBoutons, useTourDemo
+// Utilisé dans : actionsTour
 
 // Ce qui est commun à tous les événements d'un tour : la course, le tour, le joueur, l'étape.
 const base = (tour, etape) => ({ course: tour.numeroCourse, tour: tour.numero, etape, acteur: tour.idJoueur });
