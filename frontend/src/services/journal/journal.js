@@ -1,16 +1,14 @@
 /*
- * journal.js (service) : relie ceux qui ajoutent des événements et ceux qui les écoutent.
+ * journal.js (service) : fait circuler les événements du journal (patron Observateur).
  *
- * C'est un fichier qui connecte : il ne fait rien lui-même, il utilise
- *   - simulationJournal.js : les événements d'exemple (en attendant le serveur) ;
- *   - completerEvenement.js : met chaque nouvel événement au format standard.
+ * Une seule chose : relier ceux qui ajoutent des événements (journaliser) et ceux qui les
+ * écoutent (ecouterEvenements). Chaque événement ajouté est complété au format standard
+ * (utils/journal/completerEvenement.js), puis envoyé à tous les abonnés.
  *
- * Patron Observateur : on s'abonne avec ecouterEvenements, puis chaque événement ajouté
- * avec journaliser est envoyé à tous les abonnés.
+ * Il ne sait pas d'où viennent les événements : des boutons du tour, ou de la simulation
+ * (services/journal/simulationJournal.js). Plus tard, ce sera le serveur.
  */
-import { simulerEvenements } from '@/services/journal/simulationJournal.js';
 import { completerEvenement } from '@/utils/journal/completerEvenement.js';
-import PARTIE_EXEMPLE from '@/data/exemples/partieExemple.js';
 
 // Les fonctions abonnées au journal.
 const abonnes = new Set();
@@ -19,15 +17,11 @@ const abonnes = new Set();
 // Renvoie une fonction pour se désabonner (quand on quitte la page).
 export function ecouterEvenements(recevoir) {
   abonnes.add(recevoir);
-  const arreterSimulation = simulerEvenements(recevoir);
-  return () => {
-    abonnes.delete(recevoir);
-    arreterSimulation();
-  };
+  return () => abonnes.delete(recevoir);
 }
 
 // Ajouter un événement au journal : il est complété, puis envoyé à tous les abonnés.
 export function journaliser(evenement) {
-  const complet = completerEvenement(evenement, PARTIE_EXEMPLE.course.numero);
+  const complet = completerEvenement(evenement);
   abonnes.forEach((recevoir) => recevoir(complet));
 }

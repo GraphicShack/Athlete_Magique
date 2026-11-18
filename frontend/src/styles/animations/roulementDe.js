@@ -16,7 +16,7 @@
 import { css, keyframes } from 'styled-components';
 
 // Durée d'un lancer, en millisecondes.
-export const DUREE_ROULEMENT = 2200;
+const DUREE_ROULEMENT = 2200;
 
 // Partir d'un seul tour d'avance sur chaque axe (1 tour en X, 1 en Y), puis ralentir en douceur
 // jusqu'à la face voulue : le dé culbute calmement au lieu de tourbillonner.

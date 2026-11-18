@@ -8,8 +8,11 @@
  *   - phaseTour      : où en est le tour ;
  *   - messageTour    : le message affiché ;
  *   - boutonsTour    : les boutons affichés ;
- *   - evenementsTour + journal : le début et la fin du tour, et les actions qui changent la
- *     partie (pouvoirs, dé) sont ajoutés au journal. « Confirmer » (sans pouvoir) ne l'est pas.
+ *   - effetsBoutons  : ce que fait chaque bouton (patron Stratégie : le bouton dit son effet) ;
+ *   - evenementsTour + journal : le résultat du dé est ajouté au journal quand il s'arrête.
+ *
+ * Ce hook ne connaît aucun personnage : leurs boutons et leurs effets sont dans les données
+ * (data/exemples/deroulementTour.js).
  *
  * Les 4 étapes, chacune avec son pouvoir si le personnage en a un à ce moment :
  *   1. Début du tour  : « Commencer le tour »      (Hypnotiste, Party Animal : leur pouvoir)
@@ -31,18 +34,8 @@ import { phaseDuTour, ETAPE_DE_PHASE, CLES_ETAPES } from '@/utils/tour/phaseTour
 import { messageDuTour } from '@/utils/tour/messageTour.js';
 import { boutonsDuTour } from '@/utils/tour/boutonsTour.js';
 import { journaliser } from '@/services/journal/journal.js';
-import {
-  evenementDebutTour,
-  evenementFinTour,
-  evenementHypnose,
-  evenementRassemblement,
-  evenementLancer,
-  evenementRelance,
-  evenementGarder,
-  evenementDoubler,
-  evenementEchanger,
-  evenementDeplacementPouvoir,
-} from '@/utils/tour/evenementsTour.js';
+import { evenementLancer, evenementRelance } from '@/utils/tour/evenementsTour.js';
+import { EFFETS } from '@/utils/tour/effetsBoutons.js';
 
 // Le titre de la case quand il n'y a pas de pouvoir à cette étape.
 const TITRES_ETAPES = { 1: 'Début du tour', 2: 'Lancer de dé', 3: 'Déplacement', 4: 'Fin du tour' };
@@ -74,7 +67,9 @@ function useTourDemo(tour) {
   const cases = choix.deplacement ?? lancer.obtenu;
 
   // Le dé s'est arrêté : on retient sa valeur et on l'ajoute au journal.
+  // Une seule fois par lancer : si le dé est déjà arrêté (obtenu connu), on ne refait rien.
   const surArret = (valeur) => {
+    if (lancer.obtenu !== null) return;
     lancer.surArret(valeur);
     journaliser(
       lancer.lancers > 1
@@ -83,62 +78,6 @@ function useTourDemo(tour) {
     );
   };
 
-  // Quitter l'étape 1 : le tour commence (journalisé), puis on passe au lancer du dé.
-  const commencer = () => {
-    journaliser(evenementDebutTour(tour));
-    choix.passerA(2);
-  };
-
-  // Ce que fait chaque bouton, selon son id.
-  const reactions = {
-    // 1. Début du tour
-    commencer,
-    hypnotiser: () => {
-      commencer();
-      journaliser(evenementHypnose(tour));
-    },
-    rassembler: () => {
-      commencer();
-      journaliser(evenementRassemblement(tour));
-    },
-    // 2. Lancer du dé
-    lancer: lancer.relancer,
-    relancer: lancer.relancer,
-    garder: () => {
-      choix.choisirDeplacement(lancer.obtenu);
-      journaliser(evenementGarder(tour, lancer.obtenu));
-    },
-    doubler: () => {
-      choix.choisirDeplacement(lancer.obtenu * 2);
-      journaliser(evenementDoubler(tour, lancer.obtenu * 2));
-    },
-    echanger: () => {
-      journaliser(evenementEchanger(tour));
-      choix.passerA(4); // l'échange remplace le lancer et le déplacement
-    },
-    // 3. Déplacement : le pion avance, puis on passe à la fin du tour.
-    confirmer: () => {
-      choix.avancer(cases);
-      choix.passerA(4);
-    },
-    avancerLievre: () => {
-      choix.avancer(cases + 2);
-      journaliser(evenementDeplacementPouvoir(tour, cases + 2));
-      choix.passerA(4);
-    },
-    avancerCentaure: () => {
-      choix.avancer(cases);
-      journaliser(evenementDeplacementPouvoir(tour, cases));
-      choix.passerA(4);
-    },
-    // 4. Fin du tour
-    finir: () => {
-      journaliser(evenementFinTour(tour));
-      choix.terminer();
-    },
-  };
-  const surAction = (id) => reactions[id]?.();
-
   // Le pouvoir n'est montré qu'à l'étape où il s'utilise.
   const aUnPouvoirIci = tour.etapes[CLES_ETAPES[etape]].pouvoir === true;
   const etat = { tour, obtenu: lancer.obtenu, relances, deplacement: cases };
@@ -146,6 +85,13 @@ function useTourDemo(tour) {
   // Pendant que le pion avance, les boutons sont grisés (on attend qu'il soit arrivé).
   const boutons = boutonsDuTour(phase, etat);
   const actions = pion.enMouvement ? boutons.map((b) => ({ ...b, inactif: true })) : boutons;
+
+  // Un clic : on retrouve le bouton, et on applique son effet (voir utils/tour/effetsBoutons.js).
+  const surAction = (id) => {
+    const bouton = actions.find((b) => b.id === id);
+    const ctx = { tour, lancer, choix, cases, journaliser };
+    EFFETS[bouton?.effet]?.(ctx, bouton);
+  };
 
   return {
     lancer: { ...lancer, surArret },

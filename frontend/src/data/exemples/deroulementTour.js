@@ -22,7 +22,19 @@
  *   consigneAvant, avantLancer : avant le lancer ;
  *   consigneApres, apresLancer : après le lancer (vide : on passe directement au déplacement).
  *
- * Options d'un bouton :
+ * Ce que fait un bouton (voir utils/tour/effetsBoutons.js) :
+ *   effet      : 'commencer'   → journalise le début du tour, puis passe au lancer du dé
+ *                'lancer'      → lance (ou relance) le dé
+ *                'fixer'       → garde le résultat du dé, multiplié par « multiplicateur »
+ *                'allerALaFin' → saute le lancer et le déplacement (ex. échange du Flip Flop)
+ *                'avancer'     → le pion avance du résultat, plus « bonus », puis fin du tour
+ *                'terminer'    → journalise la fin du tour et termine
+ *   journal    : type d'événement à ajouter au journal (optionnel), ex. 'HYPNOSE'
+ *   parPouvoir : true si l'événement est causé par le pouvoir du personnage
+ * Pour ajouter un pouvoir : on ajoute ses boutons ici, avec un de ces effets. Aucun autre
+ * fichier ne change.
+ *
+ * Options d'affichage d'un bouton :
  *   principal       : bouton rouge (sinon blanc)
  *   avecValeurDe    : ajoute la valeur du dé au libellé (« Garder le » → « Garder le 4 »)
  *   avecDeplacement : ajoute le nombre de cases au libellé (« Avancer de » → « Avancer de 4 »)
@@ -31,10 +43,16 @@
  */
 
 // Les boutons communs à tous.
-const COMMENCER = { id: 'commencer', libelle: 'Commencer le tour', principal: true };
-const LANCER = { id: 'lancer', libelle: 'Lancer le dé', principal: true };
-const CONFIRMER = { id: 'confirmer', libelle: 'Confirmer : avancer de', avecDeplacement: true, principal: true };
-const FINIR = { id: 'finir', libelle: 'Fin du tour', principal: true };
+const COMMENCER = { id: 'commencer', libelle: 'Commencer le tour', principal: true, effet: 'commencer' };
+const LANCER = { id: 'lancer', libelle: 'Lancer le dé', principal: true, effet: 'lancer' };
+const CONFIRMER = {
+  id: 'confirmer',
+  libelle: 'Confirmer : avancer de',
+  avecDeplacement: true,
+  principal: true,
+  effet: 'avancer', // sans « journal » : un déplacement sans pouvoir n'est pas journalisé
+};
+const FINIR = { id: 'finir', libelle: 'Fin du tour', principal: true, effet: 'terminer' };
 
 export const TOUR_PAR_DEFAUT = {
   debut: { consigne: 'C’est ton tour. Commence quand tu es prêt.', boutons: [COMMENCER] },
@@ -50,8 +68,15 @@ export const POUVOIRS_PAR_ETAPE = {
       pouvoir: true,
       consigne: 'Tu peux téléporter un personnage sur ta case.',
       boutons: [
-        { id: 'hypnotiser', libelle: 'Téléporter un personnage', principal: true },
-        { id: 'commencer', libelle: 'Ne pas l’utiliser' },
+        {
+          id: 'hypnotiser',
+          libelle: 'Téléporter un personnage',
+          principal: true,
+          effet: 'commencer',
+          journal: 'HYPNOSE',
+          parPouvoir: true,
+        },
+        { id: 'commencer', libelle: 'Ne pas l’utiliser', effet: 'commencer' },
       ],
     },
   },
@@ -59,7 +84,16 @@ export const POUVOIRS_PAR_ETAPE = {
     debut: {
       pouvoir: true,
       consigne: 'Tous les autres personnages se rapprochent de 1 case.',
-      boutons: [{ id: 'rassembler', libelle: 'Rassembler les personnages', principal: true }],
+      boutons: [
+        {
+          id: 'rassembler',
+          libelle: 'Rassembler les personnages',
+          principal: true,
+          effet: 'commencer',
+          journal: 'RASSEMBLEMENT',
+          parPouvoir: true,
+        },
+      ],
     },
   },
 
@@ -71,8 +105,8 @@ export const POUVOIRS_PAR_ETAPE = {
       consigneApres: 'Tu peux garder ce résultat ou relancer le dé.',
       avantLancer: [LANCER],
       apresLancer: [
-        { id: 'relancer', libelle: 'Relancer le dé', maximum: 2, principal: true },
-        { id: 'garder', libelle: 'Garder le', avecValeurDe: true },
+        { id: 'relancer', libelle: 'Relancer le dé', maximum: 2, principal: true, effet: 'lancer' },
+        { id: 'garder', libelle: 'Garder le', avecValeurDe: true, effet: 'fixer', multiplicateur: 1, journal: 'DE_GARDE' },
       ],
     },
   },
@@ -83,8 +117,16 @@ export const POUVOIRS_PAR_ETAPE = {
       consigneApres: 'Tu peux doubler ton déplacement, mais tu trébucheras ensuite.',
       avantLancer: [LANCER],
       apresLancer: [
-        { id: 'doubler', libelle: 'Doubler et trébucher', principal: true },
-        { id: 'garder', libelle: 'Garder le', avecValeurDe: true },
+        {
+          id: 'doubler',
+          libelle: 'Doubler et trébucher',
+          principal: true,
+          effet: 'fixer',
+          multiplicateur: 2,
+          journal: 'DEPLACEMENT_DOUBLE',
+          parPouvoir: true,
+        },
+        { id: 'garder', libelle: 'Garder le', avecValeurDe: true, effet: 'fixer', multiplicateur: 1, journal: 'DE_GARDE' },
       ],
     },
   },
@@ -92,7 +134,10 @@ export const POUVOIRS_PAR_ETAPE = {
     lancer: {
       pouvoir: true,
       consigneAvant: 'Tu peux lancer le dé, ou y renoncer pour échanger ta place.',
-      avantLancer: [LANCER, { id: 'echanger', libelle: 'Échanger de place' }],
+      avantLancer: [
+        LANCER,
+        { id: 'echanger', libelle: 'Échanger de place', effet: 'allerALaFin', journal: 'ECHANGE_DEMANDE', parPouvoir: true },
+      ],
       apresLancer: [],
     },
   },
@@ -102,14 +147,35 @@ export const POUVOIRS_PAR_ETAPE = {
     deplacement: {
       pouvoir: true,
       consigne: 'Ton pouvoir ajoute 2 cases.',
-      boutons: [{ id: 'avancerLievre', libelle: 'Avancer de', avecDeplacement: true, bonus: 2, principal: true }],
+      boutons: [
+        {
+          id: 'avancer',
+          libelle: 'Avancer de',
+          avecDeplacement: true,
+          bonus: 2,
+          principal: true,
+          effet: 'avancer',
+          journal: 'DEPLACEMENT',
+          parPouvoir: true,
+        },
+      ],
     },
   },
   centaure: {
     deplacement: {
       pouvoir: true,
       consigne: 'Ceux que tu dépasses reculent de 2 cases.',
-      boutons: [{ id: 'avancerCentaure', libelle: 'Avancer de', avecDeplacement: true, principal: true }],
+      boutons: [
+        {
+          id: 'avancer',
+          libelle: 'Avancer de',
+          avecDeplacement: true,
+          principal: true,
+          effet: 'avancer',
+          journal: 'DEPLACEMENT',
+          parPouvoir: true,
+        },
+      ],
     },
   },
 };

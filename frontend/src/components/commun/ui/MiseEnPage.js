@@ -3,7 +3,7 @@
  *
  *   ┌──────────── en-tête, étapes, titre ────────────┐
  *   ├──────────────────────────────┬─────────────────┤
- *   │ panneau principal (2 parts)  │ résumé (1 part) │
+ *   │ panneau principal (2 parts)  │ colonne (1 part)│
  *   └──────────────────────────────┴─────────────────┘
  *
  * Responsabilité : écrire cette disposition une seule fois. Sur téléphone, tout s'empile.
@@ -20,7 +20,7 @@ export const Page = styled.div`
   gap: ${({ theme }) => theme.espace(6)};
 `;
 
-// Une colonne sur téléphone ; à partir de la tablette, le panneau principal (2 parts) et le résumé (1 part).
+// Une colonne sur téléphone ; à partir de la tablette, le panneau principal (2 parts) et la colonne de droite (1 part).
 // La marge intérieure laisse la place aux liserés colorés autour des panneaux.
 // flex: 1 : la grille prend toute la hauteur restante, et ses panneaux s'étirent avec elle.
 export const GrilleDeuxColonnes = styled.div`
@@ -31,37 +31,5 @@ export const GrilleDeuxColonnes = styled.div`
 
   @media (min-width: ${({ theme }) => theme.ecrans.md}) {
     grid-template-columns: minmax(0, 2fr) minmax(16rem, 1fr);
-  }
-`;
-
-// Liste « titre en gras, explication en gris » des panneaux de résumé.
-export const PointsResume = styled.dl`
-  display: flex;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.espace(4)};
-  margin: 0 0 ${({ theme }) => theme.espace(6)};
-
-  dt {
-    font-family: ${({ theme }) => theme.polices.titre};
-    font-size: ${({ theme }) => theme.texte.lg};
-    font-weight: 800;
-  }
-
-  dd {
-    margin: 0;
-    font-size: ${({ theme }) => theme.texte.sm};
-    color: ${({ theme }) => theme.couleurs.gris700};
-  }
-`;
-
-// Boutons du bas d'un panneau de résumé : toute la largeur, poussés en bas (margin-top: auto).
-export const ActionsResume = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.espace(2)};
-  margin-top: auto;
-
-  & > * {
-    width: 100%;
   }
 `;

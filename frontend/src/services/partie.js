@@ -50,6 +50,7 @@ export function obtenirPartie(idEssai) {
     tour: {
       etapes,
       numero: numeroTour,
+      numeroCourse: reste.course.numero,
       idJoueur: actif.id,
       position: actif.position,
       joueur: actif.nom,
