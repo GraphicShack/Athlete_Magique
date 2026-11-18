@@ -1,5 +1,6 @@
 // Responsabilité : l'anim du dé qui roule pis s'arrête sur sa face.
 // Utilisé dans : De.styles
+// Inspiration : CodePen « 3D Dice with CSS » de jico, https://codepen.io/jico/pen/wvMpgog (code refait pour le projet).
 
 import { css, keyframes } from 'styled-components';
 

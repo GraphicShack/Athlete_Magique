@@ -1,5 +1,6 @@
 // Responsabilité : le carrousel en coverflow (la carte du centre de face, les autres en perspective).
 // Utilisé dans : SelectionPage
+// Inspiration : l'exemple « Coverflow » de Motion (motion.dev), https://images.motion.dev/examples/stage/react/gallery-odd-lights-coverflow/v-07b8c907e0fa/stage.mp4 (refait en CSS, sans la librairie).
 
 import useDefilement from '@/hooks/useDefilement.js';
 import { modulo, ecartCirculaire, placement } from '@/utils/placement.js';

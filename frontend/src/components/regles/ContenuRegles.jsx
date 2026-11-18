@@ -1,5 +1,6 @@
 // Responsabilité : le texte des règles, écrit une seule fois (fenêtre pis page Règles).
 // Utilisé dans : AccesRegles, ReglesPage
+// Inspiration : le jeu de société « Magical Athlete » (règles, persos, plateau), manuel : https://gamers-hq.de/media/pdf/g0/6d/14/How-to-play-MAGICAL-ATHLETE.pdf
 
 import Panneau from '@/components/commun/ui/Panneau.jsx';
 import CartePersonnage from '@/components/commun/jeu/CartePersonnage.jsx';

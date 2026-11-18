@@ -1,5 +1,6 @@
 // Responsabilité : le plateau : 30 cases en serpentin sur 4 rangées, du Départ à l'Arrivée.
 // Utilisé dans : PanneauPiste
+// Inspiration : le jeu de société « Magical Athlete » (règles, persos, plateau), manuel : https://gamers-hq.de/media/pdf/g0/6d/14/How-to-play-MAGICAL-ATHLETE.pdf
 
 import CasePiste from './CasePiste.jsx';
 import Jeton from '@/components/commun/jeu/Jeton.jsx';

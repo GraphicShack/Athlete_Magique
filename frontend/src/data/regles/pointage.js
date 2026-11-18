@@ -1,5 +1,6 @@
 // Responsabilité : les points de la 1re pis 2e place pour chaque course.
 // Utilisé dans : regles
+// Inspiration : le jeu de société « Magical Athlete » (règles, persos, plateau), manuel : https://gamers-hq.de/media/pdf/g0/6d/14/How-to-play-MAGICAL-ATHLETE.pdf
 
 const POINTAGE = [
   { course: 1, premiere: 3, deuxieme: 1 },

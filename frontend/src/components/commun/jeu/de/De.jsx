@@ -1,5 +1,6 @@
 // Responsabilité : le dé 3D qui roule pis qui renvoie sa valeur quand il s'arrête.
 // Utilisé dans : ControleurDeTourActif
+// Inspiration : CodePen « 3D Dice with CSS » de jico, https://codepen.io/jico/pen/wvMpgog (code refait pour le projet).
 
 import { Eclat, Scene, Cube, Face, Emplacement, Point } from './De.styles.js';
 

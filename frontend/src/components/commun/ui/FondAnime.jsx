@@ -1,5 +1,6 @@
 // Responsabilité : le fond animé des pages du menu.
 // Utilisé dans : App
+// Inspiration : CodePen « CSS Animated Loop Background Image » de Jeong Geum-dam, https://codepen.io/fkaus/pen/mdJVeOz (idée du motif qui glisse en boucle ; code refait).
 
 import { useLocation } from 'react-router-dom';
 import CHEMINS from '@/chemins.js';

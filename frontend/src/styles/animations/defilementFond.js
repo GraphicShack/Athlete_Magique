@@ -1,5 +1,6 @@
 // Responsabilité : le motif du fond qui glisse en boucle.
 // Utilisé dans : FondAnime.styles
+// Inspiration : CodePen « CSS Animated Loop Background Image » de Jeong Geum-dam, https://codepen.io/fkaus/pen/mdJVeOz (idée du motif qui glisse en boucle ; code refait).
 
 import { css, keyframes } from 'styled-components';
 

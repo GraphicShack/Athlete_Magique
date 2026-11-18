@@ -1,5 +1,6 @@
 // Responsabilité : définir le style de ce composant (styled-components).
 // Utilisé dans : Carrousel
+// Inspiration : l'exemple « Coverflow » de Motion (motion.dev), https://images.motion.dev/examples/stage/react/gallery-odd-lights-coverflow/v-07b8c907e0fa/stage.mp4 (refait en CSS, sans la librairie).
 
 import styled, { css } from 'styled-components';
 import { COURBE } from '@/styles/animations/animations.js';
