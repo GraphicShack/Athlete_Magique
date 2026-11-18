@@ -1,8 +1,6 @@
-/*
- * PetitBouton.styles.js : l'apparence de PetitBouton (PetitBouton.jsx, dans le même dossier).
- *
- * Responsabilité : définir le style de ce composant (styled-components).
- */
+// Responsabilité : définir le style de ce composant (styled-components).
+// Utilisé dans : PetitBouton
+
 import styled from 'styled-components';
 
 // Petit bouton blanc à contour noir, avec une petite ombre.

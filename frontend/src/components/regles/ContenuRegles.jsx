@@ -1,12 +1,6 @@
-/*
- * ContenuRegles.jsx : toutes les sections des règles du jeu, tirées de la proposition de projet.
- *
- * Responsabilité : écrire le texte des règles une seule fois, dans des panneaux colorés,
- * pour la page Règles et pour la fenêtre d'accès rapide (AccesRegles).
- *
- * Props :
- *   children : éléments ajoutés à la fin de la grille (ex. la mascotte)
- */
+// Responsabilité : le texte des règles, écrit une seule fois (fenêtre pis page Règles).
+// Utilisé dans : AccesRegles, ReglesPage
+
 import Panneau from '@/components/commun/ui/Panneau.jsx';
 import CartePersonnage from '@/components/commun/jeu/CartePersonnage.jsx';
 import TableauPointage from './TableauPointage.jsx';
@@ -14,10 +8,11 @@ import { obtenirPersonnages } from '@/services/personnages.js';
 import { obtenirPointage } from '@/services/regles.js';
 import { Grille, PanneauLarge, GrillePersonnages, Contenu } from './ContenuRegles.styles.js';
 
-// Les personnages et le barème, fournis par les services (plus tard : par le serveur).
+// Les persos pis le barème, fournis par les services (plus tard : par le serveur).
 const PERSONNAGES = obtenirPersonnages();
 const POINTAGE = obtenirPointage();
 
+// Affiche toutes les sections des règles ; children va dans la dernière case (ex. la mascotte).
 function ContenuRegles({ children }) {
   return (
     <Grille>

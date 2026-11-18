@@ -1,22 +1,19 @@
-/*
- * Panneau.styles.js : l'apparence de Panneau (Panneau.jsx, dans le même dossier).
- *
- * Responsabilité : définir le style de ce composant (styled-components).
- * Panneau.jsx, lui, s'occupe seulement de ce qui est affiché et de son comportement.
- */
+// Responsabilité : définir le style de ce composant (styled-components).
+// Utilisé dans : Panneau
+
 import styled from 'styled-components';
 
 // Couleur de la teinte, ou blanc si le panneau n'en a pas.
 const couleurTeinte = ({ theme, $teinte }) => theme.teintes[$teinte] ?? theme.couleurs.surface;
 
-// La carte : fond blanc, contour noir, coins arrondis et cadre rétro.
+// La carte : fond blanc, contour noir, coins arrondis pis cadre rétro.
 export const Cadre = styled.section`
   --teinte: ${couleurTeinte};
   display: flex;
   flex-direction: column;
   min-height: 0;
-  overflow: hidden; /* le bandeau suit les coins arrondis */
-  color: ${({ theme }) => theme.couleurs.encre}; /* texte noir sur la carte blanche */
+  overflow: hidden;
+  color: ${({ theme }) => theme.couleurs.encre};
   background: ${({ theme }) => theme.couleurs.surface};
   border: ${({ theme }) => theme.bordures.contour};
   border-radius: ${({ theme }) => theme.rayons.lg};

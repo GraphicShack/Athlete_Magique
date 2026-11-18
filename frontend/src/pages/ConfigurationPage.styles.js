@@ -1,8 +1,6 @@
-/*
- * ConfigurationPage.styles.js : l'apparence de la salle d'attente (ConfigurationPage.jsx).
- *
- * Responsabilité : définir le style des blocs propres à cette page.
- */
+// Responsabilité : définir le style des blocs propres à cette page.
+// Utilisé dans : ConfigurationPage
+
 import styled from 'styled-components';
 
 // La colonne de droite : le code en haut, le résumé en dessous (qui prend le reste de la hauteur).

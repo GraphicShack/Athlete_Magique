@@ -1,12 +1,6 @@
-/*
- * main.jsx : point de départ de l'application.
- *
- * Responsabilités :
- *   - charger le CSS de Bootstrap (grille et utilitaires) ;
- *   - fournir le thème (styles/base/theme.js) à tous les composants avec ThemeProvider ;
- *   - appliquer les styles globaux (styles/base/StyleGlobal.js) ;
- *   - démarrer le routeur, qui affiche la bonne page selon l'adresse (routes.jsx).
- */
+// Responsabilité : le point de départ de l'app (thème, style global pis routeur).
+// Utilisé dans : point d'entrée (index.html)
+
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';
@@ -20,7 +14,6 @@ import routeur from './routes.jsx';
 createRoot(document.getElementById('root')).render(
   // StrictMode : en développement, React signale les erreurs courantes.
   <StrictMode>
-    {/* Chaque composant styled peut lire le thème avec ({ theme }) => theme.couleurs… */}
     <ThemeProvider theme={theme}>
       <StyleGlobal />
       <RouterProvider router={routeur} />

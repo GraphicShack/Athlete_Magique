@@ -1,26 +1,17 @@
-/*
- * Piste.styles.js : l'apparence de Piste (Piste.jsx, dans le même dossier).
- *
- * Responsabilité : définir le style de ce composant (styled-components).
- * Piste.jsx, lui, s'occupe seulement de ce qui est affiché et de son comportement.
- */
+// Responsabilité : définir le style de ce composant (styled-components).
+// Utilisé dans : Piste
+
 import styled from 'styled-components';
 import { COLONNES, RANGEES } from '@/utils/piste/dispositionPiste.js';
 
 // Le plateau garde toujours les proportions de la grille (8 colonnes sur 4 rangées).
-// Sa largeur : toute la place disponible, mais jamais plus que ce que la hauteur permet
-// (100cqh = hauteur de la zone qui le contient, voir PanneauPiste.styles.js) : il ne déborde pas.
-// Il est lui-même un « conteneur » : les textes et jetons à l'intérieur se mesurent en cqw
-// (pourcentage de la largeur du plateau).
-// Fond noir et cadre blanc à l'intérieur, comme la piste du livret.
+// Pourquoi container-type: inline-size : à l'intérieur, 1cqw = 1 % de la largeur du plateau ; les pions pis les numéros grossissent avec lui.
 export const Plateau = styled.div`
   container-type: inline-size;
   width: 100%;
   max-width: calc(100cqh * ${COLONNES} / ${RANGEES});
   aspect-ratio: ${COLONNES} / ${RANGEES};
   display: grid;
-  /* minmax(0, 1fr) : toutes les colonnes (et rangées) ont exactement la même taille,
-     même si un contenu (jetons) voudrait les agrandir. */
   grid-template-columns: repeat(${COLONNES}, minmax(0, 1fr));
   grid-template-rows: repeat(${RANGEES}, minmax(0, 1fr));
   gap: 0.8%;
@@ -31,7 +22,7 @@ export const Plateau = styled.div`
     inset 0 0 0 6px ${({ theme }) => theme.piste.contour};
 `;
 
-// Ce qui est commun au Départ et à l'Arrivée : une case de la grille, à la place donnée.
+// Ce qui est commun au Départ pis à l'Arrivée : une case de la grille, à la place donnée.
 const PlaceSpeciale = styled.div`
   grid-column: ${({ $colonne }) => $colonne};
   grid-row: ${({ $rangee }) => $rangee};
@@ -51,7 +42,7 @@ export const Depart = styled(PlaceSpeciale)`
   color: ${({ theme }) => theme.piste.departTexte};
 `;
 
-// Case Arrivée : damier noir et blanc, comme une ligne d'arrivée.
+// Case Arrivée : damier noir pis blanc, comme une ligne d'arrivée.
 export const Arrivee = styled(PlaceSpeciale)`
   background: repeating-conic-gradient(
       ${({ theme }) => theme.piste.arrivee} 0% 25%,
@@ -60,8 +51,7 @@ export const Arrivee = styled(PlaceSpeciale)`
     0 0 / 50% 50%;
 `;
 
-// « Départ » ou « Arrivée », en haut de la case. Une étiquette blanche le rend lisible
-// par-dessus le damier.
+// « Départ » ou « Arrivée », en haut de la case.
 export const Nom = styled.span`
   position: absolute;
   top: 6%;

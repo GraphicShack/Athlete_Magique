@@ -1,9 +1,6 @@
-/*
- * PanneauConnexion.styles.js : l'apparence de PanneauConnexion (PanneauConnexion.jsx, dans le même dossier).
- *
- * Responsabilité : définir le style de ce composant (styled-components).
- * PanneauConnexion.jsx, lui, s'occupe seulement de ce qui est affiché et de son comportement.
- */
+// Responsabilité : définir le style de ce composant (styled-components).
+// Utilisé dans : PanneauConnexion
+
 import styled from 'styled-components';
 
 // Trait horizontal avec le mot « ou » au milieu.

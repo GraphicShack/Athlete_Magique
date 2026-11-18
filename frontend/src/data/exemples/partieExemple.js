@@ -1,15 +1,6 @@
-/*
- * partieExemple.js : une course en cours, inventée pour essayer l'écran de course
- * avant que le serveur et le moteur de jeu existent.
- *
- * Responsabilité : fournir des valeurs d'exemple réalistes et cohérentes entre elles
- * (positions, joueurs). Rien n'est calculé ici.
- *
- * Seuls les services (dossier services/) lisent ce fichier : les composants passent par eux.
- * Les personnages sont donnés par leur id ; le service les remplace par le personnage complet.
- *
- * Le moment choisi : course 2 sur 3, c'est au tour de Félix (Magicien) de lancer le dé.
- */
+// Responsabilité : une course inventée pour tester l'écran de course.
+// Utilisé dans : partie
+
 const PARTIE_EXEMPLE = {
   course: { numero: 2, nombreCourses: 3 },
 
@@ -30,8 +21,7 @@ const PARTIE_EXEMPLE = {
   // Le numéro du tour en cours (les événements d'exemple s'arrêtent au tour 4).
   numeroTour: 5,
 
-  // Le tour en cours (étape, dé, consigne, boutons) dépend du personnage du joueur actif :
-  // voir data/exemples/deroulementTour.js.
+  // Le tour en cours (étape, dé, consigne, boutons) dépend du perso du joueur actif : voir data/exemples/deroulementTour.js.
 
   // Le journal d'événements arrive à part, au fil de la partie : voir data/exemples/evenementsExemple.js.
 };

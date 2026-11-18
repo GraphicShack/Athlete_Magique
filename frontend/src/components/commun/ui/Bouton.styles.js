@@ -1,12 +1,9 @@
-/*
- * Bouton.styles.js : l'apparence de Bouton (Bouton.jsx, dans le même dossier).
- *
- * Responsabilité : définir le style de ce composant (styled-components).
- * Bouton.jsx, lui, s'occupe seulement de ce qui est affiché et de son comportement.
- */
+// Responsabilité : définir le style de ce composant (styled-components).
+// Utilisé dans : Bouton
+
 import styled, { css } from 'styled-components';
 
-// Couleurs de chaque variante (normale et au survol).
+// Couleurs de chaque variante (normale pis au survol).
 const variantes = {
   principal: css`
     background: ${({ theme }) => theme.couleurs.accent};
@@ -33,21 +30,18 @@ export const Base = styled.button`
   border: ${({ theme }) => theme.bordures.contour};
   border-radius: ${({ theme }) => theme.rayons.sm};
   font-weight: ${({ theme }) => theme.graisses.tresForte};
-  box-shadow: ${({ theme }) => theme.ombres.blocPetit}; /* ombre noire décalée de 2 px, sans flou */
+  box-shadow: ${({ theme }) => theme.ombres.blocPetit};
   transition:
     background ${({ theme }) => theme.transition},
     translate ${({ theme }) => theme.transition},
     box-shadow ${({ theme }) => theme.transition};
   ${({ $variante }) => variantes[$variante]}
 
-  /* Pendant le clic : le bouton glisse de 2 px vers son ombre, et l'ombre disparaît.
-     On dirait qu'il s'enfonce dans la table. */
   &:active:not(:disabled) {
     translate: 2px 2px;
     box-shadow: ${({ theme }) => theme.ombres.blocEnfonce};
   }
 
-  /* Bouton désactivé : à moitié transparent. */
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;

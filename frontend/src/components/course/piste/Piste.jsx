@@ -1,20 +1,6 @@
-/*
- * Piste.jsx : le plateau de course, 30 cases qui serpentent sur 4 rangées de 8,
- * du Départ (en haut à gauche) à l'Arrivée (en bas à gauche).
- *
- * Responsabilités :
- *   - placer le Départ, les 30 cases et l'Arrivée (géométrie : utils/piste/dispositionPiste.js) ;
- *   - poser chaque jeton sur sa case, et les jetons arrivés sur l'Arrivée ;
- *   - rétrécir avec l'écran sans jamais déborder.
- * Affichage seulement : il reçoit l'état à montrer et ne calcule aucune règle.
- *
- * Props :
- *   jetons  : [{ id, position, couleur, initiales, image, tombe, actif }]
- *             position 0 = Départ, 1 à 30 = cases, plus de 30 = arrivé
- *   rochers : numéros des cases Rocher de la course
- *   etoiles : numéros des cases Étoile (10 et 20 par défaut)
- *   podium  : jetons arrivés, dans l'ordre (1er, 2e) ; sinon, les jetons au-delà de la case 30
- */
+// Responsabilité : le plateau : 30 cases en serpentin sur 4 rangées, du Départ à l'Arrivée.
+// Utilisé dans : PanneauPiste
+
 import CasePiste from './CasePiste.jsx';
 import Jeton from '@/components/commun/jeu/Jeton.jsx';
 import { obtenirPiste } from '@/services/regles.js';
@@ -27,12 +13,13 @@ const PISTE = obtenirPiste();
 // [1, 2, 3, …, 30]
 const NUMEROS = Array.from({ length: PISTE.nombreCases }, (_, i) => i + 1);
 
-// Les props de grille ($colonne, $rangee) d'une place du parcours, pour le Départ et l'Arrivée.
+// Les props de grille ($colonne, $rangee) d'une place du parcours, pour le Départ pis l'Arrivée.
 const placeDans = (rang) => {
   const { colonne, rangee } = positionSurPiste(rang);
   return { $colonne: colonne, $rangee: rangee };
 };
 
+// Affiche le Départ, les 30 cases pis l'Arrivée, avec les jetons sur leur case.
 function Piste({ jetons = [], rochers = [], etoiles = PISTE.casesEtoile, podium = [] }) {
   // Les jetons posés sur une case (ou null s'il n'y en a aucun).
   const jetonsSur = (position) => {

@@ -1,9 +1,6 @@
-/*
- * ContenuRegles.styles.js : l'apparence de ContenuRegles (ContenuRegles.jsx, dans le même dossier).
- *
- * Responsabilité : définir le style de ce composant (styled-components).
- * ContenuRegles.jsx, lui, s'occupe seulement de ce qui est affiché et de son comportement.
- */
+// Responsabilité : définir le style de ce composant (styled-components).
+// Utilisé dans : ContenuRegles
+
 import styled from 'styled-components';
 import Panneau from '@/components/commun/ui/Panneau.jsx';
 
@@ -17,7 +14,7 @@ export const Grille = styled.div`
   }
 `;
 
-// Panneau qui occupe toute la largeur de la grille (les personnages).
+// Panneau qui occupe toute la largeur de la grille (les persos).
 export const PanneauLarge = styled(Panneau)`
   grid-column: 1 / -1;
 `;
@@ -29,7 +26,7 @@ export const GrillePersonnages = styled.div`
   gap: ${({ theme }) => theme.espace(3)};
 `;
 
-// Mise en forme du texte des règles : paragraphes, listes et définitions.
+// Mise en forme du texte des règles : paragraphes, listes pis définitions.
 export const Contenu = styled.div`
   font-size: ${({ theme }) => theme.texte.sm};
 
@@ -41,7 +38,6 @@ export const Contenu = styled.div`
     margin: 0 0 ${({ theme }) => theme.espace(3)};
   }
 
-  /* Pas de marge sous le dernier élément. */
   > :last-child {
     margin-bottom: 0;
   }

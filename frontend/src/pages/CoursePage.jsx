@@ -1,29 +1,6 @@
-/*
- * CoursePage.jsx : l'écran de course (adresse « /course »), « la piste au centre de la table ».
- *
- * Responsabilités :
- *   - placer les blocs de la course, sans rien afficher elle-même ;
- *   - aller chercher l'état de la partie (service partie.js) et le donner à chaque bloc.
- *
- *   ┌──────────────────── en-tête ────────────────────┐
- *   ├────────────────────────────────┬────────────────┤
- *   │ la piste                       │ tour en cours  │
- *   │                                │                │
- *   ├────────────────────────────────┤                │
- *   │ joueurs (2 × 2)                ├────────────────┤
- *   │                                │ journal        │  ← défile à l'intérieur
- *   └────────────────────────────────┴────────────────┘
- *
- * Sur ordinateur, tout tient dans l'écran, sans défilement de la page : les deux colonnes
- * se partagent la hauteur chacune de leur côté. Les joueurs sont toujours tous visibles ;
- * seul le journal (un historique) défile à l'intérieur de son panneau.
- * Sur téléphone, les blocs s'empilent dans l'ordre : en-tête, piste, joueurs, tour, journal.
- * Pour l'instant, la partie est un exemple (data/exemples/partieExemple.js) et l'écran sert à essayer
- * l'affichage. Démo du tour (hook useTourDemo) : les 4 étapes du tour, chacune avec un bouton,
- * ou avec le pouvoir du personnage s'il s'utilise à ce moment.
- * Pour essayer un autre personnage, ajouter ?personnage=… à l'adresse (ex. hypnotiste,
- * scientifique, lievre). Voir data/exemples/deroulementTour.js.
- */
+// Responsabilité : l'écran de course (/course) ; place la piste, les joueurs, le tour pis le journal.
+// Utilisé dans : routes
+
 import { useSearchParams } from 'react-router-dom';
 import EnTeteCourse from '@/components/course/EnTeteCourse.jsx';
 import ListeJoueurs from '@/components/course/joueurs/ListeJoueurs.jsx';
@@ -36,15 +13,16 @@ import useTourDemo from '@/hooks/tour/useTourDemo.js';
 import useJournal from '@/hooks/journal/useJournal.js';
 import { Ecran, EnTete, Colonne, Bloc } from './CoursePage.styles.js';
 
+// Va chercher la partie pis donne à chaque bloc ce qu'il affiche.
 function CoursePage() {
-  // Pour essayer un autre personnage : /course?personnage=scientifique (ou flipflop, lievre…).
+  // Pour essayer un autre perso : /course?perso=scientifique (ou flipflop, lievre…).
   const [parametres] = useSearchParams();
   const { course, rochers, joueurs, idActif, tour } = obtenirPartie(parametres.get('personnage'));
 
-  // Démo du tour : dé, message, boutons et choix du joueur (voir hooks/tour/useTourDemo.js).
+  // Démo du tour : dé, message, boutons pis choix du joueur (voir hooks/tour/useTourDemo.js).
   const tourDemo = useTourDemo(tour);
 
-  // Les joueurs (positions à jour, couleurs) et leurs jetons (voir hooks/useJoueursCourse.js).
+  // Les joueurs (positions à jour, couleurs) pis leurs jetons (voir hooks/useJoueursCourse.js).
   const { joueurs: joueursColores, jetons } = useJoueursCourse(joueurs, idActif, tourDemo);
 
   // Le journal se remplit au fil des événements reçus (voir hooks/journal/useJournal.js).
@@ -56,7 +34,6 @@ function CoursePage() {
         <EnTeteCourse />
       </EnTete>
 
-      {/* Colonne de gauche : la piste prend la place, les joueurs gardent leur taille. */}
       <Colonne $cote="gauche">
         <Bloc $taille="remplit">
           <PanneauPiste
@@ -71,7 +48,6 @@ function CoursePage() {
         </Bloc>
       </Colonne>
 
-      {/* Colonne de droite : le tour à sa taille, le journal prend le reste. */}
       <Colonne $cote="droite">
         <Bloc $taille="contenu">
           <ControleurDeTourActif

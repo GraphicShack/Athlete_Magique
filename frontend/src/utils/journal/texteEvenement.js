@@ -1,13 +1,6 @@
-/*
- * texteEvenement.js : écrit la phrase complète d'un événement du journal.
- *
- * Une seule chose : transformer un événement en phrase lisible.
- *   1. la phrase de base selon le type (voir utils/journal/phrasesJournal.js) ;
- *   2. la cause ajoutée à la fin, si elle est utile (ajouterCause).
- *
- * Exemple : « Angie avance de 6 cases. » → « Angie avance de 6 cases (pouvoir : Lièvre). »
- * Un type inconnu ne fait pas planter le journal : il affiche un texte de secours.
- */
+// Responsabilité : écrit la phrase complète d'un événement (phrase + cause).
+// Utilisé dans : useJournal
+
 import { PHRASES } from '@/utils/journal/phrasesJournal.js';
 
 // Les cases à préciser entre parenthèses (les autres causes sont évidentes).
@@ -21,11 +14,7 @@ function ajouterCause(phrase, cause, nomPersonnage) {
   return phrase;
 }
 
-/**
- *   evenement     : un événement au format standard
- *   nomJoueur     : fonction id → nom affiché, ex. 'j1' → « Félix (Magicien) »
- *   nomPersonnage : fonction id → nom du personnage, ex. 'lievre' → « Lièvre »
- */
+// Renvoie la phrase de l'événement ; nomJoueur pis nomPersonnage transforment un id en nom.
 export function texteEvenement(evenement, { nomJoueur, nomPersonnage }) {
   const ecrire = PHRASES[evenement.type];
   if (!ecrire) return `Événement : ${evenement.type}.`;

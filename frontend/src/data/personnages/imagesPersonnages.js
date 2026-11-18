@@ -1,11 +1,6 @@
-/*
- * imagesPersonnages.js : l'image de chaque personnage, rangée par identifiant.
- *
- * Responsabilité : relier l'id d'un personnage (personnages.js) à son fichier image (dossier assets).
- * Exemple : IMAGES_PERSONNAGES['lievre'] donne l'image du Lièvre.
- *
- * Seuls les services (dossier services/) lisent ce fichier : les composants passent par eux.
- */
+// Responsabilité : relie l'id de chaque perso à son image.
+// Utilisé dans : personnages
+
 import banane from '@/assets/images/banane.png';
 import lievre from '@/assets/images/Lievre.png';
 import centaure from '@/assets/images/centaure.png';
@@ -17,7 +12,7 @@ import scientifique from '@/assets/images/ScientifiqueFusee.png';
 import bouche from '@/assets/images/BOUCHE.png';
 import duelliste from '@/assets/images/dueliste.png';
 
-// id du personnage → image importée ci-dessus
+// id du perso → image importée ci-dessus
 const IMAGES_PERSONNAGES = {
   banana: banane,
   lievre,

@@ -1,12 +1,9 @@
-/*
- * ControleurDeTourActif.styles.js : l'apparence de ControleurDeTourActif (ControleurDeTourActif.jsx, dans le même dossier).
- *
- * Responsabilité : définir le style de ce composant (styled-components).
- * ControleurDeTourActif.jsx, lui, s'occupe seulement de ce qui est affiché et de son comportement.
- */
+// Responsabilité : définir le style de ce composant (styled-components).
+// Utilisé dans : ControleurDeTourActif
+
 import styled from 'styled-components';
 
-// Bandeau du panneau : avatar du personnage, puis « À toi de jouer » et son nom.
+// Bandeau du panneau : avatar du perso, puis « À toi de jouer » pis son nom.
 export const EnTete = styled.div`
   display: flex;
   align-items: center;
@@ -23,8 +20,7 @@ export const NomPersonnage = styled.h2`
   font-size: ${({ theme }) => theme.texte.xl};
 `;
 
-// Le contenu du panneau en deux colonnes d’au moins 16rem chacune ; s’il manque de place,
-// la deuxième passe sous la première.
+// Le contenu du panneau en deux colonnes d’au moins 16rem chacune ; s’il manque de place, la deuxième passe sous la première.
 export const Colonnes = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
@@ -32,8 +28,8 @@ export const Colonnes = styled.div`
   gap: ${({ theme }) => theme.espace(4)} ${({ theme }) => theme.espace(5)};
 `;
 
-// Le dé et le message, côte à côte. Le message a toujours la place de 3 lignes,
-// pour que le panneau ne change pas de hauteur quand le texte change.
+// Le dé pis le message, côte à côte.
+// Pourquoi min-height: 3lh : même truc, le message garde la place de 3 lignes même quand il est court.
 export const Resultat = styled.div`
   display: flex;
   align-items: flex-start;
@@ -42,7 +38,7 @@ export const Resultat = styled.div`
 
   p {
     margin: 0;
-    min-height: 3lh; /* lh : la hauteur d'une ligne de texte */
+    min-height: 3lh;
   }
 `;
 

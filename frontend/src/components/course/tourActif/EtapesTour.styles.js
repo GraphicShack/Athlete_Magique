@@ -1,9 +1,6 @@
-/*
- * EtapesTour.styles.js : l'apparence de EtapesTour (EtapesTour.jsx, dans le même dossier).
- *
- * Responsabilité : définir le style de ce composant (styled-components).
- * EtapesTour.jsx, lui, s'occupe seulement de ce qui est affiché et de son comportement.
- */
+// Responsabilité : définir le style de ce composant (styled-components).
+// Utilisé dans : EtapesTour
+
 import styled from 'styled-components';
 import Liste from '@/components/commun/ui/Liste.jsx';
 import { rondCentre, cacheVisuellement } from '@/styles/base/utilitaires.js';

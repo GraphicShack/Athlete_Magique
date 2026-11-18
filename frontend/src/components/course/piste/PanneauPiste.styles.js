@@ -1,14 +1,10 @@
-/*
- * PanneauPiste.styles.js : l'apparence de PanneauPiste (PanneauPiste.jsx, dans le même dossier).
- *
- * Responsabilité : définir le style de ce composant (styled-components).
- * PanneauPiste.jsx, lui, s'occupe seulement de ce qui est affiché et de son comportement.
- */
+// Responsabilité : définir le style de ce composant (styled-components).
+// Utilisé dans : PanneauPiste
+
 import styled from 'styled-components';
 
-// La place réservée au plateau dans le panneau. Sur ordinateur, elle prend toute la hauteur
-// libre, et « container-type: size » permet au plateau de connaître cette place (unités cqw
-// et cqh, voir Piste.styles.js) pour s'y ajuster sans déborder.
+// La place réservée au plateau dans le panneau.
+// Pourquoi container-type: size : ça donne au plateau la taille de cette zone (unités cqw/cqh) pour qu'il fit sans dépasser.
 export const ZonePlateau = styled.div`
   display: flex;
   align-items: center;
@@ -21,8 +17,7 @@ export const ZonePlateau = styled.div`
   }
 `;
 
-// La légende, en petit sous le plateau. Sur un écran d'ordinateur très bas, elle est cachée
-// pour laisser toute la hauteur au plateau (les cases portent déjà leurs repères : ★, rocher).
+// La légende, en petit sous le plateau.
 export const ZoneLegende = styled.div`
   @media (min-width: ${({ theme }) => theme.ecrans.lg}) and (max-height: 700px) {
     display: none;

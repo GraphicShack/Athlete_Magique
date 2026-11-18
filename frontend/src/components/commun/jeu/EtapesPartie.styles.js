@@ -1,9 +1,6 @@
-/*
- * EtapesPartie.styles.js : l'apparence de EtapesPartie (EtapesPartie.jsx, dans le même dossier).
- *
- * Responsabilité : définir le style de ce composant (styled-components).
- * EtapesPartie.jsx, lui, s'occupe seulement de ce qui est affiché et de son comportement.
- */
+// Responsabilité : définir le style de ce composant (styled-components).
+// Utilisé dans : EtapesPartie
+
 import styled from 'styled-components';
 import Liste from '@/components/commun/ui/Liste.jsx';
 import { rondCentre } from '@/styles/base/utilitaires.js';
@@ -15,7 +12,7 @@ export const ListeEtapes = styled(Liste)`
   gap: ${({ theme }) => theme.espace(3)} ${({ theme }) => theme.espace(6)};
 `;
 
-// Une étape : sa pastille et son nom, posés sur le fond noir de la page.
+// Une étape : sa pastille pis son nom, posés sur le fond noir de la page.
 export const Etape = styled.li`
   display: flex;
   align-items: center;
@@ -24,7 +21,7 @@ export const Etape = styled.li`
   font-weight: ${({ theme, $courante }) => ($courante ? theme.graisses.tresForte : theme.graisses.normale)};
 `;
 
-// Rond numéroté : plein et blanc pour l'étape en cours, simplement entouré pour les autres.
+// Rond numéroté : plein pis blanc pour l'étape en cours, simplement entouré pour les autres.
 export const Pastille = styled.span`
   ${rondCentre}
   width: 2rem;

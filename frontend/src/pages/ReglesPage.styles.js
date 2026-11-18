@@ -1,10 +1,6 @@
-/*
- * ReglesPage.styles.js : l'apparence de la page des règles (ReglesPage.jsx, dans le même dossier).
- *
- * Responsabilité : définir le style des blocs propres à cette page (disposition, espaces…).
- * ReglesPage.jsx, lui, s'occupe seulement de ce qui est affiché et dans quel ordre.
- * Chaque fichier a ainsi une seule raison de changer.
- */
+// Responsabilité : définir le style des blocs propres à cette page (disposition, espaces…).
+// Utilisé dans : ReglesPage
+
 import styled from 'styled-components';
 
 // La page : les blocs l'un sous l'autre.
@@ -14,7 +10,7 @@ export const Page = styled.div`
   gap: ${({ theme }) => theme.espace(6)};
 `;
 
-// Titre et court résumé du jeu, sur une largeur limitée pour rester lisible.
+// Titre pis court résumé du jeu, sur une largeur limitée pour rester lisible.
 export const Introduction = styled.div`
   max-width: 48rem;
 
@@ -27,7 +23,7 @@ export const Introduction = styled.div`
 
 // Dernière case de la grille des règles : réserve la place de la mascotte, en bas à droite.
 export const EmplacementMascotte = styled.div`
-  margin-bottom: -1.5rem; /* compense l’espace inférieur du conteneur principal (py-4) */
+  margin-bottom: -1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;

@@ -1,9 +1,6 @@
-/*
- * Accroche.styles.js : l'apparence de Accroche (Accroche.jsx, dans le même dossier).
- *
- * Responsabilité : définir le style de ce composant (styled-components).
- * Accroche.jsx, lui, s'occupe seulement de ce qui est affiché et de son comportement.
- */
+// Responsabilité : définir le style de ce composant (styled-components).
+// Utilisé dans : Accroche
+
 import styled from 'styled-components';
 
 // Les éléments l'un sous l'autre.
@@ -13,17 +10,14 @@ export const Bloc = styled.section`
   gap: ${({ theme }) => theme.espace(4)};
 `;
 
-// Le logo du jeu, en haut de l'accroche : plus grand que dans l'en-tête des autres pages,
-// mais à l'échelle du slogan. Entre 11rem et 15rem selon la largeur de l'écran ;
-// la hauteur suit (height: auto) pour garder ses proportions.
+// Le logo du jeu, en haut de l'accroche : plus grand que dans l'en-tête des autres pages, mais à l'échelle du slogan.
 export const GrandLogo = styled.img`
   display: block;
   width: clamp(11rem, 20vw, 15rem);
   height: auto;
 `;
 
-// Grand slogan en italique très gras ; sa taille suit la largeur de l'écran (au plus 3,25rem,
-// pour que « Faites trébucher les autres. » tienne sur une ligne sur un écran d'ordinateur).
+// Gros slogan en italique très gras ; sa taille suit la largeur de l'écran (max 3,25rem).
 export const Slogan = styled.h1`
   margin: 0;
   font-family: ${({ theme }) => theme.polices.titre};

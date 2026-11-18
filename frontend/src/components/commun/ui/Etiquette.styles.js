@@ -1,9 +1,6 @@
-/*
- * Etiquette.styles.js : l'apparence de Etiquette (Etiquette.jsx, dans le même dossier).
- *
- * Responsabilité : définir le style de ce composant (styled-components).
- * Etiquette.jsx, lui, s'occupe seulement de ce qui est affiché et de son comportement.
- */
+// Responsabilité : définir le style de ce composant (styled-components).
+// Utilisé dans : Etiquette
+
 import styled from 'styled-components';
 
 // Pilule blanche à contour noir ; le texte ne passe jamais à la ligne.

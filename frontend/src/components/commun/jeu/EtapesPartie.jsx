@@ -1,17 +1,12 @@
-/*
- * EtapesPartie.jsx : le fil des étapes avant une partie
- * (1 Configuration → 2 Personnages → 3 Course), affiché en haut des pages.
- *
- * Responsabilité : montrer au joueur où il en est ; l'étape en cours est blanche et en gras,
- * les autres sont en gris, entourées.
- *
- * Props :
- *   etapeCourante : 1 à 3
- */
+// Responsabilité : le fil des étapes de la partie (Configuration, Personnages, Course).
+// Utilisé dans : ConfigurationPage, EnTeteCourse, SelectionPage
+
 import { ListeEtapes, Etape, Pastille } from './EtapesPartie.styles.js';
 
 const ETAPES = ['Configuration', 'Personnages', 'Course'];
 
+// Affiche les 3 étapes, celle en cours en évidence.
+// Props : etapeCourante (1, 2 ou 3).
 function EtapesPartie({ etapeCourante }) {
   return (
     <ListeEtapes aria-label="Étapes de la partie">

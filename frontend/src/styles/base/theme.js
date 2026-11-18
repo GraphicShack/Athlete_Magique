@@ -1,23 +1,5 @@
-/*
- * theme.js : la charte visuelle d'Athlète Magique (couleurs, polices, tailles, bordures…).
- *
- * Responsabilités :
- *   - définir une seule fois chaque valeur de design de l'interface ;
- *   - donner un sens fixe à chaque couleur, pour qu'elle veuille dire la même chose sur tous les écrans.
- *
- * Le style imite le livret de règles : pages noires, grands titres dont chaque lettre a sa couleur,
- * cartes blanches à bandeau de couleur entourées de fins liserés colorés (cadre rétro).
- *
- * Le thème est fourni à toute l'application par ThemeProvider (main.jsx).
- * Dans un composant, on le lit avec la prop `theme` :
- *
- *   const Titre = styled.h2`
- *     color: ${({ theme }) => theme.couleurs.encre};
- *     font-size: ${({ theme }) => theme.texte.lg};
- *   `;
- *
- * Règle : on n'écrit jamais une couleur ou une taille directement dans un composant.
- */
+// Responsabilité : la charte visuelle (couleurs, polices, tailles, bordures…).
+// Utilisé dans : main
 
 // Couleurs relevées dans le livret How-to-play-MAGICAL-ATHLETE.pdf.
 export const PALETTE = {
@@ -38,21 +20,9 @@ export const PALETTE = {
   gris: '#b2b0b2',
 };
 
-/*
- * Comment la palette est utilisée :
- *   - noir                 : fond des pages ; texte des cartes blanches
- *   - blanc                : cartes, et texte posé directement sur le fond noir
- *   - orange et rose       : liserés du cadre rétro autour des panneaux
- *   - toutes les couleurs  : lettres des grands titres (titre arc-en-ciel)
- *   - or (très dilué)      : fonds secondaires à l'intérieur des cartes
- *   - une couleur par sujet: bandeau de titre des panneaux (voir « teintes »)
- *   - rouge                : action principale et rideau entre les pages
- *   - rose, or, vert de piste, bleu, jaune, gris : réservés à la piste
- *   - magenta, violet, cyan, orange : réservés aux pions des joueurs
- */
+// Comment la palette est utilisée : - noir : fond des pages ; texte des cartes blanches - blanc : cartes, et texte posé directement sur le fond noir - orange et rose : liserés du cadre rétro autour des panneaux - toutes les couleurs : lettres des grands titres (titre arc-en-ciel) - or (très dilué) : fonds secondaires à l'intérieur des cartes - une couleur par sujet: bandeau de titre des panneaux (voir « teintes ») - rouge : action principale et rideau entre les pages - rose, or, vert de piste, bleu, jaune, gris : réservés à la piste - magenta, violet, cyan, orange : réservés aux pions des joueurs.
 
 // Mélange une couleur avec du blanc (ou une autre couleur de fond).
-// Exemple : melange(PALETTE.or, 15) = 15 % d'or et 85 % de blanc, un fond très clair.
 const melange = (couleur, proportion, fond = PALETTE.blanc) =>
   `color-mix(in srgb, ${couleur} ${proportion}%, ${fond})`;
 
@@ -91,12 +61,10 @@ const piste = {
   rocherTexte: PALETTE.noir,
 };
 
-// Une couleur par joueur, choisie parmi celles que la piste n'utilise pas :
-// un pion ne se confond jamais avec la case sur laquelle il se trouve.
+// Une couleur par joueur, choisie parmi celles que la piste n'utilise pas : un pion ne se confond jamais avec la case sur laquelle il se trouve.
 const joueurs = [PALETTE.magenta, PALETTE.violet, PALETTE.cyan, PALETTE.orange];
 
 // Teinte de chaque sujet : la couleur du bandeau de titre des panneaux (voir Panneau.jsx).
-// Un même sujet garde la même couleur sur tous les écrans. Toutes restent lisibles avec un titre noir.
 const teintes = {
   apercu: PALETTE.rose, // vue d'ensemble
   preparation: PALETTE.bleu, // mise en place, avant la course
@@ -169,7 +137,7 @@ const bordures = {
 
 const ombres = {
   douce: `0 2px 8px color-mix(in srgb, ${PALETTE.noir} 10%, transparent)`, // cartes du carrousel
-  // Ombre « carton » : décalée et sans flou (boutons flottants, bulle).
+  // Ombre « carton » : décalée pis sans flou (boutons flottants, bulle).
   bloc: `4px 4px 0 ${PALETTE.noir}`,
   blocPetit: `2px 2px 0 ${PALETTE.noir}`,
   // Même ombre, réduite à rien : bouton enfoncé (voir Bouton.jsx).
@@ -188,7 +156,7 @@ const ecrans = {
   xl: '1200px', // grand écran
 };
 
-// Durée et courbe des petites transitions (survol, changement de couleur).
+// Durée pis courbe des petites transitions (survol, changement de couleur).
 const transition = '150ms ease';
 
 // Le thème complet, fourni par ThemeProvider.

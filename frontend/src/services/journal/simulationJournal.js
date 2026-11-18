@@ -1,9 +1,6 @@
-/*
- * simulationJournal.js (service) : fait semblant d'être le serveur pour le journal.
- *
- * Une seule chose : ajouter au journal les événements d'exemple un par un, avec un petit
- * délai, comme pendant une vraie partie. Ce fichier disparaîtra quand le serveur existera.
- */
+// Responsabilité : fait semblant d'être le serveur en envoyant les événements d'exemple.
+// Utilisé dans : useSimulationJournal
+
 import EVENEMENTS_EXEMPLE from '@/data/exemples/evenementsExemple.js';
 import { journaliser } from '@/services/journal/journal.js';
 

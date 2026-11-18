@@ -1,12 +1,9 @@
-/*
- * CasePiste.styles.js : l'apparence de CasePiste (CasePiste.jsx, dans le même dossier).
- *
- * Responsabilité : définir le style de ce composant (styled-components).
- * CasePiste.jsx, lui, s'occupe seulement de ce qui est affiché et de son comportement.
- */
+// Responsabilité : définir le style de ce composant (styled-components).
+// Utilisé dans : CasePiste
+
 import styled, { css } from 'styled-components';
 
-// Fond et texte de la case selon son type (le thème donne toutes les couleurs de la piste).
+// Fond pis texte de la case selon son type (le thème donne toutes les couleurs de la piste).
 const couleurs = ({ theme, $type, $repere, $indice }) => {
   if ($type === 'etoile') return css`background: ${theme.piste.etoile}; color: ${theme.piste.etoileTexte};`;
   if ($type === 'rocher') return css`background: ${theme.piste.rocher}; color: ${theme.piste.rocherTexte};`;
@@ -28,7 +25,7 @@ export const Carre = styled.div`
   ${couleurs}
 `;
 
-// Gros numéro (repères et étoiles) ; sa taille suit la largeur du plateau (cqw).
+// Gros numéro (repères pis étoiles) ; sa taille suit la largeur du plateau (cqw).
 export const Numero = styled.span`
   font-family: ${({ theme }) => theme.polices.titre};
   font-size: clamp(0.6rem, 3.6cqw, 1.8rem);

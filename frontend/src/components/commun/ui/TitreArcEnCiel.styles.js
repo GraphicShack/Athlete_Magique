@@ -1,13 +1,10 @@
-/*
- * TitreArcEnCiel.styles.js : l'apparence de TitreArcEnCiel (TitreArcEnCiel.jsx, dans le même dossier).
- *
- * Responsabilité : définir le style de ce composant (styled-components).
- * TitreArcEnCiel.jsx, lui, s'occupe seulement de ce qui est affiché et de son comportement.
- */
+// Responsabilité : définir le style de ce composant (styled-components).
+// Utilisé dans : TitreArcEnCiel
+
 import styled from 'styled-components';
 import { flottement } from '@/styles/animations/flottement.js';
 
-// La taille suit la largeur de l'écran (6vw), entre 2,25rem et 4,5rem.
+// La taille suit la largeur de l'écran (6vw), entre 2,25rem pis 4,5rem.
 export const Titre = styled.h1`
   margin: 0;
   font-family: ${({ theme }) => theme.polices.titre};
@@ -24,7 +21,6 @@ export const Mot = styled.span`
 `;
 
 // Une lettre du titre, qui flotte (voir styles/animations/flottement.js).
-// « inline-block » est nécessaire pour pouvoir déplacer une lettre (transform).
 export const Lettre = styled.span`
   display: inline-block;
   ${flottement}

@@ -1,18 +1,14 @@
-/*
- * AccesParametres.styles.js : l'apparence de AccesParametres (AccesParametres.jsx, dans le même dossier).
- *
- * Responsabilité : définir le style de ce composant (styled-components).
- * AccesParametres.jsx, lui, s'occupe seulement de ce qui est affiché et de son comportement.
- */
+// Responsabilité : définir le style de ce composant (styled-components).
+// Utilisé dans : AccesParametres
+
 import styled from 'styled-components';
 
-// Bouton rond jaune à contour noir et ombre « carton ».
+// Bouton rond jaune à contour noir pis ombre « carton ».
 export const BoutonRond = styled.button`
   --fond-bouton: ${({ theme }) => theme.teintes.parametres};
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  /* Aussi haut que le bouton « Règles », et parfaitement rond. */
   width: 3.25rem;
   height: 3.25rem;
   padding: 0;
@@ -26,7 +22,6 @@ export const BoutonRond = styled.button`
     transition: rotate 400ms ease;
   }
 
-  /* Au survol, la roue tourne d'une dent et demie. */
   &:hover svg {
     rotate: 68deg;
   }

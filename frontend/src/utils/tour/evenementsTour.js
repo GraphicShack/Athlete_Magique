@@ -1,19 +1,12 @@
-/*
- * evenementsTour.js : crée les événements du journal pour le tour en cours.
- *
- * Responsabilité unique : construire chaque événement au format standard
- * (voir data/exemples/evenementsExemple.js). Il ne l'envoie pas (voir journaliser dans
- * services/journal/journal.js) et n'écrit pas la phrase (voir utils/journal/texteEvenement.js).
- *
- * Fonctions pures : elles reçoivent le tour ({ numeroCourse, numero, idJoueur, personnage }) et les valeurs
- * utiles, et renvoient un objet.
- */
+// Responsabilité : crée les événements du journal pour le tour.
+// Utilisé dans : effetsBoutons, useTourDemo
 
 // Ce qui est commun à tous les événements d'un tour : la course, le tour, le joueur, l'étape.
 const base = (tour, etape) => ({ course: tour.numeroCourse, tour: tour.numero, etape, acteur: tour.idJoueur });
 
-// Le début et la fin du tour du joueur.
+// Le début pis la fin du tour du joueur.
 export const evenementDebutTour = (tour) => ({ ...base(tour, 'debut'), type: 'TOUR_DEBUT' });
+// L'événement de fin du tour.
 export const evenementFinTour = (tour) => ({ ...base(tour, 'fin'), type: 'TOUR_FIN' });
 
 // Le premier lancer du dé.
@@ -32,13 +25,7 @@ export const evenementRelance = (tour, { valeur, relance, maximum }) => ({
   details: { valeur, relance, maximum },
 });
 
-/**
- * L'événement d'un bouton du tour (voir « journal » dans data/exemples/deroulementTour.js).
- *   etape      : 'debut', 'lancer', 'deplacement' ou 'fin'
- *   type       : ex. 'HYPNOSE', 'DE_GARDE', 'DEPLACEMENT'
- *   parPouvoir : true si c'est le pouvoir du personnage qui le cause
- *   details    : les détails du type (ex. { valeur }, { de, a, cases })
- */
+// L'événement d'un bouton du tour (voir « journal » dans data/exemples/deroulementTour.js).
 export const evenementBouton = (tour, { etape, type, parPouvoir = false, details = {} }) => ({
   ...base(tour, etape),
   type,

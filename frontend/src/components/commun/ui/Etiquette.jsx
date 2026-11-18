@@ -1,13 +1,10 @@
-/*
- * Etiquette.jsx : petite étiquette arrondie (« Course 1 sur 3 », « Choisi »…).
- *
- * Responsabilité : afficher un court texte dans une pilule blanche à contour noir.
- *
- * Props :
- *   children : le texte de l'étiquette
- */
+// Responsabilité : un petit texte dans une pilule blanche.
+// Utilisé dans : Accroche, LigneJoueur, PanneauPiste, SelectionPage
+
 import { Pilule } from './Etiquette.styles.js';
 
+// Affiche le texte dans une pilule.
+// Props : children (le texte).
 function Etiquette({ children }) {
   return <Pilule>{children}</Pilule>;
 }

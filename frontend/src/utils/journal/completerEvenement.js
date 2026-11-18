@@ -1,13 +1,10 @@
-/*
- * completerEvenement.js : complète un événement avec les champs par défaut.
- *
- * Une seule chose : ajouter ce qui manque (id unique, champs vides),
- * pour que chaque événement ait toujours le format standard (voir data/exemples/evenementsExemple.js).
- */
+// Responsabilité : ajoute ce qui manque à un événement (id, champs vides).
+// Utilisé dans : journal
 
 // Compteur pour donner un id unique à chaque événement.
 let dernierId = 0;
 
+// Renvoie l'événement avec un id unique pis les champs manquants.
 export function completerEvenement(evenement) {
   dernierId += 1;
   return {

@@ -1,20 +1,13 @@
-/*
- * De.styles.js : l'apparence de De (De.jsx, dans le même dossier).
- *
- * Responsabilité : définir le style de ce composant (styled-components).
- * De.jsx, lui, s'occupe seulement de ce qui est affiché et de son comportement.
- */
+// Responsabilité : définir le style de ce composant (styled-components).
+// Utilisé dans : De
+
 import styled from 'styled-components';
 import { roulement } from '@/styles/animations/roulementDe.js';
 
 // Côté du cube.
 const COTE = '3.5rem';
 
-/*
- * Forme d'éclat (étoile à 20 branches) posée derrière le dé, comme dans le livret.
- * On calcule les points d'un polygone : un point loin du centre, puis un point plus proche,
- * et ainsi de suite tout autour du cercle.
- */
+// Forme d'éclat (étoile à 20 branches) posée derrière le dé, comme dans le livret.
 function formeEclat(branches = 20) {
   const points = [];
   for (let i = 0; i < branches * 2; i += 1) {
@@ -25,8 +18,7 @@ function formeEclat(branches = 20) {
   return `polygon(${points.join(', ')})`;
 }
 
-// L'éclat bleu derrière le dé. L'étoile est dessinée sur un calque à part (::before) :
-// ainsi le cube qui roule n'est pas coupé par la forme de l'étoile.
+// L'éclat bleu derrière le dé.
 export const Eclat = styled.div`
   position: relative;
   flex-shrink: 0;
@@ -46,14 +38,13 @@ export const Eclat = styled.div`
 
 // La « scène » 3D : la perspective donne de la profondeur au cube.
 export const Scene = styled.div`
-  position: relative; /* au-dessus de l'étoile */
+  position: relative;
   width: ${COTE};
   height: ${COTE};
   perspective: 18rem;
 `;
 
 // Le cube : ses 6 faces gardent leur position en 3D (preserve-3d).
-// Il est tourné pour montrer la bonne face (--rx, --ry), et roule si $roule est vrai.
 export const Cube = styled.div`
   position: relative;
   width: 100%;
@@ -63,8 +54,7 @@ export const Cube = styled.div`
   ${({ $roule }) => $roule && roulement}
 `;
 
-// Une face blanche du dé : une grille de 3 × 3 emplacements, placée sur un côté du cube
-// (--place), puis avancée d'un demi-côté pour former le cube.
+// Une face blanche du dé : une grille de 3 × 3 emplacements, placée sur un côté du cube (--place), puis avancée d'un demi-côté pour former le cube.
 export const Face = styled.div`
   position: absolute;
   inset: 0;
@@ -76,7 +66,7 @@ export const Face = styled.div`
   border-radius: ${({ theme }) => theme.rayons.sm};
   background: ${({ theme }) => theme.couleurs.surface};
   transform: var(--place) translateZ(calc(${COTE} / 2));
-  backface-visibility: hidden; /* on ne voit pas une face par l'arrière */
+  backface-visibility: hidden;
 `;
 
 // Un des 9 emplacements, qui contient un point ou reste vide.

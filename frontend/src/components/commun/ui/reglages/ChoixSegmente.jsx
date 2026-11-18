@@ -1,18 +1,12 @@
-/*
- * ChoixSegmente.jsx : un réglage à choisir parmi quelques options côte à côte
- * (ex. « Lente · Normale · Rapide »), dans une ligne de réglage.
- *
- * Responsabilité : placer le nom du réglage à gauche et la barre de choix (BarreChoix) à droite.
- *
- * Props :
- *   etiquette       : nom du réglage
- *   options         : textes des choix, ex. ['Lente', 'Normale', 'Rapide']
- *   valeurParDefaut : le choix coché au départ
- */
+// Responsabilité : une ligne de réglage avec son nom à gauche pis une BarreChoix à droite.
+// Utilisé dans : ContenuParametres
+
 import { useId } from 'react';
 import { Ligne, Nom } from './LigneReglage.js';
 import BarreChoix from './BarreChoix.jsx';
 
+// Affiche le nom du réglage pis sa barre de choix.
+// Props : etiquette (nom du réglage), options, valeurParDefaut.
 function ChoixSegmente({ etiquette, options, valeurParDefaut }) {
   // Relie la barre à son nom, pour les lecteurs d'écran.
   const idEtiquette = useId();

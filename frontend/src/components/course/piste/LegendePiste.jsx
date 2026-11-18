@@ -1,14 +1,12 @@
-/*
- * LegendePiste.jsx : la légende des symboles de la piste, affichée sous le plateau.
- *
- * Responsabilité : expliquer chaque symbole avec un exemple dessiné
- * (case étoile, rocher, pion tombé, pion actif).
- */
+// Responsabilité : la légende sous la piste (étoile, rocher, tombé, pion actif).
+// Utilisé dans : PanneauPiste
+
 import { useTheme } from 'styled-components';
 import Jeton from '@/components/commun/jeu/Jeton.jsx';
 import imageRocher from '@/assets/images/rocher.png';
 import { ListeLegende, Element, Exemple, Carre, Image } from './LegendePiste.styles.js';
 
+// Affiche les 4 éléments de la légende.
 function LegendePiste() {
   const theme = useTheme();
   // Un élément de légende : un exemple à gauche, son explication à droite.

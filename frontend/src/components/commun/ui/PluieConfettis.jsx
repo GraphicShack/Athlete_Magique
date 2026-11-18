@@ -1,22 +1,13 @@
-/*
- * PluieConfettis.jsx : une pluie continue de confettis arc-en-ciel, qui tombent du haut
- * de la zone jusqu'en bas (ex. la page du classement). Pour une seule explosion, voir Confettis.jsx.
- *
- * Responsabilité : afficher les morceaux de la pluie, chacun avec sa propre trajectoire.
- *
- * Le parent doit être en « position: relative » et « overflow: hidden » : la pluie remplit
- * le parent, et ce qui dépasse en bas est coupé.
- * Les confettis passent par-dessus la page sans bloquer les clics ni décaler les éléments.
- * L'animation elle-même est dans styles/animations/confettis.js.
- *
- * Props :
- *   nombre : nombre de morceaux (60 par défaut)
- */
+// Responsabilité : une pluie de confettis qui tombe en continu (page Classement).
+// Utilisé dans : ClassementPage
+
 import { useTheme } from 'styled-components';
 import { trajectoirePluie } from '@/styles/animations/confettis.js';
 import { Zone } from './Confettis.styles.js';
 import { Goutte } from './PluieConfettis.styles.js';
 
+// Fait tomber « nombre » confettis en boucle, chacun à sa place pis son rythme.
+// Props : nombre (de confettis, 60 par défaut).
 function PluieConfettis({ nombre = 60 }) {
   const { arcEnCiel } = useTheme();
 

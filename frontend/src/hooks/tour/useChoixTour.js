@@ -1,14 +1,9 @@
-/*
- * useChoixTour.js : hook qui retient les choix du joueur pendant son tour.
- *
- * Une seule chose : garder en mémoire
- *   etape       : l'étape choisie (1 au départ, 2 après « Commencer », 4 après le déplacement) ;
- *   deplacement : le nombre de cases choisi (null tant qu'il n'a pas gardé ou doublé) ;
- *   avance      : le nombre de cases avancées une fois le déplacement confirmé (0 avant) ;
- *   termine     : true quand il a cliqué « Fin du tour ».
- */
+// Responsabilité : garde les choix du joueur pendant son tour (étape, déplacement, fini).
+// Utilisé dans : useTourDemo
+
 import { useState } from 'react';
 
+// Renvoie l'étape, le déplacement choisi, les cases avancées, si c'est fini, pis les fonctions pour les changer.
 function useChoixTour() {
   const [etape, setEtape] = useState(1);
   const [deplacement, setDeplacement] = useState(null);
@@ -18,7 +13,7 @@ function useChoixTour() {
   // Passer à une étape (1, 2 ou 4).
   const passerA = (numero) => setEtape(numero);
 
-  // Le joueur fixe son nombre de cases (garder ou doubler).
+  // Le joueur fixe son nb de cases (garder ou doubler).
   const choisirDeplacement = (cases) => setDeplacement(cases);
 
   // Le joueur confirme son déplacement : il avance de « cases » cases.

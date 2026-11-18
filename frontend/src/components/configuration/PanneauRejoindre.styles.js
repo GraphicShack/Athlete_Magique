@@ -1,8 +1,6 @@
-/*
- * PanneauRejoindre.styles.js : l'apparence de PanneauRejoindre (PanneauRejoindre.jsx, dans le même dossier).
- *
- * Responsabilité : définir le style de ce composant (styled-components).
- */
+// Responsabilité : définir le style de ce composant (styled-components).
+// Utilisé dans : PanneauRejoindre
+
 import styled from 'styled-components';
 
 export const Aide = styled.p`
@@ -11,7 +9,7 @@ export const Aide = styled.p`
   color: ${({ theme }) => theme.couleurs.gris700};
 `;
 
-// Le champ, puis le bouton sur toute la largeur. Le code s'écrit en gros et espacé.
+// Le champ, puis le bouton sur toute la largeur. Le code s'écrit en gros pis espacé.
 export const Formulaire = styled.form`
   display: flex;
   flex-direction: column;

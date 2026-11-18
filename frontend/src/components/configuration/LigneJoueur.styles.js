@@ -1,14 +1,10 @@
-/*
- * LigneJoueur.styles.js : l'apparence de LigneJoueur (LigneJoueur.jsx, dans le même dossier).
- *
- * Responsabilité : définir le style de ce composant (styled-components).
- * LigneJoueur.jsx, lui, s'occupe seulement de ce qui est affiché et de son comportement.
- */
+// Responsabilité : définir le style de ce composant (styled-components).
+// Utilisé dans : LigneJoueur
+
 import styled from 'styled-components';
 import { rondCentre } from '@/styles/base/utilitaires.js';
 
-// Carte blanche sur une ligne, avec une bande épaisse à gauche à la couleur du pion
-// (comme CarteJoueur en course). Les éléments passent à la ligne s'ils manquent de place.
+// Carte blanche sur une ligne, avec une bande épaisse à gauche à la couleur du pion (comme CarteJoueur en course).
 export const Carte = styled.li`
   display: flex;
   flex-wrap: wrap;
@@ -22,7 +18,7 @@ export const Carte = styled.li`
   background: ${({ theme }) => theme.couleurs.surface};
 `;
 
-// La pastille et le nom, côte à côte.
+// La pastille pis le nom, côte à côte.
 export const NomJoueur = styled.span`
   display: inline-flex;
   align-items: center;

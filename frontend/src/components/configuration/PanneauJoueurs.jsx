@@ -1,23 +1,6 @@
-/*
- * PanneauJoueurs.jsx : le panneau « Les joueurs » de la salle d'attente.
- *
- * Responsabilité : afficher. Il ne calcule et ne retient rien : tout lui est donné.
- *   - le nombre de joueurs : l'hôte le choisit (2, 3 ou 4), les autres le voient ;
- *   - une LigneJoueur par joueur arrivé, puis une PlaceLibre par place vide.
- * Chaque clic est transmis au parent (onChoisirPlaces, onRetirer, onAjouterBot).
- * En bas : le bouton donné par le parent (children), ex. <BoutonLancer />.
- *
- * Props :
- *   joueurs         : [{ id, nom, bot, pret, hote }], dans l'ordre d'arrivée
- *   placesMax       : nombre de places choisi
- *   libres          : numéros des places vides, ex. [4]
- *   nombres         : choix possibles du nombre de places, ex. ['2', '3', '4']
- *   impossibles     : choix grisés, ex. ['2'] s'il y a déjà 3 joueurs
- *   estHote         : true si c'est moi l'hôte (je peux tout régler)
- *   onChoisirPlaces : appelé avec le nombre choisi (un nombre)
- *   onRetirer       : appelé avec l'id du joueur à retirer
- *   onAjouterBot    : appelé au clic sur « Ajouter un bot »
- */
+// Responsabilité : le panneau des joueurs du salon (affiche seulement, tout lui est donné).
+// Utilisé dans : ConfigurationPage
+
 import { useId } from 'react';
 import { useTheme } from 'styled-components';
 import Panneau from '@/components/commun/ui/Panneau.jsx';
@@ -26,6 +9,7 @@ import LigneJoueur from './LigneJoueur.jsx';
 import PlaceLibre from './PlaceLibre.jsx';
 import { Aide, SousTitre, ListePlaces, Actions } from './PanneauJoueurs.styles.js';
 
+// Affiche le nb de places, les joueurs pis les places libres ; chaque clic est renvoyé au parent.
 function PanneauJoueurs({
   joueurs,
   placesMax,

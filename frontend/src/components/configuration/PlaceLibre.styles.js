@@ -1,8 +1,6 @@
-/*
- * PlaceLibre.styles.js : l'apparence de PlaceLibre (PlaceLibre.jsx, dans le même dossier).
- *
- * Responsabilité : définir le style de ce composant (styled-components).
- */
+// Responsabilité : définir le style de ce composant (styled-components).
+// Utilisé dans : PlaceLibre
+
 import styled from 'styled-components';
 
 // Carte au contour pointillé : la place est libre.

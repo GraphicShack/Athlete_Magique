@@ -1,13 +1,6 @@
-/*
- * phrasesJournal.js : la phrase de base de chaque type d'événement du journal.
- *
- * Une seule chose : une phrase par type (voir data/exemples/evenementsExemple.js pour le format).
- * Pour ajouter un type : ajouter une ligne ici, sans toucher au reste.
- *
- * Chaque phrase reçoit :
- *   d             : les détails de l'événement
- *   acteur, cible : les noms à afficher, ex. « Félix (Magicien) »
- */
+// Responsabilité : la phrase de base de chaque type d'événement.
+// Utilisé dans : texteEvenement
+
 import { nombreDeCases } from '@/utils/nombreDeCases.js';
 
 export const PHRASES = {

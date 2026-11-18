@@ -1,17 +1,6 @@
-/*
- * ContenuParametres.jsx : le contenu de la fenêtre des paramètres, regroupé par sujet
- * (Son, Affichage, Partie, Compte), avec les boutons « Rétablir » et « Enregistrer ».
- *
- * Responsabilité : placer les réglages dans leurs panneaux.
- *
- * Le volume général et l'interrupteur « Musique » sont branchés : ils changent tout de suite
- * la musique du menu. Les autres réglages sont encore visuels seulement (valeur de départ
- * avec defaultChecked, defaultValue…, rien n'est appliqué). Rien n'est encore enregistré :
- * plus tard, un service (dossier services/) pourra sauvegarder les valeurs.
- *
- * Props :
- *   son : { musiqueActive, setMusiqueActive, volume, setVolume } (voir App.jsx)
- */
+// Responsabilité : le contenu de la fenêtre des paramètres (son, affichage, partie, compte).
+// Utilisé dans : AccesParametres
+
 import Panneau from '@/components/commun/ui/Panneau.jsx';
 import Bouton from '@/components/commun/ui/Bouton.jsx';
 import ChampTexte from '@/components/commun/ui/ChampTexte.jsx';
@@ -20,12 +9,12 @@ import Curseur from '@/components/commun/ui/reglages/Curseur.jsx';
 import ChoixSegmente from '@/components/commun/ui/reglages/ChoixSegmente.jsx';
 import { Grille, ChampsCompte, Actions } from './ContenuParametres.styles.js';
 
+// Affiche les panneaux de réglages (seul le son est branché pour l'instant).
 function ContenuParametres({ son }) {
   return (
     <>
       <Grille>
         <Panneau titre="Son" teinte="son">
-          {/* Branchés : la valeur vient d'App, et chaque changement y est renvoyé. */}
           <Curseur
             etiquette="Volume général"
             min="0"
@@ -64,7 +53,6 @@ function ContenuParametres({ son }) {
         </Panneau>
       </Grille>
 
-      {/* Boutons sans action pour l'instant. */}
       <Actions>
         <Bouton variante="secondaire">Rétablir par défaut</Bouton>
         <Bouton variante="principal">Enregistrer</Bouton>

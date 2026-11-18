@@ -1,9 +1,6 @@
-/*
- * CartePersonnage.styles.js : l'apparence de CartePersonnage (CartePersonnage.jsx, dans le même dossier).
- *
- * Responsabilité : définir le style de ce composant (styled-components).
- * CartePersonnage.jsx, lui, s'occupe seulement de ce qui est affiché et de son comportement.
- */
+// Responsabilité : définir le style de ce composant (styled-components).
+// Utilisé dans : CartePersonnage
+
 import styled, { css } from 'styled-components';
 
 // Carte blanche à fine bordure grise.
@@ -18,7 +15,7 @@ export const Carte = styled.article`
   border-radius: ${({ theme }) => theme.rayons.md};
 `;
 
-// Image et nom : côte à côte (ligne) ou l'un au-dessus de l'autre (portrait).
+// Image pis nom : côte à côte (ligne) ou l'un au-dessus de l'autre (portrait).
 export const EnTete = styled.div`
   display: flex;
   align-items: center;
@@ -57,7 +54,7 @@ export const Nom = styled.h3`
   font-size: ${({ theme }) => theme.texte.md};
 `;
 
-// Texte du pouvoir, plus petit et gris.
+// Texte du pouvoir, plus petit pis gris.
 export const Pouvoir = styled.p`
   margin: 0;
   font-size: ${({ theme }) => theme.texte.sm};

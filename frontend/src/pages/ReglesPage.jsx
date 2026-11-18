@@ -1,10 +1,6 @@
-/*
- * ReglesPage.jsx : la page des règles du jeu (adresse « /regles »).
- *
- * Responsabilités :
- *   - placer l'en-tête, l'introduction et toutes les sections des règles (ContenuRegles) ;
- *   - ajouter la mascotte en bas à droite, qui reste visible en bas de l'écran pendant le défilement.
- */
+// Responsabilité : la page des règles (/regles).
+// Utilisé dans : routes
+
 import EnTetePage from '@/components/commun/ui/EnTetePage.jsx';
 import ContenuRegles from '@/components/regles/ContenuRegles.jsx';
 import MascotteRegles from '@/components/regles/MascotteRegles.jsx';
@@ -12,6 +8,7 @@ import CHEMINS from '@/chemins.js';
 import TitreArcEnCiel from '@/components/commun/ui/TitreArcEnCiel.jsx';
 import { Page, Introduction, EmplacementMascotte, Mascotte } from './ReglesPage.styles.js';
 
+// Affiche l'en-tête, le titre pis les règles avec la mascotte.
 function ReglesPage() {
   return (
     <Page>

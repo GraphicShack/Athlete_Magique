@@ -1,10 +1,6 @@
-/*
- * IconeRoueDentee.jsx : l'icône en roue dentée du bouton des paramètres.
- *
- * Responsabilité : dessiner la roue en SVG. Un cercle en pointillés épais forme les dents,
- * un disque plein le corps, et un petit disque de la couleur du bouton (--fond-bouton) fait le trou.
- * Décorative : cachée aux lecteurs d'écran (le bouton a son propre nom).
- */
+// Responsabilité : l'icône SVG de la roue dentée.
+// Utilisé dans : AccesParametres
+
 function IconeRoueDentee() {
   return (
     <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">

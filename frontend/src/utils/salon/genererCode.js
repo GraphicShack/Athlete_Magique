@@ -1,17 +1,13 @@
-/*
- * genererCode.js : invente un code de salon au hasard, ex. « KZ4P7Q ».
- *
- * Une seule chose : tirer 6 caractères au hasard.
- * On évite les caractères qui se confondent à l'oral ou à l'écrit (0 et O, 1 et I).
- * Provisoire : plus tard, c'est le serveur qui donnera le code (il doit être unique).
- */
+// Responsabilité : invente un code de salon au hasard (ex. KZ4P7Q).
+// Utilisé dans : nettoyerCode, salon, useRejoindre
 
 // Les caractères permis : lettres et chiffres, sans 0, O, 1 et I.
 export const CARACTERES_CODE = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
 
-// Le nombre de caractères d'un code.
+// Le nb de caractères d'un code.
 export const LONGUEUR_CODE = 6;
 
+// Tire « longueur » caractères au hasard parmi ceux permis.
 export function genererCode(longueur = LONGUEUR_CODE) {
   let code = '';
   for (let i = 0; i < longueur; i += 1) {

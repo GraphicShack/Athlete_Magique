@@ -1,23 +1,6 @@
-/*
- * ConfigurationPage.jsx : la salle d'attente de la partie (adresse « /configuration »).
- *
- * C'est un fichier qui connecte : il ne calcule rien et n'affiche rien lui-même, il relie
- *   - services/salon.js         : le salon (code, joueurs, hôte) ;
- *   - hooks/salon/useJoueursSalon : la liste des joueurs (retirer, ajouter un bot) ;
- *   - hooks/salon/usePlacesSalon  : le nombre de places choisi ;
- *   - utils/salon/placesSalon     : les places libres et les choix impossibles ;
- *   - les panneaux, qui affichent.
- *
- *   ┌──────── en-tête, étapes, titre ────────┐
- *   ├──────────────────────┬─────────────────┤
- *   │ les joueurs          │ inviter (code)  │
- *   │ (arrivés + libres)   ├─────────────────┤
- *   │ [Lancer la partie]   │ rejoindre       │
- *   └──────────────────────┴─────────────────┘
- *
- * L'hôte peut régler la partie et la lancer ; les autres attendent.
- * Pour voir la page comme un invité : /configuration?invite
- */
+// Responsabilité : la salle d'attente (/configuration) ; connecte le salon aux panneaux.
+// Utilisé dans : routes
+
 import { useSearchParams } from 'react-router-dom';
 import EnTetePage from '@/components/commun/ui/EnTetePage.jsx';
 import EtapesPartie from '@/components/commun/jeu/EtapesPartie.jsx';
@@ -37,6 +20,7 @@ import { ColonneDroite } from './ConfigurationPage.styles.js';
 // Les nombres de places possibles.
 const NOMBRES = ['2', '3', '4'];
 
+// Va chercher le salon, garde les joueurs pis les places, pis les donne aux panneaux.
 function ConfigurationPage() {
   const [parametres] = useSearchParams();
   const salon = obtenirSalon(parametres.has('invite'));

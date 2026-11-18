@@ -1,16 +1,6 @@
-/*
- * Liste.jsx : liste sans puces ni marges, base de toutes les listes de l'interface.
- *
- * Responsabilité : retirer le style par défaut des listes, et permettre à une liste
- * de défiler dans une mise en page fixe.
- *
- * Props :
- *   $defilante : la liste prend la hauteur disponible et défile, au lieu d'allonger la page
- *   as="ul"    : pour une liste non numérotée (par défaut, c'est une liste <ol>)
- *
- * Chaque composant l'étend avec sa propre disposition :
- *   const ListeEvenements = styled(Liste)` gap: … `;
- */
+// Responsabilité : une liste sans les puces pis les marges par défaut.
+// Utilisé dans : EtapesPartie.styles, EtapesTour.styles, JournalEvenements.styles, LegendePiste.styles, ListeJoueurs.styles, PanneauJoueurs.styles
+
 import styled, { css } from 'styled-components';
 
 const Liste = styled.ol`
@@ -21,9 +11,9 @@ const Liste = styled.ol`
   ${({ $defilante }) =>
     $defilante &&
     css`
-      flex: 1; /* prend la place restante dans le panneau */
-      min-height: 0; /* peut devenir plus petite que son contenu… */
-      overflow-y: auto; /* … et alors elle défile */
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
     `}
 `;
 

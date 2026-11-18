@@ -1,20 +1,11 @@
-/*
- * CasePiste.jsx : une case de la piste.
- *
- * Responsabilités :
- *   - se placer elle-même dans la grille selon son numéro (utils/piste/dispositionPiste.js) ;
- *   - prendre la couleur de son type (normale, étoile, rocher, repère) ;
- *   - afficher son numéro, et les jetons qu'on lui donne en enfants.
- *
- * Props :
- *   numero   : 1 à 30
- *   type     : 'normale' (par défaut), 'etoile' ou 'rocher'
- *   children : les jetons posés sur la case
- */
+// Responsabilité : une case de la piste (normale, étoile ou rocher) avec ses pions.
+// Utilisé dans : Piste
+
 import { positionCase, estRepere, indiceCouleur } from '@/utils/piste/dispositionPiste.js';
 import imageRocher from '@/assets/images/rocher.png';
 import { Carre, Numero, PetitNumero, Rocher, Jetons } from './CasePiste.styles.js';
 
+// Affiche la case à sa place dans la grille, avec ses jetons (children).
 function CasePiste({ numero, type = 'normale', children }) {
   const { colonne, rangee } = positionCase(numero);
   const repere = estRepere(numero);
@@ -37,7 +28,6 @@ function CasePiste({ numero, type = 'normale', children }) {
       ) : (
         <PetitNumero>{numero}</PetitNumero>
       )}
-      {/* Case Rocher : le dessin du rocher (décoratif, « rocher » est dans aria-label). */}
       {type === 'rocher' && <Rocher src={imageRocher} alt="" />}
       {children && <Jetons>{children}</Jetons>}
     </Carre>

@@ -1,16 +1,10 @@
-/*
- * PlaceLibre.jsx : une place vide dans la salle d'attente (personne ne l'occupe encore).
- *
- * Responsabilité : montrer qu'on attend un joueur, et proposer « Ajouter un bot » à l'hôte.
- *
- * Props :
- *   numero      : 1 à 4
- *   peutAjouter : true pour afficher « Ajouter un bot » (seul l'hôte peut en ajouter)
- *   onAjouter   : appelé au clic sur « Ajouter un bot »
- */
+// Responsabilité : une place vide dans le salon (avec « Ajouter un bot » pour l'hôte).
+// Utilisé dans : PanneauJoueurs
+
 import { Carte, Texte } from './PlaceLibre.styles.js';
 import PetitBouton from '@/components/commun/ui/PetitBouton.jsx';
 
+// Affiche la place vide ; « Ajouter un bot » appelle onAjouter.
 function PlaceLibre({ numero, peutAjouter = false, onAjouter }) {
   return (
     <Carte>

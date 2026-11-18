@@ -1,17 +1,13 @@
-/*
- * usePlacesSalon.js : hook qui garde le nombre de places de la salle d'attente (2, 3 ou 4).
- *
- * Une seule chose : retenir le nombre choisi par l'hôte, et le changer.
- *
- * Utilisation :
- *   const { placesMax, choisirPlaces } = usePlacesSalon(salon.placesMax);
- *   choisirPlaces(3);
- */
+// Responsabilité : garde le nb de places du salon (2, 3 ou 4).
+// Utilisé dans : ConfigurationPage
+
 import { useState } from 'react';
 
+// Renvoie le nb de places pis la fonction pour le changer.
 function usePlacesSalon(placesDepart) {
   const [placesMax, setPlacesMax] = useState(placesDepart);
 
+  // Change le nb de places.
   const choisirPlaces = (nombre) => setPlacesMax(nombre);
 
   return { placesMax, choisirPlaces };

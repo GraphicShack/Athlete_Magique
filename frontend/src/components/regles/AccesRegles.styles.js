@@ -1,9 +1,6 @@
-/*
- * AccesRegles.styles.js : l'apparence de AccesRegles (AccesRegles.jsx, dans le même dossier).
- *
- * Responsabilité : définir le style de ce composant (styled-components).
- * AccesRegles.jsx, lui, s'occupe seulement de ce qui est affiché et de son comportement.
- */
+// Responsabilité : définir le style de ce composant (styled-components).
+// Utilisé dans : AccesRegles
+
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Bouton from '@/components/commun/ui/Bouton.jsx';

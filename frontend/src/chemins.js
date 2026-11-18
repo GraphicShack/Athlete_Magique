@@ -1,14 +1,6 @@
-/*
- * chemins.js : l'adresse de chaque page, écrite une seule fois.
- *
- * Responsabilités :
- *   - fournir les adresses aux liens des pages (« Commencer », « Retour à l'accueil »…) ;
- *   - fournir les adresses au routeur (routes.jsx).
- * Changer une adresse ici la change partout.
- *
- * Parcours du joueur : Accueil → Configuration → Sélection → Course → Classement → Accueil.
- * Les Règles sont accessibles depuis toutes les pages.
- */
+// Responsabilité : l'adresse de chaque page, écrite une seule fois.
+// Utilisé dans : AccesRegles, Accroche, AccueilPage, BoutonLancer, ClassementPage, ConfigurationPage, EnTeteCourse, FondAnime, FormulaireInvite, MusiqueMenu, ReglesPage, SelectionPage, routes
+
 const CHEMINS = {
   accueil: '/',
   configuration: '/configuration',

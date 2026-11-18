@@ -1,18 +1,11 @@
-/*
- * FondAnime.jsx : le fond animé des pages du menu. Un motif de grandes pastilles et
- * d'étoiles en gris et blanc, très discret, qui glisse lentement en diagonale.
- *
- * Responsabilités :
- *   - afficher le motif derrière toutes les pages (voir FondAnime.styles.js) ;
- *   - le cacher pendant la course, où la piste est déjà chargée visuellement.
- *
- * L'animation elle-même est dans styles/animations/defilementFond.js.
- * Pas de props : il se place une seule fois, dans App.jsx.
- */
+// Responsabilité : le fond animé des pages du menu.
+// Utilisé dans : App
+
 import { useLocation } from 'react-router-dom';
 import CHEMINS from '@/chemins.js';
 import { Calque } from './FondAnime.styles.js';
 
+// Affiche le motif qui glisse, sauf sur l'écran de course.
 function FondAnime() {
   const { pathname } = useLocation(); // adresse de la page actuelle
 

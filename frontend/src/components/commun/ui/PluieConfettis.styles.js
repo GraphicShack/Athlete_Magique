@@ -1,9 +1,6 @@
-/*
- * PluieConfettis.styles.js : l'apparence de PluieConfettis (PluieConfettis.jsx, dans le même dossier).
- *
- * Responsabilité : définir le style d'un morceau de pluie. Sa forme est la même que pour
- * l'explosion (formeConfetti, dans Confettis.styles.js) ; seul le mouvement change.
- */
+// Responsabilité : définir le style d'un morceau de pluie. Sa forme est la même que pour
+// Utilisé dans : PluieConfettis
+
 import styled from 'styled-components';
 import { pluie } from '@/styles/animations/confettis.js';
 import { formeConfetti } from './Confettis.styles.js';

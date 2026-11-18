@@ -1,21 +1,16 @@
-/*
- * AccueilPage.styles.js : l'apparence de la page d'accueil (AccueilPage.jsx, dans le même dossier).
- *
- * Responsabilité : définir le style des blocs propres à cette page (disposition, espaces…).
- * AccueilPage.jsx, lui, s'occupe seulement de ce qui est affiché et dans quel ordre.
- * Chaque fichier a ainsi une seule raison de changer.
- */
+// Responsabilité : définir le style des blocs propres à cette page (disposition, espaces…).
+// Utilisé dans : AccueilPage
+
 import styled from 'styled-components';
 
 // La page : l'en-tête, puis la grille, l'un sous l'autre.
-// Espaces serrés : l'accueil doit tenir dans un écran d'ordinateur portable, sans défiler.
 export const Page = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.espace(4)};
 `;
 
-// Sur téléphone : une colonne. Dès la taille tablette : deux colonnes, puis les personnages en dessous.
+// Sur cell : une colonne. Dès la taille tablette : deux colonnes, puis les persos en dessous.
 export const Grille = styled.div`
   display: flex;
   flex-direction: column;
@@ -23,7 +18,6 @@ export const Grille = styled.div`
 
   @media (min-width: ${({ theme }) => theme.ecrans.md}) {
     display: grid;
-    /* Colonne de gauche souple ; colonne de droite entre 19rem et 24rem. */
     grid-template-columns: minmax(0, 1fr) minmax(19rem, 24rem);
     grid-template-areas:
       'accroche    connexion'

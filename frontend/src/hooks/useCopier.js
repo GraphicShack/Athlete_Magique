@@ -1,25 +1,20 @@
-/*
- * useCopier.js : hook qui retient le résultat d'une copie, pour l'afficher sur un bouton.
- *
- * Une seule chose : retenir « copié » ou « erreur » pendant 2 secondes.
- * La copie elle-même est faite par services/pressePapiers.js.
- *
- * Utilisation :
- *   const { etat, copier } = useCopier();
- *   etat : null (rien), 'copie' (réussi) ou 'erreur' (refusé)
- */
+// Responsabilité : garde le résultat d'une copie (copié ou erreur) pendant 2 sec.
+// Utilisé dans : PanneauCode
+
 import { useState } from 'react';
 import { copierTexte } from '@/services/pressePapiers.js';
 
+// Renvoie le résultat de la copie (null, 'copie' ou 'erreur') pis la fonction copier.
 function useCopier() {
   const [etat, setEtat] = useState(null);
 
-  // Montre le résultat, puis l'efface après 2 secondes.
+  // Montre le résultat, puis l'efface après 2 sec.
   const montrer = (resultat) => {
     setEtat(resultat);
     setTimeout(() => setEtat(null), 2000);
   };
 
+  // Copie le texte, pis montre si ça a marché.
   const copier = (texte) =>
     copierTexte(texte)
       .then(() => montrer('copie'))

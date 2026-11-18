@@ -1,15 +1,9 @@
-/*
- * messageTour.js : écrit le message du tour en cours.
- *
- * Une seule chose : le texte affiché à côté du dé, selon la phase (voir utils/tour/phaseTour.js).
- */
+// Responsabilité : écrit le message du tour selon la phase.
+// Utilisé dans : useTourDemo
+
 import { nombreDeCases } from '@/utils/nombreDeCases.js';
 
-/**
- *   tour        : { joueur, etapes } (etapes : voir data/exemples/deroulementTour.js)
- *   obtenu      : valeur du dé arrêté
- *   deplacement : nombre de cases à avancer
- */
+// Renvoie le message à afficher selon la phase.
 export function messageDuTour(phase, { tour, obtenu, deplacement }) {
   const { debut, lancer, fin } = tour.etapes;
 

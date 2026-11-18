@@ -1,13 +1,10 @@
-/*
- * JournalEvenements.styles.js : l'apparence de JournalEvenements (JournalEvenements.jsx, dans le même dossier).
- *
- * Responsabilité : définir le style de ce composant (styled-components).
- * JournalEvenements.jsx, lui, s'occupe seulement de ce qui est affiché et de son comportement.
- */
+// Responsabilité : définir le style de ce composant (styled-components).
+// Utilisé dans : JournalEvenements
+
 import styled from 'styled-components';
 import Liste from '@/components/commun/ui/Liste.jsx';
 
-// La liste défile : elle prend la hauteur disponible dans une mise en page fixe, et au plus 22rem ailleurs.
+// La liste défile : elle prend la hauteur disponible dans une mise en page fixe, pis au plus 22rem ailleurs.
 export const ListeEvenements = styled(Liste)`
   display: flex;
   flex-direction: column;
@@ -23,7 +20,6 @@ export const Ligne = styled.li`
   align-items: baseline;
   padding: ${({ theme }) => theme.espace(2.5)} ${({ theme }) => theme.espace(4)};
   border-radius: ${({ theme }) => theme.rayons.sm};
-  /* Teinte du panneau diluée ; l'événement le plus récent est un peu plus marqué. */
   background: ${({ $recent }) => ($recent ? 'color-mix(in srgb, var(--teinte) 40%, white)' : 'color-mix(in srgb, var(--teinte) 16%, white)')};
   font-size: ${({ theme }) => theme.texte.sm};
 `;

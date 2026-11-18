@@ -1,14 +1,12 @@
-/*
- * FormulaireInvite.jsx : jouer sans compte, en choisissant seulement un pseudo.
- *
- * Responsabilité : afficher le champ du pseudo et le bouton « Jouer en invité ».
- * Provisoire : le pseudo n'est pas encore enregistré ; le bouton mène à la configuration.
- */
+// Responsabilité : le champ du pseudo pis le bouton « Jouer en invité ».
+// Utilisé dans : PanneauConnexion
+
 import ChampTexte from '@/components/commun/ui/ChampTexte.jsx';
 import Bouton from '@/components/commun/ui/Bouton.jsx';
 import CHEMINS from '@/chemins.js';
 import { Bloc, SousTitre, Aide } from './FormulaireInvite.styles.js';
 
+// Affiche le formulaire invité (visuel seulement).
 function FormulaireInvite() {
   return (
     <Bloc>

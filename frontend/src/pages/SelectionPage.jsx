@@ -1,16 +1,6 @@
-/*
- * SelectionPage.jsx : la page de sélection du personnage (adresse « /selection »),
- * entre la configuration et la course.
- *
- * Responsabilités :
- *   - montrer les personnages dans le carrousel, la carte du centre flottant doucement ;
- *   - relier le choix du personnage (hooks/useChoixPersonnage.js) aux blocs de la page ;
- *   - n'autoriser « Lancer la course » qu'une fois un personnage choisi.
- *
- * Provisoire : on propose ici les 10 personnages et le choix reste dans la page.
- * Plus tard, le serveur fournira les personnages tirés au hasard (joueurs + 2)
- * et l'ordre de choix, et recevra le personnage choisi.
- */
+// Responsabilité : la page de choix du perso (/selection), entre la config pis la course.
+// Utilisé dans : routes
+
 import EnTetePage from '@/components/commun/ui/EnTetePage.jsx';
 import EtapesPartie from '@/components/commun/jeu/EtapesPartie.jsx';
 import Carrousel from '@/components/commun/ui/carrousel/Carrousel.jsx';
@@ -23,11 +13,12 @@ import CHEMINS from '@/chemins.js';
 import TitreArcEnCiel from '@/components/commun/ui/TitreArcEnCiel.jsx';
 import { Page, CarteFlottante, Consigne, Barre, Resume, Actions } from './SelectionPage.styles.js';
 
-// Les personnages, fournis par le service (plus tard : par le serveur).
+// Les persos, fournis par le service (plus tard : par le serveur).
 const PERSONNAGES = obtenirPersonnages();
 
+// Affiche le carrousel des persos pis les boutons Choisir / Lancer la course.
 function SelectionPage() {
-  // Le choix du personnage (carte au centre, personnage choisi) : voir hooks/useChoixPersonnage.js.
+  // Le choix du perso (carte au centre, perso choisi) : voir hooks/useChoixPersonnage.js.
   const { indexActif, changerIndex, idChoisi, personnageActif, choisi, actifEstChoisi, choisirActif } =
     useChoixPersonnage(PERSONNAGES);
 
@@ -41,7 +32,6 @@ function SelectionPage() {
         <Consigne>Glissez, cliquez sur une carte ou utilisez les flèches pour parcourir les personnages.</Consigne>
       </div>
 
-      {/* Le carrousel reçoit la façon d'afficher chaque carte (rendu) et son nom (libelle). */}
       <Carrousel
         elements={PERSONNAGES}
         indexActif={indexActif}
@@ -50,7 +40,6 @@ function SelectionPage() {
         rendu={(personnage) => (
           // Seule la carte du centre flotte.
           <CarteFlottante personnage={personnage} format="portrait" $flotte={personnage.id === personnageActif.id}>
-            {/* La carte choisie : l'étiquette « Choisi » et une explosion de confettis. */}
             {personnage.id === idChoisi && (
               <>
                 <div>
@@ -63,7 +52,6 @@ function SelectionPage() {
         )}
       />
 
-      {/* Barre du bas : le personnage choisi, et les boutons. */}
       <Barre>
         <Resume aria-live="polite">
           {choisi ? (
@@ -84,7 +72,6 @@ function SelectionPage() {
             {actifEstChoisi ? `${personnageActif.nom} choisi` : `Choisir ${personnageActif.nom}`}
           </Bouton>
 
-          {/* Sans personnage choisi, le bouton est grisé et ne mène nulle part. */}
           {choisi ? (
             <Bouton to={CHEMINS.course}>Lancer la course</Bouton>
           ) : (

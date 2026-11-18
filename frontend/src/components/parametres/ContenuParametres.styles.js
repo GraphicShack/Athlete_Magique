@@ -1,13 +1,9 @@
-/*
- * ContenuParametres.styles.js : l'apparence de ContenuParametres (ContenuParametres.jsx, dans le même dossier).
- *
- * Responsabilité : définir le style de ce composant (styled-components).
- * ContenuParametres.jsx, lui, s'occupe seulement de ce qui est affiché et de son comportement.
- */
+// Responsabilité : définir le style de ce composant (styled-components).
+// Utilisé dans : ContenuParametres
+
 import styled from 'styled-components';
 
-// Une colonne sur téléphone, deux à partir de la tablette.
-// L'espace laisse la place aux liserés colorés autour des panneaux.
+// Une colonne sur cell, deux à partir de la tablette.
 export const Grille = styled.div`
   display: grid;
   gap: ${({ theme }) => theme.espace(8)};
@@ -18,7 +14,7 @@ export const Grille = styled.div`
   }
 `;
 
-// Le champ du pseudo et le choix de la langue, l'un sous l'autre.
+// Le champ du pseudo pis le choix de la langue, l'un sous l'autre.
 export const ChampsCompte = styled.div`
   display: flex;
   flex-direction: column;

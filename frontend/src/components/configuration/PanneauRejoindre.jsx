@@ -1,16 +1,13 @@
-/*
- * PanneauRejoindre.jsx : le panneau « Rejoindre une partie » de la salle d'attente.
- *
- * Responsabilité : afficher le champ du code et le bouton « Rejoindre ».
- * Le code est retenu et nettoyé par le hook useRejoindre (majuscules, 6 caractères).
- * Le bouton est grisé tant que le code n'a pas 6 caractères.
- */
+// Responsabilité : le champ pour entrer un code pis le bouton Rejoindre.
+// Utilisé dans : ConfigurationPage
+
 import Panneau from '@/components/commun/ui/Panneau.jsx';
 import ChampTexte from '@/components/commun/ui/ChampTexte.jsx';
 import Bouton from '@/components/commun/ui/Bouton.jsx';
 import useRejoindre from '@/hooks/salon/useRejoindre.js';
 import { Formulaire, Aide, Message } from './PanneauRejoindre.styles.js';
 
+// Affiche le formulaire ; Rejoindre est grisé tant que le code a pas 6 caractères.
 function PanneauRejoindre() {
   const { code, changer, complet, message, rejoindre } = useRejoindre();
 
@@ -38,7 +35,6 @@ function PanneauRejoindre() {
         </Bouton>
       </Formulaire>
 
-      {/* role="status" : les lecteurs d'écran annoncent le message. */}
       {message && <Message role="status">{message}</Message>}
     </Panneau>
   );

@@ -1,14 +1,6 @@
-/*
- * regles.js (service) : le seul endroit où les composants vont chercher les chiffres
- * des règles (barème des points, nombre de cases, cases Étoile).
- *
- * Responsabilité : fournir ces chiffres aux composants, sans qu'ils sachent d'où ils viennent.
- *
- * Aujourd'hui, ils viennent du dossier data/ et sont renvoyés tout de suite (synchrone).
- * S'ils viennent plus tard du serveur ou du moteur de jeu, il faudra changer ce fichier,
- * et les composants devront gérer l'attente (chargement) et les erreurs. Ils continueront
- * quand même de passer par ce service.
- */
+// Responsabilité : donne les chiffres des règles (points, piste) aux composants.
+// Utilisé dans : ContenuRegles, Piste, textesJoueur
+
 import POINTAGE from '@/data/regles/pointage.js';
 import { NOMBRE_CASES, CASES_ETOILE } from '@/data/regles/piste.js';
 

@@ -1,18 +1,10 @@
-/*
- * CasePouvoir.jsx : la case du tour quand le personnage a un pouvoir à utiliser au lancer
- * à l'étape en cours.
- *
- * Responsabilité : montrer le pouvoir et ses boutons.
- * Elle a les mêmes props que CaseSansPouvoir : on peut mettre l'une à la place de l'autre.
- *
- * Props :
- *   pouvoir  : { titre, description }
- *   actions  : [{ id, libelle, principal }]
- *   onAction : appelé avec l'id de l'action choisie
- */
+// Responsabilité : la case du tour quand le perso a un pouvoir à utiliser à cette étape.
+// Utilisé dans : ControleurDeTourActif
+
 import EncadreTour from './EncadreTour.jsx';
 import BoutonsAction from './BoutonsAction.jsx';
 
+// Affiche le pouvoir pis ses boutons.
 function CasePouvoir({ pouvoir, actions, onAction }) {
   return (
     <EncadreTour titre={pouvoir.titre} texte={pouvoir.description}>

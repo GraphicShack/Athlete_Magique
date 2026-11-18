@@ -1,9 +1,6 @@
-/*
- * FormulaireCompte.styles.js : l'apparence de FormulaireCompte (FormulaireCompte.jsx, dans le même dossier).
- *
- * Responsabilité : définir le style de ce composant (styled-components).
- * FormulaireCompte.jsx, lui, s'occupe seulement de ce qui est affiché et de son comportement.
- */
+// Responsabilité : définir le style de ce composant (styled-components).
+// Utilisé dans : FormulaireCompte
+
 import styled from 'styled-components';
 
 // Les éléments l'un sous l'autre.

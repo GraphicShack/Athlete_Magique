@@ -1,10 +1,6 @@
-/*
- * utilitaires.js : petits morceaux de style réutilisés par plusieurs composants.
- *
- * Responsabilité : éviter de recopier les mêmes lignes CSS dans plusieurs fichiers.
- * On les insère dans un composant styled :
- *   const Pastille = styled.span` ${rondCentre} width: 1.5rem; `;
- */
+// Responsabilité : des bouts de CSS réutilisés (rond centré, caché visuellement…).
+// Utilisé dans : AvatarPersonnage.styles, ChampTexte.styles, EtapesPartie.styles, EtapesTour.styles, Jeton.styles, LigneJoueur.styles
+
 import { css } from 'styled-components';
 
 // Forme ronde dont le contenu (initiales, chiffre) est centré (pastilles, jetons, avatars).
@@ -15,8 +11,7 @@ export const rondCentre = css`
   border-radius: ${({ theme }) => theme.rayons.rond};
 `;
 
-// Cache un élément à l'écran tout en le laissant lisible par les lecteurs d'écran
-// (ex. l'étiquette d'un champ quand la mise en page rend son rôle évident).
+// Cache un élément à l'écran, mais les lecteurs d'écran le lisent quand même.
 export const cacheVisuellement = css`
   position: absolute;
   width: 1px;

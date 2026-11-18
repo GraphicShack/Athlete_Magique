@@ -1,17 +1,9 @@
-/*
- * MiseEnPage.js : la disposition commune des pages Configuration, Sélection et Classement.
- *
- *   ┌──────────── en-tête, étapes, titre ────────────┐
- *   ├──────────────────────────────┬─────────────────┤
- *   │ panneau principal (2 parts)  │ colonne (1 part)│
- *   └──────────────────────────────┴─────────────────┘
- *
- * Responsabilité : écrire cette disposition une seule fois. Sur téléphone, tout s'empile.
- */
+// Responsabilité : la disposition commune des pages (2 colonnes, tout s'empile sur cell).
+// Utilisé dans : ConfigurationPage
+
 import styled from 'styled-components';
 
-// La page : les blocs l'un sous l'autre. Elle remplit la hauteur de l'écran (flex: 1),
-// en gardant de la place en bas pour les boutons « Règles » et « Paramètres ».
+// La page : les blocs l'un sous l'autre.
 export const Page = styled.div`
   flex: 1;
   padding-bottom: ${({ theme }) => theme.espace(16)};
@@ -20,9 +12,7 @@ export const Page = styled.div`
   gap: ${({ theme }) => theme.espace(6)};
 `;
 
-// Une colonne sur téléphone ; à partir de la tablette, le panneau principal (2 parts) et la colonne de droite (1 part).
-// La marge intérieure laisse la place aux liserés colorés autour des panneaux.
-// flex: 1 : la grille prend toute la hauteur restante, et ses panneaux s'étirent avec elle.
+// Une colonne sur cell ; à partir de la tablette, le panneau principal (2 parts) pis la colonne de droite (1 part).
 export const GrilleDeuxColonnes = styled.div`
   flex: 1;
   display: grid;

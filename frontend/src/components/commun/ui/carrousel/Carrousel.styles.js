@@ -1,9 +1,6 @@
-/*
- * Carrousel.styles.js : l'apparence de Carrousel (Carrousel.jsx, dans le même dossier).
- *
- * Responsabilité : définir le style de ce composant (styled-components).
- * Carrousel.jsx, lui, s'occupe seulement de ce qui est affiché et de son comportement.
- */
+// Responsabilité : définir le style de ce composant (styled-components).
+// Utilisé dans : Carrousel
+
 import styled, { css } from 'styled-components';
 import { COURBE } from '@/styles/animations/animations.js';
 
@@ -22,9 +19,9 @@ export const Scene = styled.div`
   perspective: 1400px;
   overflow: hidden;
   cursor: grab;
-  touch-action: pan-y; /* sur téléphone, le glisser vertical fait défiler la page */
-  overscroll-behavior-x: contain; /* le pavé tactile ne déclenche pas « page précédente » */
-  user-select: none; /* le glisser ne sélectionne pas de texte */
+  touch-action: pan-y;
+  overscroll-behavior-x: contain;
+  user-select: none;
   border-radius: ${({ theme }) => theme.rayons.lg};
 
   &:active {
@@ -48,27 +45,23 @@ export const Diapo = styled.div`
   margin-top: -13.5rem;
   margin-left: calc(${({ $largeur }) => $largeur} / -2);
   transform-style: preserve-3d;
-  /* Pendant un glisser, les cartes suivent sans délai ; sinon elles glissent en douceur. */
   transition: ${({ $enMouvement }) =>
     $enMouvement
       ? 'opacity 300ms ease, filter 300ms ease'
       : `transform 550ms ${COURBE}, opacity 300ms ease, filter 300ms ease`};
   cursor: ${({ $auCentre }) => ($auCentre ? 'default' : 'pointer')};
 
-  /* La carte remplit la diapositive. */
   & > * {
     height: 100%;
     box-shadow: ${({ theme }) => theme.ombres.douce};
   }
 
-  /* Les cartes de côté sont un peu plus sombres. */
   ${({ $auCentre }) =>
     !$auCentre &&
     css`
       filter: brightness(0.92);
     `}
 
-  /* Les cartes trop loin du centre sont invisibles et ne réagissent pas au clic. */
   ${({ $cachee }) =>
     $cachee &&
     css`
@@ -81,7 +74,7 @@ export const Diapo = styled.div`
   }
 `;
 
-// Boutons ronds ‹ et ›.
+// Boutons ronds ‹ pis ›.
 export const Fleche = styled.button`
   width: 2.75rem;
   height: 2.75rem;

@@ -1,17 +1,11 @@
-/*
- * CarteJoueur.jsx : la petite carte d'un joueur, comme sur un tableau des scores.
- *
- * Responsabilité : afficher une bande à la couleur de son pion, l'avatar de son personnage,
- * son nom, sa case, son état et ses points. Les textes viennent de utils/textesJoueur.js.
- *
- * Props :
- *   joueur : { nom, bot, couleur, personnage: { id, nom, initiales }, position, etat, points }
- *   actif  : true si c'est le tour de ce joueur (cadre rétro autour de la carte)
- */
+// Responsabilité : la carte d'un joueur pendant la course (perso, case, points, état).
+// Utilisé dans : ListeJoueurs
+
 import AvatarPersonnage from '@/components/commun/jeu/AvatarPersonnage.jsx';
 import { textePosition, textePoints, texteEtat } from '@/utils/textesJoueur.js';
 import { Carte, Infos, Nom, Detail, Points } from './CarteJoueur.styles.js';
 
+// Affiche la carte du joueur ; « actif » la met en évidence.
 function CarteJoueur({ joueur, actif = false }) {
   const { nom, bot, couleur, personnage, position, etat, points } = joueur;
   const etatAffiche = texteEtat(etat);

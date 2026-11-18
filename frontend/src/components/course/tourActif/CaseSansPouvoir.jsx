@@ -1,17 +1,10 @@
-/*
- * CaseSansPouvoir.jsx : la case du tour quand le personnage n'a pas de pouvoir à utiliser
- * à cette étape : le titre de l'étape et ses boutons (ex. « Lancer le dé »).
- *
- * Elle a les mêmes props que CasePouvoir : on peut mettre l'une à la place de l'autre.
- *
- * Props :
- *   titre    : le nom de l'étape, ex. « Début du tour »
- *   actions  : [{ id, libelle, principal }]
- *   onAction : appelé avec l'id de l'action choisie
- */
+// Responsabilité : la case du tour quand y'a pas de pouvoir à cette étape (juste les boutons).
+// Utilisé dans : ControleurDeTourActif
+
 import EncadreTour from './EncadreTour.jsx';
 import BoutonsAction from './BoutonsAction.jsx';
 
+// Affiche le nom de l'étape pis ses boutons.
 function CaseSansPouvoir({ titre, actions, onAction }) {
   return (
     <EncadreTour neutre titre={titre} texte="Ton personnage n’a pas de pouvoir à utiliser à cette étape.">

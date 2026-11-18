@@ -1,12 +1,9 @@
-/*
- * Interrupteur.styles.js : l'apparence de Interrupteur (Interrupteur.jsx, dans le même dossier).
- *
- * Responsabilité : définir le style de ce composant (styled-components).
- * Interrupteur.jsx, lui, s'occupe seulement de ce qui est affiché et de son comportement.
- */
+// Responsabilité : définir le style de ce composant (styled-components).
+// Utilisé dans : Interrupteur
+
 import styled from 'styled-components';
 
-// La case à cocher, redessinée : on retire son apparence (appearance: none) et on dessine un rail.
+// La case à cocher, redessinée : on retire son apparence (appearance: none) pis on dessine un rail.
 export const Bascule = styled.input`
   appearance: none;
   position: relative;
@@ -20,7 +17,6 @@ export const Bascule = styled.input`
   cursor: pointer;
   transition: background ${({ theme }) => theme.transition};
 
-  /* Le bouton rond qui glisse de gauche (non) à droite (oui). */
   &::before {
     content: '';
     position: absolute;
@@ -33,7 +29,6 @@ export const Bascule = styled.input`
     transition: translate ${({ theme }) => theme.transition};
   }
 
-  /* Activé : le rail prend la teinte du panneau et le rond glisse à droite. */
   &:checked {
     background: var(--teinte);
   }

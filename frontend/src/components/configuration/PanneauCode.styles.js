@@ -1,8 +1,6 @@
-/*
- * PanneauCode.styles.js : l'apparence de PanneauCode (PanneauCode.jsx, dans le même dossier).
- *
- * Responsabilité : définir le style de ce composant (styled-components).
- */
+// Responsabilité : définir le style de ce composant (styled-components).
+// Utilisé dans : PanneauCode
+
 import styled from 'styled-components';
 
 export const Aide = styled.p`

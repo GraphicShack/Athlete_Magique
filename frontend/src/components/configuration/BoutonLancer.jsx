@@ -1,18 +1,10 @@
-/*
- * BoutonLancer.jsx : le bouton du bas de la salle d'attente.
- *
- * Responsabilité : choisir quel bouton montrer :
- *   - l'hôte, avec au moins 2 joueurs : « Lancer la partie » (vers le choix des personnages) ;
- *   - l'hôte, avec moins de 2 joueurs : « Il faut au moins 2 joueurs », grisé ;
- *   - les autres : « En attente de l'hôte… », grisé.
- *
- * Props :
- *   estHote        : true si c'est moi l'hôte
- *   assezDeJoueurs : true s'il y a au moins 2 joueurs
- */
+// Responsabilité : choisit le bouton du bas du salon (Lancer, il manque du monde, ou en attente de l'hôte).
+// Utilisé dans : ConfigurationPage
+
 import Bouton from '@/components/commun/ui/Bouton.jsx';
 import CHEMINS from '@/chemins.js';
 
+// Renvoie le bon bouton selon si on est l'hôte pis s'il y a assez de joueurs.
 function BoutonLancer({ estHote, assezDeJoueurs }) {
   if (!estHote) return <Bouton disabled>En attente de l’hôte…</Bouton>;
   if (!assezDeJoueurs) return <Bouton disabled>Il faut au moins 2 joueurs</Bouton>;

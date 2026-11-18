@@ -1,9 +1,6 @@
-/*
- * ApercuPersonnages.styles.js : l'apparence de ApercuPersonnages (ApercuPersonnages.jsx, dans le même dossier).
- *
- * Responsabilité : définir le style de ce composant (styled-components).
- * ApercuPersonnages.jsx, lui, s'occupe seulement de ce qui est affiché et de son comportement.
- */
+// Responsabilité : définir le style de ce composant (styled-components).
+// Utilisé dans : ApercuPersonnages
+
 import styled from 'styled-components';
 import { COURBE, grandir } from '@/styles/animations/animations.js';
 
@@ -12,7 +9,6 @@ export const Grille = styled.ul`
   margin: 0;
   padding: 0;
   display: grid;
-  /* Des rangées toujours complètes : 2 colonnes sur téléphone, 5 sur tablette, 10 sur grand écran. */
   grid-template-columns: repeat(2, 1fr);
 
   @media (min-width: ${({ theme }) => theme.ecrans.sm}) {
@@ -25,7 +21,7 @@ export const Grille = styled.ul`
   gap: ${({ theme }) => theme.espace(2)};
 `;
 
-// Un bouton sans apparence de bouton : il rend le personnage cliquable et accessible au clavier.
+// Un bouton sans apparence de bouton : il rend le perso cliquable pis accessible au clavier.
 export const Personnage = styled.button`
   display: flex;
   flex-direction: column;
@@ -70,16 +66,10 @@ export const Nom = styled.span`
   font-weight: ${({ theme }) => theme.graisses.forte};
 `;
 
-/*
- * Bulle de bande dessinée posée au-dessus du personnage.
- * « translate » la remonte de sa propre hauteur ; « transform » reste libre pour l'animation.
- * Elle s'ouvre avec la même animation que la fenêtre des règles (« grandir »),
- * en partant de la pointe, donc du personnage cliqué.
- */
+// Bulle de bande dessinée posée au-dessus du personnage.
 export const Bulle = styled.div`
   --couleur-bouton: ${({ theme }) => theme.teintes.personnages};
 
-  /* On remplace la position par défaut d'un popover (centré à l'écran). */
   position: absolute;
   inset: auto;
   margin: 0;
@@ -99,7 +89,6 @@ export const Bulle = styled.div`
     animation: ${grandir} 450ms ${COURBE};
   }
 
-  /* La pointe : un petit carré tourné, dont on ne voit que le coin du bas. */
   &::after {
     content: '';
     position: absolute;
@@ -114,7 +103,6 @@ export const Bulle = styled.div`
     background: ${({ theme }) => theme.couleurs.surface};
   }
 
-  /* Le popover n'a pas de fond assombri derrière lui. */
   &::backdrop {
     background: transparent;
   }

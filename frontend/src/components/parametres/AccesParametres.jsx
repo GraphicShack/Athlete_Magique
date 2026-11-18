@@ -1,25 +1,18 @@
-/*
- * AccesParametres.jsx : l'accès aux paramètres depuis n'importe quelle page.
- *
- * Responsabilités :
- *   - afficher le bouton rond en roue dentée, tout en bas à droite (voir App.jsx) ;
- *   - ouvrir et fermer la fenêtre des paramètres (FenetreModale + ContenuParametres).
- *
- * Props :
- *   son : réglages du son venus d'App.jsx, transmis tels quels à ContenuParametres
- */
+// Responsabilité : le bouton roue dentée qui ouvre la fenêtre des paramètres.
+// Utilisé dans : App
+
 import FenetreModale from '@/components/commun/ui/FenetreModale.jsx';
 import useFenetre from '@/hooks/useFenetre.js';
 import ContenuParametres from './ContenuParametres.jsx';
 import IconeRoueDentee from './IconeRoueDentee.jsx';
 import { BoutonRond } from './AccesParametres.styles.js';
 
+// Affiche le bouton pis la fenêtre des paramètres.
 function AccesParametres({ son }) {
   const fenetre = useFenetre();
 
   return (
     <>
-      {/* Comme pour les règles, le bouton se cache pendant que la fenêtre est ouverte. */}
       <BoutonRond
         type="button"
         onClick={fenetre.ouvrir}

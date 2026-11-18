@@ -1,26 +1,6 @@
-/*
- * evenementsExemple.js : les événements d'exemple du journal, dans le format standard,
- * en attendant ceux du serveur.
- *
- * Responsabilité : fournir des événements réalistes, cohérents avec data/exemples/partieExemple.js.
- * Seul le service partie.js lit ce fichier.
- *
- * FORMAT STANDARD D'UN ÉVÉNEMENT (le même que celui attendu du serveur) :
- *   {
- *     id      : 'e12'        unique et croissant (sert aussi à garder l'ordre)
- *     course  : 2            numéro de la course
- *     tour    : 5            numéro du tour
- *     etape   : 'debut' | 'lancer' | 'deplacement' | 'fin'   (les 4 étapes du tour)
- *     type    : 'TREBUCHE'   un des types de utils/journal/phrasesJournal.js
- *     acteur  : 'j3'         id du joueur concerné (jamais son nom), ou null
- *     cible   : 'j1'         id d'un 2e joueur (échange, duel, élimination…), ou null
- *     cause   : { genre: 'de' | 'case' | 'pouvoir' | 'regle', id: 'rocher' }   pourquoi, ou null
- *     details : { … }        ce qui dépend du type (voir utils/journal/phrasesJournal.js)
- *   }
- *
- * Le serveur envoie des données, pas des phrases : c'est le frontend qui écrit le texte.
- * Les événements sont ici du plus ancien au plus récent, comme le serveur les enverrait.
- */
+// Responsabilité : des événements de journal inventés, au format standard (en attendant le serveur).
+// Utilisé dans : simulationJournal
+
 const EVENEMENTS_EXEMPLE = [
   {
     id: 'e1', course: 2, tour: 1, etape: 'debut', type: 'COURSE_DEBUT',

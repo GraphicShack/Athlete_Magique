@@ -1,16 +1,6 @@
-/*
- * ListeJoueurs.jsx : le panneau « Joueurs » de l'écran de course, avec les joueurs côte à côte,
- * dans leur ordre de jeu, comme un tableau des scores.
- *
- * Responsabilités :
- *   - afficher une CarteJoueur par joueur, et mettre en évidence celui dont c'est le tour ;
- *   - donner à chaque joueur la couleur de son pion (celle du thème selon son rang, par défaut) ;
- *   - avant le début de la course, afficher des places vides pour que le panneau garde sa forme.
- *
- * Props :
- *   joueurs : [{ id, nom, bot, couleur, personnage, position, etat, points }]
- *   idActif : id du joueur dont c'est le tour
- */
+// Responsabilité : le panneau « Joueurs » de la course, dans l'ordre de jeu.
+// Utilisé dans : CoursePage
+
 import { useTheme } from 'styled-components';
 import Panneau from '@/components/commun/ui/Panneau.jsx';
 import CarteJoueur from './CarteJoueur.jsx';
@@ -18,6 +8,7 @@ import { Joueurs, PlaceVide } from './ListeJoueurs.styles.js';
 
 const PLACES = 4; // nombre de places affichées quand la partie n'a pas encore commencé
 
+// Affiche une carte par joueur (ou des places vides avant la course).
 function ListeJoueurs({ joueurs = [], idActif = null }) {
   const theme = useTheme();
 

@@ -1,14 +1,11 @@
-/*
- * FormulaireCompte.jsx : se connecter avec un compte (courriel et mot de passe).
- *
- * Responsabilité : afficher les champs et les boutons de connexion.
- * Provisoire : visuel seulement, les boutons ne font rien. La connexion sera branchée
- * plus tard sur le serveur, à travers un service dans src/services/.
- */
+// Responsabilité : les champs pis le bouton pour se connecter avec un compte.
+// Utilisé dans : PanneauConnexion
+
 import ChampTexte from '@/components/commun/ui/ChampTexte.jsx';
 import Bouton from '@/components/commun/ui/Bouton.jsx';
 import { Bloc, LienCreer } from './FormulaireCompte.styles.js';
 
+// Affiche le formulaire de connexion (visuel seulement).
 function FormulaireCompte() {
   return (
     <Bloc>

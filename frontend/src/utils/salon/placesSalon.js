@@ -1,15 +1,12 @@
-/*
- * placesSalon.js : les calculs sur les places de la salle d'attente.
- *
- * Une seule chose : à partir du nombre de joueurs et de places, dire
- *   placesLibres(3, 4)                  → [4]   (les numéros des places vides)
- *   nombresImpossibles(['2','3','4'], 3) → ['2'] (on ne peut pas avoir moins de places que de joueurs)
- */
+// Responsabilité : les calculs sur les places du salon (places libres, choix impossibles).
+// Utilisé dans : ConfigurationPage
+
 export function placesLibres(nombreJoueurs, placesMax) {
   const combien = Math.max(placesMax - nombreJoueurs, 0);
   return Array.from({ length: combien }, (_, i) => nombreJoueurs + i + 1);
 }
 
+// Les nb de places plus petits que le nb de joueurs (ex. '2' s'il y a 3 joueurs).
 export function nombresImpossibles(nombres, nombreJoueurs) {
   return nombres.filter((n) => Number(n) < nombreJoueurs);
 }

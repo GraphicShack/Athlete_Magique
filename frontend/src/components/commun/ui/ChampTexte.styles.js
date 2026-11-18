@@ -1,9 +1,6 @@
-/*
- * ChampTexte.styles.js : l'apparence de ChampTexte (ChampTexte.jsx, dans le même dossier).
- *
- * Responsabilité : définir le style de ce composant (styled-components).
- * ChampTexte.jsx, lui, s'occupe seulement de ce qui est affiché et de son comportement.
- */
+// Responsabilité : définir le style de ce composant (styled-components).
+// Utilisé dans : ChampTexte
+
 import styled from 'styled-components';
 import { cacheVisuellement } from '@/styles/base/utilitaires.js';
 
@@ -29,7 +26,6 @@ export const Champ = styled.input`
   color: ${({ theme }) => theme.couleurs.encre};
   font: inherit;
 
-  /* Texte d'exemple, en gris. */
   &::placeholder {
     color: ${({ theme }) => theme.couleurs.gris500};
   }

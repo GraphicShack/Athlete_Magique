@@ -1,13 +1,7 @@
-/*
- * piste.js : les chiffres de la piste tirés des règles du jeu.
- *
- * Responsabilité : être la seule source de ces chiffres, pour que la piste,
- * la liste des joueurs et leurs textes (« Case 15 », « Arrivé ») soient toujours d'accord.
- *
- * Seuls les services (dossier services/) lisent ce fichier : les composants passent par eux.
- */
+// Responsabilité : les chiffres de la piste (nb de cases, cases étoile).
+// Utilisé dans : regles
 
-// La piste compte 30 cases ; au-delà de la case 30, un personnage a franchi l'arrivée.
+// La piste compte 30 cases ; au-delà de la case 30, un perso a franchi l'arrivée.
 export const NOMBRE_CASES = 30;
 
 // Cases Étoile : s'y arrêter rapporte 1 point.

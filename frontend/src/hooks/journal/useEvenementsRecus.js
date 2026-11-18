@@ -1,13 +1,10 @@
-/*
- * useEvenementsRecus.js : hook qui reçoit les événements de la partie.
- *
- * Une seule chose : s'abonner au journal (services/journal/journal.js) quand la page s'ouvre,
- * se désabonner quand elle se ferme, et garder les événements reçus
- * (le plus récent en premier).
- */
+// Responsabilité : s'abonne au journal pis garde les événements reçus.
+// Utilisé dans : useJournal
+
 import { useEffect, useState } from 'react';
 import { ecouterEvenements } from '@/services/journal/journal.js';
 
+// Renvoie les événements reçus, le plus récent en premier.
 function useEvenementsRecus() {
   const [recus, setRecus] = useState([]);
 

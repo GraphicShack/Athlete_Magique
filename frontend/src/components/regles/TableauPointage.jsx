@@ -1,13 +1,9 @@
-/*
- * TableauPointage.jsx : le tableau des points gagnés à chaque course.
- *
- * Responsabilité : afficher le barème reçu, une ligne par course.
- *
- * Props :
- *   pointage : [{ course, premiere, deuxieme }] (voir services/regles.js)
- */
+// Responsabilité : le tableau des points par course.
+// Utilisé dans : ContenuRegles
+
 import { Tableau } from './TableauPointage.styles.js';
 
+// Affiche une ligne par course avec les points de la 1re pis 2e place.
 function TableauPointage({ pointage }) {
   return (
     <Tableau>
@@ -23,7 +19,6 @@ function TableauPointage({ pointage }) {
           <tr key={course}>
             <th scope="row">Course {course}</th>
             <td>{premiere} pts</td>
-            {/* « 1 pt », mais « 2 pts » */}
             <td>
               {deuxieme} {deuxieme > 1 ? 'pts' : 'pt'}
             </td>

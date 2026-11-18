@@ -1,19 +1,6 @@
-/*
- * useDefilement.js : hook (fonction React réutilisable) qui gère le défilement du carrousel.
- *
- * Responsabilités :
- *   - suivre le doigt ou la souris pendant un glisser ;
- *   - suivre le pavé tactile (défilement horizontal) ;
- *   - se caler sur la carte la plus proche à la fin du mouvement, puis prévenir la page ;
- *   - rejoindre la carte choisie par la page (flèches, clic) par le chemin le plus court.
- *
- * La « position » est un nombre décimal qui peut dépasser le nombre de cartes
- * (ex. 12,4) : seul son modulo compte. Grâce à ça, passer de la dernière carte
- * à la première est un simple pas en avant.
- *
- * Reçoit  : indexActif (la carte choisie par la page), total, onChange
- * Renvoie : position, enMouvement, et les fonctions à brancher sur la scène (gestionnaires)
- */
+// Responsabilité : gère le défilement du carrousel (glisser, pavé tactile, calage sur une carte).
+// Utilisé dans : Carrousel
+
 import { useEffect, useRef, useState } from 'react';
 import { modulo, ecartCirculaire } from '@/utils/placement.js';
 
@@ -22,6 +9,7 @@ const SENSIBILITE_MOLETTE = 1 / 180; // nombre de cartes avancées par pixel de 
 const DELAI_CALAGE = 140; // ms sans mouvement du pavé avant de se caler sur une carte
 const SEUIL_CLIC = 5; // px : un déplacement plus petit est un simple clic
 
+// Renvoie la position du carrousel pis les gestionnaires à mettre sur la scène.
 function useDefilement({ indexActif, total, onChange }) {
   const [position, setPosition] = useState(indexActif); // position affichée (décimale)
   const [enMouvement, setEnMouvement] = useState(false); // true pendant un glisser ou un défilement
@@ -30,7 +18,7 @@ function useDefilement({ indexActif, total, onChange }) {
   const minuterie = useRef(null); // minuterie du calage après le pavé tactile
   const positionActuelle = useRef(position); // dernière position connue, même entre deux rendus
 
-  // Change la position, à la fois pour l'affichage (état) et pour les calculs (référence).
+  // Change la position, à la fois pour l'affichage (état) pis pour les calculs (référence).
   function deplacer(nouvellePosition) {
     positionActuelle.current = nouvellePosition;
     setPosition(nouvellePosition);
@@ -93,7 +81,6 @@ function useDefilement({ indexActif, total, onChange }) {
   }
 
   // --- Pavé tactile : on suit le mouvement horizontal, puis on se cale après une pause.
-  // Le défilement vertical est laissé à la page.
 
   function surMolette(evenement) {
     if (Math.abs(evenement.deltaX) <= Math.abs(evenement.deltaY)) return;

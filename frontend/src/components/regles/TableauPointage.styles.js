@@ -1,9 +1,6 @@
-/*
- * TableauPointage.styles.js : l'apparence de TableauPointage (TableauPointage.jsx, dans le même dossier).
- *
- * Responsabilité : définir le style de ce composant (styled-components).
- * TableauPointage.jsx, lui, s'occupe seulement de ce qui est affiché et de son comportement.
- */
+// Responsabilité : définir le style de ce composant (styled-components).
+// Utilisé dans : TableauPointage
+
 import styled from 'styled-components';
 
 // Tableau sur toute la largeur, lignes séparées par un trait fin.

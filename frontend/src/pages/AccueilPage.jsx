@@ -1,13 +1,6 @@
-/*
- * AccueilPage.jsx : la page d'accueil (adresse « / »).
- *
- * Responsabilité : placer les blocs de l'accueil, sans rien afficher elle-même :
- *   - en haut : le lien vers le tableau d'honneur (le logo, lui, est en grand dans l'accroche) ;
- *   - à gauche : la présentation du jeu (Accroche) ;
- *   - à droite : la carte pour commencer une partie (PanneauConnexion) ;
- *   - en bas, sur toute la largeur : les 10 personnages (ApercuPersonnages).
- * Sur téléphone, les blocs s'empilent dans cet ordre.
- */
+// Responsabilité : place les blocs de l'accueil (accroche + connexion).
+// Utilisé dans : routes
+
 import EnTetePage from '@/components/commun/ui/EnTetePage.jsx';
 import Accroche from '@/components/accueil/Accroche.jsx';
 import ApercuPersonnages from '@/components/accueil/ApercuPersonnages.jsx';
@@ -15,10 +8,10 @@ import PanneauConnexion from '@/components/accueil/PanneauConnexion.jsx';
 import CHEMINS from '@/chemins.js';
 import { Page, Grille, Zone } from './AccueilPage.styles.js';
 
+// Place l'en-tête, l'accroche pis le panneau de connexion.
 function AccueilPage() {
   return (
     <Page>
-      {/* Sans logo dans l'en-tête : l'accroche l'affiche en grand, juste en dessous. */}
       <EnTetePage logo={false} lien={{ libelle: "Tableau d'honneur", to: CHEMINS.classement }} />
 
       <Grille>

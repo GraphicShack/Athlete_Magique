@@ -1,19 +1,10 @@
-/*
- * Jeton.jsx : le pion d'un personnage (sur la piste, dans la légende…) : un disque avec son image,
- * entouré de la couleur du joueur (ou ses initiales s'il n'y a pas d'image).
- *
- * Responsabilité : montrer l'état du pion : couché s'il est tombé, entouré de rouge
- * si c'est le pion du joueur actif.
- *
- * Props :
- *   couleur   : couleur du joueur (contour du pion)
- *   initiales : ex. « MA » (affichées s'il n'y a pas d'image, et lues au survol)
- *   image     : image du personnage (optionnelle)
- *   tombe     : true si le personnage est tombé
- *   actif     : true si c'est le pion du joueur dont c'est le tour
- */
+// Responsabilité : le pion d'un joueur sur la piste (couché s'il est tombé, contour rouge si c'est son tour).
+// Utilisé dans : LegendePiste, Piste
+
 import { Disque, Image } from './Jeton.styles.js';
 
+// Affiche le pion ; avec « saut », il saute depuis la case d'avant.
+// Props : couleur (du joueur), initiales, image, tombe (couché), actif (contour rouge), saut ({ dx, dy } pour l'anim, ou null).
 function Jeton({ couleur, initiales, image, tombe = false, actif = false, saut = null }) {
   return (
     // title : texte affiché quand on laisse la souris sur le pion.
@@ -27,7 +18,6 @@ function Jeton({ couleur, initiales, image, tombe = false, actif = false, saut =
       style={saut ? { '--dx': saut.dx, '--dy': saut.dy } : undefined}
       title={tombe ? `${initiales} (tombé)` : initiales}
     >
-      {/* alt vide : l'image est décorative, les initiales sont dans « title ». */}
       {image ? <Image src={image} alt="" /> : initiales}
     </Disque>
   );

@@ -1,9 +1,6 @@
-/*
- * LegendePiste.styles.js : l'apparence de LegendePiste (LegendePiste.jsx, dans le même dossier).
- *
- * Responsabilité : définir le style de ce composant (styled-components).
- * LegendePiste.jsx, lui, s'occupe seulement de ce qui est affiché et de son comportement.
- */
+// Responsabilité : définir le style de ce composant (styled-components).
+// Utilisé dans : LegendePiste
+
 import styled from 'styled-components';
 import Liste from '@/components/commun/ui/Liste.jsx';
 
@@ -26,7 +23,6 @@ export const Element = styled.li`
 `;
 
 // L'exemple à gauche de chaque explication, toujours de la même petite taille (0,9rem).
-// Les pions d'exemple prennent exactement cette taille (leur taille normale suit le plateau).
 export const Exemple = styled.span`
   display: inline-flex;
   align-items: center;

@@ -1,16 +1,6 @@
-/*
- * animations.js : les animations partagées de l'application.
- *
- * Responsabilité : définir une seule fois les petites animations réutilisables
- * (comme base/theme.js pour les couleurs).
- *
- * Un composant importe une animation puis l'utilise dans son style :
- *   import { fondu, COURBE } from '@/styles/animations/animations.js';
- *   const Bloc = styled.div` animation: ${fondu} 200ms ${COURBE}; `;
- *
- * Une animation plus complète (avec son propre réglage) a son propre fichier, ex. flottement.js ;
- * la transition entre les pages est dans rideau.js.
- */
+// Responsabilité : les petites animations réutilisables (fondu, apparaître, grandir…).
+// Utilisé dans : ApercuPersonnages.styles, Carrousel.styles, FenetreModale.styles, animations, rideau
+
 import { keyframes } from 'styled-components';
 
 // Courbe de vitesse : départ rapide, arrivée tout en douceur.
@@ -40,7 +30,6 @@ export const tourner = keyframes`
 `;
 
 // Grandir à partir d'un petit rond de la couleur d'un bouton (variable --couleur-bouton).
-// Sert à l'ouverture des fenêtres (règles, paramètres) et de la bulle d'un personnage.
 export const grandir = keyframes`
   from {
     transform: scale(0.08);
@@ -49,7 +38,7 @@ export const grandir = keyframes`
   }
 `;
 
-// Inverse de « grandir » : rétrécir en un petit rond et disparaître (fermeture d'une fenêtre).
+// Inverse de « grandir » : rétrécir en un petit rond pis disparaître (fermeture d'une fenêtre).
 export const retrecir = keyframes`
   to {
     transform: scale(0.18);

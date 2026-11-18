@@ -1,17 +1,11 @@
-/*
- * Interrupteur.jsx : un réglage oui / non, affiché comme un interrupteur (ex. « Musique »).
- *
- * Responsabilité : dessiner une case à cocher ordinaire sous la forme d'un interrupteur.
- * Comme c'est une vraie case à cocher, le navigateur gère le clic et le clavier.
- *
- * Props :
- *   etiquette   : nom du réglage
- *   description : petite phrase d'aide sous le nom (optionnelle)
- *   autres      : transmises à la case à cocher (defaultChecked, checked, onChange…)
- */
+// Responsabilité : une case à cocher affichée comme un interrupteur on/off.
+// Utilisé dans : ContenuParametres
+
 import { Ligne, Textes, Nom, Aide } from './LigneReglage.js';
 import { Bascule } from './Interrupteur.styles.js';
 
+// Affiche le nom, l'aide pis l'interrupteur.
+// Props : etiquette, description (petite aide), + le reste va à la case à cocher (checked, onChange…).
 function Interrupteur({ etiquette, description, ...props }) {
   return (
     <Ligne>

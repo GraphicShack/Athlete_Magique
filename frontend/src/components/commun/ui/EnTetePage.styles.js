@@ -1,9 +1,6 @@
-/*
- * EnTetePage.styles.js : l'apparence de EnTetePage (EnTetePage.jsx, dans le même dossier).
- *
- * Responsabilité : définir le style de ce composant (styled-components).
- * EnTetePage.jsx, lui, s'occupe seulement de ce qui est affiché et de son comportement.
- */
+// Responsabilité : définir le style de ce composant (styled-components).
+// Utilisé dans : EnTetePage
+
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
@@ -16,14 +13,14 @@ export const Bandeau = styled.header`
   gap: ${({ theme }) => theme.espace(3)};
 `;
 
-// Le logo et ce qui l'accompagne.
+// Le logo pis ce qui l'accompagne.
 export const Marque = styled.div`
   display: flex;
   align-items: center;
   gap: ${({ theme }) => theme.espace(3)};
 `;
 
-// Les actions et le lien.
+// Les actions pis le lien.
 export const Droite = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -31,9 +28,7 @@ export const Droite = styled.div`
   gap: ${({ theme }) => theme.espace(4)};
 `;
 
-// Le logo dessiné (assets/images/logo.webp), sur deux lignes : on fixe sa hauteur,
-// la largeur suit (width: auto) pour garder ses proportions.
-// La hauteur suit la largeur de l'écran (8vw), entre 2,75rem et 4rem.
+// Le logo dessiné (assets/images/logo.webp), sur deux lignes : on fixe sa hauteur, la largeur suit (width: auto) pour garder ses proportions.
 export const Logo = styled.img`
   display: block;
   height: clamp(2.75rem, 8vw, 4rem);

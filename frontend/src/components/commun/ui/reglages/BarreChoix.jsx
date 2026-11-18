@@ -1,20 +1,11 @@
-/*
- * BarreChoix.jsx : une barre de quelques choix côte à côte (ex. « 2 · 3 · 4 », « Humain · Bot »).
- *
- * Responsabilité : dessiner des boutons radio ordinaires comme une barre de boutons.
- * Comme ce sont de vrais boutons radio, un seul choix est possible et le clavier fonctionne.
- * Elle n'a pas de nom affiché : c'est le parent qui la nomme (ChoixSegmente, une ligne de joueur…).
- *
- * Props :
- *   options         : textes des choix, ex. ['Humain', 'Bot']
- *   valeurParDefaut : le choix coché au départ
- *   onChange        : appelé avec le texte du choix quand on en coche un autre (optionnel)
- *   inactifs        : les choix qu'on ne peut pas cocher, grisés (optionnel), ex. ['2']
- *   autres          : transmises au groupe (aria-label ou aria-labelledby, pour lui donner un nom)
- */
+// Responsabilité : des boutons radio affichés comme une barre (ex. 2 · 3 · 4).
+// Utilisé dans : ChoixSegmente, PanneauJoueurs
+
 import { useId } from 'react';
 import { Segments, Segment } from './BarreChoix.styles.js';
 
+// Affiche un bouton radio par option ; onChange reçoit l'option cochée.
+// Props : options (textes des choix), valeurParDefaut, onChange (reçoit le choix), inactifs (choix grisés), + aria-label ou aria-labelledby.
 function BarreChoix({ options, valeurParDefaut, onChange, inactifs = [], ...props }) {
   // Les boutons radio d'un même groupe doivent partager un nom unique.
   const nom = useId();

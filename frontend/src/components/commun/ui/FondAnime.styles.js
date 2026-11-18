@@ -1,23 +1,13 @@
-/*
- * FondAnime.styles.js : l'apparence de FondAnime (FondAnime.jsx, dans le même dossier).
- *
- * Responsabilités :
- *   - dessiner un carreau du motif (grandes pastilles et étoiles, en gris et blanc) ;
- *   - poser ce motif sur un calque fixe, derrière toutes les pages, et le faire glisser.
- *
- * Le carreau est un petit dessin SVG écrit ici, transformé en image (« data URI ») :
- * pas de fichier image à gérer, et les couleurs viennent du thème.
- */
+// Responsabilité : le style de FondAnime
+// Utilisé dans : FondAnime
+
 import styled from 'styled-components';
 import { TAILLE_MOTIF, defilementFond } from '@/styles/animations/defilementFond.js';
 
 // Opacité du motif : assez faible pour rester derrière les panneaux, assez forte pour bien voir les formes.
 const OPACITE = 0.14;
 
-// Les formes d'un carreau. x et y sont en fraction du carreau (0 = bord gauche ou haut,
-// 1 = bord droit ou bas) : les formes restent bien réparties, quelle que soit TAILLE_MOTIF.
-// taille : rayon en pixels. « clair » : blanc ; sinon gris (couleurs neutres).
-// Aucune forme ne touche le bord, pour que les carreaux se raccordent sans couper de forme.
+// Les formes d'un carreau.
 const FORMES = [
   { type: 'pastille', x: 0.17, y: 0.19, taille: 34, clair: true },
   { type: 'etoile', x: 0.56, y: 0.17, taille: 47, clair: false },
@@ -54,9 +44,8 @@ function motif(blanc, gris) {
   return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
 }
 
-// Cadre fixe de la taille de l'écran, derrière toutes les pages. overflow: hidden : le motif
-// qui dépasse est coupé, donc pas de barre de défilement.
-// z-index: -1 : passe sous le contenu ; pointer-events: none : ne bloque aucun clic.
+// Cadre fixe de la taille de l'écran, derrière toutes les pages.
+// Pourquoi overflow: hidden : le motif déborde exprès (inset négatif) pour la boucle ; sans ça, la page aurait un scroll horizontal.
 export const Calque = styled.div`
   position: fixed;
   inset: 0;
@@ -64,8 +53,6 @@ export const Calque = styled.div`
   overflow: hidden;
   pointer-events: none;
 
-  /* Le motif lui-même : il dépasse du cadre d'un carreau de chaque côté, pour que l'écran
-     reste toujours couvert pendant qu'il glisse d'un carreau. */
   &::before {
     content: '';
     position: absolute;

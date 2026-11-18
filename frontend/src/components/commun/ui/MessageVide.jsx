@@ -1,9 +1,6 @@
-/*
- * MessageVide.jsx : texte discret affiché quand un panneau n'a encore rien à montrer
- * (ex. « Aucun événement pour l'instant. »).
- *
- * Responsabilité : donner le même style à tous les messages « vide » de l'interface.
- */
+// Responsabilité : le même style pour tous les messages « y'a rien ici ».
+// Utilisé dans : ControleurDeTourActif, JournalEvenements
+
 import styled from 'styled-components';
 
 const MessageVide = styled.p`

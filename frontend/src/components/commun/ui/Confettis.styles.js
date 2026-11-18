@@ -1,10 +1,6 @@
-/*
- * Confettis.styles.js : l'apparence de Confettis (Confettis.jsx, dans le même dossier).
- *
- * Responsabilité : définir le style de ce composant (styled-components).
- * Confettis.jsx, lui, s'occupe seulement de ce qui est affiché et de son comportement.
- * La forme d'un morceau (formeConfetti) et le calque (Zone) servent aussi à PluieConfettis.
- */
+// Responsabilité : définir le style de ce composant (styled-components).
+// Utilisé dans : Confettis, PluieConfettis, PluieConfettis.styles
+
 import styled, { css } from 'styled-components';
 import { explosion } from '@/styles/animations/confettis.js';
 
@@ -16,8 +12,7 @@ export const Zone = styled.span`
   pointer-events: none;
 `;
 
-// Forme d'un morceau : petit rectangle, ou rond un morceau sur trois ($rond),
-// avec un contour noir comme le reste du jeu. La couleur vient de l'attribut style.
+// Forme d'un morceau : petit rectangle, ou rond un morceau sur trois ($rond), avec un contour noir comme le reste du jeu.
 export const formeConfetti = css`
   position: absolute;
   width: 8px;
@@ -27,7 +22,6 @@ export const formeConfetti = css`
 `;
 
 // Un morceau qui explose : posé au centre du calque, puis lancé par l'animation « explosion ».
-// Les marges négatives (moitié de la taille) mettent son centre pile au centre du calque.
 export const Morceau = styled.span`
   ${formeConfetti}
   top: 50%;

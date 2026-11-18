@@ -1,15 +1,6 @@
-/*
- * effetsBoutons.js : ce que fait chaque sorte de bouton du tour (patron Stratégie).
- *
- * Une seule chose : une petite fonction par effet ('commencer', 'lancer', 'fixer', 'allerALaFin',
- * 'avancer', 'terminer'). Chaque bouton des données dit quel effet il utilise
- * (voir data/exemples/deroulementTour.js) : ce fichier ne connaît aucun personnage.
- * Pour ajouter un pouvoir, on ajoute des données ; ce fichier ne change pas.
- *
- * Chaque effet reçoit :
- *   ctx    : { tour, lancer, choix, cases, journaliser } (fourni par hooks/tour/useTourDemo.js)
- *   bouton : le bouton cliqué, avec ses options (multiplicateur, bonus, journal, parPouvoir)
- */
+// Responsabilité : ce que fait chaque sorte de bouton du tour (patron Stratégie).
+// Utilisé dans : useTourDemo
+
 import { evenementBouton, evenementDebutTour, evenementFinTour } from '@/utils/tour/evenementsTour.js';
 
 // Ajoute au journal l'événement du bouton, s'il en a un (option « journal »).
@@ -39,7 +30,7 @@ export const EFFETS = {
     journaliserBouton(ctx, bouton, 'lancer', { valeur, cases });
   },
 
-  // Sauter le lancer et le déplacement (ex. échange du Flip Flop).
+  // Sauter le lancer pis le déplacement (ex. échange du Flip Flop).
   allerALaFin: (ctx, bouton) => {
     journaliserBouton(ctx, bouton, 'lancer');
     ctx.choix.passerA(4);

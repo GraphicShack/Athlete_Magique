@@ -1,25 +1,13 @@
-/*
- * Confettis.jsx : une petite explosion de confettis arc-en-ciel, pour récompenser le joueur
- * (ex. quand il choisit son personnage). Pour une pluie continue, voir PluieConfettis.jsx.
- *
- * Responsabilités :
- *   - lancer une explosion chaque fois que « declencheur » change de valeur ;
- *   - retirer les confettis de la page quand ils ont tous fini de tomber.
- *
- * Le parent doit être en « position: relative » : l'explosion part de son centre.
- * Les confettis passent par-dessus la page sans bloquer les clics ni décaler les éléments.
- * L'animation elle-même est dans styles/animations/confettis.js.
- *
- * Props :
- *   declencheur : une valeur quelconque ; chaque nouvelle valeur relance l'explosion
- *                 (null, undefined ou false : pas de confettis)
- *   nombre      : nombre de morceaux (24 par défaut)
- */
+// Responsabilité : une petite explosion de confettis (ex. quand on choisit un perso).
+// Utilisé dans : SelectionPage
+
 import { useState } from 'react';
 import { useTheme } from 'styled-components';
 import { trajectoireConfetti } from '@/styles/animations/confettis.js';
 import { Zone, Morceau } from './Confettis.styles.js';
 
+// Relance une explosion chaque fois que « declencheur » change.
+// Props : declencheur (quand il change, ça explose), nombre (de morceaux, 24 par défaut).
 function Confettis({ declencheur, nombre = 24 }) {
   if (declencheur === null || declencheur === undefined || declencheur === false) return null;
 

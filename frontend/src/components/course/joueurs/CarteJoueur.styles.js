@@ -1,19 +1,15 @@
-/*
- * CarteJoueur.styles.js : l'apparence de CarteJoueur (CarteJoueur.jsx, dans le même dossier).
- *
- * Responsabilité : définir le style de ce composant (styled-components).
- * CarteJoueur.jsx, lui, s'occupe seulement de ce qui est affiché et de son comportement.
- */
+// Responsabilité : définir le style de ce composant (styled-components).
+// Utilisé dans : CarteJoueur
+
 import styled from 'styled-components';
 
-// Avatar, infos et points sur une ligne.
+// Avatar, infos pis points sur une ligne.
 export const Carte = styled.li`
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
   gap: ${({ theme }) => theme.espace(2.5)};
   padding: ${({ theme }) => theme.espace(2)} ${({ theme }) => theme.espace(3)};
-  /* Bande épaisse à gauche, à la couleur du pion du joueur sur la piste. */
   border: ${({ theme }) => theme.bordures.contour};
   border-left: 8px solid ${({ $couleur }) => $couleur};
   border-radius: ${({ theme }) => theme.rayons.md};
@@ -23,7 +19,7 @@ export const Carte = styled.li`
 `;
 
 export const Infos = styled.div`
-  min-width: 0; /* permet au texte trop long d'être coupé au lieu de déborder */
+  min-width: 0;
 `;
 
 // Nom du joueur ; « … » s'il est trop long.

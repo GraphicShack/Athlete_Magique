@@ -1,32 +1,19 @@
-/*
- * useDeplacementAnime.js : hook qui fait avancer un pion case par case jusqu'à sa case d'arrivée.
- *
- * Une seule chose : donner la case à afficher pendant le déplacement, et la case qu'il vient
- * de quitter (pour le saut en arc, voir styles/animations/sautJeton.js).
- * Le pion change de case toutes les DUREE_PAS millisecondes, jusqu'à la case visée.
- *
- * Si le joueur a demandé moins d'animations, le pion va directement à sa case.
- *
- * Utilisation :
- *   const { position, depuis, enMouvement } = useDeplacementAnime(caseVisee);
- *
- * Renvoie :
- *   position    : la case où dessiner le pion maintenant
- *   depuis      : la case qu'il vient de quitter (null s'il ne bouge pas)
- *   enMouvement : true tant que le pion n'a pas fini son dernier saut
- */
+// Responsabilité : fait avancer le pion une case à la fois jusqu'à sa case d'arrivée (pour l'anim de saut).
+// Utilisé dans : useTourDemo
+
 import { useEffect, useState } from 'react';
 import { DUREE_PAS } from '@/styles/animations/sautJeton.js';
 
-// true si le joueur a demandé moins d'animations dans son système.
+// Check si le joueur a activé « réduire les animations » dans son OS.
 const moinsDAnimations = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+// Donne la case où dessiner le pion, celle qu'il vient de quitter, pis s'il bouge encore.
 function useDeplacementAnime(caseVisee) {
   const [position, setPosition] = useState(caseVisee);
   const [depuis, setDepuis] = useState(null);
 
   useEffect(() => {
-    // Arrivé : on attend la fin du dernier saut, puis le pion ne bouge plus.
+    // Arrivé : on laisse finir le dernier saut avant de dire qu'il bouge plus.
     if (position === caseVisee) {
       if (depuis === null) return;
       const minuterie = setTimeout(() => setDepuis(null), DUREE_PAS);
@@ -38,9 +25,8 @@ function useDeplacementAnime(caseVisee) {
       return;
     }
 
-    // Pas encore arrivé : on saute sur la case suivante (tout de suite pour le premier saut,
-    // puis une fois le saut précédent fini).
-    const pas = position < caseVisee ? 1 : -1; // en avant (ou en arrière pour un recul)
+    const pas = position < caseVisee ? 1 : -1; // -1 = il recule
+    // Le 1er saut part tout de suite (délai 0), les autres attendent la fin du saut d'avant.
     const minuterie = setTimeout(
       () => {
         setDepuis(position);

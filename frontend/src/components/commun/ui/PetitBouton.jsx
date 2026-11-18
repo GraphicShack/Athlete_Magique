@@ -1,13 +1,10 @@
-/*
- * PetitBouton.jsx : un petit bouton secondaire, pour une action discrète dans une ligne
- * (ex. « Retirer », « Ajouter un bot »).
- *
- * Responsabilité : donner le même style à ces petits boutons.
- *
- * Props : transmises au bouton (onClick, aria-label…), et le texte en enfant.
- */
+// Responsabilité : un petit bouton discret (ex. « Retirer », « Ajouter un bot »).
+// Utilisé dans : LigneJoueur, PlaceLibre
+
 import { Base } from './PetitBouton.styles.js';
 
+// Affiche un petit bouton.
+// Props : children (le texte), + le reste va au <button> (onClick, aria-label…).
 function PetitBouton({ children, ...props }) {
   return (
     <Base type="button" {...props}>

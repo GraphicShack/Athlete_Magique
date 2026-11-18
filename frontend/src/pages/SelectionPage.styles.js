@@ -1,10 +1,6 @@
-/*
- * SelectionPage.styles.js : l'apparence de la page de sélection du personnage (SelectionPage.jsx, dans le même dossier).
- *
- * Responsabilité : définir le style des blocs propres à cette page (disposition, espaces…).
- * SelectionPage.jsx, lui, s'occupe seulement de ce qui est affiché et dans quel ordre.
- * Chaque fichier a ainsi une seule raison de changer.
- */
+// Responsabilité : définir le style des blocs propres à cette page (disposition, espaces…).
+// Utilisé dans : SelectionPage
+
 import styled, { css } from 'styled-components';
 import { flottement } from '@/styles/animations/flottement.js';
 import CartePersonnage from '@/components/commun/jeu/CartePersonnage.jsx';
@@ -16,18 +12,16 @@ export const Page = styled.div`
   gap: ${({ theme }) => theme.espace(6)};
 `;
 
-// La carte d'un personnage, qui flotte de 6 px quand $flotte est vrai (voir styles/animations/flottement.js).
-// On complète le style de CartePersonnage sans la modifier : sur la page des règles, elle ne bouge pas.
-// (Pas d'enveloppe autour de la carte : le carrousel doit pouvoir lui donner toute la hauteur.)
+// La carte d'un perso, qui flotte de 6 px quand $flotte est vrai (voir styles/animations/flottement.js).
 export const CarteFlottante = styled(CartePersonnage)`
   --hauteur-flottement: -6px;
-  position: relative; /* repère des confettis, qui partent du centre de la carte choisie */
+  position: relative;
 
   ${({ $flotte }) =>
     $flotte &&
     css`
       ${flottement}
-      animation-duration: 2.6s; /* après flottement, sinon elle serait remise à zéro */
+      animation-duration: 2.6s;
     `}
 `;
 
@@ -53,7 +47,7 @@ export const Barre = styled.div`
   border-radius: ${({ theme }) => theme.rayons.md};
 `;
 
-// « Votre personnage : … »
+// « Votre perso : … »
 export const Resume = styled.p`
   margin: 0;
 `;

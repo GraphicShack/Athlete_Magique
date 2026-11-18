@@ -1,16 +1,11 @@
-/*
- * JournalEvenements.jsx : l'historique de la course (lancers, déplacements, pouvoirs déclenchés).
- *
- * Responsabilité : afficher les événements reçus, du plus récent au plus ancien,
- * le plus récent un peu plus coloré. Affichage seulement : il ne crée aucun événement.
- *
- * Props :
- *   evenements : [{ id, tour, texte }]
- */
+// Responsabilité : affiche le journal, le plus récent en haut.
+// Utilisé dans : CoursePage
+
 import Panneau from '@/components/commun/ui/Panneau.jsx';
 import MessageVide from '@/components/commun/ui/MessageVide.jsx';
 import { ListeEvenements, Ligne, Tour } from './JournalEvenements.styles.js';
 
+// Affiche la liste des événements, ou un message si y'en a pas encore.
 function JournalEvenements({ evenements = [] }) {
   return (
     <Panneau titre="Journal d'événements" teinte="journal">
