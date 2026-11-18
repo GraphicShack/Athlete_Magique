@@ -7,15 +7,15 @@
  *   - proposer un lien vers la page complète des règles.
  * Le bouton est masqué sur la page des règles elle-même.
  */
-import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import FenetreModale from '@/components/commun/ui/FenetreModale.jsx';
+import useFenetre from '@/hooks/useFenetre.js';
 import ContenuRegles from './ContenuRegles.jsx';
 import CHEMINS from '@/chemins.js';
 import { BoutonFlottant, EmplacementMascotte, MascotteModale, LienPage } from './AccesRegles.styles.js';
 
 function AccesRegles() {
-  const [ouverte, setOuverte] = useState(false); // la fenêtre est-elle ouverte ?
+  const fenetre = useFenetre();
   const { pathname } = useLocation(); // adresse de la page actuelle
 
   // Sur la page des règles, le bouton ne sert à rien.
@@ -26,20 +26,20 @@ function AccesRegles() {
       {/* Le bouton se cache pendant que la fenêtre est ouverte : la fenêtre semble sortir de lui. */}
       <BoutonFlottant
         variante="principal"
-        onClick={() => setOuverte(true)}
+        onClick={fenetre.ouvrir}
         aria-haspopup="dialog"
-        style={{ opacity: ouverte ? 0 : 1 }}
+        style={{ opacity: fenetre.ouverte ? 0 : 1 }}
       >
         <span aria-hidden="true">?</span> Règles
       </BoutonFlottant>
 
-      <FenetreModale ouverte={ouverte} onFermer={() => setOuverte(false)} titre="Règles du jeu">
+      <FenetreModale ouverte={fenetre.ouverte} onFermer={fenetre.fermer} titre="Règles du jeu">
         <ContenuRegles>
           <EmplacementMascotte>
             <MascotteModale />
           </EmplacementMascotte>
         </ContenuRegles>
-        <LienPage to={CHEMINS.regles} viewTransition onClick={() => setOuverte(false)}>
+        <LienPage to={CHEMINS.regles} viewTransition onClick={fenetre.fermer}>
           Ouvrir les règles dans une page
         </LienPage>
       </FenetreModale>

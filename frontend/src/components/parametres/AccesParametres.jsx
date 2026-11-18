@@ -8,43 +8,32 @@
  * Props :
  *   son : réglages du son venus d'App.jsx, transmis tels quels à ContenuParametres
  */
-import { useState } from 'react';
 import FenetreModale from '@/components/commun/ui/FenetreModale.jsx';
+import useFenetre from '@/hooks/useFenetre.js';
 import ContenuParametres from './ContenuParametres.jsx';
+import IconeRoueDentee from './IconeRoueDentee.jsx';
 import { BoutonRond } from './AccesParametres.styles.js';
 
 function AccesParametres({ son }) {
-  const [ouverte, setOuverte] = useState(false); // la fenêtre est-elle ouverte ?
+  const fenetre = useFenetre();
 
   return (
     <>
       {/* Comme pour les règles, le bouton se cache pendant que la fenêtre est ouverte. */}
       <BoutonRond
         type="button"
-        onClick={() => setOuverte(true)}
+        onClick={fenetre.ouvrir}
         aria-label="Paramètres"
         aria-haspopup="dialog"
-        style={{ opacity: ouverte ? 0 : 1 }}
+        style={{ opacity: fenetre.ouverte ? 0 : 1 }}
       >
-        <RoueDentee />
+        <IconeRoueDentee />
       </BoutonRond>
 
-      <FenetreModale ouverte={ouverte} onFermer={() => setOuverte(false)} titre="Paramètres" teinte="parametres">
+      <FenetreModale ouverte={fenetre.ouverte} onFermer={fenetre.fermer} titre="Paramètres" teinte="parametres">
         <ContenuParametres son={son} />
       </FenetreModale>
     </>
-  );
-}
-
-// Roue dentée dessinée en SVG : un cercle en pointillés épais forme les dents,
-// un disque plein le corps, et un petit disque de la couleur du bouton fait le trou.
-function RoueDentee() {
-  return (
-    <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
-      <circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" strokeWidth="4" strokeDasharray="3.34 3.34" />
-      <circle cx="12" cy="12" r="7" fill="currentColor" />
-      <circle cx="12" cy="12" r="3" fill="var(--fond-bouton)" />
-    </svg>
   );
 }
 

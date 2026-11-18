@@ -15,12 +15,13 @@
 import PERSONNAGES from '@/data/personnages/personnages.js';
 import IMAGES_PERSONNAGES from '@/data/personnages/imagesPersonnages.js';
 
-// La liste des personnages : [{ id, nom, initiales, pouvoir }, …]
-export function obtenirPersonnages() {
-  return PERSONNAGES;
-}
+// La liste des personnages, chacun avec son image : [{ id, nom, initiales, pouvoir, image }, …]
+// Les composants n'ont donc pas besoin de chercher l'image eux-mêmes.
+const PERSONNAGES_AVEC_IMAGE = PERSONNAGES.map((personnage) => ({
+  ...personnage,
+  image: IMAGES_PERSONNAGES[personnage.id],
+}));
 
-// L'image d'un personnage, à partir de son id (undefined si on ne la connaît pas).
-export function imagePersonnage(id) {
-  return IMAGES_PERSONNAGES[id];
+export function obtenirPersonnages() {
+  return PERSONNAGES_AVEC_IMAGE;
 }

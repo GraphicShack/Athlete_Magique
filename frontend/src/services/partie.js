@@ -11,12 +11,11 @@
  */
 import PARTIE_EXEMPLE from '@/data/exemples/partieExemple.js';
 import { TOUR_PAR_DEFAUT, POUVOIRS_PAR_ETAPE } from '@/data/exemples/deroulementTour.js';
-import { obtenirPersonnages, imagePersonnage } from '@/services/personnages.js';
+import { obtenirPersonnages } from '@/services/personnages.js';
 
 // Le personnage complet ({ id, nom, initiales, pouvoir, image }) à partir de son id.
 function personnageDepuisId(id) {
-  const personnage = obtenirPersonnages().find((p) => p.id === id);
-  return { ...personnage, image: imagePersonnage(id) };
+  return obtenirPersonnages().find((p) => p.id === id);
 }
 
 // Les personnages qu'on peut essayer comme joueur actif (tous).

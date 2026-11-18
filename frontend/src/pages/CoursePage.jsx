@@ -24,7 +24,6 @@
  * Pour essayer un autre personnage, ajouter ?personnage=… à l'adresse (ex. hypnotiste,
  * scientifique, lievre). Voir data/exemples/deroulementTour.js.
  */
-import { useTheme } from 'styled-components';
 import { useSearchParams } from 'react-router-dom';
 import EnTeteCourse from '@/components/course/EnTeteCourse.jsx';
 import ListeJoueurs from '@/components/course/joueurs/ListeJoueurs.jsx';
@@ -32,14 +31,12 @@ import PanneauPiste from '@/components/course/piste/PanneauPiste.jsx';
 import ControleurDeTourActif from '@/components/course/tourActif/ControleurDeTourActif.jsx';
 import JournalEvenements from '@/components/course/JournalEvenements.jsx';
 import { obtenirPartie } from '@/services/partie.js';
-import { jetonsDesJoueurs } from '@/utils/piste/jetons.js';
-import { deplacerJoueur } from '@/utils/piste/deplacerJoueur.js';
+import useJoueursCourse from '@/hooks/useJoueursCourse.js';
 import useTourDemo from '@/hooks/tour/useTourDemo.js';
 import useJournal from '@/hooks/journal/useJournal.js';
 import { Ecran, EnTete, Colonne, Bloc } from './CoursePage.styles.js';
 
 function CoursePage() {
-  const theme = useTheme();
   // Pour essayer un autre personnage : /course?personnage=scientifique (ou flipflop, lievre…).
   const [parametres] = useSearchParams();
   const { course, rochers, joueurs, idActif, tour } = obtenirPartie(parametres.get('personnage'));
@@ -47,15 +44,8 @@ function CoursePage() {
   // Démo du tour : dé, message, boutons et choix du joueur (voir hooks/tour/useTourDemo.js).
   const tourDemo = useTourDemo(tour);
 
-  // Le joueur actif est posé sur sa case du moment (elle change quand il confirme son déplacement).
-  const joueursAJour = deplacerJoueur(joueurs, idActif, tourDemo.position);
-
-  // Le pion qui saute en ce moment (et la case qu'il quitte), pour l'animation en arc.
-  const mouvement = tourDemo.depuis !== null ? { id: idActif, depuis: tourDemo.depuis } : null;
-
-  // Chaque joueur reçoit la couleur de son pion, selon sa place dans l'ordre de jeu.
-  // La même couleur sert à sa carte et à son jeton sur la piste.
-  const joueursColores = joueursAJour.map((joueur, rang) => ({ ...joueur, couleur: theme.joueurs[rang] }));
+  // Les joueurs (positions à jour, couleurs) et leurs jetons (voir hooks/useJoueursCourse.js).
+  const { joueurs: joueursColores, jetons } = useJoueursCourse(joueurs, idActif, tourDemo);
 
   // Le journal se remplit au fil des événements reçus (voir hooks/journal/useJournal.js).
   const evenements = useJournal(joueurs);
@@ -72,7 +62,7 @@ function CoursePage() {
           <PanneauPiste
             numeroCourse={course.numero}
             nombreCourses={course.nombreCourses}
-            jetons={jetonsDesJoueurs(joueursColores, idActif, mouvement)}
+            jetons={jetons}
             rochers={rochers}
           />
         </Bloc>

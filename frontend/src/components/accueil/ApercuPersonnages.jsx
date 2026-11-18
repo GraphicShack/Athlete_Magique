@@ -12,7 +12,7 @@
  */
 import { useRef, useState } from 'react';
 import Panneau from '@/components/commun/ui/Panneau.jsx';
-import { obtenirPersonnages, imagePersonnage } from '@/services/personnages.js';
+import { obtenirPersonnages } from '@/services/personnages.js';
 import { Grille, Personnage, Portrait, Nom, Bulle, NomPouvoir, Pouvoir } from './ApercuPersonnages.styles.js';
 
 // Les personnages, fournis par le service (plus tard : par le serveur).
@@ -64,7 +64,7 @@ function ApercuPersonnages() {
               onMouseLeave={fermer}
               onBlur={fermer}
             >
-              <Portrait src={imagePersonnage(personnage.id)} alt="" />
+              <Portrait src={personnage.image} alt="" />
               <Nom>{personnage.nom}</Nom>
             </Personnage>
           </li>
