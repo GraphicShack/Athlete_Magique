@@ -2,18 +2,20 @@
 // Utilisé dans : partie
 
 // Options d'un bouton : effet (ce qu'il fait, voir utils/tour/actionsTour.js), journal (événement à noter),
-// parPouvoir, bonus, multiplicateur, pis pour le libellé : avecRelances, avecValeurDe, avecDeplacement.
+// parPouvoir, bonus, multiplicateur.
+// Le libellé peut être un texte, ou une petite fonction qui le fabrique avec les infos du moment :
+// { valeurDe, cases (bonus compris), relances, relancesMax }.
 
 // Les boutons communs à tous.
 const COMMENCER = { id: 'commencer', libelle: 'Commencer le tour', principal: true, effet: 'commencer' };
 const LANCER = { id: 'lancer', libelle: 'Lancer le dé', principal: true, effet: 'lancer' };
 const CONFIRMER = {
   id: 'confirmer',
-  libelle: 'Confirmer : avancer de',
-  avecDeplacement: true,
+  libelle: ({ cases }) => `Confirmer : avancer de ${cases}`,
   principal: true,
   effet: 'avancer', // sans « journal » : un déplacement sans pouvoir n'est pas journalisé
 };
+const GARDER = { id: 'garder', libelle: ({ valeurDe }) => `Garder le ${valeurDe}`, effet: 'fixer', multiplicateur: 1, journal: 'DE_GARDE' };
 const FINIR = { id: 'finir', libelle: 'Fin du tour', principal: true, effet: 'terminer' };
 
 export const TOUR_PAR_DEFAUT = {
@@ -68,8 +70,8 @@ export const POUVOIRS_PAR_ETAPE = {
       relancesMax: 2,
       avantLancer: [LANCER],
       apresLancer: [
-        { id: 'relancer', libelle: 'Relancer le dé', avecRelances: true, principal: true, effet: 'lancer' },
-        { id: 'garder', libelle: 'Garder le', avecValeurDe: true, effet: 'fixer', multiplicateur: 1, journal: 'DE_GARDE' },
+        { id: 'relancer', libelle: ({ relances, relancesMax }) => `Relancer le dé (${relances + 1} sur ${relancesMax})`, principal: true, effet: 'lancer' },
+        GARDER,
       ],
     },
   },
@@ -89,7 +91,7 @@ export const POUVOIRS_PAR_ETAPE = {
           journal: 'DEPLACEMENT_DOUBLE',
           parPouvoir: true,
         },
-        { id: 'garder', libelle: 'Garder le', avecValeurDe: true, effet: 'fixer', multiplicateur: 1, journal: 'DE_GARDE' },
+        GARDER,
       ],
     },
   },
@@ -113,8 +115,7 @@ export const POUVOIRS_PAR_ETAPE = {
       boutons: [
         {
           id: 'avancer',
-          libelle: 'Avancer de',
-          avecDeplacement: true,
+          libelle: ({ cases }) => `Avancer de ${cases}`,
           bonus: 2,
           principal: true,
           effet: 'avancer',
@@ -131,8 +132,7 @@ export const POUVOIRS_PAR_ETAPE = {
       boutons: [
         {
           id: 'avancer',
-          libelle: 'Avancer de',
-          avecDeplacement: true,
+          libelle: ({ cases }) => `Avancer de ${cases}`,
           principal: true,
           effet: 'avancer',
           journal: 'DEPLACEMENT',

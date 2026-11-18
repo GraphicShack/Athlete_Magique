@@ -54,9 +54,7 @@ function CoursePage() {
             joueur={tour.joueur}
             personnage={tour.personnage}
             etapeCourante={tourDemo.etape}
-            resultatDe={tourDemo.de.valeur}
-            lancerDe={tourDemo.de.lancers}
-            onArretDe={tourDemo.de.surArret}
+            de={tourDemo.de}
             message={tourDemo.message}
             pouvoir={tourDemo.pouvoir}
             titreEtape={tourDemo.titreEtape}

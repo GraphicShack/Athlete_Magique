@@ -1,6 +1,7 @@
 // Responsabilité : la salle d'attente (/configuration) ; connecte le salon aux panneaux.
 // Utilisé dans : routes
 
+import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import EnTetePage from '@/components/commun/ui/EnTetePage.jsx';
 import EtapesPartie from '@/components/commun/jeu/EtapesPartie.jsx';
@@ -12,13 +13,12 @@ import PanneauRejoindre from '@/components/configuration/PanneauRejoindre.jsx';
 import BoutonLancer from '@/components/configuration/BoutonLancer.jsx';
 import { obtenirSalon } from '@/services/salon.js';
 import useJoueursSalon from '@/hooks/salon/useJoueursSalon.js';
-import usePlacesSalon from '@/hooks/salon/usePlacesSalon.js';
 import { placesLibres, nombresImpossibles } from '@/utils/salon/placesSalon.js';
 import CHEMINS from '@/chemins.js';
 import { ColonneDroite } from './ConfigurationPage.styles.js';
 
 // Les nombres de places possibles.
-const NOMBRES = ['2', '3', '4'];
+const NOMBRES = [2, 3, 4];
 
 // Va chercher le salon, garde les joueurs pis les places, pis les donne aux panneaux.
 function ConfigurationPage() {
@@ -26,7 +26,7 @@ function ConfigurationPage() {
   const salon = obtenirSalon(parametres.has('invite'));
 
   const { joueurs, retirer, ajouterBot } = useJoueursSalon(salon.joueurs);
-  const { placesMax, choisirPlaces } = usePlacesSalon(salon.placesMax);
+  const [placesMax, setPlacesMax] = useState(salon.placesMax); // nb de places choisi par l'hôte
 
   return (
     <Page>
@@ -42,7 +42,7 @@ function ConfigurationPage() {
           nombres={NOMBRES}
           impossibles={nombresImpossibles(NOMBRES, joueurs.length)}
           estHote={salon.estHote}
-          onChoisirPlaces={choisirPlaces}
+          onChoisirPlaces={setPlacesMax}
           onRetirer={retirer}
           onAjouterBot={ajouterBot}
         >

@@ -6,7 +6,7 @@ export function placesLibres(nombreJoueurs, placesMax) {
   return Array.from({ length: combien }, (_, i) => nombreJoueurs + i + 1);
 }
 
-// Les nb de places plus petits que le nb de joueurs (ex. '2' s'il y a 3 joueurs).
+// Les nb de places plus petits que le nb de joueurs (ex. 2 s'il y a 3 joueurs).
 export function nombresImpossibles(nombres, nombreJoueurs) {
-  return nombres.filter((n) => Number(n) < nombreJoueurs);
+  return nombres.filter((n) => n < nombreJoueurs);
 }

@@ -15,9 +15,7 @@ function ControleurDeTourActif({
   joueur,
   personnage,
   etapeCourante = 1,
-  resultatDe = null,
-  lancerDe = 0,
-  onArretDe,
+  de = { valeur: null, lancers: 0 },
   message,
   pouvoir = null,
   titreEtape,
@@ -56,8 +54,8 @@ function ControleurDeTourActif({
           <EtapesTour etapeCourante={etapeCourante} />
 
           <Resultat>
-            {resultatDe ? (
-              <De valeur={resultatDe} lancer={lancerDe} onArret={onArretDe} />
+            {de.valeur ? (
+              <De valeur={de.valeur} lancer={de.lancers} onArret={de.surArret} />
             ) : (
               <PlaceDe aria-hidden="true" />
             )}

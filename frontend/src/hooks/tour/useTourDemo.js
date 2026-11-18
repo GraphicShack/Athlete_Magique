@@ -5,7 +5,6 @@ import { useState } from 'react';
 import useDeplacementAnime from '@/hooks/tour/useDeplacementAnime.js';
 import { ETAT_DEPART, ACTIONS, arreterDe } from '@/utils/tour/actionsTour.js';
 import { ETAPES } from '@/utils/tour/etapesTour.js';
-import { preparerBouton } from '@/utils/tour/boutonsTour.js';
 import { journaliser } from '@/services/journal/journal.js';
 import { lancerDe } from '@/services/de.js';
 
@@ -31,16 +30,19 @@ function useTourDemo(tour) {
   // L'étape actuelle (numéro, titre, boutons, message) : voir utils/tour/etapesTour.js.
   const etape = ETAPES[etat.etape];
 
-  // Les boutons, avec leur libellé final ; tous grisés pendant que le dé roule ou que le pion avance.
+  // Les infos du moment, pour les libellés qui sont des fonctions (voir data/exemples/deroulementTour.js).
+  // Pendant que le dé roule, on cache sa valeur pis la relance en cours compte pas encore.
   const infos = {
     valeurDe: etat.roule ? '…' : etat.valeurDe,
-    relances: Math.max(etat.lancers - 1, 0),
+    relances: Math.max(etat.lancers - (etat.roule ? 2 : 1), 0),
     relancesMax: tour.etapes.lancer.relancesMax,
-    cases: etat.cases,
   };
+
+  // Les boutons avec leur libellé final ; tous grisés pendant que le dé roule ou que le pion avance.
   const actions = etape.boutons(tour, etat).map((bouton) => {
-    const pret = preparerBouton(bouton, infos);
-    return { ...pret, inactif: pret.inactif || etat.roule || pion.enMouvement };
+    const cases = etat.cases + (bouton.bonus ?? 0); // ce que le pion avancera avec ce bouton
+    const libelle = typeof bouton.libelle === 'function' ? bouton.libelle({ ...infos, cases }) : bouton.libelle;
+    return { ...bouton, libelle, inactif: etat.roule || pion.enMouvement };
   });
 
   return {
