@@ -76,10 +76,10 @@ const teintes = {
   definitions: PALETTE.gris, // vocabulaire, informations neutres
   regles: PALETTE.rouge, // la fenêtre des règles et son bouton
   parametres: PALETTE.jaune, // la fenêtre des paramètres et son bouton
-  son: PALETTE.violet, // paramètres : musique et effets sonores
+  son: PALETTE.violet, // paramètres : volume et musique
   affichage: PALETTE.rose, // paramètres : animations, taille du texte
   partie: PALETTE.or, // paramètres : déroulement d'une partie
-  compte: PALETTE.bleu, // paramètres : pseudo, langue (même bleu que la connexion)
+  compte: PALETTE.bleu, // paramètres : pseudo (même bleu que la connexion)
 };
 
 // Couleurs des lettres des grands titres, dans l'ordre (voir TitreArcEnCiel.jsx).

@@ -13,13 +13,6 @@ export const Grille = styled.div`
   }
 `;
 
-// Le champ du pseudo pis le choix de la langue, l'un sous l'autre.
-export const ChampsCompte = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.espace(4)};
-`;
-
 // Les deux boutons du bas, à droite.
 export const Actions = styled.div`
   display: flex;

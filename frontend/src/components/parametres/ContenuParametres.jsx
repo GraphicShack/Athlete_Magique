@@ -6,7 +6,7 @@ import ChampTexte from '@/components/commun/ui/ChampTexte.jsx';
 import Interrupteur from '@/components/commun/ui/reglages/Interrupteur.jsx';
 import Curseur from '@/components/commun/ui/reglages/Curseur.jsx';
 import ChoixSegmente from '@/components/commun/ui/reglages/ChoixSegmente.jsx';
-import { Grille, ChampsCompte, Actions } from './ContenuParametres.styles.js';
+import { Grille, Actions } from './ContenuParametres.styles.js';
 
 // Affiche les panneaux de réglages (branchés pour l'instant : le volume, la musique pis les numéros des cases).
 // Props : son, affichage (les réglages), onEnregistrer (appelé au clic sur « Enregistrer »).
@@ -27,7 +27,6 @@ function ContenuParametres({ son, affichage, onEnregistrer }) {
             checked={son.musiqueActive}
             onChange={(evenement) => son.setMusiqueActive(evenement.target.checked)}
           />
-          <Interrupteur etiquette="Effets sonores" description="Dé, chutes et pouvoirs" defaultChecked />
         </Panneau>
 
         <Panneau titre="Affichage" teinte="affichage">
@@ -50,10 +49,7 @@ function ContenuParametres({ son, affichage, onEnregistrer }) {
         </Panneau>
 
         <Panneau titre="Compte" teinte="compte">
-          <ChampsCompte>
-            <ChampTexte etiquette="Pseudo" placeholder="Ex. Coureur rapide" autoComplete="nickname" />
-            <ChoixSegmente etiquette="Langue" options={['Français', 'English']} valeurParDefaut="Français" />
-          </ChampsCompte>
+          <ChampTexte etiquette="Pseudo" placeholder="Ex. Coureur rapide" autoComplete="nickname" />
         </Panneau>
       </Grille>
 
