@@ -1,13 +1,13 @@
 // Responsabilité : affiche le panneau du tour (qui joue, étape, dé, message pis les boutons).
 
 import Panneau from '@/components/commun/ui/Panneau.jsx';
-import AvatarPersonnage from '@/components/commun/jeu/AvatarPersonnage.jsx';
 import MessageVide from '@/components/commun/ui/MessageVide.jsx';
 import De from '@/components/commun/jeu/de/De.jsx';
+import EnTeteTour from './EnTeteTour.jsx';
 import EtapesTour from './EtapesTour.jsx';
 import CasePouvoir from './CasePouvoir.jsx';
 import CaseSansPouvoir from './CaseSansPouvoir.jsx';
-import { EnTete, SurTitre, NomPersonnage, Colonnes, Resultat, PlaceDe } from './ControleurDeTourActif.styles.js';
+import { Colonnes, Resultat, PlaceDe } from './ControleurDeTourActif.styles.js';
 
 // Affiche le tour en cours ; un clic sur un bouton est juste renvoyé avec onAction(bouton).
 function ControleurDeTourActif({
@@ -38,15 +38,7 @@ function ControleurDeTourActif({
       enEvidence
       teinte="tour"
       aria-label="Tour en cours"
-      entete={
-        <EnTete>
-          <AvatarPersonnage initiales={personnage.initiales} image={personnage.image} />
-          <div>
-            <SurTitre>À toi de jouer, {joueur}</SurTitre>
-            <NomPersonnage>{personnage.nom}</NomPersonnage>
-          </div>
-        </EnTete>
-      }
+      entete={<EnTeteTour personnage={personnage} surTitre={`À toi de jouer, ${joueur}`} />}
     >
       <Colonnes>
         <div>

@@ -5,6 +5,7 @@ import EnTeteCourse from '@/components/course/EnTeteCourse.jsx';
 import ListeJoueurs from '@/components/course/joueurs/ListeJoueurs.jsx';
 import PanneauPiste from '@/components/course/piste/PanneauPiste.jsx';
 import ControleurDeTourActif from '@/components/course/tourActif/ControleurDeTourActif.jsx';
+import AttenteTour from '@/components/course/tourActif/AttenteTour.jsx';
 import JournalEvenements from '@/components/course/JournalEvenements.jsx';
 import { obtenirPartie } from '@/services/partie.js';
 import useJoueursCourse from '@/hooks/useJoueursCourse.js';
@@ -15,9 +16,12 @@ import { Ecran, EnTete, Colonne, Bloc } from './CoursePage.styles.js';
 
 // Va chercher la partie pis donne à chaque bloc ce qu'il affiche.
 function CoursePage() {
-  // Pour essayer un autre perso : /course?perso=scientifique (ou flipflop, lievre…).
+  // Pour essayer : /course?personnage=scientifique (ou flipflop, lievre…), ou /course?attente (tour d'un autre), /course?attente=bot (tour d'un bot).
   const [parametres] = useSearchParams();
-  const { course, rochers, joueurs, idActif, tour } = obtenirPartie(parametres.get('personnage'));
+  const { course, rochers, joueurs, idActif, monTour, tour } = obtenirPartie(
+    parametres.get('personnage'),
+    parametres.get('attente')
+  );
 
   const { numerosVisibles } = useOutletContext(); // réglage gardé dans App
   useSuivreFinCourse(); // amène à l'écran de fin quand la course est finie
@@ -54,17 +58,22 @@ function CoursePage() {
 
       <Colonne $cote="droite">
         <Bloc $taille="contenu">
-          <ControleurDeTourActif
-            joueur={tour.joueur}
-            personnage={tour.personnage}
-            etapeCourante={tourDemo.etape}
-            de={tourDemo.de}
-            message={tourDemo.message}
-            pouvoir={tourDemo.pouvoir}
-            titreEtape={tourDemo.titreEtape}
-            actions={tourDemo.actions}
-            onAction={tourDemo.surAction}
-          />
+          {monTour ? (
+            <ControleurDeTourActif
+              joueur={tour.joueur}
+              personnage={tour.personnage}
+              etapeCourante={tourDemo.etape}
+              de={tourDemo.de}
+              message={tourDemo.message}
+              pouvoir={tourDemo.pouvoir}
+              titreEtape={tourDemo.titreEtape}
+              actions={tourDemo.actions}
+              onAction={tourDemo.surAction}
+            />
+          ) : (
+            // key : un nouveau joueur = un nouveau panneau (pis un nouveau tirage de la blague).
+            <AttenteTour key={tour.idJoueur} joueur={tour.joueur} bot={tour.bot} personnage={tour.personnage} />
+          )}
         </Bloc>
         <Bloc $taille="remplit">
           <JournalEvenements evenements={evenements} />

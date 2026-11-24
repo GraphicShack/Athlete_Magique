@@ -10,8 +10,9 @@ import { finRecue } from '@/services/serveur/finCourse.js';
 const PERSONNAGES_A_ESSAYER = obtenirPersonnages().map((p) => p.id);
 
 // L'état de la partie : { course, rochers, idActif, joueurs: [Joueur], tour } Chaque joueur reçoit son perso complet à la place de idPersonnage, et le tour reçoit le joueur actif, son perso, son pouvoir et ses 4 étapes (voir data/exemples/deroulementTour.aRemplacer.js).
-export function obtenirPartie(idEssai) {
-  const { joueurs, idActif, numeroTour, nombreCourses, rochers } = PARTIE_EXEMPLE;
+// attente (optionnel) : pour essayer le tour d'un autre (je deviens j2) ; 'bot' = cet autre est un bot.
+export function obtenirPartie(idEssai, attente = null) {
+  const { joueurs, idActif, idMoi, numeroTour, nombreCourses, rochers } = PARTIE_EXEMPLE;
 
   // La course après la dernière finie (après la 3e, on recommence à 1).
   const numeroCourse = ((finRecue.lire()?.numero ?? 0) % nombreCourses) + 1;
@@ -20,7 +21,8 @@ export function obtenirPartie(idEssai) {
     const remplace = joueur.id === idActif && PERSONNAGES_A_ESSAYER.includes(idEssai);
     return { ...joueur, personnage: obtenirPersonnage(remplace ? idEssai : idPersonnage) };
   });
-  const actif = joueursComplets.find((joueur) => joueur.id === idActif);
+  const trouve = joueursComplets.find((joueur) => joueur.id === idActif);
+  const actif = attente === 'bot' ? { ...trouve, nom: 'Bot 1', bot: true } : trouve;
 
   // Les 4 étapes du tour du perso actif : son pouvoir là où il en a un, sinon l'étape par défaut.
   const pouvoirs = POUVOIRS_PAR_ETAPE[actif.personnage.id] ?? {};
@@ -30,6 +32,7 @@ export function obtenirPartie(idEssai) {
     course: { numero: numeroCourse, nombreCourses },
     rochers,
     idActif,
+    monTour: idActif === (attente === null ? idMoi : 'j2'),
     joueurs: joueursComplets,
     tour: {
       etapes,
@@ -38,6 +41,7 @@ export function obtenirPartie(idEssai) {
       idJoueur: actif.id,
       position: actif.position,
       joueur: actif.nom,
+      bot: actif.bot,
       personnage: actif.personnage,
       pouvoir: { titre: `Pouvoir : ${actif.personnage.nom}`, description: actif.personnage.pouvoir },
     },

@@ -14,6 +14,9 @@ const PARTIE_EXEMPLE = {
     { id: 'j4', nom: 'Alexis (GOAT)', bot: false, idPersonnage: 'banana', position: 6, etat: null, points: 0 },
   ],
 
+  // Moi.
+  idMoi: 'j1',
+
   // Le joueur dont c'est le tour.
   idActif: 'j1',
 

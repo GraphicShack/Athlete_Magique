@@ -2,23 +2,6 @@
 
 import styled from 'styled-components';
 
-// Bandeau du panneau : avatar du perso, puis « À toi de jouer » pis son nom.
-export const EnTete = styled.div`
-  display: flex;
-  align-items: center;
-  gap: ${({ theme }) => theme.espace(4)};
-`;
-
-export const SurTitre = styled.div`
-  font-size: ${({ theme }) => theme.texte.sm};
-  font-weight: ${({ theme }) => theme.graisses.forte};
-`;
-
-export const NomPersonnage = styled.h2`
-  margin: 0;
-  font-size: ${({ theme }) => theme.texte.xl};
-`;
-
 // Le contenu du panneau en deux colonnes d’au moins 16rem chacune ; s’il manque de place, la deuxième passe sous la première.
 export const Colonnes = styled.div`
   display: grid;
