@@ -1,5 +1,5 @@
 // Responsabilité : un petit texte dans une pilule blanche.
-// Utilisé dans : Accroche, LigneJoueur, LigneScore, PanneauPiste, SelectionPage
+// Utilisé dans : Accroche, FinCoursePage, LigneJoueur, LigneScore, PanneauPiste, SelectionPage
 
 import { Pilule } from './Etiquette.styles.js';
 

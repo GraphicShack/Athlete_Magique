@@ -1,5 +1,5 @@
 // Responsabilité : donne les persos avec leur image (seul accès aux données des persos).
-// Utilisé dans : ApercuPersonnages, ContenuRegles, SelectionPage, partie, useJournal
+// Utilisé dans : ApercuPersonnages, ContenuRegles, SelectionPage, partie, useFinCourse, useJournal
 
 import PERSONNAGES from '@/data/personnages/personnages.js';
 import IMAGES_PERSONNAGES from '@/data/personnages/imagesPersonnages.js';
@@ -13,4 +13,9 @@ const PERSONNAGES_AVEC_IMAGE = PERSONNAGES.map((personnage) => ({
 // Renvoie la liste des persos (avec leur image).
 export function obtenirPersonnages() {
   return PERSONNAGES_AVEC_IMAGE;
+}
+
+// Renvoie le perso qui a cet id.
+export function obtenirPersonnage(id) {
+  return PERSONNAGES_AVEC_IMAGE.find((personnage) => personnage.id === id);
 }

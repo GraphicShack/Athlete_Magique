@@ -6,6 +6,7 @@ import useDeplacementAnime from '@/hooks/tour/useDeplacementAnime.js';
 import { ETAT_DEPART, ACTIONS, arreterDe } from '@/utils/tour/actionsTour.aRemplacer.js';
 import { ETAPES } from '@/utils/tour/etapesTour.js';
 import { journaliser } from '@/services/journal/journal.js';
+import { finirTour } from '@/services/serveur/finCourse.js';
 import { lancerDe } from '@/services/de.aSupprimer.js';
 
 // Renvoie tout ce que le panneau du tour a besoin (étape, message, boutons, dé, pion).
@@ -22,7 +23,10 @@ function useTourDemo(tour) {
 
   // Un clic sur un bouton : on fait son action (son « effet » dans les données).
   // On tire un dé à chaque clic ; seule l'action « lancer » s'en sert.
-  const surAction = (bouton) => appliquer(ACTIONS[bouton.effet](etat, { tour, bouton, nouveauDe: lancerDe() }));
+  const surAction = (bouton) => {
+    appliquer(ACTIONS[bouton.effet](etat, { tour, bouton, nouveauDe: lancerDe() }));
+    if (bouton.effet === 'terminer') finirTour();
+  };
 
   // Le dé a fini de rouler.
   const surArretDe = () => appliquer(arreterDe(etat, tour));

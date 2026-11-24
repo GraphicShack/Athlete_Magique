@@ -3,6 +3,7 @@
 
 import { useTheme } from 'styled-components';
 import Panneau from '@/components/commun/ui/Panneau.jsx';
+import { texteNom, texteDetail, textePoints } from '@/utils/textesJoueur.js';
 import CarteJoueur from './CarteJoueur.jsx';
 import { Joueurs, PlaceVide } from './ListeJoueurs.styles.js';
 
@@ -26,7 +27,11 @@ function ListeJoueurs({ joueurs = [], idActif = null }) {
           {joueurs.map((joueur, rang) => (
             <CarteJoueur
               key={joueur.id}
-              joueur={{ ...joueur, couleur: joueur.couleur ?? theme.joueurs[rang] }}
+              nom={texteNom(joueur)}
+              detail={texteDetail(joueur)}
+              points={textePoints(joueur.points)}
+              couleur={joueur.couleur ?? theme.joueurs[rang]}
+              personnage={joueur.personnage}
               actif={joueur.id === idActif}
             />
           ))}

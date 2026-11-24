@@ -3,7 +3,8 @@
 
 import Etiquette from '@/components/commun/ui/Etiquette.jsx';
 import { texteDate } from '@/utils/classement/texteDate.js';
-import { Ligne, Rang, Joueur, Type, Score, DateScore } from './LigneScore.styles.js';
+import { Ligne, Chiffre, Joueur } from '@/components/commun/ui/Tableau.styles.js';
+import { Type, Score, DateScore } from './LigneScore.styles.js';
 
 // Le nom affiché de chaque type de joueur.
 const TYPES = { compte: 'Compte', invite: 'Invité' };
@@ -12,8 +13,8 @@ const TYPES = { compte: 'Compte', invite: 'Invité' };
 // Props : rang, pseudo, type ('compte' ou 'invite'), score, date, vous (true = ma ligne).
 function LigneScore({ rang, pseudo, type, score, date, vous = false }) {
   return (
-    <Ligne $vous={vous}>
-      <Rang>{rang}</Rang>
+    <Ligne $enEvidence={vous}>
+      <Chiffre>{rang}</Chiffre>
       <Joueur scope="row">
         {pseudo}
         {vous && ' (vous)'}
@@ -21,7 +22,7 @@ function LigneScore({ rang, pseudo, type, score, date, vous = false }) {
       <Type>
         <Etiquette>{TYPES[type] ?? type}</Etiquette>
       </Type>
-      <Score>{score}</Score>
+      <Score $droite>{score}</Score>
       <DateScore>{texteDate(date)}</DateScore>
     </Ligne>
   );

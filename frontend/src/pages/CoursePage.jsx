@@ -10,6 +10,7 @@ import JournalEvenements from '@/components/course/JournalEvenements.jsx';
 import { obtenirPartie } from '@/services/partie.js';
 import useJoueursCourse from '@/hooks/useJoueursCourse.js';
 import useTourDemo from '@/hooks/tour/useTourDemo.aRemplacer.js';
+import useSuivreFinCourse from '@/hooks/finCourse/useSuivreFinCourse.js';
 import useJournal from '@/hooks/journal/useJournal.js';
 import { Ecran, EnTete, Colonne, Bloc } from './CoursePage.styles.js';
 
@@ -18,6 +19,8 @@ function CoursePage() {
   // Pour essayer un autre perso : /course?perso=scientifique (ou flipflop, lievre…).
   const [parametres] = useSearchParams();
   const { course, rochers, joueurs, idActif, tour } = obtenirPartie(parametres.get('personnage'));
+
+  useSuivreFinCourse(); // amène à l'écran de fin quand la course est finie
 
   // Démo du tour : dé, message, boutons pis choix du joueur (voir hooks/tour/useTourDemo.aRemplacer.js).
   const tourDemo = useTourDemo(tour);

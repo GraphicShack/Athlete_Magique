@@ -8,6 +8,7 @@ import AccueilPage from './pages/AccueilPage.jsx';
 import ConfigurationPage from './pages/ConfigurationPage.jsx';
 import SelectionPage from './pages/SelectionPage.jsx';
 import CoursePage from './pages/CoursePage.jsx';
+import FinCoursePage from './pages/FinCoursePage.jsx';
 import ClassementPage from './pages/ClassementPage.jsx';
 import ReglesPage from './pages/ReglesPage.jsx';
 
@@ -17,6 +18,7 @@ const PAGES = [
   { chemin: CHEMINS.configuration, Page: ConfigurationPage },
   { chemin: CHEMINS.selection, Page: SelectionPage },
   { chemin: CHEMINS.course, Page: CoursePage },
+  { chemin: CHEMINS.finCourse, Page: FinCoursePage },
   { chemin: CHEMINS.classement, Page: ClassementPage },
   { chemin: CHEMINS.regles, Page: ReglesPage },
 ];

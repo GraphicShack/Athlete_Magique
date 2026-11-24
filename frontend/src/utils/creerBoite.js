@@ -1,5 +1,5 @@
 // Responsabilité : une boîte qui garde une valeur pis prévient quand elle change.
-// Utilisé dans : salon
+// Utilisé dans : finCourse, salon
 
 export function creerBoite(valeurDepart) {
   let valeur = valeurDepart;

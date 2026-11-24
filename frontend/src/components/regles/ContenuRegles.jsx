@@ -4,10 +4,11 @@
 
 import Panneau from '@/components/commun/ui/Panneau.jsx';
 import CartePersonnage from '@/components/commun/jeu/CartePersonnage.jsx';
+import ContenuPanneau from '@/components/commun/ui/ContenuPanneau.js';
 import TableauPointage from './TableauPointage.jsx';
 import { obtenirPersonnages } from '@/services/personnages.js';
 import { obtenirPointage } from '@/services/regles.js';
-import { Grille, PanneauLarge, GrillePersonnages, Contenu } from './ContenuRegles.styles.js';
+import { Grille, PanneauLarge, GrillePersonnages } from './ContenuRegles.styles.js';
 
 // Les persos pis le barème, fournis par les services (plus tard : par le serveur).
 const PERSONNAGES = obtenirPersonnages();
@@ -18,46 +19,46 @@ function ContenuRegles({ children }) {
   return (
     <Grille>
       <Panneau titre="Vue d'ensemble" teinte="apercu">
-        <Contenu>
+        <ContenuPanneau>
           <ul>
             <li><strong>Joueurs :</strong> 1 à 4. Les places libres sont prises par des bots.</li>
             <li><strong>Durée :</strong> 3 courses.</li>
             <li><strong>But :</strong> accumuler le plus de points au fil des 3 courses.</li>
           </ul>
-        </Contenu>
+        </ContenuPanneau>
       </Panneau>
 
       <Panneau titre="La piste" teinte="piste">
-        <Contenu>
+        <ContenuPanneau>
           <ul>
             <li><strong>Départ :</strong> la case 0, où tous les personnages commencent.</li>
             <li><strong>Cases 1 à 30</strong>, puis la ligne d'arrivée, franchie dès qu'un déplacement dépasse la case 30.</li>
             <li><strong>Cases Étoile (10 et 20) :</strong> s'y arrêter rapporte 1 point.</li>
             <li><strong>Cases Rocher :</strong> 3 par course, placées au hasard entre les cases 5 et 25. S'y arrêter fait trébucher.</li>
           </ul>
-        </Contenu>
+        </ContenuPanneau>
       </Panneau>
 
       <Panneau titre="Avant chaque course" teinte="preparation">
-        <Contenu>
+        <ContenuPanneau>
           <ul>
             <li><strong>3 ou 4 joueurs :</strong> un personnage chacun. <strong>2 joueurs :</strong> deux personnages chacun.</li>
             <li><strong>Choix des personnages :</strong> on tire au hasard 2 personnages de plus qu'il n'en faut. Le joueur le moins bien classé choisit en premier.</li>
             <li><strong>Ordre de jeu :</strong> le joueur qui a le moins de points joue en premier.</li>
             <li>Avant la 1re course, et en cas d'égalité, l'ordre est tiré au hasard.</li>
           </ul>
-        </Contenu>
+        </ContenuPanneau>
       </Panneau>
 
       <Panneau titre="Déroulement d'un tour" teinte="tour">
-        <Contenu>
+        <ContenuPanneau>
           <ol>
             <li><strong>Début du tour :</strong> un personnage tombé se relève et saute son déplacement. Les pouvoirs « avant le déplacement » s'appliquent ici.</li>
             <li><strong>Lancer du dé :</strong> un dé à 6 faces, avec les relances du Magicien puis le doublement du Scientifique Fusé.</li>
             <li><strong>Déplacement principal :</strong> le résultat du dé, plus les bonus (Lièvre +2, Party Animal +1 par voisin).</li>
             <li><strong>Fin du déplacement :</strong> on applique les effets des cases et des pouvoirs déclenchés.</li>
           </ol>
-        </Contenu>
+        </ContenuPanneau>
       </Panneau>
 
       <PanneauLarge titre="Les personnages" teinte="personnages" aside={`${PERSONNAGES.length} pouvoirs qui changent les règles`}>
@@ -69,7 +70,7 @@ function ContenuRegles({ children }) {
       </PanneauLarge>
 
       <Panneau titre="Fin de course et pointage" teinte="pointage">
-        <Contenu>
+        <ContenuPanneau>
           <p>
             La course se termine dès que 2 personnages ont franchi la ligne d'arrivée. Si tous les autres sont
             éliminés avant, aucun point de 2e place n'est donné.
@@ -79,11 +80,11 @@ function ContenuRegles({ children }) {
             Après 3 courses, le plus de points gagne. En cas d'égalité : le plus de 1res places, sinon la
             victoire est partagée.
           </p>
-        </Contenu>
+        </ContenuPanneau>
       </Panneau>
 
       <Panneau titre="Ordre de résolution" teinte="joueurs">
-        <Contenu>
+        <ContenuPanneau>
           <p>Quand plusieurs effets se déclenchent en même temps :</p>
           <ol>
             <li>les effets des cases (ex. case Étoile) ;</li>
@@ -91,11 +92,11 @@ function ContenuRegles({ children }) {
             <li>les pouvoirs des autres personnages, dans l'ordre des joueurs.</li>
           </ol>
           <p>Chaque effet est résolu entièrement, y compris les déplacements qu'il provoque, avant de passer au suivant.</p>
-        </Contenu>
+        </ContenuPanneau>
       </Panneau>
 
       <Panneau titre="Définitions" teinte="definitions">
-        <Contenu>
+        <ContenuPanneau>
           <dl>
             <dt>Déplacement</dt>
             <dd>Tout changement de case causé par le dé, un pouvoir ou une règle qui dit « déplacer ».</dd>
@@ -110,7 +111,7 @@ function ContenuRegles({ children }) {
             <dt>Éliminé</dt>
             <dd>Retiré de la course : il ne bouge plus, n'est plus ciblé et ne marque aucun point.</dd>
           </dl>
-        </Contenu>
+        </ContenuPanneau>
       </Panneau>
       {children}
     </Grille>

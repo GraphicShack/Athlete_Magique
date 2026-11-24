@@ -7,7 +7,8 @@ import MessageVide from '@/components/commun/ui/MessageVide.jsx';
 import PetitBouton from '@/components/commun/ui/PetitBouton.jsx';
 import { messageScores } from '@/utils/classement/messageScores.js';
 import LigneScore from './LigneScore.jsx';
-import { Filtre, Zone, Tableau, Titre } from './TableauHonneur.styles.js';
+import { Tableau, Titre } from '@/components/commun/ui/Tableau.styles.js';
+import { Filtre, Zone } from './TableauHonneur.styles.js';
 
 // Les filtres (écrits comme le serveur les attend) pis leur nom affiché.
 const FILTRES = { tous: 'Tous', comptes: 'Comptes', invites: 'Invités' };

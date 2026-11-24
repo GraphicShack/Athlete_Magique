@@ -1,5 +1,5 @@
 // Responsabilité : des bouts de CSS réutilisés (rond centré, caché visuellement…).
-// Utilisé dans : AvatarPersonnage.styles, ChampTexte.styles, EtapesPartie.styles, EtapesTour.styles, Jeton.styles, LigneJoueur.styles
+// Utilisé dans : AvatarPersonnage.styles, CarteJoueur.styles, ChampTexte.styles, EtapesPartie.styles, EtapesTour.styles, Jeton.styles, LigneJoueur.styles
 
 import { css } from 'styled-components';
 

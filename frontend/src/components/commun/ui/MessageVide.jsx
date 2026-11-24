@@ -1,5 +1,5 @@
 // Responsabilité : le même style pour tous les messages « y'a rien ici ».
-// Utilisé dans : ConfigurationPage, ControleurDeTourActif, JournalEvenements, TableauHonneur
+// Utilisé dans : ConfigurationPage, ControleurDeTourActif, FinCoursePage, JournalEvenements, TableauHonneur
 
 import styled from 'styled-components';
 

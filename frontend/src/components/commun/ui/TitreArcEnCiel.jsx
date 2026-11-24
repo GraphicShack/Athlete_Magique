@@ -1,5 +1,5 @@
 // Responsabilité : le gros titre de page, une couleur par lettre comme dans le livret.
-// Utilisé dans : ClassementPage, ConfigurationPage, ReglesPage, SelectionPage
+// Utilisé dans : ClassementPage, ConfigurationPage, FinCoursePage, ReglesPage, SelectionPage
 
 import { Fragment } from 'react';
 import { useTheme } from 'styled-components';

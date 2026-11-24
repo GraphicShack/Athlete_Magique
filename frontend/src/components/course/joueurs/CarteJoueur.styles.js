@@ -2,11 +2,11 @@
 // Utilisé dans : CarteJoueur
 
 import styled from 'styled-components';
+import { rondCentre } from '@/styles/base/utilitaires.js';
 
-// Avatar, infos pis points sur une ligne.
+// Rang (s'il y en a un), avatar, infos pis points sur une ligne.
 export const Carte = styled.li`
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
+  display: flex;
   align-items: center;
   gap: ${({ theme }) => theme.espace(2.5)};
   padding: ${({ theme }) => theme.espace(2)} ${({ theme }) => theme.espace(3)};
@@ -18,7 +18,9 @@ export const Carte = styled.li`
   box-shadow: ${({ theme, $actif }) => ($actif ? theme.ombres.cadre : 'none')};
 `;
 
+// Les infos prennent la place qui reste.
 export const Infos = styled.div`
+  flex: 1;
   min-width: 0;
 `;
 
@@ -47,4 +49,14 @@ export const Points = styled.div`
   font-style: italic;
   font-weight: 900;
   white-space: nowrap;
+`;
+
+// Le rang, dans un rond gris.
+export const Rang = styled.span`
+  ${rondCentre}
+  flex-shrink: 0;
+  width: 1.75rem;
+  height: 1.75rem;
+  background: ${({ theme }) => theme.couleurs.gris300};
+  font-weight: ${({ theme }) => theme.graisses.tresForte};
 `;

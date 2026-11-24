@@ -1,5 +1,5 @@
-// Responsabilité : les petits textes d'un joueur (« Case 15 », « 3 pts », « tombé »…).
-// Utilisé dans : CarteJoueur
+// Responsabilité : les petits textes d'un joueur (« Case 15 », « 3 pts », « 1re place »…).
+// Utilisé dans : ClassementGeneral, ListeJoueurs, PartieTerminee, ProchaineCourse, ResultatCourse
 
 import { obtenirPiste } from '@/services/regles.js';
 
@@ -7,7 +7,7 @@ import { obtenirPiste } from '@/services/regles.js';
 const ETATS = { tombe: 'tombé', elimine: 'éliminé' };
 
 // 0 → « Départ », 15 → « Case 15 », plus de 30 → « Arrivé ».
-export function textePosition(position) {
+function textePosition(position) {
   if (position === 0) return 'Départ';
   if (position > obtenirPiste().nombreCases) return 'Arrivé';
   return `Case ${position}`;
@@ -19,6 +19,23 @@ export function textePoints(points) {
 }
 
 // 'tombe' → « tombé », 'elimine' → « éliminé », 'debout' → rien.
-export function texteEtat(etat) {
+function texteEtat(etat) {
   return ETATS[etat] ?? '';
+}
+
+// « Félix », ou « Bot 1 (bot) ».
+export function texteNom({ nom, bot }) {
+  return bot ? `${nom} (bot)` : nom;
+}
+
+// Pendant la course : « Magicien · Case 12 · tombé ».
+export function texteDetail({ personnage, position, etat }) {
+  return [personnage.nom, textePosition(position), texteEtat(etat)].filter(Boolean).join(' · ');
+}
+
+// À la fin de la course : place 1, 2, ou null s'il n'a pas franchi la ligne.
+export function textePlace(place) {
+  if (place === 1) return '1re place : a franchi la ligne en premier';
+  if (place === 2) return '2e place : a franchi la ligne en deuxième';
+  return "N'a pas franchi la ligne";
 }

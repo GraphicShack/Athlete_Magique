@@ -1,30 +1,22 @@
-// Responsabilité : la carte d'un joueur pendant la course (perso, case, points, état).
-// Utilisé dans : ListeJoueurs
+// Responsabilité : la carte d'un joueur (rang, avatar, nom, détail, points).
+// Utilisé dans : ListeJoueurs, ResultatCourse
 
 import AvatarPersonnage from '@/components/commun/jeu/AvatarPersonnage.jsx';
-import { textePosition, textePoints, texteEtat } from '@/utils/textesJoueur.js';
-import { Carte, Infos, Nom, Detail, Points } from './CarteJoueur.styles.js';
+import { Carte, Rang, Infos, Nom, Detail, Points } from './CarteJoueur.styles.js';
 
-// Affiche la carte du joueur ; « actif » la met en évidence.
-function CarteJoueur({ joueur, actif = false }) {
-  const { nom, bot, couleur, personnage, position, etat, points } = joueur;
-  const etatAffiche = texteEtat(etat);
-
+// Affiche la carte, avec une bordure de la couleur du joueur.
+// Props : nom, detail pis points (textes), couleur, personnage, actif (true = en évidence), rang (optionnel, dans un rond).
+function CarteJoueur({ nom, detail, points, couleur, personnage, actif = false, rang }) {
   return (
-    // aria-current : les lecteurs d'écran annoncent le joueur dont c'est le tour.
+    // aria-current : les lecteurs d'écran annoncent le joueur en évidence.
     <Carte $couleur={couleur} $actif={actif} aria-current={actif ? 'true' : undefined}>
+      {rang && <Rang>{rang}</Rang>}
       <AvatarPersonnage initiales={personnage.initiales} image={personnage.image} />
       <Infos>
-        <Nom>
-          {nom}
-          {bot && ' (bot)'}
-        </Nom>
-        <Detail>
-          {personnage.nom} · {textePosition(position)}
-          {etatAffiche && ` · ${etatAffiche}`}
-        </Detail>
+        <Nom>{nom}</Nom>
+        <Detail>{detail}</Detail>
       </Infos>
-      <Points>{textePoints(points)}</Points>
+      <Points>{points}</Points>
     </Carte>
   );
 }
