@@ -20,7 +20,7 @@ const placeDans = (rang) => {
 };
 
 // Affiche le Départ, les 30 cases pis l'Arrivée, avec les jetons sur leur case.
-function Piste({ jetons = [], rochers = [], etoiles = PISTE.casesEtoile, podium = [] }) {
+function Piste({ jetons = [], rochers = [], etoiles = PISTE.casesEtoile, podium = [], numerosVisibles = true }) {
   // Les jetons posés sur une case (ou null s'il n'y en a aucun).
   const jetonsSur = (position) => {
     const presents = jetons.filter((j) => j.position === position);
@@ -45,7 +45,7 @@ function Piste({ jetons = [], rochers = [], etoiles = PISTE.casesEtoile, podium 
       </Depart>
 
       {NUMEROS.map((numero) => (
-        <CasePiste key={numero} numero={numero} type={typeCase(numero)}>
+        <CasePiste key={numero} numero={numero} type={typeCase(numero)} numeroVisible={numerosVisibles}>
           {jetonsSur(numero)}
         </CasePiste>
       ))}

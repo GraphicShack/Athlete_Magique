@@ -7,7 +7,7 @@ import IconeRoueDentee from './IconeRoueDentee.jsx';
 import { BoutonRond } from './AccesParametres.styles.js';
 
 // Affiche le bouton pis la fenêtre des paramètres.
-function AccesParametres({ son }) {
+function AccesParametres({ son, affichage }) {
   const fenetre = useFenetre();
 
   return (
@@ -23,7 +23,7 @@ function AccesParametres({ son }) {
       </BoutonRond>
 
       <FenetreModale ouverte={fenetre.ouverte} onFermer={fenetre.fermer} titre="Paramètres" teinte="parametres">
-        <ContenuParametres son={son} />
+        <ContenuParametres son={son} affichage={affichage} />
       </FenetreModale>
     </>
   );

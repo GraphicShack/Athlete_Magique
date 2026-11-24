@@ -8,8 +8,8 @@ import Curseur from '@/components/commun/ui/reglages/Curseur.jsx';
 import ChoixSegmente from '@/components/commun/ui/reglages/ChoixSegmente.jsx';
 import { Grille, ChampsCompte, Actions } from './ContenuParametres.styles.js';
 
-// Affiche les panneaux de réglages (seul le son est branché pour l'instant).
-function ContenuParametres({ son }) {
+// Affiche les panneaux de réglages (branchés pour l'instant : le volume, la musique pis les numéros des cases).
+function ContenuParametres({ son, affichage }) {
   return (
     <>
       <Grille>
@@ -30,12 +30,16 @@ function ContenuParametres({ son }) {
         </Panneau>
 
         <Panneau titre="Affichage" teinte="affichage">
-          <ChoixSegmente etiquette="Taille du texte" options={['Petite', 'Normale', 'Grande']} valeurParDefaut="Normale" />
           <Interrupteur
             etiquette="Réduire les animations"
             description="Coupe le rideau entre les pages et les effets"
           />
-          <Interrupteur etiquette="Numéros des cases" description="Affichés sur la piste" defaultChecked />
+          <Interrupteur
+            etiquette="Numéros des cases"
+            description="Affichés sur la piste"
+            checked={affichage.numerosVisibles}
+            onChange={(evenement) => affichage.setNumerosVisibles(evenement.target.checked)}
+          />
         </Panneau>
 
         <Panneau titre="Partie" teinte="partie">

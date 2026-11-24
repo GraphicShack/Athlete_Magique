@@ -33,14 +33,15 @@ export const Numero = styled.span`
   white-space: nowrap;
 `;
 
-// Petit numéro discret, en haut à gauche des autres cases.
+// Petit numéro, en haut à gauche des autres cases.
 export const PetitNumero = styled.span`
   position: absolute;
+  z-index: 1; /* au-dessus du rocher */
   top: 6%;
   left: 8%;
-  font-size: clamp(0.45rem, 1.8cqw, 0.85rem);
+  font-size: clamp(0.5rem, 2.1cqw, 1rem);
   font-weight: ${({ theme }) => theme.graisses.forte};
-  opacity: 0.55;
+  opacity: 0.85;
 `;
 
 // Le dessin du rocher, centré dans la case (les jetons passent par-dessus).

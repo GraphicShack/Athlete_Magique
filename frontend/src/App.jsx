@@ -8,25 +8,29 @@ import MusiqueMenu from './components/son/MusiqueMenu.jsx';
 import FondAnime from './components/commun/ui/FondAnime.jsx';
 import { CoinFlottant } from './App.styles.js';
 
-// Garde les réglages du son pis place la page courante dans le cadre commun.
+// Garde les réglages pis place la page courante dans le cadre commun.
 function App() {
   // Réglages du son : gardés ici, le plus proche parent commun de la musique pis des paramètres.
   const [musiqueActive, setMusiqueActive] = useState(true);
   const [volume, setVolume] = useState(40); // 0 à 100
   const son = { musiqueActive, setMusiqueActive, volume, setVolume };
 
+  // Numéros sur la piste : gardés ici, parce que les paramètres les changent pis que la course les affiche.
+  const [numerosVisibles, setNumerosVisibles] = useState(true);
+
   return (
     // Classes Bootstrap : largeur maximale centrée, marges intérieures, pis au moins toute la hauteur de l'écran (la page peut remplir l'espace restant).
     <main className="container-xxl px-4 py-4 min-vh-100 d-flex flex-column">
       <FondAnime />
 
-      <Outlet />
+      {/* context : ce que les pages peuvent lire avec useOutletContext (voir CoursePage). */}
+      <Outlet context={{ numerosVisibles }} />
 
       <MusiqueMenu active={musiqueActive} volume={volume} />
 
       <CoinFlottant>
         <AccesRegles />
-        <AccesParametres son={son} />
+        <AccesParametres son={son} affichage={{ numerosVisibles, setNumerosVisibles }} />
       </CoinFlottant>
     </main>
   );

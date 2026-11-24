@@ -1,6 +1,6 @@
 // Responsabilité : l'écran de course (/course) ; place la piste, les joueurs, le tour pis le journal.
 
-import { useSearchParams } from 'react-router-dom';
+import { useOutletContext, useSearchParams } from 'react-router-dom';
 import EnTeteCourse from '@/components/course/EnTeteCourse.jsx';
 import ListeJoueurs from '@/components/course/joueurs/ListeJoueurs.jsx';
 import PanneauPiste from '@/components/course/piste/PanneauPiste.jsx';
@@ -19,6 +19,7 @@ function CoursePage() {
   const [parametres] = useSearchParams();
   const { course, rochers, joueurs, idActif, tour } = obtenirPartie(parametres.get('personnage'));
 
+  const { numerosVisibles } = useOutletContext(); // réglage gardé dans App
   useSuivreFinCourse(); // amène à l'écran de fin quand la course est finie
 
   // Démo du tour : dé, message, boutons pis choix du joueur (voir hooks/tour/useTourDemo.aRemplacer.js).
@@ -43,6 +44,7 @@ function CoursePage() {
             nombreCourses={course.nombreCourses}
             jetons={jetons}
             rochers={rochers}
+            numerosVisibles={numerosVisibles}
           />
         </Bloc>
         <Bloc $taille="contenu">
