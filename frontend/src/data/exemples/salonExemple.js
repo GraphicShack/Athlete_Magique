@@ -1,11 +1,12 @@
 // Responsabilité : un salon inventé pour tester la salle d'attente.
-// Utilisé dans : salon
+// Utilisé dans : salonSimule
 
 const SALON_EXEMPLE = {
   placesMax: 4,
   idHote: 'j1',
+  statut: 'attente', // 'attente' | 'selection' | 'course' | 'terminee'
   joueurs: [
-    { id: 'j1', nom: 'Félix', bot: false, pret: true },
+    { id: 'j1', nom: 'Félix', hote: true, bot: false, pret: true },
     { id: 'j2', nom: 'Angie', bot: false, pret: false },
     { id: 'j3', nom: 'Bot 1', bot: true, pret: true },
   ],

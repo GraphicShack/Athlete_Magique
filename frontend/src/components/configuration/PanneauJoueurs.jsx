@@ -31,7 +31,7 @@ function PanneauJoueurs({
       {estHote ? (
         <BarreChoix
           options={nombres}
-          valeurParDefaut={placesMax}
+          valeur={placesMax}
           onChange={onChoisirPlaces}
           inactifs={impossibles}
           aria-labelledby={idNombre}

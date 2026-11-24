@@ -1,5 +1,5 @@
 // Responsabilité : le bouton de l'app (rouge ou blanc), qui peut aussi être un lien vers une page.
-// Utilisé dans : AccesRegles.styles, Accroche, BoutonLancer, BoutonsAction, ClassementPage, ContenuParametres, FormulaireCompte, FormulaireInvite, PanneauCode, PanneauRejoindre, SelectionPage
+// Utilisé dans : AccesRegles.styles, Accroche, BoutonLancer, BoutonsAction, ContenuParametres, FormulaireCompte, FormulaireInvite, PanneauCode, PanneauRejoindre, SelectionPage
 
 import { Link } from 'react-router-dom';
 import { Base } from './Bouton.styles.js';

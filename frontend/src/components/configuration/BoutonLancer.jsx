@@ -4,11 +4,13 @@
 import Bouton from '@/components/commun/ui/Bouton.jsx';
 import CHEMINS from '@/chemins.js';
 
-// Renvoie le bon bouton selon si on est l'hôte pis s'il y a assez de joueurs.
-function BoutonLancer({ estHote, assezDeJoueurs }) {
+// Renvoie le bon bouton ; « Lancer » appelle onLancer.
+// Props : lancee (true = partie déjà lancée), estHote, assezDeJoueurs, onLancer.
+function BoutonLancer({ lancee, estHote, assezDeJoueurs, onLancer }) {
+  if (lancee) return <Bouton to={CHEMINS.selection}>Continuer la partie</Bouton>;
   if (!estHote) return <Bouton disabled>En attente de l’hôte…</Bouton>;
   if (!assezDeJoueurs) return <Bouton disabled>Il faut au moins 2 joueurs</Bouton>;
-  return <Bouton to={CHEMINS.selection}>Lancer la partie</Bouton>;
+  return <Bouton onClick={onLancer}>Lancer la partie</Bouton>;
 }
 
 export default BoutonLancer;

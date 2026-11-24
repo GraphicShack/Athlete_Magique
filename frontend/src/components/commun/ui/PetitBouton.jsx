@@ -1,5 +1,5 @@
 // Responsabilité : un petit bouton discret (ex. « Retirer », « Ajouter un bot »).
-// Utilisé dans : LigneJoueur, PlaceLibre
+// Utilisé dans : LigneJoueur, PlaceLibre, TableauHonneur
 
 import { Base } from './PetitBouton.styles.js';
 

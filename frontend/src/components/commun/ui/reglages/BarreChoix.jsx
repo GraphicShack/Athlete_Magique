@@ -1,12 +1,13 @@
 // Responsabilité : des boutons radio affichés comme une barre (ex. 2 · 3 · 4).
-// Utilisé dans : ChoixSegmente, PanneauJoueurs
+// Utilisé dans : ChoixSegmente, PanneauJoueurs, TableauHonneur
 
 import { useId } from 'react';
 import { Segments, Segment } from './BarreChoix.styles.js';
 
 // Affiche un bouton radio par option ; onChange reçoit l'option cochée.
-// Props : options (les choix : textes ou nombres), valeurParDefaut, onChange (reçoit le choix), inactifs (choix grisés), + aria-label ou aria-labelledby.
-function BarreChoix({ options, valeurParDefaut, onChange, inactifs = [], ...props }) {
+// Props : options (les choix : textes ou nombres), valeur (le choix coché), onChange (reçoit le choix), inactifs (choix grisés),
+// libelle (fonction : le texte d'un choix, sinon le choix lui-même), + aria-label ou aria-labelledby.
+function BarreChoix({ options, valeur, onChange, inactifs = [], libelle = (option) => option, ...props }) {
   // Les boutons radio d'un même groupe doivent partager un nom unique.
   const nom = useId();
 
@@ -18,11 +19,11 @@ function BarreChoix({ options, valeurParDefaut, onChange, inactifs = [], ...prop
             type="radio"
             name={nom}
             value={option}
-            defaultChecked={option === valeurParDefaut}
+            checked={option === valeur}
             disabled={inactifs.includes(option)}
-            onChange={() => onChange?.(option)}
+            onChange={() => onChange(option)}
           />
-          <span>{option}</span>
+          <span>{libelle(option)}</span>
         </Segment>
       ))}
     </Segments>

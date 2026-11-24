@@ -2,24 +2,23 @@
 // Utilisé dans : PanneauRejoindre
 
 import { useState } from 'react';
+import useDemande from '@/hooks/useDemande.js';
+import { rejoindreSalon } from '@/services/serveur/salon.js';
 import { nettoyerCode } from '@/utils/salon/nettoyerCode.js';
 import { LONGUEUR_CODE } from '@/utils/salon/genererCode.js';
 
-// Renvoie le code tapé, s'il est complet, le message, pis les fonctions changer / rejoindre.
+// Renvoie le code tapé, si on peut l'envoyer, le message, pis les fonctions changer / rejoindre.
 function useRejoindre() {
   const [code, setCode] = useState('');
-  const [message, setMessage] = useState(null);
+  const { enCours, erreur, faire } = useDemande();
 
-  // Le joueur tape : on garde la version nettoyée, pis on efface l'ancien message.
-  const changer = (texte) => {
-    setCode(nettoyerCode(texte));
-    setMessage(null);
+  return {
+    code,
+    changer: (texte) => setCode(nettoyerCode(texte)),
+    pret: code.length === LONGUEUR_CODE && !enCours,
+    message: enCours ? `Recherche de la partie ${code}…` : erreur,
+    rejoindre: () => faire(() => rejoindreSalon(code)),
   };
-
-  // Placeholder : on montre seulement ce qui se passera plus tard.
-  const rejoindre = () => setMessage(`Recherche de la partie ${code}… (bientôt disponible)`);
-
-  return { code, changer, complet: code.length === LONGUEUR_CODE, message, rejoindre };
 }
 
 export default useRejoindre;

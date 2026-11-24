@@ -1,5 +1,5 @@
 // Responsabilité : la carte encadrée style livret (bandeau de titre coloré + cadre rétro).
-// Utilisé dans : ApercuPersonnages, ContenuParametres, ContenuRegles, ContenuRegles.styles, ControleurDeTourActif, JournalEvenements, ListeJoueurs, PanneauCode, PanneauConnexion, PanneauJoueurs, PanneauPiste, PanneauRejoindre
+// Utilisé dans : ApercuPersonnages, ConfigurationPage, ContenuParametres, ContenuRegles, ContenuRegles.styles, ControleurDeTourActif, JournalEvenements, ListeJoueurs, PanneauCode, PanneauConnexion, PanneauJoueurs, PanneauPiste, PanneauRejoindre, TableauHonneur
 
 import { Cadre, Bandeau, Titre, Aside, Contenu } from './Panneau.styles.js';
 

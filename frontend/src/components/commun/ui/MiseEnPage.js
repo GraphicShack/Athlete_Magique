@@ -1,5 +1,5 @@
 // Responsabilité : la disposition commune des pages (2 colonnes, tout s'empile sur cell).
-// Utilisé dans : ConfigurationPage
+// Utilisé dans : ClassementPage.styles, ConfigurationPage
 
 import styled from 'styled-components';
 

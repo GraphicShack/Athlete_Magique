@@ -1,20 +1,38 @@
-// Responsabilité : la page Classement (pour l'instant : un titre pis une pluie de confettis).
+// Responsabilité : la page du tableau d'honneur (/classement).
 // Utilisé dans : routes
 
-import Bouton from '@/components/commun/ui/Bouton.jsx';
+import { useState } from 'react';
+import EnTetePage from '@/components/commun/ui/EnTetePage.jsx';
 import PluieConfettis from '@/components/commun/ui/PluieConfettis.jsx';
-import CHEMINS from '@/chemins.js';
 import TitreArcEnCiel from '@/components/commun/ui/TitreArcEnCiel.jsx';
-import { Scene } from './ClassementPage.styles.js';
+import TableauHonneur from '@/components/classement/TableauHonneur.jsx';
+import useScores from '@/hooks/classement/useScores.js';
+import CHEMINS from '@/chemins.js';
+import { Scene, SousTitre, Scores } from './ClassementPage.styles.js';
 
-// Affiche le titre, le retour à l'accueil pis la pluie de confettis.
+// Va chercher les scores, pis affiche l'en-tête, le titre, les meilleurs scores pis la pluie de confettis.
 function ClassementPage() {
+  const [filtre, setFiltre] = useState('tous');
+  const { scores, etat, reessayer } = useScores(filtre);
+
   return (
     <Scene>
-      <TitreArcEnCiel className="mb-4">Classement</TitreArcEnCiel>
+      <EnTetePage lien={{ libelle: "Retour à l'accueil", to: CHEMINS.accueil }} />
+
       <div>
-        <Bouton to={CHEMINS.accueil}>Retour à l'accueil</Bouton>
+        <TitreArcEnCiel>Tableau d'honneur</TitreArcEnCiel>
+        <SousTitre>Les meilleurs scores finaux après les 3 courses, joueurs invités et comptes réunis.</SousTitre>
       </div>
+
+      <Scores>
+        <TableauHonneur
+          scores={scores}
+          etat={etat}
+          filtre={filtre}
+          onFiltrer={setFiltre}
+          onReessayer={reessayer}
+        />
+      </Scores>
 
       <PluieConfettis nombre={70} />
     </Scene>

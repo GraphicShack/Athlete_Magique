@@ -1,18 +1,20 @@
 // Responsabilité : la salle d'attente (/configuration) ; connecte le salon aux panneaux.
 // Utilisé dans : routes
 
-import { useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
 import EnTetePage from '@/components/commun/ui/EnTetePage.jsx';
 import EtapesPartie from '@/components/commun/jeu/EtapesPartie.jsx';
+import Panneau from '@/components/commun/ui/Panneau.jsx';
+import MessageVide from '@/components/commun/ui/MessageVide.jsx';
 import TitreArcEnCiel from '@/components/commun/ui/TitreArcEnCiel.jsx';
 import { Page, GrilleDeuxColonnes } from '@/components/commun/ui/MiseEnPage.js';
 import PanneauJoueurs from '@/components/configuration/PanneauJoueurs.jsx';
 import PanneauCode from '@/components/configuration/PanneauCode.jsx';
 import PanneauRejoindre from '@/components/configuration/PanneauRejoindre.jsx';
 import BoutonLancer from '@/components/configuration/BoutonLancer.jsx';
-import { obtenirSalon } from '@/services/salon.js';
-import useJoueursSalon from '@/hooks/salon/useJoueursSalon.js';
+import { changerPlaces, ajouterBot, retirerJoueur, lancerPartie } from '@/services/serveur/salon.js';
+import useSalon from '@/hooks/salon/useSalon.js';
+import useSuivrePartie from '@/hooks/salon/useSuivrePartie.js';
+import useDemande from '@/hooks/useDemande.js';
 import { placesLibres, nombresImpossibles } from '@/utils/salon/placesSalon.js';
 import CHEMINS from '@/chemins.js';
 import { ColonneDroite } from './ConfigurationPage.styles.js';
@@ -20,13 +22,11 @@ import { ColonneDroite } from './ConfigurationPage.styles.js';
 // Les nombres de places possibles.
 const NOMBRES = [2, 3, 4];
 
-// Va chercher le salon, garde les joueurs pis les places, pis les donne aux panneaux.
+// Va chercher le salon pis le donne aux panneaux ; chaque clic est envoyé au serveur.
 function ConfigurationPage() {
-  const [parametres] = useSearchParams();
-  const salon = obtenirSalon(parametres.has('invite'));
-
-  const { joueurs, retirer, ajouterBot } = useJoueursSalon(salon.joueurs);
-  const [placesMax, setPlacesMax] = useState(salon.placesMax); // nb de places choisi par l'hôte
+  const salon = useSalon();
+  const { erreur, faire } = useDemande();
+  useSuivrePartie(salon?.statut);
 
   return (
     <Page>
@@ -35,21 +35,33 @@ function ConfigurationPage() {
       <TitreArcEnCiel>Salle d'attente</TitreArcEnCiel>
 
       <GrilleDeuxColonnes>
-        <PanneauJoueurs
-          joueurs={joueurs}
-          placesMax={placesMax}
-          libres={placesLibres(joueurs.length, placesMax)}
-          nombres={NOMBRES}
-          impossibles={nombresImpossibles(NOMBRES, joueurs.length)}
-          estHote={salon.estHote}
-          onChoisirPlaces={setPlacesMax}
-          onRetirer={retirer}
-          onAjouterBot={ajouterBot}
-        >
-          <BoutonLancer estHote={salon.estHote} assezDeJoueurs={joueurs.length >= 2} />
-        </PanneauJoueurs>
+        {salon ? (
+          <PanneauJoueurs
+            joueurs={salon.joueurs}
+            placesMax={salon.placesMax}
+            libres={placesLibres(salon.joueurs.length, salon.placesMax)}
+            nombres={NOMBRES}
+            impossibles={nombresImpossibles(NOMBRES, salon.joueurs.length)}
+            estHote={salon.estHote}
+            onChoisirPlaces={(nombre) => faire(() => changerPlaces(nombre))}
+            onRetirer={(id) => faire(() => retirerJoueur(id))}
+            onAjouterBot={() => faire(ajouterBot)}
+          >
+            <BoutonLancer
+              lancee={salon.statut === 'selection'}
+              estHote={salon.estHote}
+              assezDeJoueurs={salon.joueurs.length >= 2}
+              onLancer={() => faire(lancerPartie)}
+            />
+            {erreur && <MessageVide role="alert">{erreur}</MessageVide>}
+          </PanneauJoueurs>
+        ) : (
+          <Panneau titre="Les joueurs" teinte="joueurs" enEvidence>
+            <MessageVide role="status">Aucun salon. Entre un code, ou retourne à l'accueil pour créer une partie.</MessageVide>
+          </Panneau>
+        )}
         <ColonneDroite>
-          <PanneauCode code={salon.code} />
+          {salon && <PanneauCode code={salon.code} />}
           <PanneauRejoindre />
         </ColonneDroite>
       </GrilleDeuxColonnes>

@@ -7,14 +7,14 @@ import Bouton from '@/components/commun/ui/Bouton.jsx';
 import useRejoindre from '@/hooks/salon/useRejoindre.js';
 import { Formulaire, Aide, Message } from './PanneauRejoindre.styles.js';
 
-// Affiche le formulaire ; Rejoindre est grisé tant que le code a pas 6 caractères.
+// Affiche le formulaire ; Rejoindre est grisé tant que le code a pas 6 caractères, ou pendant la recherche.
 function PanneauRejoindre() {
-  const { code, changer, complet, message, rejoindre } = useRejoindre();
+  const { code, changer, pret, message, rejoindre } = useRejoindre();
 
   // « Entrée » dans le champ ou clic sur le bouton : on rejoint (sans recharger la page).
   const surEnvoi = (evenement) => {
     evenement.preventDefault();
-    if (complet) rejoindre();
+    if (pret) rejoindre();
   };
 
   return (
@@ -30,7 +30,7 @@ function PanneauRejoindre() {
           autoComplete="off"
           spellCheck={false}
         />
-        <Bouton type="submit" disabled={!complet}>
+        <Bouton type="submit" disabled={!pret}>
           Rejoindre
         </Bouton>
       </Formulaire>

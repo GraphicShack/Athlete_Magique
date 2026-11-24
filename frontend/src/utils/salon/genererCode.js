@@ -1,5 +1,5 @@
 // Responsabilité : invente un code de salon au hasard (ex. KZ4P7Q).
-// Utilisé dans : nettoyerCode, salon, useRejoindre
+// Utilisé dans : nettoyerCode, salonSimule, useRejoindre
 
 // Les caractères permis : lettres et chiffres, sans 0, O, 1 et I.
 export const CARACTERES_CODE = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
