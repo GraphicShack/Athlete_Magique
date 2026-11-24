@@ -1,5 +1,4 @@
 // Responsabilité : garde la carte au centre du carrousel pis le perso choisi.
-// Utilisé dans : SelectionPage
 
 import { useState } from 'react';
 

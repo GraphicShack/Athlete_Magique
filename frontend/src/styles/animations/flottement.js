@@ -1,5 +1,4 @@
 // Responsabilité : le petit va-et-vient vertical en boucle (titres, cartes).
-// Utilisé dans : SelectionPage.styles, TitreArcEnCiel, TitreArcEnCiel.styles
 
 import { css, keyframes } from 'styled-components';
 

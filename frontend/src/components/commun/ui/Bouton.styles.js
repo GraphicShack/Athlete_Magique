@@ -1,5 +1,4 @@
 // Responsabilité : définir le style de ce composant (styled-components).
-// Utilisé dans : Bouton
 
 import styled, { css } from 'styled-components';
 

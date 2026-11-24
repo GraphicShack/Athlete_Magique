@@ -1,5 +1,4 @@
 // Responsabilité : la carte d'un joueur (rang, avatar, nom, détail, points).
-// Utilisé dans : ListeJoueurs, ResultatCourse
 
 import AvatarPersonnage from '@/components/commun/jeu/AvatarPersonnage.jsx';
 import { Carte, Rang, Infos, Nom, Detail, Points } from './CarteJoueur.styles.js';

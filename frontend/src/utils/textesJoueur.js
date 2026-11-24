@@ -1,5 +1,4 @@
 // Responsabilité : les petits textes d'un joueur (« Case 15 », « 3 pts », « 1re place »…).
-// Utilisé dans : ClassementGeneral, ListeJoueurs, PartieTerminee, ProchaineCourse, ResultatCourse
 
 import { obtenirPiste } from '@/services/regles.js';
 

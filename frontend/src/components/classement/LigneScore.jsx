@@ -1,5 +1,4 @@
 // Responsabilité : une ligne du tableau d'honneur (rang, joueur, type, score, date).
-// Utilisé dans : TableauHonneur
 
 import Etiquette from '@/components/commun/ui/Etiquette.jsx';
 import { texteDate } from '@/utils/classement/texteDate.js';

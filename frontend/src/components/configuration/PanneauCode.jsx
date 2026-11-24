@@ -1,5 +1,4 @@
 // Responsabilité : affiche le code de la partie en gros avec un bouton pour le copier.
-// Utilisé dans : ConfigurationPage
 
 import Panneau from '@/components/commun/ui/Panneau.jsx';
 import Bouton from '@/components/commun/ui/Bouton.jsx';

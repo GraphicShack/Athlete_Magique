@@ -1,5 +1,4 @@
 // Responsabilité : affiche le panneau du tour (qui joue, étape, dé, message pis les boutons).
-// Utilisé dans : CoursePage
 
 import Panneau from '@/components/commun/ui/Panneau.jsx';
 import AvatarPersonnage from '@/components/commun/jeu/AvatarPersonnage.jsx';

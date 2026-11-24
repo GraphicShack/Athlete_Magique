@@ -1,5 +1,4 @@
 // Responsabilité : ajoute ce qui manque à un événement (id, champs vides).
-// Utilisé dans : journal
 
 // Compteur pour donner un id unique à chaque événement.
 let dernierId = 0;

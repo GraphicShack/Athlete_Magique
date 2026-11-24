@@ -1,5 +1,4 @@
 // Responsabilité : transforme les joueurs en jetons pour la piste.
-// Utilisé dans : useJoueursCourse
 
 import { sautEntre } from '@/utils/piste/dispositionPiste.js';
 

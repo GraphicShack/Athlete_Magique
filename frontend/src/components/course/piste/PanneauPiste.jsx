@@ -1,5 +1,4 @@
 // Responsabilité : le panneau « La piste » : le plateau pis sa légende.
-// Utilisé dans : CoursePage
 
 import Panneau from '@/components/commun/ui/Panneau.jsx';
 import Etiquette from '@/components/commun/ui/Etiquette.jsx';

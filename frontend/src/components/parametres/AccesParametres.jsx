@@ -1,5 +1,4 @@
 // Responsabilité : le bouton roue dentée qui ouvre la fenêtre des paramètres.
-// Utilisé dans : App
 
 import FenetreModale from '@/components/commun/ui/FenetreModale.jsx';
 import useFenetre from '@/hooks/useFenetre.js';

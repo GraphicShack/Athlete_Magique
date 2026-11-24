@@ -1,5 +1,4 @@
 // Responsabilité : définir le style de ce composant (styled-components).
-// Utilisé dans : PanneauCode
 
 import styled from 'styled-components';
 

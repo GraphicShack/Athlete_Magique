@@ -1,5 +1,4 @@
 // Responsabilité : la géométrie de la piste (colonne, rangée, couleur de chaque case).
-// Utilisé dans : CasePiste, Piste, Piste.styles, jetons
 
 // Taille de la grille du plateau.
 export const COLONNES = 8;

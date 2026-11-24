@@ -1,5 +1,4 @@
 // Responsabilité : ce que le faux serveur répond pour le tableau d'honneur.
-// Utilisé dans : serveurSimule
 
 import SCORES_EXEMPLE from '@/data/exemples/scoresExemple.aSupprimer.js';
 

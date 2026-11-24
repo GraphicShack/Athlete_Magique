@@ -1,5 +1,4 @@
 // Responsabilité : définir le style des blocs propres à cette page.
-// Utilisé dans : ConfigurationPage
 
 import styled from 'styled-components';
 

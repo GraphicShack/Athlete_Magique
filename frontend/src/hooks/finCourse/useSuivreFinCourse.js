@@ -1,5 +1,4 @@
 // Responsabilité : amène à l'écran de fin quand le serveur dit que la course est finie.
-// Utilisé dans : CoursePage
 
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';

@@ -1,5 +1,4 @@
 // Responsabilité : fait circuler les événements du journal (patron Observateur).
-// Utilisé dans : simulationJournal, useEvenementsRecus, useTourDemo
 
 import { completerEvenement } from '@/utils/journal/completerEvenement.js';
 

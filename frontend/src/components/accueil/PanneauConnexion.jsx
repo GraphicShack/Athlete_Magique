@@ -1,5 +1,4 @@
 // Responsabilité : regroupe les 2 façons de commencer (invité ou compte), séparées par « ou ».
-// Utilisé dans : AccueilPage
 
 import Panneau from '@/components/commun/ui/Panneau.jsx';
 import FormulaireInvite from './FormulaireInvite.jsx';

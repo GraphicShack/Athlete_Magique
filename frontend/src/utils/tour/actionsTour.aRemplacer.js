@@ -1,5 +1,4 @@
 // Responsabilité : l'état du tour pis toutes les façons dont il change (une fonction par action).
-// Utilisé dans : useTourDemo
 
 import { evenementBouton, evenementDebutTour, evenementFinTour, evenementLancer, evenementRelance } from '@/utils/tour/evenementsTour.aRemplacer.js';
 

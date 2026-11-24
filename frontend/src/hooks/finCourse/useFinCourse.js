@@ -1,5 +1,4 @@
 // Responsabilité : donne la fin de course à la page, avec le perso complet de chaque joueur.
-// Utilisé dans : FinCoursePage
 
 import { useSyncExternalStore } from 'react';
 import { finRecue } from '@/services/serveur/finCourse.js';

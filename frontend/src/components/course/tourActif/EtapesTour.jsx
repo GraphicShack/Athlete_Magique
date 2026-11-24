@@ -1,5 +1,4 @@
 // Responsabilité : les 4 étapes du tour en pastilles, l'étape en cours en évidence.
-// Utilisé dans : ControleurDeTourActif
 
 import { ListeEtapes, Etape, Pastille, Libelle } from './EtapesTour.styles.js';
 

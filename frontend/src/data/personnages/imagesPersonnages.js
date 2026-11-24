@@ -1,5 +1,4 @@
 // Responsabilité : relie l'id de chaque perso à son image.
-// Utilisé dans : personnages
 
 import banane from '@/assets/images/banane.png';
 import lievre from '@/assets/images/Lievre.png';

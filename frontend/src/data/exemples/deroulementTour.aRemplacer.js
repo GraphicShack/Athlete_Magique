@@ -1,5 +1,4 @@
 // Responsabilité : les boutons pis les consignes de chaque étape du tour, par perso (en attendant le moteur).
-// Utilisé dans : partie
 
 // Options d'un bouton : effet (ce qu'il fait, voir utils/tour/actionsTour.aRemplacer.js), journal (événement à noter),
 // parPouvoir, bonus, multiplicateur.

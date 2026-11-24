@@ -1,5 +1,4 @@
 // Responsabilité : définir le style de ce composant (styled-components).
-// Utilisé dans : Confettis, PluieConfettis, PluieConfettis.styles
 
 import styled, { css } from 'styled-components';
 import { explosion } from '@/styles/animations/confettis.js';

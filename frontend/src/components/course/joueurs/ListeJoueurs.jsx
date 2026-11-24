@@ -1,5 +1,4 @@
 // Responsabilité : le panneau « Joueurs » de la course, dans l'ordre de jeu.
-// Utilisé dans : CoursePage
 
 import { useTheme } from 'styled-components';
 import Panneau from '@/components/commun/ui/Panneau.jsx';

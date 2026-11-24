@@ -1,5 +1,4 @@
 // Responsabilité : le fil des étapes de la partie (Configuration, Personnages, Course).
-// Utilisé dans : ConfigurationPage, EnTeteCourse, SelectionPage
 
 import { ListeEtapes, Etape, Pastille } from './EtapesPartie.styles.js';
 

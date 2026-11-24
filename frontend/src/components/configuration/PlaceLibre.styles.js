@@ -1,5 +1,4 @@
 // Responsabilité : définir le style de ce composant (styled-components).
-// Utilisé dans : PlaceLibre
 
 import styled from 'styled-components';
 

@@ -1,5 +1,4 @@
 // Responsabilité : la liste des pages pis leurs adresses (le routeur).
-// Utilisé dans : main
 
 import { createBrowserRouter } from 'react-router-dom';
 import CHEMINS from './chemins.js';

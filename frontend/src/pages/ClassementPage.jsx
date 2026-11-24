@@ -1,5 +1,4 @@
 // Responsabilité : la page du tableau d'honneur (/classement).
-// Utilisé dans : routes
 
 import { useState } from 'react';
 import EnTetePage from '@/components/commun/ui/EnTetePage.jsx';

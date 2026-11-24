@@ -1,5 +1,4 @@
 // Responsabilité : écrit la phrase complète d'un événement (phrase + cause).
-// Utilisé dans : useJournal
 
 import { PHRASES } from '@/utils/journal/phrasesJournal.js';
 

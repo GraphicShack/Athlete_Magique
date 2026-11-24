@@ -1,5 +1,4 @@
 // Responsabilité : donne le salon aux pages, toujours à jour.
-// Utilisé dans : ConfigurationPage
 
 import { useSyncExternalStore } from 'react';
 import { salonRecu } from '@/services/serveur/salon.js';

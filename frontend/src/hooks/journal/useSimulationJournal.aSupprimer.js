@@ -1,5 +1,4 @@
 // Responsabilité : lance la simulation du journal tant que la page est ouverte.
-// Utilisé dans : useJournal
 
 import { useEffect } from 'react';
 import { demarrerSimulation } from '@/services/journal/simulationJournal.aSupprimer.js';

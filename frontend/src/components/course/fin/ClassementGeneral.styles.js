@@ -1,5 +1,4 @@
 // Responsabilité : définir le style de ce composant (styled-components).
-// Utilisé dans : ClassementGeneral
 
 import styled from 'styled-components';
 import ContenuPanneau from '@/components/commun/ui/ContenuPanneau.js';

@@ -1,5 +1,4 @@
 // Responsabilité : la salle d'attente (/configuration) ; connecte le salon aux panneaux.
-// Utilisé dans : routes
 
 import EnTetePage from '@/components/commun/ui/EnTetePage.jsx';
 import EtapesPartie from '@/components/commun/jeu/EtapesPartie.jsx';

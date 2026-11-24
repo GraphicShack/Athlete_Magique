@@ -1,5 +1,4 @@
 // Responsabilité : le texte dans un panneau (petite taille, bons espaces entre paragraphes, listes pis tableaux).
-// Utilisé dans : ClassementGeneral.styles, ContenuRegles, PartieTerminee, ProchaineCourse
 
 import styled from 'styled-components';
 

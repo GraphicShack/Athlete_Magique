@@ -1,5 +1,4 @@
 // Responsabilité : le panneau affiché après la dernière course (gagnant pis bouton Classement).
-// Utilisé dans : FinCoursePage
 
 import Panneau from '@/components/commun/ui/Panneau.jsx';
 import ContenuPanneau from '@/components/commun/ui/ContenuPanneau.js';

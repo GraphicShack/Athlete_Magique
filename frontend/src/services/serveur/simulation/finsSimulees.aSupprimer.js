@@ -1,5 +1,4 @@
 // Responsabilité : ce que le faux serveur envoie à la fin d'une course.
-// Utilisé dans : serveurSimule
 
 import FINS_EXEMPLE from '@/data/exemples/finsExemple.aSupprimer.js';
 

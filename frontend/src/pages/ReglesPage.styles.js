@@ -1,5 +1,4 @@
 // Responsabilité : définir le style des blocs propres à cette page (disposition, espaces…).
-// Utilisé dans : ReglesPage
 
 import styled from 'styled-components';
 

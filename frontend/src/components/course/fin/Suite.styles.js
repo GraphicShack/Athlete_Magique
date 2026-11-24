@@ -1,5 +1,4 @@
 // Responsabilité : la disposition du panneau du bas (texte pis boutons).
-// Utilisé dans : PartieTerminee, ProchaineCourse
 
 import styled from 'styled-components';
 

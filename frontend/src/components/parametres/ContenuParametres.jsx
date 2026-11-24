@@ -1,5 +1,4 @@
 // Responsabilité : le contenu de la fenêtre des paramètres (son, affichage, partie, compte).
-// Utilisé dans : AccesParametres
 
 import Panneau from '@/components/commun/ui/Panneau.jsx';
 import Bouton from '@/components/commun/ui/Bouton.jsx';

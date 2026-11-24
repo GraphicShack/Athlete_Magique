@@ -1,5 +1,4 @@
 // Responsabilité : fait une demande au serveur pis garde si elle est en cours ou refusée.
-// Utilisé dans : ConfigurationPage, FormulaireInvite, ProchaineCourse, useRejoindre
 
 import { useState } from 'react';
 

@@ -1,5 +1,4 @@
 // Responsabilité : une place vide dans le salon (avec « Ajouter un bot » pour l'hôte).
-// Utilisé dans : PanneauJoueurs
 
 import { Carte, Texte } from './PlaceLibre.styles.js';
 import PetitBouton from '@/components/commun/ui/PetitBouton.jsx';

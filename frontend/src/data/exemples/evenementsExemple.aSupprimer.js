@@ -1,5 +1,4 @@
 // Responsabilité : des événements de journal inventés, au format standard (en attendant le serveur).
-// Utilisé dans : simulationJournal
 
 const EVENEMENTS_EXEMPLE = [
   {

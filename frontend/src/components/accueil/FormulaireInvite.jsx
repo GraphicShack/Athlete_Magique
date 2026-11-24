@@ -1,5 +1,4 @@
 // Responsabilité : le champ du pseudo pis le bouton « Jouer en invité ».
-// Utilisé dans : PanneauConnexion
 
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';

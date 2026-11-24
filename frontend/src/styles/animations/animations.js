@@ -1,5 +1,4 @@
 // Responsabilité : les petites animations réutilisables (fondu, apparaître, grandir…).
-// Utilisé dans : ApercuPersonnages.styles, Carrousel.styles, FenetreModale.styles, rideau
 
 import { keyframes } from 'styled-components';
 

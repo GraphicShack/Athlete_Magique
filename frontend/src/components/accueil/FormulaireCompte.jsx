@@ -1,5 +1,4 @@
 // Responsabilité : les champs pis le bouton pour se connecter avec un compte.
-// Utilisé dans : PanneauConnexion
 
 import ChampTexte from '@/components/commun/ui/ChampTexte.jsx';
 import Bouton from '@/components/commun/ui/Bouton.jsx';

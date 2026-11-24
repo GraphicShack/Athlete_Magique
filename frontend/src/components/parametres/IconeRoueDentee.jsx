@@ -1,5 +1,4 @@
 // Responsabilité : l'icône SVG de la roue dentée.
-// Utilisé dans : AccesParametres
 
 function IconeRoueDentee() {
   return (

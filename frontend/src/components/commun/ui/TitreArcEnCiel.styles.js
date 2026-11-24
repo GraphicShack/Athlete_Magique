@@ -1,5 +1,4 @@
 // Responsabilité : définir le style de ce composant (styled-components).
-// Utilisé dans : TitreArcEnCiel
 
 import styled from 'styled-components';
 import { flottement } from '@/styles/animations/flottement.js';

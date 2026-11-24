@@ -1,5 +1,4 @@
 // Responsabilité : les 10 persos pis le texte de leur pouvoir (seule source de ces textes).
-// Utilisé dans : personnages
 // Inspiration : le jeu de société « Magical Athlete » (règles, persos, plateau), manuel : https://gamers-hq.de/media/pdf/g0/6d/14/How-to-play-MAGICAL-ATHLETE.pdf
 
 const PERSONNAGES = [

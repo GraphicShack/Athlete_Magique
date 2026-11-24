@@ -1,5 +1,4 @@
 // Responsabilité : fait semblant d'être le serveur (à enlever quand le vrai est branché).
-// Utilisé dans : serveur
 
 import { SALON_DEPART, repondreSalon } from './salonSimule.aSupprimer.js';
 import { prochaineFin, finDemandee } from './finsSimulees.aSupprimer.js';

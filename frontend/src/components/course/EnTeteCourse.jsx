@@ -1,5 +1,4 @@
 // Responsabilité : l'en-tête de la course (fil d'étapes + « Quitter la partie »).
-// Utilisé dans : CoursePage
 
 import EnTetePage from '@/components/commun/ui/EnTetePage.jsx';
 import EtapesPartie from '@/components/commun/jeu/EtapesPartie.jsx';

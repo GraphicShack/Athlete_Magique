@@ -1,5 +1,4 @@
 // Responsabilité : définir le style de ce composant (styled-components).
-// Utilisé dans : ChampTexte
 
 import styled from 'styled-components';
 import { cacheVisuellement } from '@/styles/base/utilitaires.js';

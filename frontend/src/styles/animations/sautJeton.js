@@ -1,5 +1,4 @@
 // Responsabilité : le saut en arc d'un pion d'une case à l'autre.
-// Utilisé dans : Jeton.styles, useDeplacementAnime
 
 import { css, keyframes } from 'styled-components';
 

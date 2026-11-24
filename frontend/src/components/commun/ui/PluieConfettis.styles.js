@@ -1,5 +1,4 @@
 // Responsabilité : définir le style d'un morceau de pluie. Sa forme est la même que pour
-// Utilisé dans : PluieConfettis
 
 import styled from 'styled-components';
 import { pluie } from '@/styles/animations/confettis.js';

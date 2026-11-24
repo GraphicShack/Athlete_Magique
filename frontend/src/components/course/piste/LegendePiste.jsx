@@ -1,5 +1,4 @@
 // Responsabilité : la légende sous la piste (étoile, rocher, tombé, pion actif).
-// Utilisé dans : PanneauPiste
 
 import { useTheme } from 'styled-components';
 import Jeton from '@/components/commun/jeu/Jeton.jsx';

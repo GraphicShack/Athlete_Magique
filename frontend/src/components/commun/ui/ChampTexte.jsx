@@ -1,5 +1,4 @@
 // Responsabilité : un champ texte avec son étiquette en haut.
-// Utilisé dans : ContenuParametres, FormulaireCompte, FormulaireInvite, PanneauRejoindre
 
 import { useId } from 'react';
 import { Groupe, Etiquette, Champ } from './ChampTexte.styles.js';

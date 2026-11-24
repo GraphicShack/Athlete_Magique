@@ -1,5 +1,4 @@
 // Responsabilité : le panneau des joueurs du salon (affiche seulement, tout lui est donné).
-// Utilisé dans : ConfigurationPage
 
 import { useId } from 'react';
 import { useTheme } from 'styled-components';

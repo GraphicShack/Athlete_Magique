@@ -1,5 +1,4 @@
 // Responsabilité : le pion d'un joueur sur la piste (couché s'il est tombé, contour rouge si c'est son tour).
-// Utilisé dans : LegendePiste, Piste
 
 import { Disque, Image } from './Jeton.styles.js';
 

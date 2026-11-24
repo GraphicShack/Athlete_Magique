@@ -1,5 +1,4 @@
 // Responsabilité : fait vivre le tour pour la démo (garde l'état, applique les actions, prépare l'affichage).
-// Utilisé dans : CoursePage
 
 import { useState } from 'react';
 import useDeplacementAnime from '@/hooks/tour/useDeplacementAnime.js';

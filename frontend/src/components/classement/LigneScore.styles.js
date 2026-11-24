@@ -1,5 +1,4 @@
 // Responsabilité : définir le style de ce composant (styled-components).
-// Utilisé dans : LigneScore
 
 import styled from 'styled-components';
 import { cacheSurCell, Chiffre } from '@/components/commun/ui/Tableau.styles.js';

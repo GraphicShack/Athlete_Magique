@@ -1,5 +1,4 @@
 // Responsabilité : ce que le faux serveur répond aux demandes du salon.
-// Utilisé dans : serveurSimule
 
 import SALON_EXEMPLE from '@/data/exemples/salonExemple.aSupprimer.js';
 import { genererCode } from '@/utils/salon/genererCode.js';

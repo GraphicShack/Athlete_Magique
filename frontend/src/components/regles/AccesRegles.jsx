@@ -1,5 +1,4 @@
 // Responsabilité : le bouton « ? Règles » qui ouvre les règles dans une fenêtre (caché sur la page Règles).
-// Utilisé dans : App
 
 import { useLocation } from 'react-router-dom';
 import FenetreModale from '@/components/commun/ui/FenetreModale.jsx';

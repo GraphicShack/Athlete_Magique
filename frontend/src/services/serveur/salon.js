@@ -1,5 +1,4 @@
 // Responsabilité : le salon reçu du serveur, pis les demandes qu'on lui fait.
-// Utilisé dans : ConfigurationPage, FormulaireInvite, useRejoindre, useSalon
 
 import { envoyer, ecouter } from '@/services/serveur/serveur.js';
 import { creerBoite } from '@/utils/creerBoite.js';

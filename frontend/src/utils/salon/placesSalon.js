@@ -1,5 +1,4 @@
 // Responsabilité : les calculs sur les places du salon (places libres, choix impossibles).
-// Utilisé dans : ConfigurationPage
 
 export function placesLibres(nombreJoueurs, placesMax) {
   const combien = Math.max(placesMax - nombreJoueurs, 0);

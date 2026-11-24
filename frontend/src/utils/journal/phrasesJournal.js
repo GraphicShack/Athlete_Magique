@@ -1,5 +1,4 @@
 // Responsabilité : la phrase de base de chaque type d'événement.
-// Utilisé dans : texteEvenement
 
 import { nombreDeCases } from '@/utils/nombreDeCases.js';
 

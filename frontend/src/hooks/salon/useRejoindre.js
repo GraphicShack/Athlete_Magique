@@ -1,5 +1,4 @@
 // Responsabilité : garde le code tapé pour rejoindre une partie pis le message à afficher.
-// Utilisé dans : PanneauRejoindre
 
 import { useState } from 'react';
 import useDemande from '@/hooks/useDemande.js';

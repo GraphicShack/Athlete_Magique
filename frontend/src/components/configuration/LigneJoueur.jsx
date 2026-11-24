@@ -1,5 +1,4 @@
 // Responsabilité : un joueur dans le salon (numéro, nom, hôte/bot, prêt ou pas, bouton Retirer).
-// Utilisé dans : PanneauJoueurs
 
 import Etiquette from '@/components/commun/ui/Etiquette.jsx';
 import PetitBouton from '@/components/commun/ui/PetitBouton.jsx';

@@ -1,5 +1,4 @@
 // Responsabilité : garde si une fenêtre est ouverte ou fermée.
-// Utilisé dans : AccesParametres, AccesRegles
 
 import { useState } from 'react';
 

@@ -1,5 +1,4 @@
 // Responsabilité : définir le style des blocs propres à cette page (disposition, espaces…).
-// Utilisé dans : SelectionPage
 
 import styled, { css } from 'styled-components';
 import { flottement } from '@/styles/animations/flottement.js';

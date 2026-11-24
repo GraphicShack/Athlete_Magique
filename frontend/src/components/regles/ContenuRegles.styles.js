@@ -1,5 +1,4 @@
 // Responsabilité : définir le style de ce composant (styled-components).
-// Utilisé dans : ContenuRegles
 
 import styled from 'styled-components';
 import Panneau from '@/components/commun/ui/Panneau.jsx';

@@ -1,5 +1,4 @@
 // Responsabilité : la seule porte vers le serveur.
-// Utilisé dans : finCourse, salon, scores
 // À REMPLIR : le vrai code est plus bas, en commentaire (le fichier reste).
 
 // demander(route)            : lire une fois. Renvoie une promesse avec les données.

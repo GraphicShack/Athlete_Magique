@@ -1,5 +1,4 @@
 // Responsabilité : une case de la piste (normale, étoile ou rocher) avec ses pions.
-// Utilisé dans : Piste
 
 import { positionCase, estRepere, indiceCouleur } from '@/utils/piste/dispositionPiste.js';
 import imageRocher from '@/assets/images/rocher.png';

@@ -1,5 +1,4 @@
 // Responsabilité : les 2 animations de confettis (explosion pis pluie).
-// Utilisé dans : Confettis, Confettis.styles, PluieConfettis, PluieConfettis.styles
 
 import { css, keyframes } from 'styled-components';
 

@@ -1,5 +1,4 @@
 // Responsabilité : définir le style de ce composant (styled-components).
-// Utilisé dans : AvatarPersonnage
 
 import styled from 'styled-components';
 import { rondCentre } from '@/styles/base/utilitaires.js';

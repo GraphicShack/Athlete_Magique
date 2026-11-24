@@ -1,5 +1,4 @@
 // Responsabilité : choisit le bouton du bas du salon (Lancer, il manque du monde, ou en attente de l'hôte).
-// Utilisé dans : ConfigurationPage
 
 import Bouton from '@/components/commun/ui/Bouton.jsx';
 import CHEMINS from '@/chemins.js';

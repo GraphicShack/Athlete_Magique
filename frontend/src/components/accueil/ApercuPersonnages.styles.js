@@ -1,5 +1,4 @@
 // Responsabilité : définir le style de ce composant (styled-components).
-// Utilisé dans : ApercuPersonnages
 
 import styled from 'styled-components';
 import { COURBE, grandir } from '@/styles/animations/animations.js';

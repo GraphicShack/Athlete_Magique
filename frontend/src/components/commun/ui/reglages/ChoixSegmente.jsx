@@ -1,5 +1,4 @@
 // Responsabilité : une ligne de réglage avec son nom à gauche pis une BarreChoix à droite.
-// Utilisé dans : ContenuParametres
 
 import { useId, useState } from 'react';
 import { Ligne, Nom } from './LigneReglage.js';

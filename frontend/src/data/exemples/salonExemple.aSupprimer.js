@@ -1,5 +1,4 @@
 // Responsabilité : un salon inventé pour tester la salle d'attente.
-// Utilisé dans : salonSimule
 
 const SALON_EXEMPLE = {
   placesMax: 4,

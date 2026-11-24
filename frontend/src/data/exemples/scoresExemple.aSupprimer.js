@@ -1,5 +1,4 @@
 // Responsabilité : des scores inventés, écrits comme le serveur les enverra.
-// Utilisé dans : scoresSimules
 
 // Du meilleur score au moins bon. type : 'compte' ou 'invite' ; vous : true pour mon score. Le faux serveur ajoute le rang.
 const SCORES_EXEMPLE = [

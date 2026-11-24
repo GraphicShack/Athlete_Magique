@@ -1,5 +1,4 @@
 // Responsabilité : la case du tour quand y'a pas de pouvoir à cette étape (juste les boutons).
-// Utilisé dans : ControleurDeTourActif
 
 import EncadreTour from './EncadreTour.jsx';
 import BoutonsAction from './BoutonsAction.jsx';

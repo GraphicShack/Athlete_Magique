@@ -1,5 +1,4 @@
 // Responsabilité : fait avancer le pion une case à la fois jusqu'à sa case d'arrivée (pour l'anim de saut).
-// Utilisé dans : useTourDemo
 
 import { useEffect, useState } from 'react';
 import { DUREE_PAS } from '@/styles/animations/sautJeton.js';

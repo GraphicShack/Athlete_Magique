@@ -1,5 +1,4 @@
 // Responsabilité : le style commun des tableaux à rangées (tableau d'honneur, classement général).
-// Utilisé dans : ClassementGeneral, ClassementGeneral.styles, LigneScore, LigneScore.styles, TableauHonneur
 
 import styled, { css } from 'styled-components';
 

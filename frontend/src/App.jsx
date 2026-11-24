@@ -1,5 +1,4 @@
 // Responsabilité : le cadre commun de toutes les pages (fond, musique, boutons Règles et Paramètres).
-// Utilisé dans : routes
 
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';

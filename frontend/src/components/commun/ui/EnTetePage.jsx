@@ -1,5 +1,4 @@
 // Responsabilité : l'en-tête commun des pages (logo + un lien ou des actions à droite).
-// Utilisé dans : AccueilPage, ClassementPage, ConfigurationPage, EnTeteCourse, FinCoursePage, ReglesPage, SelectionPage
 
 import imageLogo from '@/assets/images/logo.webp';
 import { Bandeau, Marque, Droite, Logo, Lien } from './EnTetePage.styles.js';

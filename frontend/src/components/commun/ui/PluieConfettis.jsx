@@ -1,5 +1,4 @@
 // Responsabilité : une pluie de confettis qui tombe en continu (page Classement).
-// Utilisé dans : ClassementPage
 
 import { useTheme } from 'styled-components';
 import { trajectoirePluie } from '@/styles/animations/confettis.js';

@@ -1,5 +1,4 @@
 // Responsabilité : une fenêtre par-dessus la page (règles, paramètres), sans changer de page.
-// Utilisé dans : AccesParametres, AccesRegles
 
 import { useEffect, useId, useRef, useState } from 'react';
 import { DUREE_FERMETURE, Dialogue, Cadre, EnTete, Titre, BoutonFermer, Corps } from './FenetreModale.styles.js';

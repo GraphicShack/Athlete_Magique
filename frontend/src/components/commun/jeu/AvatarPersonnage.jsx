@@ -1,5 +1,4 @@
 // Responsabilité : l'image du perso dans un rond (ou ses initiales si y'a pas d'image).
-// Utilisé dans : CarteJoueur, ControleurDeTourActif
 
 import { Rond, Image } from './AvatarPersonnage.styles.js';
 

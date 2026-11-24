@@ -1,5 +1,4 @@
 // Responsabilité : le gros logo, le slogan pis l'aperçu des persos sur l'accueil.
-// Utilisé dans : AccueilPage
 
 import Etiquette from '@/components/commun/ui/Etiquette.jsx';
 import Bouton from '@/components/commun/ui/Bouton.jsx';

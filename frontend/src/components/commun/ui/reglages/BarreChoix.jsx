@@ -1,5 +1,4 @@
 // Responsabilité : des boutons radio affichés comme une barre (ex. 2 · 3 · 4).
-// Utilisé dans : ChoixSegmente, PanneauJoueurs, TableauHonneur
 
 import { useId } from 'react';
 import { Segments, Segment } from './BarreChoix.styles.js';

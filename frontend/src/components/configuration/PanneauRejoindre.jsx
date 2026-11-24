@@ -1,5 +1,4 @@
 // Responsabilité : le champ pour entrer un code pis le bouton Rejoindre.
-// Utilisé dans : ConfigurationPage
 
 import Panneau from '@/components/commun/ui/Panneau.jsx';
 import ChampTexte from '@/components/commun/ui/ChampTexte.jsx';

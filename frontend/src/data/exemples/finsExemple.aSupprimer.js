@@ -1,5 +1,4 @@
 // Responsabilité : la fin des 3 courses, inventée, écrite comme le serveur l'enverra.
-// Utilisé dans : finsSimulees
 
 // joueurs : dans l'ordre du classement général.
 //   numero       : sa place dans le salon (1 à 4), pour sa couleur

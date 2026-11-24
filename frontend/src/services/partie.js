@@ -1,5 +1,4 @@
 // Responsabilité : donne l'état de la partie (joueurs, piste, tour en cours).
-// Utilisé dans : CoursePage
 // À REMPLIR : le contenu viendra du serveur (le fichier reste).
 
 import PARTIE_EXEMPLE from '@/data/exemples/partieExemple.aSupprimer.js';

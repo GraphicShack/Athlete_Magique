@@ -1,5 +1,4 @@
 // Responsabilité : une course inventée pour tester l'écran de course.
-// Utilisé dans : partie
 
 const PARTIE_EXEMPLE = {
   nombreCourses: 3,

@@ -1,5 +1,4 @@
 // Responsabilité : le cadre commun des cases du tour (titre, texte, boutons).
-// Utilisé dans : CasePouvoir, CaseSansPouvoir
 
 import { Encadre, Titre } from './EncadreTour.styles.js';
 

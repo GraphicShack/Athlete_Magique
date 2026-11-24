@@ -1,5 +1,4 @@
 // Responsabilité : la page de choix du perso (/selection), entre la config pis la course.
-// Utilisé dans : routes
 
 import EnTetePage from '@/components/commun/ui/EnTetePage.jsx';
 import EtapesPartie from '@/components/commun/jeu/EtapesPartie.jsx';

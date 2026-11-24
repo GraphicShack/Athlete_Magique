@@ -1,5 +1,4 @@
 // Responsabilité : affiche le journal, le plus récent en haut.
-// Utilisé dans : CoursePage
 
 import Panneau from '@/components/commun/ui/Panneau.jsx';
 import MessageVide from '@/components/commun/ui/MessageVide.jsx';

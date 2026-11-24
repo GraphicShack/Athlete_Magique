@@ -1,5 +1,4 @@
 // Responsabilité : le message à montrer quand y'a pas de scores à afficher.
-// Utilisé dans : TableauHonneur
 
 // Renvoie le message, ou null s'il y a des scores à montrer.
 export function messageScores(etat, nombre) {

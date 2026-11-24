@@ -1,5 +1,4 @@
 // Responsabilité : pour chaque étape du tour, son numéro, son titre, ses boutons pis son message.
-// Utilisé dans : useTourDemo
 
 import { nombreDeCases } from '@/utils/nombreDeCases.js';
 

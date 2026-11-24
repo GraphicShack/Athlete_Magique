@@ -1,5 +1,4 @@
 // Responsabilité : écrit la date d'un score (« 9 oct. », « 9 oct. 2025 », « Aujourd'hui »).
-// Utilisé dans : LigneScore
 
 export function texteDate(texte) {
   // Un jour sans heure (« 2026-10-09 ») : on ajoute minuit, sinon JavaScript le lit à l'heure de Londres pis affiche la veille.

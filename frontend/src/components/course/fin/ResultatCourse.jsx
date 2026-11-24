@@ -1,5 +1,4 @@
 // Responsabilité : le panneau du résultat de la course (une carte par joueur, dans l'ordre d'arrivée).
-// Utilisé dans : FinCoursePage
 
 import { useTheme } from 'styled-components';
 import Panneau from '@/components/commun/ui/Panneau.jsx';

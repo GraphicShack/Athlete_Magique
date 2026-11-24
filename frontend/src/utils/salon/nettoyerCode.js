@@ -1,5 +1,4 @@
 // Responsabilité : nettoie le code tapé (majuscules, caractères permis, 6 max).
-// Utilisé dans : useRejoindre
 
 import { CARACTERES_CODE, LONGUEUR_CODE } from '@/utils/salon/genererCode.js';
 

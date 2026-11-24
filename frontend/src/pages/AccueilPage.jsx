@@ -1,5 +1,4 @@
 // Responsabilité : place les blocs de l'accueil (accroche + connexion).
-// Utilisé dans : routes
 
 import EnTetePage from '@/components/commun/ui/EnTetePage.jsx';
 import Accroche from '@/components/accueil/Accroche.jsx';

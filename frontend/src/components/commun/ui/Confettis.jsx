@@ -1,5 +1,4 @@
 // Responsabilité : une petite explosion de confettis (ex. quand on choisit un perso).
-// Utilisé dans : SelectionPage
 
 import { useState } from 'react';
 import { useTheme } from 'styled-components';

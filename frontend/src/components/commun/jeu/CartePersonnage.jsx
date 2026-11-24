@@ -1,5 +1,4 @@
 // Responsabilité : la carte d'un perso (image, nom, pouvoir), en format ligne ou portrait.
-// Utilisé dans : ContenuRegles, SelectionPage.styles
 
 import { Carte, EnTete, Portrait, Nom, Pouvoir } from './CartePersonnage.styles.js';
 

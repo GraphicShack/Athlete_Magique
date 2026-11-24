@@ -1,5 +1,4 @@
 // Responsabilité : la fin de course reçue du serveur, pis les demandes autour.
-// Utilisé dans : ProchaineCourse, partie, useFinCourse, useSuivreFinCourse, useTourDemo
 
 import { envoyer, ecouter } from '@/services/serveur/serveur.js';
 import { creerBoite } from '@/utils/creerBoite.js';

@@ -1,5 +1,4 @@
 // Responsabilité : le tableau des points par course.
-// Utilisé dans : ContenuRegles
 
 import { Tableau } from './TableauPointage.styles.js';
 

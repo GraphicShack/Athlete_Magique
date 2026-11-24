@@ -1,5 +1,4 @@
 // Responsabilité : l'écran entre les courses, pis après la dernière (/fin-course).
-// Utilisé dans : routes
 
 import EnTetePage from '@/components/commun/ui/EnTetePage.jsx';
 import Etiquette from '@/components/commun/ui/Etiquette.jsx';

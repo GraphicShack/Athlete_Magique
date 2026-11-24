@@ -1,5 +1,4 @@
 // Responsabilité : le panneau des meilleurs scores, avec son filtre.
-// Utilisé dans : ClassementPage
 
 import Panneau from '@/components/commun/ui/Panneau.jsx';
 import BarreChoix from '@/components/commun/ui/reglages/BarreChoix.jsx';

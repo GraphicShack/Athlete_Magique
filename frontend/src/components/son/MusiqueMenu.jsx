@@ -1,5 +1,4 @@
 // Responsabilité : joue la musique de fond des menus (rien d'affiché).
-// Utilisé dans : App
 // Musique : « Lobby Loop » (assets/musique/musique-menu.mp3), générée avec Suno (IA), https://suno.com
 
 import { useEffect, useRef } from 'react';

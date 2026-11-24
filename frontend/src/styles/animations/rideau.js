@@ -1,5 +1,4 @@
 // Responsabilité : la transition « rideau » entre 2 pages.
-// Utilisé dans : StyleGlobal
 
 import { css } from 'styled-components';
 import { COURBE } from './animations.js';

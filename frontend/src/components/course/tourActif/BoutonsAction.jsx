@@ -1,5 +1,4 @@
 // Responsabilité : un bouton par action du tour ; le clic est juste renvoyé avec onAction(bouton).
-// Utilisé dans : CasePouvoir, CaseSansPouvoir
 
 import Bouton from '@/components/commun/ui/Bouton.jsx';
 import { Actions } from './BoutonsAction.styles.js';

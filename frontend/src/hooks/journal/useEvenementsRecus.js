@@ -1,5 +1,4 @@
 // Responsabilité : s'abonne au journal pis garde les événements reçus.
-// Utilisé dans : useJournal
 
 import { useEffect, useState } from 'react';
 import { ecouterEvenements } from '@/services/journal/journal.js';

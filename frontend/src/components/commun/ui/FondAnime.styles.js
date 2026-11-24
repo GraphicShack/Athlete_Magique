@@ -1,5 +1,4 @@
 // Responsabilité : le style de FondAnime
-// Utilisé dans : FondAnime
 // Inspiration : CodePen « CSS Animated Loop Background Image » de Jeong Geum-dam, https://codepen.io/fkaus/pen/mdJVeOz (idée du motif qui glisse en boucle ; code refait).
 
 import styled from 'styled-components';

@@ -1,5 +1,4 @@
 // Responsabilité : un curseur (input range) aux couleurs du thème (ex. le volume).
-// Utilisé dans : ContenuParametres
 
 import { Ligne, Textes, Nom, Aide } from './LigneReglage.js';
 import { Glissiere } from './Curseur.styles.js';

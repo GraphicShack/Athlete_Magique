@@ -1,5 +1,4 @@
 // Responsabilité : une ligne de réglage : le nom à gauche, le contrôle à droite.
-// Utilisé dans : ChoixSegmente, Curseur, Interrupteur
 
 import styled from 'styled-components';
 

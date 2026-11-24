@@ -1,5 +1,4 @@
 // Responsabilité : définir le style de ce composant (styled-components).
-// Utilisé dans : FenetreModale
 
 import styled, { css } from 'styled-components';
 import { COURBE, fondu, apparaitre, tourner, grandir, retrecir } from '@/styles/animations/animations.js';

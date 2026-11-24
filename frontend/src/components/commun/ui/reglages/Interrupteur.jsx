@@ -1,5 +1,4 @@
 // Responsabilité : une case à cocher affichée comme un interrupteur on/off.
-// Utilisé dans : ContenuParametres
 
 import { Ligne, Textes, Nom, Aide } from './LigneReglage.js';
 import { Bascule } from './Interrupteur.styles.js';

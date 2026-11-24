@@ -1,5 +1,4 @@
 // Responsabilité : le CSS qui s'applique à toute l'app.
-// Utilisé dans : main
 
 import { createGlobalStyle } from 'styled-components';
 import { transitionsDePage } from '@/styles/animations/rideau.js';

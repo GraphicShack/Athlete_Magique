@@ -1,5 +1,4 @@
 // Responsabilité : la page des règles (/regles).
-// Utilisé dans : routes
 
 import EnTetePage from '@/components/commun/ui/EnTetePage.jsx';
 import ContenuRegles from '@/components/regles/ContenuRegles.jsx';

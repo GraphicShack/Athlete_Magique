@@ -1,5 +1,4 @@
 // Responsabilité : l'écran de course (/course) ; place la piste, les joueurs, le tour pis le journal.
-// Utilisé dans : routes
 
 import { useSearchParams } from 'react-router-dom';
 import EnTeteCourse from '@/components/course/EnTeteCourse.jsx';

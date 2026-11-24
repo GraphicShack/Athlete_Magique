@@ -1,5 +1,4 @@
 // Responsabilité : garde le résultat d'une copie (copié ou erreur) pendant 2 sec.
-// Utilisé dans : PanneauCode
 
 import { useState } from 'react';
 import { copierTexte } from '@/services/pressePapiers.js';

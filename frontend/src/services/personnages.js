@@ -1,5 +1,4 @@
 // Responsabilité : donne les persos avec leur image (seul accès aux données des persos).
-// Utilisé dans : ApercuPersonnages, ContenuRegles, SelectionPage, partie, useFinCourse, useJournal
 
 import PERSONNAGES from '@/data/personnages/personnages.js';
 import IMAGES_PERSONNAGES from '@/data/personnages/imagesPersonnages.js';

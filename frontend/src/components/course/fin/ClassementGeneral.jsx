@@ -1,5 +1,4 @@
 // Responsabilité : le panneau du classement général de la partie.
-// Utilisé dans : FinCoursePage
 
 import Panneau from '@/components/commun/ui/Panneau.jsx';
 import { Titre, Ligne, Chiffre, Joueur } from '@/components/commun/ui/Tableau.styles.js';

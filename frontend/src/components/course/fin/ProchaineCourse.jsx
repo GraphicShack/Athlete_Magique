@@ -1,5 +1,4 @@
 // Responsabilité : le panneau qui annonce la prochaine course pis permet d'y aller.
-// Utilisé dans : FinCoursePage
 
 import { useNavigate } from 'react-router-dom';
 import Panneau from '@/components/commun/ui/Panneau.jsx';

@@ -1,5 +1,4 @@
 // Responsabilité : l'image de la mascotte des règles.
-// Utilisé dans : AccesRegles.styles, ReglesPage
 
 import imageMascotte from '@/assets/images/Mascotte.png';
 import { Image } from './MascotteRegles.styles.js';

@@ -1,5 +1,4 @@
 // Responsabilité : montre les 10 persos sur l'accueil (image + nom).
-// Utilisé dans : AccueilPage
 
 import { useRef, useState } from 'react';
 import Panneau from '@/components/commun/ui/Panneau.jsx';

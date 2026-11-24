@@ -1,5 +1,4 @@
 // Responsabilité : définir le style de ce composant (styled-components).
-// Utilisé dans : AccesRegles
 
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';

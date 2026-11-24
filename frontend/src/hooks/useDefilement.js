@@ -1,5 +1,4 @@
 // Responsabilité : gère le défilement du carrousel (glisser, pavé tactile, calage sur une carte).
-// Utilisé dans : Carrousel
 
 import { useEffect, useRef, useState } from 'react';
 import { modulo, ecartCirculaire } from '@/utils/placement.js';

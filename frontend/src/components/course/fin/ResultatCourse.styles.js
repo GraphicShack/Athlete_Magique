@@ -1,5 +1,4 @@
 // Responsabilité : définir le style de ce composant (styled-components).
-// Utilisé dans : ResultatCourse
 
 import styled from 'styled-components';
 import Liste from '@/components/commun/ui/Liste.jsx';

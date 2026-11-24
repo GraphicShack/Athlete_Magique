@@ -1,5 +1,4 @@
 // Responsabilité : modifie la liste des joueurs du salon (renvoie tjrs une nouvelle liste, jamais l'ancienne).
-// Utilisé dans : salonSimule
 
 // Trouve le 1er nom de bot libre (« Bot 1 », sinon « Bot 2 »…).
 function nomProchainBot(joueurs) {

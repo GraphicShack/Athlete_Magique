@@ -1,5 +1,4 @@
 // Responsabilité : charge les scores du filtre choisi pis garde où en est le chargement.
-// Utilisé dans : ClassementPage
 
 import { useEffect, useState } from 'react';
 import { obtenirScores } from '@/services/serveur/scores.js';

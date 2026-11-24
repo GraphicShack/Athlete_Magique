@@ -1,5 +1,4 @@
 // Responsabilité : définir le style des blocs propres à cette page.
-// Utilisé dans : FinCoursePage
 
 import styled from 'styled-components';
 import { Page } from '@/components/commun/ui/MiseEnPage.js';

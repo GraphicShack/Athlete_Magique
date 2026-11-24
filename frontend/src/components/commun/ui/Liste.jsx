@@ -1,5 +1,4 @@
 // Responsabilité : une liste sans les puces pis les marges par défaut.
-// Utilisé dans : EtapesPartie.styles, EtapesTour.styles, JournalEvenements.styles, LegendePiste.styles, ListeJoueurs.styles, PanneauJoueurs.styles, ResultatCourse.styles
 
 import styled, { css } from 'styled-components';
 

@@ -1,5 +1,4 @@
 // Responsabilité : la charte visuelle (couleurs, polices, tailles, bordures…).
-// Utilisé dans : main
 
 // Couleurs relevées dans le livret How-to-play-MAGICAL-ATHLETE.pdf.
 export const PALETTE = {

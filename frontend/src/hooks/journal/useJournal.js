@@ -1,5 +1,4 @@
 // Responsabilité : donne le journal prêt à afficher (connecte les événements, les noms pis les phrases).
-// Utilisé dans : CoursePage
 
 import useEvenementsRecus from '@/hooks/journal/useEvenementsRecus.js';
 import useSimulationJournal from '@/hooks/journal/useSimulationJournal.aSupprimer.js';

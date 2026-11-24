@@ -1,5 +1,4 @@
 // Responsabilité : va chercher les meilleurs scores.
-// Utilisé dans : useScores
 
 import { demander } from '@/services/serveur/serveur.js';
 

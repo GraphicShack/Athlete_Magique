@@ -1,5 +1,4 @@
 // Responsabilité : amène tout le monde à la sélection quand la partie est lancée.
-// Utilisé dans : ConfigurationPage
 
 import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';

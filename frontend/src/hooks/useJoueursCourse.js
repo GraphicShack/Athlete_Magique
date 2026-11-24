@@ -1,5 +1,4 @@
 // Responsabilité : prépare les joueurs de la course pour l'affichage (case, couleur, jetons).
-// Utilisé dans : CoursePage
 
 import { useTheme } from 'styled-components';
 import { deplacerJoueur } from '@/utils/piste/deplacerJoueur.js';
