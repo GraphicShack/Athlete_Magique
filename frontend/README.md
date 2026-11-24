@@ -17,7 +17,7 @@ Le serveur parle, l'interface écoute.
 
 | Façon | Pour quoi |
 |---|---|
-| **En direct** (Socket.IO) | ce qui change pendant qu'on joue : le salon, la course, la fin de course |
+| **En direct** (Socket.IO) | ce qui change pendant qu'on joue : le salon, la sélection, la course, la fin de course |
 | **À la demande** (API REST) | ce qu'on lit une fois : le tableau d'honneur, les comptes |
 
 Le chemin est toujours le même : le message arrive, on le met dans une **boîte**, et l'écran qui regarde la boîte se redessine.
@@ -26,16 +26,15 @@ Les règles :
 
 1. **Toujours l'état au complet**, pas juste ce qui a changé. Un message manqué est réparé par le suivant.
 2. **À la connexion** (ou reconnexion), le serveur renvoie tout.
-3. **`idMoi` est dans chaque état** : le serveur l'envoie donc à chaque joueur séparément.
+3. **`idMoi` est dans `salon:etat`, `selection:etat` et `partie:etat`** : le serveur les envoie donc à chaque joueur séparément.
 4. **L'interface anime, elle ne décide pas.** Si un pion passe de 12 à 16, elle le fait avancer ; si le nombre de lancers augmente, elle fait rouler le dé.
 5. **Le résultat du dé n'est pas dévoilé** : pendant que mon dé roule, l'ancien écran reste (boutons, journal, pions).
 6. **Les bots attendent environ 1 seconde** entre deux actions, côté serveur, pour laisser le temps aux animations.
 
 | Marque | Veut dire |
 |---|---|
-| ✅ Branché | l'interface l'attend déjà du serveur (essayé avec un faux serveur) |
-| 👀 Affiché | l'écran existe, avec des données d'exemple |
-| ⬜ À faire | l'écran n'existe pas encore (les noms de champs sont proposés) |
+| Branché | l'interface l'attend déjà du serveur (essayé avec un faux serveur) |
+| À faire | pas encore branché (les noms de champs sont proposés) |
 
 ---
 
@@ -43,7 +42,7 @@ Les règles :
 
 Tout ce qui se passe pendant une course.
 
-### La course ✅ `partie:etat`
+### La course `partie:etat` (branché)
 
 Envoyée après chaque action, au complet.
 
@@ -70,7 +69,7 @@ Chaque joueur de la course :
 | `etat` | `'tombe'` | `null`, `'tombe'` (couché) ou `'elimine'` (retiré de la piste) |
 | `points` | `3` | ses points |
 
-### Le tour ✅ `partie:etat.tour`
+### Le tour `partie:etat.tour` (branché)
 
 | Champ | Exemple | À l'écran |
 |---|---|---|
@@ -102,23 +101,24 @@ Encore à faire à l'écran :
 
 | Information | Exemple proposé | |
 |---|---|---|
-| choisir une cible (Hypnotiste, Flip Flop) | `ciblesPossibles: ['j2', 'j3']` | ⬜ |
-| déclarer un duel, même pendant le tour d'un autre | `decisions: [{ idJoueur: 'j2', type: 'DUEL' }]` | ⬜ |
-| 2 personnages par joueur, à 2 joueurs | | ⬜ |
+| choisir une cible (Hypnotiste, Flip Flop) | `ciblesPossibles: ['j2', 'j3']` | À faire |
+| déclarer un duel, même pendant le tour d'un autre | `decisions: [{ idJoueur: 'j2', type: 'DUEL' }]` | À faire |
+| 2 personnages par joueur, à 2 joueurs | | À faire |
 
-### Le journal ✅ `partie:etat.journal`
+### Le journal `partie:etat.journal` (branché)
 
 On envoie des données, l'interface écrit la phrase.
 
 | Champ | Exemple | Sert à |
 |---|---|---|
 | `id` | `'e4'` | |
-| `course`, `tour` | `1`, `4` | « Tour 4 » |
-| `etape` | `'fin'` | `'debut'`, `'lancer'`, `'deplacement'` ou `'fin'` |
+| `tour` | `4` | « Tour 4 » |
+| `course`, `etape` | `1`, `'fin'` | pas affichés pour l'instant |
 | `type` | `'TREBUCHE'` | choisir la phrase (liste plus bas) |
-| `acteur` | `'j3'` | qui |
+| `acteur` | `'j3'` | qui (`null` si c'est la course) |
 | `cible` | `'j1'` | l'autre joueur, ou `null` |
-| `cause` | `{ genre: 'case', id: 'rocher' }` | « (rocher) », ou `null` |
+| `cause` | `{ genre: 'case', id: 'rocher' }` | « (rocher) » ; aussi `'etoile'`, ou `null` |
+| | `{ genre: 'pouvoir', id: 'lievre' }` | « (pouvoir : Lièvre) » |
 | `details` | `{ case: 13 }` | les chiffres de la phrase |
 
 <details>
@@ -130,7 +130,7 @@ On envoie des données, l'interface écrit la phrase.
 | `TOUR_DEBUT`, `TOUR_FIN`, `RELEVE`, `HYPNOSE`, `RASSEMBLEMENT`, `ECHANGE_DEMANDE` | `{}` |
 | `DE_LANCE`, `DE_GARDE` | `{ valeur }` |
 | `DE_RELANCE` | `{ valeur, relance, maximum }` |
-| `DEPLACEMENT`, `RECUL` | `{ de, a, cases }` |
+| `DEPLACEMENT`, `RECUL` | `{ a, cases }` (`de`, la case de départ, n'est pas affichée) |
 | `DEPLACEMENT_DOUBLE` | `{ cases }` |
 | `TELEPORTATION` | `{ a }` |
 | `TREBUCHE` | `{ case }` |
@@ -143,7 +143,7 @@ Un type inconnu ne fait rien planter.
 
 </details>
 
-### La fin de course ✅ `course:fin`
+### La fin de course `course:fin` (branché)
 
 | Champ | Exemple | À l'écran |
 |---|---|---|
@@ -181,7 +181,7 @@ Un seul fichier à remplir : `src/services/serveur/serveur.js`. Le code est déj
 
 Pour lancer l'interface : `npm run dev`
 
-### La réponse à chaque clic ✅
+### La réponse à chaque clic (branché)
 
 Le serveur répond à chaque demande en moins de 5 secondes.
 
@@ -191,7 +191,7 @@ Le serveur répond à chaque demande en moins de 5 secondes.
 | refusé | `callback({ erreur: { code, message } })` | le `message`, tel quel |
 | rien | | « Le serveur ne répond pas. » |
 
-### Le salon ✅ `salon:etat`
+### Le salon `salon:etat` (branché)
 
 Envoyé après chaque changement, au complet.
 
@@ -202,25 +202,25 @@ Envoyé après chaque changement, au complet.
 | `idMoi` | `'j2'` | qui je suis (différent pour chaque joueur) |
 | `idHote` | `'j1'` | l'hôte a plus de boutons |
 | `statut` | `'attente'` | la page de tout le monde : `'attente'`, `'selection'`, `'course'` ou `'fin'` |
-| `joueurs` | `{ id, nom, hote, bot, pret }` | la liste des joueurs |
+| `joueurs` | une liste de `{ id, nom, hote, bot, pret }` | les joueurs, « Hôte », « Bot », « Prêt » |
 
 L'interface envoie :
 
 | Envoyé | Données | |
 |---|---|---|
-| `salon:creer` | `{ pseudo }` | ✅ |
-| `salon:rejoindre` | `{ code, pseudo }` | ✅ |
-| `salon:places` | `{ placesMax }` | ✅ |
-| `salon:ajouterBot` | `{}` | ✅ |
-| `salon:retirer` | `{ idJoueur }` | ✅ |
-| `salon:lancer` | `{}` | ✅ |
-| `course:suivante` | `{}` | ✅ |
-| `salon:pret` | `{ pret: true }` | ⬜ |
-| quitter le salon | | ⬜ |
+| `salon:creer` | `{ pseudo }` | Branché |
+| `salon:rejoindre` | `{ code, pseudo }` | Branché |
+| `salon:places` | `{ placesMax }` | Branché |
+| `salon:ajouterBot` | `{}` | Branché |
+| `salon:retirer` | `{ idJoueur }` | Branché |
+| `salon:lancer` | `{}` | Branché |
+| `course:suivante` | `{}` | Branché |
+| `salon:pret` | `{ pret: true }` | À faire |
+| quitter le salon | | À faire |
 
-### La sélection des personnages ✅ `selection:etat`
+### La sélection des personnages `selection:etat` (branché)
 
-Envoyée avant chaque course, pis après chaque choix, au complet.
+Envoyée avant chaque course, puis après chaque choix, au complet.
 
 | Champ | Exemple | À l'écran |
 |---|---|---|
@@ -228,14 +228,16 @@ Envoyée avant chaque course, pis après chaque choix, au complet.
 | `idChoisit` | `'j2'` | qui choisit maintenant (`null` = tout le monde a choisi) |
 | `course` | `{ numero: 1, nombreCourses: 3 }` | « Course 1 sur 3 » |
 | `personnagesTires` | `['banana', 'lievre']` | les cartes à choisir (2 de plus que nécessaire) |
-| `joueurs` | `{ id, nom, bot }` | l'ordre de choix |
-| `choix` | `{ idJoueur, idPersonnage }` | « Pris par Angie », ou « Choisi » si c'est moi |
+| `joueurs` | une liste de `{ id, nom, bot }` | l'ordre de choix |
+| `choix` | une liste de `{ idJoueur, idPersonnage }` | « Pris par Angie », ou « Choisi » si c'est moi |
 
 L'interface envoie `selection:choisir` avec `{ idPersonnage }`. Le serveur refuse si ce n'est pas mon tour ou si le personnage est pris.
 
-### Les changements de page ✅
+### Les changements de page (branché)
 
-C'est le `statut` du salon qui décide. Une seule règle : si le statut a une page et que je n'y suis pas, l'interface m'y amène. Un message manqué ou une page rechargée se répare donc tout seul.
+C'est le `statut` du salon qui décide. Une seule règle : si le statut a une page et que je n'y suis pas, l'interface m'y amène. Un message manqué se répare donc tout seul.
+
+Ça marche sur 4 pages : la salle d'attente, la sélection, la course et la fin de course. Ailleurs (accueil, règles, tableau d'honneur), on ne dérange pas le joueur.
 
 | `statut` | Page | Le serveur envoie juste avant |
 |---|---|---|
@@ -248,8 +250,9 @@ C'est le `statut` du salon qui décide. Une seule règle : si le statut a une pa
 
 | Information | À l'écran | |
 |---|---|---|
-| je me reconnecte | je reprends où j'étais, avec l'état au complet | ✅ |
-| un joueur s'est déconnecté | un message, ou un bot le remplace | ⬜ |
+| je reçois de nouveau l'état au complet | l'écran reprend où j'étais | Branché |
+| dire au serveur qui je suis quand je reviens | rien : l'interface n'envoie pas encore d'identifiant | À faire |
+| un joueur s'est déconnecté | un message, ou un bot le remplace | À faire |
 
 ---
 
@@ -257,7 +260,7 @@ C'est le `statut` du salon qui décide. Une seule règle : si le statut a une pa
 
 Ce qui reste après une partie. L'interface le demande au serveur, jamais directement à la base.
 
-### Le tableau d'honneur ✅ `GET /api/honneur?filtre=tous`
+### Le tableau d'honneur `GET /api/honneur?filtre=tous` (branché)
 
 `filtre` : `tous`, `comptes` ou `invites`. Une liste, du meilleur score au moins bon.
 
@@ -269,11 +272,13 @@ Ce qui reste après une partie. L'interface le demande au serveur, jamais direct
 | `type` | `'compte'` | « Compte » ou « Invité » (`'compte'` ou `'invite'`) |
 | `score` | `12` | les points |
 | `date` | `'2026-10-09T18:00:00Z'` | « 9 oct. » |
-| `vous` | `true` | la ligne en jaune, « (vous) » |
+| `vous` | `true` | ma ligne en évidence, « (vous) » |
 
-### Les comptes ⬜
+`vous` : l'interface ne dit pas encore au serveur qui demande la liste. À décider avec l'équipe.
 
-Les champs sont à l'écran, mais les boutons ne font rien.
+### Les comptes (à faire)
+
+Les champs de connexion sont à l'écran, mais les boutons ne font rien.
 
 | Envoyé (proposé) | Données | Réponse attendue |
 |---|---|---|
@@ -282,7 +287,7 @@ Les champs sont à l'écran, mais les boutons ne font rien.
 
 ### Enregistrer un score
 
-Rien à recevoir : le serveur l'enregistre lui-même à la fin de la 3e course. Le pseudo vient de `salon:creer` ou du compte.
+Rien à recevoir : le serveur l'enregistre lui-même à la fin de la 3e course. Le pseudo vient de `salon:creer`, de `salon:rejoindre` ou du compte.
 
 ### Ce qui n'est pas dans la base
 
@@ -291,4 +296,6 @@ Les personnages sont envoyés par leur id : `banana`, `lievre`, `centaure`, `fli
 
 ---
 
-Des exemples complets sont dans `src/data/exemples/`. Les fichiers en `.aSupprimer.js` sont faux : on les efface une fois le vrai serveur branché (avec le dossier `src/services/serveur/simulation/`).
+Des exemples sont dans `src/data/exemples/`. Le tour et la sélection, eux, sont fabriqués dans `src/services/serveur/simulation/`.
+
+Les fichiers en `.aSupprimer.js` sont faux : on les efface une fois le vrai serveur branché.
