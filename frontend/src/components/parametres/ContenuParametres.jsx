@@ -9,7 +9,8 @@ import ChoixSegmente from '@/components/commun/ui/reglages/ChoixSegmente.jsx';
 import { Grille, ChampsCompte, Actions } from './ContenuParametres.styles.js';
 
 // Affiche les panneaux de réglages (branchés pour l'instant : le volume, la musique pis les numéros des cases).
-function ContenuParametres({ son, affichage }) {
+// Props : son, affichage (les réglages), onEnregistrer (appelé au clic sur « Enregistrer »).
+function ContenuParametres({ son, affichage, onEnregistrer }) {
   return (
     <>
       <Grille>
@@ -58,7 +59,9 @@ function ContenuParametres({ son, affichage }) {
 
       <Actions>
         <Bouton variante="secondaire">Rétablir par défaut</Bouton>
-        <Bouton variante="principal">Enregistrer</Bouton>
+        <Bouton variante="principal" onClick={onEnregistrer}>
+          Enregistrer
+        </Bouton>
       </Actions>
     </>
   );

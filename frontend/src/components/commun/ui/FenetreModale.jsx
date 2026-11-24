@@ -4,7 +4,8 @@ import { useEffect, useId, useRef, useState } from 'react';
 import { DUREE_FERMETURE, Dialogue, Cadre, EnTete, Titre, BoutonFermer, Corps } from './FenetreModale.styles.js';
 
 // Ouvre ou ferme la fenêtre (avec anim) selon « ouverte ».
-// Props : ouverte (true/false), onFermer (appelé pour fermer), titre, teinte (couleur du bandeau), children (le contenu).
+// Props : ouverte (true/false), onFermer (appelé pour fermer), titre, teinte (couleur du bandeau), children (le contenu,
+// ou une fonction qui reçoit « fermer » pis renvoie le contenu, pour un bouton qui ferme la fenêtre avec l'anim).
 function FenetreModale({ ouverte, onFermer, titre, teinte = 'regles', children }) {
   const dialogue = useRef(null); // l'élément <dialog> de la page
   const [enFermeture, setEnFermeture] = useState(false); // true pendant l'animation de fermeture
@@ -54,7 +55,7 @@ function FenetreModale({ ouverte, onFermer, titre, teinte = 'regles', children }
             ×
           </BoutonFermer>
         </EnTete>
-        <Corps>{children}</Corps>
+        <Corps>{typeof children === 'function' ? children(fermer) : children}</Corps>
       </Cadre>
     </Dialogue>
   );

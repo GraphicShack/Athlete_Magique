@@ -23,7 +23,7 @@ function AccesParametres({ son, affichage }) {
       </BoutonRond>
 
       <FenetreModale ouverte={fenetre.ouverte} onFermer={fenetre.fermer} titre="Paramètres" teinte="parametres">
-        <ContenuParametres son={son} affichage={affichage} />
+        {(fermer) => <ContenuParametres son={son} affichage={affichage} onEnregistrer={fermer} />}
       </FenetreModale>
     </>
   );
