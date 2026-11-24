@@ -23,12 +23,3 @@ export const Resultat = styled.div`
     min-height: 3lh;
   }
 `;
-
-// La place du dé avant le premier lancer : un rond pointillé de la taille du dé (5rem, voir De.styles.js).
-export const PlaceDe = styled.div`
-  flex-shrink: 0;
-  width: 5rem;
-  height: 5rem;
-  border: 2px dashed color-mix(in srgb, currentColor 30%, transparent);
-  border-radius: 50%;
-`;

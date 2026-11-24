@@ -6,7 +6,7 @@ import EnTeteTour from './EnTeteTour.jsx';
 import EtapesTour from './EtapesTour.jsx';
 import CasePouvoir from './CasePouvoir.jsx';
 import CaseSansPouvoir from './CaseSansPouvoir.jsx';
-import { Colonnes, Resultat, PlaceDe } from './ControleurDeTourActif.styles.js';
+import { Colonnes, Resultat } from './ControleurDeTourActif.styles.js';
 
 // Affiche le tour en cours ; un clic sur un bouton est juste renvoyé avec onAction(bouton).
 function ControleurDeTourActif({
@@ -35,11 +35,7 @@ function ControleurDeTourActif({
           <EtapesTour etapeCourante={etapeCourante} />
 
           <Resultat>
-            {de.valeur ? (
-              <De valeur={de.valeur} roule={de.roule} onArret={de.surArret} />
-            ) : (
-              <PlaceDe aria-hidden="true" />
-            )}
+            <De valeur={de.valeur} roule={de.roule} onArret={de.surArret} />
             {message && <p>{message}</p>}
           </Resultat>
         </div>

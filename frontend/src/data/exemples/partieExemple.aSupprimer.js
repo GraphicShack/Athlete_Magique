@@ -5,6 +5,7 @@
 const PARTIE_EXEMPLE = {
   idMoi: 'j1',
   idActif: 'j1',
+  duel: null,
   rochers: [7, 13, 22],
   joueurs: [
     { id: 'j1', numero: 1, nom: 'Félix', bot: false, idPersonnage: 'magicien', position: 12, etat: null, points: 0 },

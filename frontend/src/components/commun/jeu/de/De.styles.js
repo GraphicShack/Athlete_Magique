@@ -83,3 +83,12 @@ export const Point = styled.span`
   border-radius: ${({ theme }) => theme.rayons.rond};
   background: ${({ theme }) => theme.couleurs.encre};
 `;
+
+// La place du dé avant le premier lancer : un rond pointillé de la taille de l'éclat (5rem).
+export const PlaceDe = styled.div`
+  flex-shrink: 0;
+  width: 5rem;
+  height: 5rem;
+  border: 2px dashed color-mix(in srgb, currentColor 30%, transparent);
+  border-radius: 50%;
+`;

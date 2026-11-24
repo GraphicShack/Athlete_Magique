@@ -20,7 +20,7 @@ export const Dialogue = styled.dialog`
   --couleur-bouton: ${({ theme }) => theme.couleurs.encre};
   transform-origin: bottom right;
 
-  width: min(72rem, calc(100vw - 2rem));
+  width: min(${({ $largeur }) => $largeur}, calc(100vw - 2rem));
   max-height: calc(100dvh - 2rem);
   padding: 0;
   border: ${({ theme }) => theme.bordures.contour};

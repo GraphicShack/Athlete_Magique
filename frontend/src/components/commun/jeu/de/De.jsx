@@ -1,7 +1,7 @@
 // Responsabilité : le dé 3D qui roule pis qui prévient quand il s'arrête.
 // Inspiration : CodePen « 3D Dice with CSS » de jico, https://codepen.io/jico/pen/wvMpgog (code refait pour le projet).
 
-import { Eclat, Scene, Cube, Face, Emplacement, Point } from './De.styles.js';
+import { Eclat, Scene, Cube, Face, Emplacement, Point, PlaceDe } from './De.styles.js';
 
 // Position des points pour chaque face, dans une grille 3 × 3 (cases numérotées 0 à 8).
 const POINTS = {
@@ -24,8 +24,10 @@ const FACES = [
 ];
 
 // Affiche le dé ; s'il roule, il appelle onArret à la fin.
-// Props : valeur (face à montrer, 1 à 6), roule (true = il roule), onArret.
+// Props : valeur (face à montrer, 1 à 6 ; null = juste la place du dé), roule (true = il roule), onArret.
 function De({ valeur, roule, onArret }) {
+  if (!valeur) return <PlaceDe aria-hidden="true" />;
+
   const visee = FACES.find((face) => face.valeur === valeur) ?? FACES[0];
 
   return (

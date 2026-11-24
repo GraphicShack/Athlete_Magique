@@ -3,17 +3,20 @@
 import { SALON_DEPART, repondreSalon } from './salonSimule.aSupprimer.js';
 import { nouvelleSelection, premierLibre, choisir } from './selectionSimulee.aSupprimer.js';
 import { nouvellePartie, jouerAction } from './partieSimulee.aSupprimer.js';
+import { ajouterDuel, repondreAuDuel, finirDuel } from './duelSimule.aSupprimer.js';
 import { courseDemandee, finDeCourse } from './finsSimulees.aSupprimer.js';
 import { repondreScores } from './scoresSimules.aSupprimer.js';
 
 const DELAI = 200; // ms : comme un vrai serveur, il répond jamais tout de suite
 const PAUSE = 1000; // ms entre 2 actions des autres, pour laisser le temps aux animations
 
+const DUREE_DUEL = 5000; // ms : le temps de voir les dés rouler pis le résultat
+
 const attendre = (duree) => new Promise((continuer) => setTimeout(continuer, duree));
 
 let salon = SALON_DEPART;
 let selection = nouvelleSelection(1);
-let partie = nouvellePartie(courseDemandee || 1);
+let partie = ajouterDuel(nouvellePartie(courseDemandee || 1));
 let abonnes = []; // [{ message, recevoir }, …]
 
 // Envoie des données à tous ceux qui écoutent ce message.
@@ -58,6 +61,15 @@ async function choisirPourLesAutres() {
   }
 }
 
+// Répond au duel ; s'il est accepté, on montre le résultat, pis le gagnant avance.
+async function jouerDuel(accepter) {
+  changerPartie(repondreAuDuel(partie, accepter));
+  const avant = partie;
+  if (!partie.duel) return;
+  await attendre(DUREE_DUEL);
+  if (partie === avant) changerPartie(finirDuel(partie));
+}
+
 // Après mon tour : les autres jouent tout seuls, pis la course finit quand ça revient à moi.
 async function jouerLesAutres() {
   while (partie.idActif !== partie.idMoi) {
@@ -81,6 +93,7 @@ attendre(DELAI).then(() => {
   diffuser('selection:etat', selection);
   diffuser('partie:etat', partie);
   choisirPourLesAutres();
+  if (partie.duel && partie.duel.idDuelliste !== partie.idMoi) attendre(PAUSE).then(() => jouerDuel(true));
   if (courseDemandee) diffuser('course:fin', finDeCourse(courseDemandee));
 });
 
@@ -95,6 +108,11 @@ export async function envoyer(message, donnees) {
   if (message === 'tour:action') {
     changerPartie(jouerAction(partie, donnees.type)); // lance une erreur si c'est refusé
     if (donnees.type === 'FINIR_TOUR') jouerLesAutres();
+    return;
+  }
+  if (message === 'duel:repondre') {
+    if (!partie.duel) throw new Error("Il n'y a pas de duel en ce moment.");
+    jouerDuel(donnees.accepter); // pas de « await » : la réponse part tout de suite
     return;
   }
   if (message === 'course:suivante') {

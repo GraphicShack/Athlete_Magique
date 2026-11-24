@@ -20,8 +20,6 @@ Le serveur parle, l'interface écoute.
 | **En direct** (Socket.IO) | ce qui change pendant qu'on joue : le salon, la sélection, la course, la fin de course |
 | **À la demande** (API REST) | ce qu'on lit une fois : le tableau d'honneur, les comptes |
 
-Le chemin est toujours le même : le message arrive, on le met dans une **boîte**, et l'écran qui regarde la boîte se redessine.
-
 Les règles :
 
 1. **Toujours l'état au complet**, pas juste ce qui a changé. Un message manqué est réparé par le suivant.
@@ -54,6 +52,7 @@ Envoyée après chaque action, au complet.
 | `rochers` | `[7, 13, 22]` | les cases Rocher |
 | `joueurs` | une liste, dans l'ordre de jeu | les cartes et les pions |
 | `tour` | voir plus bas | le panneau du tour |
+| `duel` | voir plus bas, ou `null` | la fenêtre du duel |
 | `journal` | une liste, du plus ancien au plus récent | le journal |
 
 Chaque joueur de la course :
@@ -62,7 +61,7 @@ Chaque joueur de la course :
 |---|---|---|
 | `id` | `'j1'` | |
 | `numero` | `1` | sa couleur (sa place dans le salon, 1 à 4) |
-| `nom` | `'Félix'` | son nom |
+| `nom` | `'Zoé'` | son nom |
 | `bot` | `false` | « (bot) » |
 | `idPersonnage` | `'magicien'` | son image, son nom, son pouvoir |
 | `position` | `12` | sa case (0 = Départ, plus de 30 = arrivé) |
@@ -102,8 +101,27 @@ Encore à faire à l'écran :
 | Information | Exemple proposé | |
 |---|---|---|
 | choisir une cible (Hypnotiste, Flip Flop) | `ciblesPossibles: ['j2', 'j3']` | À faire |
-| déclarer un duel, même pendant le tour d'un autre | `decisions: [{ idJoueur: 'j2', type: 'DUEL' }]` | À faire |
 | 2 personnages par joueur, à 2 joueurs | | À faire |
+
+### Le duel `partie:etat.duel` (branché)
+
+`null` s'il n'y a pas de duel. Possible pendant le tour de n'importe qui.
+
+| Champ | Exemple | À l'écran |
+|---|---|---|
+| `id` | `'d1'` | différent pour chaque duel |
+| `idDuelliste` | `'j1'` | celui qui décide |
+| `idCible` | `'j2'` | son adversaire |
+| `valeurs` | `{ j1: 4, j2: 2 }` | les 2 dés (`null` pendant la question) |
+| `gagnant` | `'j1'` | l'`id` du gagnant (`null` pendant la question) |
+
+1. Le serveur envoie le duel avec `valeurs: null` : seul le Duelliste voit la question. Les boutons du tour sont grisés.
+2. L'interface envoie `duel:repondre` avec `{ id, accepter: true }` (ou `false`).
+3. Si c'est non, le serveur envoie `duel: null`.
+4. Si c'est oui, le serveur lance les 2 dés et envoie `valeurs` et `gagnant`, sans bouger les pions. Tout le monde voit les dés.
+5. Environ 5 secondes plus tard, il envoie `duel: null`, la nouvelle position du gagnant et l'événement `DUEL` du journal.
+
+S'il y a plusieurs adversaires possibles, le serveur envoie un duel à la fois.
 
 ### Le journal `partie:etat.journal` (branché)
 
@@ -149,7 +167,7 @@ Un type inconnu ne fait rien planter.
 |---|---|---|
 | `numero`, `nombreCourses` | `1`, `3` | « Course 1 sur 3 terminée » |
 | `joueurs` | une liste, dans l'ordre du classement | les 2 tableaux |
-| `ordreChoix` | `['Alec', 'Félix']` | qui choisira en premier (`[]` à la fin) |
+| `ordreChoix` | `['Alec', 'Zoé']` | qui choisira en premier (`[]` à la fin) |
 
 Chaque joueur de la fin de course :
 
@@ -172,14 +190,9 @@ Qui est là, qui peut faire quoi, et les réponses aux clics.
 
 ### Pour se brancher
 
-Un seul fichier à remplir : `src/services/serveur/serveur.js`. Le code est déjà dedans, en commentaire.
+Côté serveur, permettre l'adresse de l'interface (CORS).
 
-1. `npm install`, puis `npm install socket.io-client`
-2. Fichier `.env` : `VITE_URL_SERVEUR=http://localhost:3000` (l'adresse du serveur)
-3. Remplacer la dernière ligne de `serveur.js` par le code en commentaire
-4. Côté serveur, permettre l'adresse de l'interface (CORS)
-
-Pour lancer l'interface : `npm run dev`
+Pour lancer l'interface : `npm install`, puis `npm run dev`
 
 ### La réponse à chaque clic (branché)
 
@@ -237,8 +250,6 @@ L'interface envoie `selection:choisir` avec `{ idPersonnage }`. Le serveur refus
 
 C'est le `statut` du salon qui décide. Une seule règle : si le statut a une page et que je n'y suis pas, l'interface m'y amène. Un message manqué se répare donc tout seul.
 
-Ça marche sur 4 pages : la salle d'attente, la sélection, la course et la fin de course. Ailleurs (accueil, règles, tableau d'honneur), on ne dérange pas le joueur.
-
 | `statut` | Page | Le serveur envoie juste avant |
 |---|---|---|
 | `'attente'` | on reste où on est | |
@@ -278,8 +289,6 @@ Ce qui reste après une partie. L'interface le demande au serveur, jamais direct
 
 ### Les comptes (à faire)
 
-Les champs de connexion sont à l'écran, mais les boutons ne font rien.
-
 | Envoyé (proposé) | Données | Réponse attendue |
 |---|---|---|
 | `POST /api/comptes` | `{ courriel, motDePasse, pseudo }` | `{ id, pseudo }` |
@@ -296,6 +305,4 @@ Les personnages sont envoyés par leur id : `banana`, `lievre`, `centaure`, `fli
 
 ---
 
-Des exemples sont dans `src/data/exemples/`. Le tour et la sélection, eux, sont fabriqués dans `src/services/serveur/simulation/`.
-
-Les fichiers en `.aSupprimer.js` sont faux : on les efface une fois le vrai serveur branché.
+Des exemples sont dans `src/data/exemples/`.

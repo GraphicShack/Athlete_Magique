@@ -6,6 +6,7 @@ import ListeJoueurs from '@/components/course/joueurs/ListeJoueurs.jsx';
 import PanneauPiste from '@/components/course/piste/PanneauPiste.jsx';
 import MonTour from '@/components/course/tourActif/MonTour.jsx';
 import AttenteTour from '@/components/course/tourActif/AttenteTour.jsx';
+import FenetreDuel from '@/components/course/duel/FenetreDuel.jsx';
 import JournalEvenements from '@/components/course/JournalEvenements.jsx';
 import usePartieAffichee from '@/hooks/course/usePartieAffichee.js';
 import useJoueursCourse from '@/hooks/course/useJoueursCourse.js';
@@ -49,7 +50,7 @@ function EcranCourse({ partie }) {
               tour={vue.tour}
               joueur={actif}
               de={de}
-              bloque={de.roule || enMouvement}
+              bloque={de.roule || enMouvement || Boolean(vue.duel)}
             />
           ) : (
             // key : un nouveau joueur = un nouveau panneau (pis un nouveau tirage de la blague).
@@ -60,6 +61,9 @@ function EcranCourse({ partie }) {
           <JournalEvenements evenements={lignesJournal(vue.journal, joueurs)} />
         </Bloc>
       </Colonne>
+
+      {/* Le duel attend que les pions soient rendus. key : un nouveau duel = une nouvelle fenêtre. */}
+      {vue.duel && !enMouvement && <FenetreDuel key={vue.duel.id} duel={vue.duel} joueurs={joueurs} idMoi={vue.idMoi} />}
     </Ecran>
   );
 }
