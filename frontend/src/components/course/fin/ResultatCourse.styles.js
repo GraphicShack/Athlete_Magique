@@ -11,7 +11,7 @@ export const Resultats = styled(Liste)`
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: clamp(10px, 2vh, 18px);
+  gap: clamp(10px, 1.4vh, 16px);
   margin: -10px;
   padding: 10px;
 
