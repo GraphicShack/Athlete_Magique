@@ -1,7 +1,7 @@
 // Responsabilité : l'état du tour pis toutes les façons dont il change (une fonction par action).
 // Utilisé dans : useTourDemo
 
-import { evenementBouton, evenementDebutTour, evenementFinTour, evenementLancer, evenementRelance } from '@/utils/tour/evenementsTour.js';
+import { evenementBouton, evenementDebutTour, evenementFinTour, evenementLancer, evenementRelance } from '@/utils/tour/evenementsTour.aRemplacer.js';
 
 // L'état du tour au départ. Tout le tour tient dans cet objet-là.
 export const ETAT_DEPART = {

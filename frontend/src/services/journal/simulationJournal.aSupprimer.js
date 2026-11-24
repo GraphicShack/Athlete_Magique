@@ -1,7 +1,7 @@
 // Responsabilité : fait semblant d'être le serveur en envoyant les événements d'exemple.
 // Utilisé dans : useSimulationJournal
 
-import EVENEMENTS_EXEMPLE from '@/data/exemples/evenementsExemple.js';
+import EVENEMENTS_EXEMPLE from '@/data/exemples/evenementsExemple.aSupprimer.js';
 import { journaliser } from '@/services/journal/journal.js';
 
 // Délai entre deux événements, en millisecondes.

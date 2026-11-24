@@ -1,7 +1,7 @@
 // Responsabilité : les boutons pis les consignes de chaque étape du tour, par perso (en attendant le moteur).
 // Utilisé dans : partie
 
-// Options d'un bouton : effet (ce qu'il fait, voir utils/tour/actionsTour.js), journal (événement à noter),
+// Options d'un bouton : effet (ce qu'il fait, voir utils/tour/actionsTour.aRemplacer.js), journal (événement à noter),
 // parPouvoir, bonus, multiplicateur.
 // Le libellé peut être un texte, ou une petite fonction qui le fabrique avec les infos du moment :
 // { valeurDe, cases (bonus compris), relances, relancesMax }.

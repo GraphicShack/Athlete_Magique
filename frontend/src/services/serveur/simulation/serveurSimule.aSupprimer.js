@@ -1,8 +1,8 @@
 // Responsabilité : fait semblant d'être le serveur (à enlever quand le vrai est branché).
 // Utilisé dans : serveur
 
-import { SALON_DEPART, repondreSalon } from './salonSimule.js';
-import { repondreScores } from './scoresSimules.js';
+import { SALON_DEPART, repondreSalon } from './salonSimule.aSupprimer.js';
+import { repondreScores } from './scoresSimules.aSupprimer.js';
 
 // Comme un vrai serveur, il répond jamais tout de suite.
 const attendre = () => new Promise((continuer) => setTimeout(continuer, 200));

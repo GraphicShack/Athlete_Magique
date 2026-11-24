@@ -25,7 +25,7 @@ export const evenementRelance = (tour, { valeur, relance, maximum }) => ({
   details: { valeur, relance, maximum },
 });
 
-// L'événement d'un bouton du tour (voir « journal » dans data/exemples/deroulementTour.js).
+// L'événement d'un bouton du tour (voir « journal » dans data/exemples/deroulementTour.aRemplacer.js).
 export const evenementBouton = (tour, { etape, type, parPouvoir = false, details = {} }) => ({
   ...base(tour, etape),
   type,

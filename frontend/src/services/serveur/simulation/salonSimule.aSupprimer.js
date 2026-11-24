@@ -1,9 +1,9 @@
 // Responsabilité : ce que le faux serveur répond aux demandes du salon.
 // Utilisé dans : serveurSimule
 
-import SALON_EXEMPLE from '@/data/exemples/salonExemple.js';
+import SALON_EXEMPLE from '@/data/exemples/salonExemple.aSupprimer.js';
 import { genererCode } from '@/utils/salon/genererCode.js';
-import { retirerJoueur, ajouterBot } from '@/utils/salon/joueursSalon.js';
+import { retirerJoueur, ajouterBot } from '@/utils/salon/joueursSalon.aSupprimer.js';
 
 // Pour essayer comme invité (pas l'hôte) : ouvrir /configuration?invite.
 const vueInvite = new URLSearchParams(window.location.search).has('invite');

@@ -3,10 +3,10 @@
 
 import { useState } from 'react';
 import useDeplacementAnime from '@/hooks/tour/useDeplacementAnime.js';
-import { ETAT_DEPART, ACTIONS, arreterDe } from '@/utils/tour/actionsTour.js';
+import { ETAT_DEPART, ACTIONS, arreterDe } from '@/utils/tour/actionsTour.aRemplacer.js';
 import { ETAPES } from '@/utils/tour/etapesTour.js';
 import { journaliser } from '@/services/journal/journal.js';
-import { lancerDe } from '@/services/de.js';
+import { lancerDe } from '@/services/de.aSupprimer.js';
 
 // Renvoie tout ce que le panneau du tour a besoin (étape, message, boutons, dé, pion).
 function useTourDemo(tour) {
@@ -30,7 +30,7 @@ function useTourDemo(tour) {
   // L'étape actuelle (numéro, titre, boutons, message) : voir utils/tour/etapesTour.js.
   const etape = ETAPES[etat.etape];
 
-  // Les infos du moment, pour les libellés qui sont des fonctions (voir data/exemples/deroulementTour.js).
+  // Les infos du moment, pour les libellés qui sont des fonctions (voir data/exemples/deroulementTour.aRemplacer.js).
   // Pendant que le dé roule, on cache sa valeur pis la relance en cours compte pas encore.
   const infos = {
     valeurDe: etat.roule ? '…' : etat.valeurDe,

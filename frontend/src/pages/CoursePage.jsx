@@ -9,7 +9,7 @@ import ControleurDeTourActif from '@/components/course/tourActif/ControleurDeTou
 import JournalEvenements from '@/components/course/JournalEvenements.jsx';
 import { obtenirPartie } from '@/services/partie.js';
 import useJoueursCourse from '@/hooks/useJoueursCourse.js';
-import useTourDemo from '@/hooks/tour/useTourDemo.js';
+import useTourDemo from '@/hooks/tour/useTourDemo.aRemplacer.js';
 import useJournal from '@/hooks/journal/useJournal.js';
 import { Ecran, EnTete, Colonne, Bloc } from './CoursePage.styles.js';
 
@@ -19,7 +19,7 @@ function CoursePage() {
   const [parametres] = useSearchParams();
   const { course, rochers, joueurs, idActif, tour } = obtenirPartie(parametres.get('personnage'));
 
-  // Démo du tour : dé, message, boutons pis choix du joueur (voir hooks/tour/useTourDemo.js).
+  // Démo du tour : dé, message, boutons pis choix du joueur (voir hooks/tour/useTourDemo.aRemplacer.js).
   const tourDemo = useTourDemo(tour);
 
   // Les joueurs (positions à jour, couleurs) pis leurs jetons (voir hooks/useJoueursCourse.js).

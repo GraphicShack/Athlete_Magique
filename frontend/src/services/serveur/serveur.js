@@ -1,5 +1,6 @@
-// Responsabilité : la seule porte vers le serveur (le fichier à remplir pour brancher le vrai).
+// Responsabilité : la seule porte vers le serveur.
 // Utilisé dans : salon, scores
+// À REMPLIR : le vrai code est plus bas, en commentaire (le fichier reste).
 
 // demander(route)            : lire une fois. Renvoie une promesse avec les données.
 // envoyer(message, donnees)  : faire une demande. Renvoie une promesse : réussie si c'est accepté, erreur si c'est refusé.
@@ -29,4 +30,4 @@
 //     socket.on(message, recevoir);
 //     return () => socket.off(message, recevoir);
 //   }
-export { demander, envoyer, ecouter } from './simulation/serveurSimule.js';
+export { demander, envoyer, ecouter } from './simulation/serveurSimule.aSupprimer.js';

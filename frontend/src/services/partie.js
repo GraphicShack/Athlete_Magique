@@ -1,8 +1,9 @@
 // Responsabilité : donne l'état de la partie (joueurs, piste, tour en cours).
 // Utilisé dans : CoursePage
+// À REMPLIR : le contenu viendra du serveur (le fichier reste).
 
-import PARTIE_EXEMPLE from '@/data/exemples/partieExemple.js';
-import { TOUR_PAR_DEFAUT, POUVOIRS_PAR_ETAPE } from '@/data/exemples/deroulementTour.js';
+import PARTIE_EXEMPLE from '@/data/exemples/partieExemple.aSupprimer.js';
+import { TOUR_PAR_DEFAUT, POUVOIRS_PAR_ETAPE } from '@/data/exemples/deroulementTour.aRemplacer.js';
 import { obtenirPersonnages } from '@/services/personnages.js';
 
 // Le perso complet ({ id, nom, initiales, pouvoir, image }) à partir de son id.
@@ -13,7 +14,7 @@ function personnageDepuisId(id) {
 // Les persos qu'on peut essayer comme joueur actif (tous).
 const PERSONNAGES_A_ESSAYER = obtenirPersonnages().map((p) => p.id);
 
-// L'état de la partie : { course, rochers, idActif, joueurs: [Joueur], tour } Chaque joueur reçoit son perso complet à la place de idPersonnage, et le tour reçoit le joueur actif, son perso, son pouvoir et ses 4 étapes (voir data/exemples/deroulementTour.js).
+// L'état de la partie : { course, rochers, idActif, joueurs: [Joueur], tour } Chaque joueur reçoit son perso complet à la place de idPersonnage, et le tour reçoit le joueur actif, son perso, son pouvoir et ses 4 étapes (voir data/exemples/deroulementTour.aRemplacer.js).
 export function obtenirPartie(idEssai) {
   const { joueurs, idActif, numeroTour, ...reste } = PARTIE_EXEMPLE;
 

@@ -21,9 +21,9 @@ const PARTIE_EXEMPLE = {
   // Le numéro du tour en cours (les événements d'exemple s'arrêtent au tour 4).
   numeroTour: 5,
 
-  // Le tour en cours (étape, dé, consigne, boutons) dépend du perso du joueur actif : voir data/exemples/deroulementTour.js.
+  // Le tour en cours (étape, dé, consigne, boutons) dépend du perso du joueur actif : voir data/exemples/deroulementTour.aRemplacer.js.
 
-  // Le journal d'événements arrive à part, au fil de la partie : voir data/exemples/evenementsExemple.js.
+  // Le journal d'événements arrive à part, au fil de la partie : voir data/exemples/evenementsExemple.aSupprimer.js.
 };
 
 export default PARTIE_EXEMPLE;

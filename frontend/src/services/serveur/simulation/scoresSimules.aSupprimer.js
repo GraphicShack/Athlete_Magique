@@ -1,7 +1,7 @@
 // Responsabilité : ce que le faux serveur répond pour le tableau d'honneur.
 // Utilisé dans : serveurSimule
 
-import SCORES_EXEMPLE from '@/data/exemples/scoresExemple.js';
+import SCORES_EXEMPLE from '@/data/exemples/scoresExemple.aSupprimer.js';
 
 // Ajoute le rang : 1 + le nb de scores meilleurs (deux scores égaux ont donc le même rang).
 const classer = (scores) =>

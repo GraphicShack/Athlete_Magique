@@ -2,7 +2,7 @@
 // Utilisé dans : CoursePage
 
 import useEvenementsRecus from '@/hooks/journal/useEvenementsRecus.js';
-import useSimulationJournal from '@/hooks/journal/useSimulationJournal.js';
+import useSimulationJournal from '@/hooks/journal/useSimulationJournal.aSupprimer.js';
 import { obtenirPersonnages } from '@/services/personnages.js';
 import { nomJoueur, nomPersonnage } from '@/utils/journal/nomsJournal.js';
 import { texteEvenement } from '@/utils/journal/texteEvenement.js';

@@ -2,7 +2,7 @@
 // Utilisé dans : useJournal
 
 import { useEffect } from 'react';
-import { demarrerSimulation } from '@/services/journal/simulationJournal.js';
+import { demarrerSimulation } from '@/services/journal/simulationJournal.aSupprimer.js';
 
 // Démarre la simulation à l'ouverture de la page, l'arrête à la fermeture.
 function useSimulationJournal() {
