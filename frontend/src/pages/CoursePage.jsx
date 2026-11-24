@@ -6,12 +6,12 @@ import Panneau from '@/components/commun/ui/Panneau.jsx';
 import MessageVide from '@/components/commun/ui/MessageVide.jsx';
 import { Page } from '@/components/commun/ui/MiseEnPage.js';
 import useBoite from '@/hooks/useBoite.js';
-import useSuivreFinCourse from '@/hooks/finCourse/useSuivreFinCourse.js';
+import useSuivrePartie from '@/hooks/salon/useSuivrePartie.js';
 import { partieRecue } from '@/services/serveur/partie.js';
 
 function CoursePage() {
   const partie = useBoite(partieRecue);
-  useSuivreFinCourse(); // amène à l'écran de fin quand la course est finie
+  useSuivrePartie(); // amène à l'écran de fin quand la course est finie
 
   if (!partie) {
     return (

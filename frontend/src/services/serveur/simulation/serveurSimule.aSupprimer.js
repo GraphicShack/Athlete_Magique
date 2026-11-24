@@ -68,8 +68,11 @@ async function jouerLesAutres() {
     const choix = actions.find(({ type }) => type === 'GARDER') ?? actions[0];
     changerPartie(jouerAction(partie, choix.type));
   }
+  const avant = selection;
   await attendre(PAUSE);
+  if (selection !== avant) return; // une autre partie a commencé entre-temps
   diffuser('course:fin', finDeCourse(partie.course.numero));
+  changerSalon({ ...salon, statut: 'fin' });
 }
 
 // À l'ouverture du site, on reçoit tout une fois (comme un joueur qui se reconnecte).
@@ -109,6 +112,11 @@ export async function envoyer(message, donnees) {
     return;
   }
 
+  if (message === 'salon:creer') {
+    // On repart à neuf (pis on arrête ceux qui jouaient encore).
+    changerSelection(nouvelleSelection(1));
+    changerPartie(nouvellePartie(1));
+  }
   changerSalon(repondreSalon(salon, message, donnees)); // lance une erreur si c'est refusé
 }
 

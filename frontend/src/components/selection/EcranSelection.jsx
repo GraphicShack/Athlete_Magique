@@ -1,6 +1,6 @@
 // Responsabilité : le carrousel des persos tirés, qui choisit, pis le bouton Choisir.
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Carrousel from '@/components/commun/ui/carrousel/Carrousel.jsx';
 import Etiquette from '@/components/commun/ui/Etiquette.jsx';
 import Confettis from '@/components/commun/ui/Confettis.jsx';
@@ -15,14 +15,11 @@ import { CarteFlottante, Marque, Consigne, Barre, Resume } from './EcranSelectio
 // Props : selection (reçue du serveur, voir README).
 function EcranSelection({ selection }) {
   const [indexActif, setIndexActif] = useState(0); // la carte au centre du carrousel
-  const { enCours, erreur, faire, effacer } = useDemande();
+  const { enCours, erreur, faire } = useDemande(selection);
 
-  const { idMoi, course, joueurs } = selection;
-  const { personnages, mesPersonnages, choisit, aMoi } = lireSelection(selection);
+  const { course, joueurs } = selection;
+  const { personnages, mesPersonnages, choisit, monTour } = lireSelection(selection);
   const auCentre = personnages[indexActif];
-
-  // La sélection a changé : l'ancien refus est plus bon.
-  useEffect(effacer, [selection]);
 
   return (
     <>
@@ -41,14 +38,14 @@ function EcranSelection({ selection }) {
             personnage={personnage}
             format="portrait"
             $flotte={personnage.id === auCentre.id}
-            $pris={Boolean(personnage.prisPar) && personnage.prisPar.id !== idMoi}
+            $pris={personnage.prisPar && !personnage.choisiParMoi}
           >
             {personnage.prisPar && (
               <Marque>
-                <Etiquette>{textePris(personnage.prisPar, idMoi)}</Etiquette>
+                <Etiquette>{textePris(personnage)}</Etiquette>
               </Marque>
             )}
-            {personnage.prisPar?.id === idMoi && <Confettis declencheur={personnage.id} />}
+            {personnage.choisiParMoi && <Confettis declencheur={personnage.id} />}
           </CarteFlottante>
         )}
       />
@@ -60,12 +57,12 @@ function EcranSelection({ selection }) {
               Votre choix : <strong>{mesPersonnages.map(({ nom }) => nom).join(' et ')}</strong>.{' '}
             </>
           )}
-          {erreur ?? messageSelection({ choisit, aMoi })}
+          {erreur ?? messageSelection({ choisit, monTour })}
         </Resume>
 
         <Bouton
           onClick={() => faire(() => choisirPersonnage(auCentre.id))}
-          disabled={!aMoi || Boolean(auCentre.prisPar) || enCours}
+          disabled={!monTour || Boolean(auCentre.prisPar) || enCours}
         >
           {libelleChoisir(auCentre)}
         </Bouton>

@@ -1,22 +1,20 @@
-// Responsabilité : amène tout le monde à la bonne page quand le statut du salon change.
+// Responsabilité : amène le joueur à la page qui va avec le statut du salon.
 
-import { useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import useSalon from '@/hooks/salon/useSalon.js';
 import { pageDuStatut } from '@/utils/salon/pageDuStatut.js';
 
-// Change de page seulement au moment où le statut change (sinon on pourrait plus revenir au salon).
+// Une seule règle : si le statut a une page pis que j'y suis pas, j'y vais.
 function useSuivrePartie() {
-  const statut = useSalon()?.statut;
+  const page = pageDuStatut(useSalon()?.statut);
+  const { pathname } = useLocation();
   const naviguer = useNavigate();
-  const statutAvant = useRef(statut);
 
   useEffect(() => {
-    const vientDeChanger = statutAvant.current && statutAvant.current !== statut;
-    statutAvant.current = statut;
-    const page = pageDuStatut(statut);
-    if (vientDeChanger && page) naviguer(page, { viewTransition: true });
-  }, [statut, naviguer]);
+    // replace : le bouton Retour du navigateur ramène pas à une page dépassée.
+    if (page && page !== pathname) naviguer(page, { replace: true, viewTransition: true });
+  }, [page, pathname, naviguer]);
 }
 
 export default useSuivrePartie;

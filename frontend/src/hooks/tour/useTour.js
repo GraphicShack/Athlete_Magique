@@ -1,17 +1,14 @@
 // Responsabilité : prépare mon tour pour l'affichage (étape, message, boutons) pis envoie mes choix.
 
-import { useEffect } from 'react';
 import useDemande from '@/hooks/useDemande.js';
 import { faireAction } from '@/services/serveur/partie.js';
 import { infosEtape, libelleAction, messageTour } from '@/utils/tour/textesTour.js';
 
 // tour : reçu du serveur. joueur : celui qui joue. bloque : true pendant une anim (boutons grisés).
 function useTour({ tour, joueur, roule, bloque }) {
-  const { enCours, erreur, faire, effacer } = useDemande();
+  // null pendant que le dé roule : ça compte comme un changement, donc l'ancien refus s'efface.
+  const { enCours, erreur, faire } = useDemande(roule ? null : tour);
   const { numero, titre } = infosEtape(tour.etape);
-
-  // Le tour a changé (ou le dé roule) : l'ancien refus est plus bon.
-  useEffect(effacer, [tour, roule]);
 
   return {
     etape: numero,

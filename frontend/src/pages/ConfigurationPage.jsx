@@ -15,7 +15,6 @@ import useSalon from '@/hooks/salon/useSalon.js';
 import useSuivrePartie from '@/hooks/salon/useSuivrePartie.js';
 import useDemande from '@/hooks/useDemande.js';
 import { placesLibres, nombresImpossibles } from '@/utils/salon/placesSalon.js';
-import { pageDuStatut } from '@/utils/salon/pageDuStatut.js';
 import CHEMINS from '@/chemins.js';
 import { ColonneDroite } from './ConfigurationPage.styles.js';
 
@@ -48,7 +47,6 @@ function ConfigurationPage() {
             onAjouterBot={() => faire(ajouterBot)}
           >
             <BoutonLancer
-              page={pageDuStatut(salon.statut)}
               estHote={salon.estHote}
               assezDeJoueurs={salon.joueurs.length >= 2}
               onLancer={() => faire(lancerPartie)}

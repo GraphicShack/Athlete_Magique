@@ -1,16 +1,17 @@
 // Responsabilité : fait une demande au serveur pis garde si elle est en cours ou refusée.
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-// Renvoie enCours, erreur (le texte, ou null), faire(demande), qui dit true si ça a marché, pis effacer (l'erreur).
-function useDemande() {
+// etat (optionnel) : ce qu'on a reçu du serveur ; quand il change, l'ancienne erreur est plus bonne, on l'efface.
+// Renvoie enCours, erreur (le texte, ou null) pis faire(demande), qui dit true si ça a marché.
+function useDemande(etat) {
   const [enCours, setEnCours] = useState(false);
   const [erreur, setErreur] = useState(null);
 
-  const effacer = () => setErreur(null);
+  useEffect(() => setErreur(null), [etat]);
 
   const faire = async (demande) => {
-    effacer();
+    setErreur(null);
     setEnCours(true);
     try {
       await demande();
@@ -23,7 +24,7 @@ function useDemande() {
     }
   };
 
-  return { enCours, erreur, faire, effacer };
+  return { enCours, erreur, faire };
 }
 
 export default useDemande;

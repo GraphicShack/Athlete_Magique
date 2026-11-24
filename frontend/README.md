@@ -25,7 +25,7 @@ Le chemin est toujours le même : le message arrive, on le met dans une **boîte
 Les règles :
 
 1. **Toujours l'état au complet**, pas juste ce qui a changé. Un message manqué est réparé par le suivant.
-2. **À la connexion** (ou reconnexion), le serveur renvoie tout. Une vieille fin de course est ignorée : `course:fin` compte seulement si son `numero` est celui de la course en cours.
+2. **À la connexion** (ou reconnexion), le serveur renvoie tout.
 3. **`idMoi` est dans chaque état** : le serveur l'envoie donc à chaque joueur séparément.
 4. **L'interface anime, elle ne décide pas.** Si un pion passe de 12 à 16, elle le fait avancer ; si le nombre de lancers augmente, elle fait rouler le dé.
 5. **Le résultat du dé n'est pas dévoilé** : pendant que mon dé roule, l'ancien écran reste (boutons, journal, pions).
@@ -201,7 +201,7 @@ Envoyé après chaque changement, au complet.
 | `placesMax` | `4` | 2, 3 ou 4 places |
 | `idMoi` | `'j2'` | qui je suis (différent pour chaque joueur) |
 | `idHote` | `'j1'` | l'hôte a plus de boutons |
-| `statut` | `'attente'` | quand il devient `'selection'` ou `'course'`, tout le monde va à cette page |
+| `statut` | `'attente'` | la page de tout le monde : `'attente'`, `'selection'`, `'course'` ou `'fin'` |
 | `joueurs` | `{ id, nom, hote, bot, pret }` | la liste des joueurs |
 
 L'interface envoie :
@@ -233,12 +233,16 @@ Envoyée avant chaque course, pis après chaque choix, au complet.
 
 L'interface envoie `selection:choisir` avec `{ idPersonnage }`. Le serveur refuse si ce n'est pas mon tour ou si le personnage est pris.
 
-Pour changer tout le monde de page, l'ordre compte :
+### Les changements de page ✅
 
-1. envoyer `selection:etat` (ou `partie:etat`) ;
-2. puis `salon:etat` avec `statut: 'selection'` (ou `'course'`).
+C'est le `statut` du salon qui décide. Une seule règle : si le statut a une page et que je n'y suis pas, l'interface m'y amène. Un message manqué ou une page rechargée se répare donc tout seul.
 
-C'est pareil pour `course:suivante`.
+| `statut` | Page | Le serveur envoie juste avant |
+|---|---|---|
+| `'attente'` | on reste où on est | |
+| `'selection'` | choix des personnages | `selection:etat` |
+| `'course'` | la course | `partie:etat` |
+| `'fin'` | fin de course | `course:fin` |
 
 ### Les connexions
 
