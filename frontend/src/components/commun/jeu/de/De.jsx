@@ -1,4 +1,4 @@
-// Responsabilité : le dé 3D qui roule pis qui renvoie sa valeur quand il s'arrête.
+// Responsabilité : le dé 3D qui roule pis qui prévient quand il s'arrête.
 // Inspiration : CodePen « 3D Dice with CSS » de jico, https://codepen.io/jico/pen/wvMpgog (code refait pour le projet).
 
 import { Eclat, Scene, Cube, Face, Emplacement, Point } from './De.styles.js';
@@ -23,19 +23,18 @@ const FACES = [
   { valeur: 5, place: 'rotateX(-90deg)', rx: 90, ry: 0 },
 ];
 
-// Affiche le dé ; à chaque nouveau lancer, il roule pis appelle onArret(valeur) à la fin.
-// Props : valeur (face à montrer, 1 à 6), lancer (augmente à chaque lancer pour relancer l'anim), onArret (reçoit la valeur à la fin).
-function De({ valeur, lancer = 0, onArret }) {
+// Affiche le dé ; s'il roule, il appelle onArret à la fin.
+// Props : valeur (face à montrer, 1 à 6), roule (true = il roule), onArret.
+function De({ valeur, roule, onArret }) {
   const visee = FACES.find((face) => face.valeur === valeur) ?? FACES[0];
 
   return (
     <Eclat>
       <Scene role="img" aria-label={`Dé : ${valeur}`}>
         <Cube
-          key={lancer}
-          $roule={lancer > 0}
+          $roule={roule}
           style={{ '--rx': `${visee.rx}deg`, '--ry': `${visee.ry}deg` }}
-          onAnimationEnd={() => onArret?.(valeur)}
+          onAnimationEnd={onArret}
         >
           {FACES.map(({ valeur: v, place }) => (
             <Face key={v} style={{ '--place': place }} aria-hidden="true">

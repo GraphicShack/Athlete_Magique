@@ -1,7 +1,6 @@
 // Responsabilité : affiche le panneau du tour (qui joue, étape, dé, message pis les boutons).
 
 import Panneau from '@/components/commun/ui/Panneau.jsx';
-import MessageVide from '@/components/commun/ui/MessageVide.jsx';
 import De from '@/components/commun/jeu/de/De.jsx';
 import EnTeteTour from './EnTeteTour.jsx';
 import EtapesTour from './EtapesTour.jsx';
@@ -13,24 +12,15 @@ import { Colonnes, Resultat, PlaceDe } from './ControleurDeTourActif.styles.js';
 function ControleurDeTourActif({
   joueur,
   personnage,
-  etapeCourante = 1,
-  de = { valeur: null, lancers: 0 },
+  etapeCourante,
+  de,
   message,
-  pouvoir = null,
+  pouvoir,
   titreEtape,
-  actions = [],
-  onAction = () => {},
+  actions,
+  onAction,
 }) {
-  // Pas encore de perso = la course a pas commencé.
-  if (!personnage) {
-    return (
-      <Panneau enEvidence teinte="tour" titre="Tour en cours">
-        <MessageVide>En attente du début de la course.</MessageVide>
-      </Panneau>
-    );
-  }
-
-  // Les 2 cases ont les mêmes props, faque on peut prendre l'une ou l'autre.
+  // On donne les mêmes props aux 2 cases ; chacune prend celles qu'elle a besoin.
   const CaseDuTour = pouvoir ? CasePouvoir : CaseSansPouvoir;
 
   return (
@@ -46,7 +36,7 @@ function ControleurDeTourActif({
 
           <Resultat>
             {de.valeur ? (
-              <De valeur={de.valeur} lancer={de.lancers} onArret={de.surArret} />
+              <De valeur={de.valeur} roule={de.roule} onArret={de.surArret} />
             ) : (
               <PlaceDe aria-hidden="true" />
             )}

@@ -15,6 +15,7 @@ import useSalon from '@/hooks/salon/useSalon.js';
 import useSuivrePartie from '@/hooks/salon/useSuivrePartie.js';
 import useDemande from '@/hooks/useDemande.js';
 import { placesLibres, nombresImpossibles } from '@/utils/salon/placesSalon.js';
+import { pageDuStatut } from '@/utils/salon/pageDuStatut.js';
 import CHEMINS from '@/chemins.js';
 import { ColonneDroite } from './ConfigurationPage.styles.js';
 
@@ -25,7 +26,7 @@ const NOMBRES = [2, 3, 4];
 function ConfigurationPage() {
   const salon = useSalon();
   const { erreur, faire } = useDemande();
-  useSuivrePartie(salon?.statut);
+  useSuivrePartie(); // amène à la sélection quand la partie est lancée
 
   return (
     <Page>
@@ -47,7 +48,7 @@ function ConfigurationPage() {
             onAjouterBot={() => faire(ajouterBot)}
           >
             <BoutonLancer
-              lancee={salon.statut === 'selection'}
+              page={pageDuStatut(salon.statut)}
               estHote={salon.estHote}
               assezDeJoueurs={salon.joueurs.length >= 2}
               onLancer={() => faire(lancerPartie)}

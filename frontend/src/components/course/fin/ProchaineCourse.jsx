@@ -1,6 +1,5 @@
 // Responsabilité : le panneau qui annonce la prochaine course pis permet d'y aller.
 
-import { useNavigate } from 'react-router-dom';
 import Panneau from '@/components/commun/ui/Panneau.jsx';
 import ContenuPanneau from '@/components/commun/ui/ContenuPanneau.js';
 import Bouton from '@/components/commun/ui/Bouton.jsx';
@@ -11,19 +10,13 @@ import { textePoints } from '@/utils/textesJoueur.js';
 import CHEMINS from '@/chemins.js';
 import { Rangee, Boutons } from './Suite.styles.js';
 
-// « Course suivante » le demande au serveur, pis va à la sélection si c'est accepté.
+// « Course suivante » le demande au serveur ; c'est lui qui amène tout le monde à la sélection (voir useSuivrePartie.js).
 // Props : numero (de la course finie), nombreCourses, ordreChoix (les noms).
 function ProchaineCourse({ numero, nombreCourses, ordreChoix }) {
   const { enCours, erreur, faire } = useDemande();
-  const naviguer = useNavigate();
 
   const prochaine = numero + 1;
   const { premiere, deuxieme } = obtenirPointage().find(({ course }) => course === prochaine);
-
-  const continuer = async () => {
-    const reussi = await faire(courseSuivante);
-    if (reussi) naviguer(CHEMINS.selection, { viewTransition: true });
-  };
 
   return (
     <Panneau titre="Prochaine course" teinte="preparation" enEvidence>
@@ -37,7 +30,7 @@ function ProchaineCourse({ numero, nombreCourses, ordreChoix }) {
           {erreur && <p role="alert">{erreur}</p>}
         </ContenuPanneau>
         <Boutons>
-          <Bouton onClick={continuer} disabled={enCours}>
+          <Bouton onClick={() => faire(courseSuivante)} disabled={enCours}>
             Course suivante
           </Bouton>
           <Bouton to={CHEMINS.classement} variante="secondaire">

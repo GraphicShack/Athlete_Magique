@@ -2,13 +2,15 @@
 
 import { useState } from 'react';
 
-// Renvoie enCours, erreur (le texte, ou null) pis faire(demande), qui dit true si ça a marché.
+// Renvoie enCours, erreur (le texte, ou null), faire(demande), qui dit true si ça a marché, pis effacer (l'erreur).
 function useDemande() {
   const [enCours, setEnCours] = useState(false);
   const [erreur, setErreur] = useState(null);
 
+  const effacer = () => setErreur(null);
+
   const faire = async (demande) => {
-    setErreur(null);
+    effacer();
     setEnCours(true);
     try {
       await demande();
@@ -21,7 +23,7 @@ function useDemande() {
     }
   };
 
-  return { enCours, erreur, faire };
+  return { enCours, erreur, faire, effacer };
 }
 
 export default useDemande;

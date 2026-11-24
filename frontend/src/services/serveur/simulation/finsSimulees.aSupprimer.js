@@ -2,14 +2,10 @@
 
 import FINS_EXEMPLE from '@/data/exemples/finsExemple.aSupprimer.js';
 
-// Pour essayer l'écran sans jouer : /fin-course?course=1 (ou 2, 3).
-export const finDemandee = Number(new URLSearchParams(window.location.search).get('course'));
+// Pour essayer l'écran sans jouer : /fin-course?course=1 (ou 2, 3). 0 si c'est pas demandé.
+export const courseDemandee = Number(new URLSearchParams(window.location.search).get('course'));
 
-let prochaine = finDemandee ? finDemandee - 1 : 0;
-
-// Renvoie la fin de la course 1, puis 2, puis 3, puis on recommence.
-export function prochaineFin() {
-  const fin = FINS_EXEMPLE[prochaine % FINS_EXEMPLE.length];
-  prochaine += 1;
-  return fin;
+// Renvoie la fin de cette course (1, 2 ou 3).
+export function finDeCourse(numero) {
+  return FINS_EXEMPLE[numero - 1];
 }

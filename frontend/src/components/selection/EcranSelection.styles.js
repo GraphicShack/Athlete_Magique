@@ -1,20 +1,15 @@
-// Responsabilité : définir le style des blocs propres à cette page (disposition, espaces…).
+// Responsabilité : définir le style de ce composant (styled-components).
 
 import styled, { css } from 'styled-components';
 import { flottement } from '@/styles/animations/flottement.js';
 import CartePersonnage from '@/components/commun/jeu/CartePersonnage.jsx';
 
-// La page : les blocs l'un sous l'autre.
-export const Page = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.espace(6)};
-`;
-
-// La carte d'un perso, qui flotte de 6 px quand $flotte est vrai (voir styles/animations/flottement.js).
+// La carte d'un perso : elle flotte de 6 px si $flotte (voir styles/animations/flottement.js), en gris si $pris par un autre.
 export const CarteFlottante = styled(CartePersonnage)`
   --hauteur-flottement: -6px;
   position: relative;
+
+  ${({ $pris }) => $pris && 'filter: grayscale(1);'}
 
   ${({ $flotte }) =>
     $flotte &&
@@ -24,10 +19,16 @@ export const CarteFlottante = styled(CartePersonnage)`
     `}
 `;
 
-// Phrase d'aide sous le titre.
+// « Choisi » ou « Pris par … », par-dessus le haut de l'image.
+export const Marque = styled.div`
+  position: absolute;
+  top: ${({ theme }) => theme.espace(6)};
+  left: ${({ theme }) => theme.espace(6)};
+`;
+
+// La course pis l'ordre de choix.
 export const Consigne = styled.p`
   margin: 0;
-  margin-top: ${({ theme }) => theme.espace(3)};
   color: ${({ theme }) => theme.couleurs.texteSurPageDoux};
 `;
 
@@ -46,14 +47,7 @@ export const Barre = styled.div`
   border-radius: ${({ theme }) => theme.rayons.md};
 `;
 
-// « Votre perso : … »
+// « Votre choix : … », pis qui choisit.
 export const Resume = styled.p`
   margin: 0;
-`;
-
-// Les deux boutons côte à côte (l'un sous l'autre s'ils manquent de place).
-export const Actions = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: ${({ theme }) => theme.espace(2)};
 `;

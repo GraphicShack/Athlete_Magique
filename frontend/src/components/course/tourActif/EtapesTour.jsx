@@ -1,8 +1,7 @@
 // Responsabilité : les 4 étapes du tour en pastilles, l'étape en cours en évidence.
 
+import { ETAPES } from '@/utils/tour/textesTour.js';
 import { ListeEtapes, Etape, Pastille, Libelle } from './EtapesTour.styles.js';
-
-const ETAPES_TOUR = ['Début du tour', 'Lancer du dé', 'Déplacement principal', 'Fin du tour'];
 
 // Statut d'une étape par rapport à l'étape en cours : 'passee', 'courante' ou 'avenir'.
 function statutEtape(numero, etapeCourante) {
@@ -15,19 +14,18 @@ function statutEtape(numero, etapeCourante) {
 function EtapesTour({ etapeCourante }) {
   return (
     <ListeEtapes>
-      {ETAPES_TOUR.map((libelle, i) => {
-        const numero = i + 1;
+      {Object.values(ETAPES).map(({ numero, titre }) => {
         const statut = statutEtape(numero, etapeCourante);
         return (
           // aria-current : les lecteurs d'écran annoncent l'étape en cours.
           <Etape
-            key={libelle}
+            key={numero}
             $statut={statut}
-            title={libelle}
+            title={titre}
             aria-current={statut === 'courante' ? 'step' : undefined}
           >
             <Pastille $statut={statut}>{numero}</Pastille>
-            <Libelle $cache={statut !== 'courante'}>{libelle}</Libelle>
+            <Libelle $cache={statut !== 'courante'}>{titre}</Libelle>
           </Etape>
         );
       })}

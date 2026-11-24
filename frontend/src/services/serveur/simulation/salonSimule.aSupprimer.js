@@ -19,7 +19,6 @@ const REPONSES = {
   'salon:places': (salon, { placesMax }) => ({ ...salon, placesMax }),
   'salon:ajouterBot': (salon) => ({ ...salon, joueurs: ajouterBot(salon.joueurs) }),
   'salon:retirer': (salon, { idJoueur }) => ({ ...salon, joueurs: retirerJoueur(salon.joueurs, idJoueur) }),
-  'salon:lancer': (salon) => ({ ...salon, statut: 'selection' }),
   // Un seul salon existe ici, donc un autre code est refusé.
   'salon:rejoindre': (salon, { code }) => {
     if (code !== salon.code) throw new Error(`Aucune partie avec le code ${code}.`);

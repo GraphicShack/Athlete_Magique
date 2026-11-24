@@ -1,4 +1,4 @@
-// Responsabilité : la fin de course reçue du serveur, pis les demandes autour.
+// Responsabilité : la fin de course reçue du serveur, pis la demande pour continuer.
 
 import { envoyer, ecouter } from '@/services/serveur/serveur.js';
 import { creerBoite } from '@/utils/creerBoite.js';
@@ -7,5 +7,4 @@ import { creerBoite } from '@/utils/creerBoite.js';
 export const finRecue = creerBoite(null);
 ecouter('course:fin', finRecue.changer);
 
-export const finirTour = () => envoyer('tour:action', { type: 'FINIR_TOUR' });
 export const courseSuivante = () => envoyer('course:suivante', {});

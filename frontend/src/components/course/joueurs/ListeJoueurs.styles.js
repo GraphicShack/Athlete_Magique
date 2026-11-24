@@ -10,13 +10,3 @@ export const Joueurs = styled(Liste)`
   gap: ${({ theme }) => theme.espace(3)} ${({ theme }) => theme.espace(4)};
   padding: 10px;
 `;
-
-// Place vide : cadre en pointillés.
-export const PlaceVide = styled.li`
-  padding: ${({ theme }) => theme.espace(4)};
-  border: 2px dashed ${({ theme }) => theme.couleurs.gris500};
-  border-radius: ${({ theme }) => theme.rayons.md};
-  color: ${({ theme }) => theme.couleurs.gris700};
-  font-size: ${({ theme }) => theme.texte.sm};
-  text-align: center;
-`;

@@ -11,6 +11,7 @@ import ProchaineCourse from '@/components/course/fin/ProchaineCourse.jsx';
 import PartieTerminee from '@/components/course/fin/PartieTerminee.jsx';
 import { Page } from '@/components/commun/ui/MiseEnPage.js';
 import useFinCourse from '@/hooks/finCourse/useFinCourse.js';
+import useSuivrePartie from '@/hooks/salon/useSuivrePartie.js';
 import CHEMINS from '@/chemins.js';
 import { Ecran, SousTitre, Grille, Suite } from './FinCoursePage.styles.js';
 
@@ -18,6 +19,8 @@ import { Ecran, SousTitre, Grille, Suite } from './FinCoursePage.styles.js';
 // Pour essayer sans jouer : /fin-course?course=1 (ou 2, 3).
 function FinCoursePage() {
   const fin = useFinCourse();
+  useSuivrePartie(); // amène à la sélection quand l'hôte continue
+
   if (!fin) {
     return (
       <Page>
