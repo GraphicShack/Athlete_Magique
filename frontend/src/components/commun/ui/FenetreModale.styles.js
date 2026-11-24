@@ -48,13 +48,6 @@ export const Dialogue = styled.dialog`
         animation: ${retrecir} ${DUREE_FERMETURE}ms ease-in forwards;
       }
     `}
-
-  @media (prefers-reduced-motion: reduce) {
-    &[open],
-    &[open] * {
-      animation: none !important;
-    }
-  }
 `;
 
 // Le cadre remplit la fenêtre : un clic dessus n'est donc jamais pris pour un clic à l'extérieur.

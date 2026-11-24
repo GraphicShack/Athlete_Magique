@@ -3,8 +3,8 @@
 import { useEffect, useState } from 'react';
 import { DUREE_PAS } from '@/styles/animations/sautJeton.js';
 
-// Check si le joueur a activé « réduire les animations » dans son OS.
-const moinsDAnimations = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+// Check si le joueur a activé « Réduire les animations » (voir useAnimationsReduites.js).
+const moinsDAnimations = () => document.documentElement.dataset.animations === 'reduites';
 
 // Donne la case où dessiner le pion, celle qu'il vient de quitter, pis s'il bouge encore.
 function useDeplacementAnime(caseVisee) {

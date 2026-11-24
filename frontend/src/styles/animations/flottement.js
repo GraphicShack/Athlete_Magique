@@ -12,10 +12,6 @@ const flotter = keyframes`
 // Le style à mettre dans un élément pour le faire flotter.
 export const flottement = css`
   animation: ${flotter} ease-in-out infinite;
-
-  @media (prefers-reduced-motion: reduce) {
-    animation: none;
-  }
 `;
 
 // Donne à un élément sa durée pis son départ, selon sa position (0, 1, 2…).

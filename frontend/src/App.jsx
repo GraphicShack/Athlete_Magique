@@ -6,17 +6,20 @@ import AccesParametres from './components/parametres/AccesParametres.jsx';
 import AccesRegles from './components/regles/AccesRegles.jsx';
 import MusiqueMenu from './components/son/MusiqueMenu.jsx';
 import FondAnime from './components/commun/ui/FondAnime.jsx';
+import useAnimationsReduites from './hooks/useAnimationsReduites.js';
 import { CoinFlottant } from './App.styles.js';
 
 // Garde les réglages pis place la page courante dans le cadre commun.
 function App() {
   // Réglages du son : gardés ici, le plus proche parent commun de la musique pis des paramètres.
   const [musiqueActive, setMusiqueActive] = useState(true);
-  const [volume, setVolume] = useState(40); // 0 à 100
+  const [volume, setVolume] = useState(15); // 0 à 100
   const son = { musiqueActive, setMusiqueActive, volume, setVolume };
 
   // Numéros sur la piste : gardés ici, parce que les paramètres les changent pis que la course les affiche.
   const [numerosVisibles, setNumerosVisibles] = useState(true);
+  const [animationsReduites, setAnimationsReduites] = useAnimationsReduites();
+  const affichage = { numerosVisibles, setNumerosVisibles, animationsReduites, setAnimationsReduites };
 
   return (
     // Classes Bootstrap : largeur maximale centrée, marges intérieures, pis au moins toute la hauteur de l'écran (la page peut remplir l'espace restant).
@@ -30,7 +33,7 @@ function App() {
 
       <CoinFlottant>
         <AccesRegles />
-        <AccesParametres son={son} affichage={{ numerosVisibles, setNumerosVisibles }} />
+        <AccesParametres son={son} affichage={affichage} />
       </CoinFlottant>
     </main>
   );

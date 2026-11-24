@@ -19,8 +19,4 @@ const glisser = keyframes`
 // Le style à mettre dans le calque du motif : un carreau toutes les 60 sec, à vitesse régulière.
 export const defilementFond = css`
   animation: ${glisser} 60s linear infinite;
-
-  @media (prefers-reduced-motion: reduce) {
-    animation: none;
-  }
 `;

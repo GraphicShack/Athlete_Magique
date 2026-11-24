@@ -68,10 +68,6 @@ export const Diapo = styled.div`
       opacity: 0;
       pointer-events: none;
     `}
-
-  @media (prefers-reduced-motion: reduce) {
-    transition: none;
-  }
 `;
 
 // Boutons ronds ‹ pis ›.

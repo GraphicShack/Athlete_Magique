@@ -39,11 +39,10 @@ export const transitionsDePage = css`
     animation: nouvelle-page-entre ${DUREE_PAGE}ms ${COURBE} ${DECALAGE_RIDEAU}ms both;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    ::view-transition-group(*),
-    ::view-transition-old(*),
-    ::view-transition-new(*) {
-      animation: none !important;
-    }
+  /* « Réduire les animations » : pas de rideau. */
+  html[data-animations='reduites']::view-transition-group(*),
+  html[data-animations='reduites']::view-transition-old(*),
+  html[data-animations='reduites']::view-transition-new(*) {
+    animation: none !important;
   }
 `;

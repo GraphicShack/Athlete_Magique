@@ -8,7 +8,7 @@ import Curseur from '@/components/commun/ui/reglages/Curseur.jsx';
 import ChoixSegmente from '@/components/commun/ui/reglages/ChoixSegmente.jsx';
 import { Grille, Actions } from './ContenuParametres.styles.js';
 
-// Affiche les panneaux de réglages (branchés pour l'instant : le volume, la musique pis les numéros des cases).
+// Affiche les panneaux de réglages (branchés pour l'instant : ceux du son pis de l'affichage).
 // Props : son, affichage (les réglages), onEnregistrer (appelé au clic sur « Enregistrer »).
 function ContenuParametres({ son, affichage, onEnregistrer }) {
   return (
@@ -33,6 +33,8 @@ function ContenuParametres({ son, affichage, onEnregistrer }) {
           <Interrupteur
             etiquette="Réduire les animations"
             description="Coupe le rideau entre les pages et les effets"
+            checked={affichage.animationsReduites}
+            onChange={(evenement) => affichage.setAnimationsReduites(evenement.target.checked)}
           />
           <Interrupteur
             etiquette="Numéros des cases"

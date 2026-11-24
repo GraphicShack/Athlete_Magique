@@ -44,10 +44,14 @@ const StyleGlobal = createGlobalStyle`
     outline-offset: 2px;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-      transition-duration: 0.01ms !important;
+  /* « Réduire les animations » (voir useAnimationsReduites.js) : tout finit tout de suite, une seule fois.
+     0.01ms pis pas « none » : le dé attend la fin de son anim pour donner son résultat. */
+  html[data-animations='reduites'] {
+    *, *::before, *::after, *::backdrop {
       animation-duration: 0.01ms !important;
+      animation-delay: 0s !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
     }
   }
 `;

@@ -7,7 +7,7 @@ const melanger = (rang, nombre) => (rang * nombre) % 1; // entre 0 et 1
 
 // Le joueur a demandé moins d'animations : pas de confettis du tout.
 const sansAnimationReduite = css`
-  @media (prefers-reduced-motion: reduce) {
+  html[data-animations='reduites'] & {
     display: none;
   }
 `;
