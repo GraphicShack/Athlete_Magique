@@ -1,7 +1,7 @@
 // Responsabilité : le CSS qui s'applique à toute l'app.
 
 import { createGlobalStyle } from 'styled-components';
-import { transitionsDePage } from '@/styles/animations/rideau.js';
+import { transitionsDePage } from '@/styles/animations/rideaux/rideaux.js';
 
 const StyleGlobal = createGlobalStyle`
   :root {

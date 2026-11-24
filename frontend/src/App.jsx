@@ -6,11 +6,14 @@ import AccesParametres from './components/parametres/AccesParametres.jsx';
 import AccesRegles from './components/regles/AccesRegles.jsx';
 import MusiqueMenu from './components/son/MusiqueMenu.jsx';
 import FondAnime from './components/commun/ui/FondAnime.jsx';
+import useRideauAuHasard from './hooks/useRideauAuHasard.js';
 import useAnimationsReduites from './hooks/useAnimationsReduites.js';
 import { CoinFlottant } from './App.styles.js';
 
 // Garde les réglages pis place la page courante dans le cadre commun.
 function App() {
+  useRideauAuHasard(); // la transition entre les pages
+
   // Réglages du son : gardés ici, le plus proche parent commun de la musique pis des paramètres.
   const [musiqueActive, setMusiqueActive] = useState(true);
   const [volume, setVolume] = useState(15); // 0 à 100
