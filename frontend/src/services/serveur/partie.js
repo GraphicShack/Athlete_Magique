@@ -7,8 +7,8 @@ import { creerBoite } from '@/utils/creerBoite.js';
 export const partieRecue = creerBoite(null);
 ecouter('partie:etat', partieRecue.changer);
 
-// Dit au serveur ce que le joueur a choisi (ex. 'LANCER').
-export const faireAction = (type) => envoyer('tour:action', { type });
+// Dit au serveur ce que le joueur a choisi (ex. 'LANCER'), pis sur qui s'il y a une cible.
+export const faireAction = (type, cible) => envoyer('tour:action', { type, cible });
 
 // Répond à la question « Veux-tu déclarer un duel ? » (accepter : true ou false).
 export const repondreDuel = (id, accepter) => envoyer('duel:repondre', { id, accepter });

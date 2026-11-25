@@ -84,23 +84,27 @@ Les actions que le serveur peut permettre :
 | `type` | Bouton |
 |---|---|
 | `COMMENCER` | Commencer le tour |
-| `HYPNOTISER`, `PASSER_POUVOIR` | Téléporter un personnage, Ne pas l'utiliser |
+| `HYPNOTISER` avec `ciblesPossibles` | Téléporter un personnage |
+| `PASSER_POUVOIR` | Ne pas l'utiliser |
 | `RASSEMBLER` | Rassembler les personnages |
 | `LANCER` | Lancer le dé |
 | `RELANCER` avec `relance`, `relancesMax` | Relancer le dé (1 sur 2) |
 | `GARDER` | Garder le 4 |
 | `DOUBLER` | Doubler et trébucher |
-| `ECHANGER` | Échanger de place |
+| `ECHANGER` avec `ciblesPossibles` | Échanger de place |
 | `AVANCER` | Confirmer : avancer de 6 (« Avancer de 6 » si un pouvoir est actif) |
 | `FINIR_TOUR` | Fin du tour |
 
-Quand le joueur clique, l'interface envoie `tour:action` avec `{ type }`, ex. `{ type: 'LANCER' }`. Le serveur tire le dé. Une action ou une étape inconnue affiche son nom, sans planter.
+Quand le joueur clique, l'interface envoie `tour:action` avec `{ type }`, ex. `{ type: 'LANCER' }`. Le serveur tire le dé.
+
+Une action avec `ciblesPossibles` (ex. `['j2', 'j3']`, des `id` de joueurs) ouvre une fenêtre pour choisir. L'interface envoie alors `{ type: 'HYPNOTISER', cible: 'j2' }`. Fermer la fenêtre n'envoie rien. S'il n'y a aucune cible possible, le serveur n'envoie pas l'action.
+
+Une action ou une étape inconnue affiche son nom, sans planter.
 
 Encore à faire à l'écran :
 
 | Information | Exemple proposé | |
 |---|---|---|
-| choisir une cible (Hypnotiste, Flip Flop) | `ciblesPossibles: ['j2', 'j3']` | À faire |
 | 2 personnages par joueur, à 2 joueurs | | À faire |
 
 ### Le duel `partie:etat.duel` (branché)

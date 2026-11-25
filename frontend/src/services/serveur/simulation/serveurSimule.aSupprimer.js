@@ -78,7 +78,7 @@ async function jouerLesAutres() {
     if (partie !== avant) return; // une autre partie a commencé entre-temps
     const { actions } = partie.tour;
     const choix = actions.find(({ type }) => type === 'GARDER') ?? actions[0];
-    changerPartie(jouerAction(partie, choix.type));
+    changerPartie(jouerAction(partie, choix.type, choix.ciblesPossibles?.[0]));
   }
   const avant = selection;
   await attendre(PAUSE);
@@ -106,7 +106,7 @@ export async function envoyer(message, donnees) {
   await attendre(DELAI);
 
   if (message === 'tour:action') {
-    changerPartie(jouerAction(partie, donnees.type)); // lance une erreur si c'est refusé
+    changerPartie(jouerAction(partie, donnees.type, donnees.cible)); // lance une erreur si c'est refusé
     if (donnees.type === 'FINIR_TOUR') jouerLesAutres();
     return;
   }

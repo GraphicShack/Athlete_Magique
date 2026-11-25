@@ -21,12 +21,16 @@ const actif = (partie) => partie.joueurs.find((joueur) => joueur.id === partie.i
 
 const changerTour = (partie, changements) => ({ ...partie, tour: { ...partie.tour, ...changements } });
 
-const changerActif = (partie, changements) => ({
+const changerJoueur = (partie, id, changements) => ({
   ...partie,
-  joueurs: partie.joueurs.map((joueur) => (joueur.id === partie.idActif ? { ...joueur, ...changements } : joueur)),
+  joueurs: partie.joueurs.map((joueur) => (joueur.id === id ? { ...joueur, ...changements } : joueur)),
 });
 
-const noter = (partie, type, details = {}, parPouvoir = false) => ({
+const changerActif = (partie, changements) => changerJoueur(partie, partie.idActif, changements);
+
+const position = (partie, id) => partie.joueurs.find((joueur) => joueur.id === id).position;
+
+const noter = (partie, type, details = {}, parPouvoir = false, qui = {}) => ({
   ...partie,
   journal: [
     ...partie.journal,
@@ -40,6 +44,7 @@ const noter = (partie, type, details = {}, parPouvoir = false) => ({
       cible: null,
       cause: parPouvoir ? { genre: 'pouvoir', id: actif(partie).idPersonnage } : null,
       details,
+      ...qui,
     },
   ],
 });
@@ -71,13 +76,27 @@ function lancer(partie) {
 }
 
 function avancer(partie) {
-  const { position, idPersonnage } = actif(partie);
+  const { position: de, idPersonnage } = actif(partie);
   const { cases } = partie.tour;
-  const a = position + cases;
+  const a = de + cases;
   const parPouvoir = ETAPE_DU_POUVOIR[idPersonnage] === 'deplacement';
   // Un déplacement sans pouvoir est pas noté dans le journal.
-  const notee = parPouvoir ? noter(partie, 'DEPLACEMENT', { de: position, a, cases }, true) : partie;
+  const notee = parPouvoir ? noter(partie, 'DEPLACEMENT', { de, a, cases }, true) : partie;
   return changerTour(changerActif(notee, { position: a }), { etape: 'fin' });
+}
+
+// Hypnotiste : la cible arrive sur ma case.
+function hypnotiser(partie, cible) {
+  const a = actif(partie).position;
+  const commencee = commencer(partie);
+  return noter(changerJoueur(commencee, cible, { position: a }), 'TELEPORTATION', { a }, true, { acteur: cible });
+}
+
+// Flip Flop : on échange nos cases, au lieu de lancer le dé.
+function echanger(partie, cible) {
+  const [maCase, saCase] = [actif(partie).position, position(partie, cible)];
+  const echangee = changerJoueur(changerActif(partie, { position: saCase }), cible, { position: maCase });
+  return changerTour(noter(echangee, 'ECHANGE', {}, true, { cible }), { etape: 'fin' });
 }
 
 // Le tour passe au joueur suivant.
@@ -90,7 +109,7 @@ function finirTour(partie) {
 const ACTIONS = {
   COMMENCER: commencer,
   PASSER_POUVOIR: commencer,
-  HYPNOTISER: (partie) => noter(commencer(partie), 'HYPNOSE', {}, true),
+  HYPNOTISER: hypnotiser,
   RASSEMBLER: (partie) => noter(commencer(partie), 'RASSEMBLEMENT', {}, true),
   LANCER: lancer,
   RELANCER: lancer,
@@ -99,7 +118,7 @@ const ACTIONS = {
     const cases = partie.tour.de.valeur * 2;
     return fixerCases(noter(partie, 'DEPLACEMENT_DOUBLE', { cases }, true), cases);
   },
-  ECHANGER: (partie) => changerTour(noter(partie, 'ECHANGE_DEMANDE', {}, true), { etape: 'fin' }),
+  ECHANGER: echanger,
   AVANCER: avancer,
   FINIR_TOUR: finirTour,
 };
@@ -109,14 +128,15 @@ const ACTIONS = {
 function actionsPermises(partie) {
   const { etape, de } = partie.tour;
   const perso = actif(partie).idPersonnage;
+  const ciblesPossibles = partie.joueurs.map(({ id }) => id).filter((id) => id !== partie.idActif);
   if (etape === 'deplacement') return [{ type: 'AVANCER' }];
   if (etape === 'fin') return [{ type: 'FINIR_TOUR' }];
   if (etape === 'debut') {
-    if (perso === 'hypnotiste') return [{ type: 'HYPNOTISER' }, { type: 'PASSER_POUVOIR' }];
+    if (perso === 'hypnotiste') return [{ type: 'HYPNOTISER', ciblesPossibles }, { type: 'PASSER_POUVOIR' }];
     if (perso === 'partyanimal') return [{ type: 'RASSEMBLER' }];
     return [{ type: 'COMMENCER' }];
   }
-  if (de.lancers === 0) return perso === 'flipflop' ? [{ type: 'LANCER' }, { type: 'ECHANGER' }] : [{ type: 'LANCER' }];
+  if (de.lancers === 0) return perso === 'flipflop' ? [{ type: 'LANCER' }, { type: 'ECHANGER', ciblesPossibles }] : [{ type: 'LANCER' }];
   if (perso === 'magicien') return [{ type: 'RELANCER', relance: de.lancers, relancesMax: RELANCES_MAX }, { type: 'GARDER' }];
   return [{ type: 'DOUBLER' }, { type: 'GARDER' }];
 }
@@ -150,7 +170,9 @@ export function nouvellePartie(numero, choix = []) {
 }
 
 // Joue une action ; lance une erreur si elle est pas permise.
-export function jouerAction(partie, type) {
-  if (!partie.tour.actions.some((action) => action.type === type)) throw new Error("Tu ne peux pas faire ça maintenant.");
-  return completer(ACTIONS[type](partie));
+export function jouerAction(partie, type, cible) {
+  const action = partie.tour.actions.find((permise) => permise.type === type);
+  const cibleCorrecte = !action?.ciblesPossibles || action.ciblesPossibles.includes(cible);
+  if (!action || !cibleCorrecte) throw new Error('Tu ne peux pas faire ça maintenant.');
+  return completer(ACTIONS[type](partie, cible));
 }

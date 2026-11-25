@@ -49,6 +49,7 @@ function EcranCourse({ partie }) {
             <MonTour
               tour={vue.tour}
               joueur={actif}
+              joueurs={joueurs}
               de={de}
               bloque={de.roule || enMouvement || Boolean(vue.duel)}
             />

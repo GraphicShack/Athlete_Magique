@@ -13,6 +13,7 @@ function useTour({ tour, joueur, roule, bloque }) {
   return {
     etape: numero,
     titreEtape: titre,
+    enCours,
     message: erreur ?? messageTour({ tour, joueur, roule }),
     // Le premier bouton est le principal (rouge).
     actions: tour.actions.map((action, rang) => ({
@@ -21,7 +22,7 @@ function useTour({ tour, joueur, roule, bloque }) {
       principal: rang === 0,
       inactif: bloque || enCours,
     })),
-    surAction: ({ id }) => faire(() => faireAction(id)),
+    jouer: (type, cible) => faire(() => faireAction(type, cible)),
   };
 }
 
