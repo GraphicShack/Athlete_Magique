@@ -1,8 +1,9 @@
 // Responsabilité : définir le style de ce composant (styled-components).
 
 import styled, { css } from 'styled-components';
+import { holographique } from '@/styles/animations/holographique.js';
 
-// Couleurs de chaque variante (normale pis au survol).
+// Couleurs de chaque variante (normale pis au survol) ; le rouge a aussi le reflet holographique.
 const variantes = {
   principal: css`
     background: ${({ theme }) => theme.couleurs.accent};
@@ -10,6 +11,7 @@ const variantes = {
     &:hover:not(:disabled) {
       background: ${({ theme }) => theme.couleurs.accentFonce};
     }
+    ${holographique}
   `,
   secondaire: css`
     background: ${({ theme }) => theme.couleurs.surface};
@@ -33,6 +35,7 @@ export const Base = styled.button`
   transition:
     background ${({ theme }) => theme.transition},
     translate ${({ theme }) => theme.transition},
+    scale ${({ theme }) => theme.transition},
     box-shadow ${({ theme }) => theme.transition};
   ${({ $variante }) => variantes[$variante]}
 

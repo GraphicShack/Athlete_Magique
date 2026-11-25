@@ -1,6 +1,7 @@
 // Responsabilité : définir le style de ce composant (styled-components).
 
 import styled from 'styled-components';
+import { flottement } from '@/styles/animations/flottement.js';
 
 export const Aide = styled.p`
   margin: 0 0 ${({ theme }) => theme.espace(4)};
@@ -16,8 +17,10 @@ export const Code = styled.div`
   margin-bottom: ${({ theme }) => theme.espace(4)};
 `;
 
-// Une lettre du code dans sa case, en gros caractères.
+// Une lettre du code dans sa case, qui flotte de 4 px comme les titres (voir styles/animations/flottement.js).
 export const Lettre = styled.span`
+  --hauteur-flottement: -4px;
+  ${flottement}
   display: grid;
   place-items: center;
   width: 2.5rem;

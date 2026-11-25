@@ -3,6 +3,7 @@
 import Panneau from '@/components/commun/ui/Panneau.jsx';
 import Bouton from '@/components/commun/ui/Bouton.jsx';
 import useCopier from '@/hooks/useCopier.js';
+import { rythmeFlottement } from '@/styles/animations/flottement.js';
 import { Code, Lettre, Aide } from './PanneauCode.styles.js';
 
 // Le texte du bouton selon le résultat de la copie.
@@ -18,7 +19,7 @@ function PanneauCode({ code }) {
 
       <Code aria-label={`Code : ${code}`}>
         {[...code].map((lettre, i) => (
-          <Lettre key={i} aria-hidden="true">
+          <Lettre key={i} style={rythmeFlottement(i)} aria-hidden="true">
             {lettre}
           </Lettre>
         ))}
