@@ -10,6 +10,7 @@ import FenetreDuel from '@/components/course/duel/FenetreDuel.jsx';
 import JournalEvenements from '@/components/course/JournalEvenements.jsx';
 import usePartieAffichee from '@/hooks/course/usePartieAffichee.js';
 import useJoueursCourse from '@/hooks/course/useJoueursCourse.js';
+import useGains from '@/hooks/journal/useGains.js';
 import { lignesJournal } from '@/utils/journal/lignesJournal.js';
 import { Ecran, EnTete, Colonne, Bloc } from './EcranCourse.styles.js';
 
@@ -20,6 +21,7 @@ function EcranCourse({ partie }) {
 
   const { vue, de } = usePartieAffichee(partie);
   const { joueurs, jetons, enMouvement } = useJoueursCourse(vue.joueurs, vue.idActif);
+  const gains = useGains(vue.journal, enMouvement);
   const actif = joueurs.find((joueur) => joueur.id === vue.idActif);
 
   return (
@@ -35,11 +37,12 @@ function EcranCourse({ partie }) {
             nombreCourses={vue.course.nombreCourses}
             jetons={jetons}
             rochers={vue.rochers}
+            gains={gains}
             numerosVisibles={numerosVisibles}
           />
         </Bloc>
         <Bloc $taille="contenu">
-          <ListeJoueurs joueurs={joueurs} idActif={vue.idActif} />
+          <ListeJoueurs joueurs={joueurs} idActif={vue.idActif} gains={gains} />
         </Bloc>
       </Colonne>
 

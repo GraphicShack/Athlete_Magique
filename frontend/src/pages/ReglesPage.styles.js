@@ -28,7 +28,7 @@ export const EmplacementMascotte = styled.div`
   justify-content: flex-end;
   min-width: 0;
 
-  @media (min-width: ${({ theme }) => theme.ecrans.lg}) {
+  @media ${({ theme }) => theme.medias.ordi} {
     grid-column: 2;
   }
 `;

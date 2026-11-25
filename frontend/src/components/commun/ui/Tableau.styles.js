@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 
 // Pour une colonne cachée sur cell (la place manque).
 export const cacheSurCell = css`
-  @media (max-width: ${({ theme }) => theme.ecrans.sm}) {
+  @media ${({ theme }) => theme.medias.cell} {
     display: none;
   }
 `;
@@ -41,7 +41,7 @@ export const Ligne = styled.tr`
   border-radius: ${({ theme }) => theme.rayons.sm};
   background: ${({ theme, $enEvidence }) => ($enEvidence ? theme.palette.jaune : theme.couleurs.gris100)};
   outline: ${({ theme, $enEvidence }) => ($enEvidence ? theme.bordures.contour : 'none')};
-  outline-offset: -2px; /* le contour reste à l'intérieur de la rangée */
+  outline-offset: -0.125rem; /* le contour reste à l'intérieur de la rangée */
 
   & > :first-child {
     border-radius: ${({ theme }) => `${theme.rayons.sm} 0 0 ${theme.rayons.sm}`};

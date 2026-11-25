@@ -8,7 +8,7 @@ export const Grille = styled.div`
   gap: ${({ theme }) => theme.espace(8)};
   padding: ${({ theme }) => theme.espace(2)};
 
-  @media (min-width: ${({ theme }) => theme.ecrans.md}) {
+  @media ${({ theme }) => theme.medias.tablette} {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 `;

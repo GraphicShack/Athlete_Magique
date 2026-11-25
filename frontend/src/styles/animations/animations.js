@@ -16,7 +16,7 @@ export const fondu = keyframes`
 export const apparaitre = keyframes`
   from {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(0.75rem);
   }
 `;
 

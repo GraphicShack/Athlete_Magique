@@ -18,8 +18,10 @@ function SelectionPage() {
 
   return (
     <Page>
-      <EnTetePage lien={{ libelle: 'Quitter la partie', to: CHEMINS.accueil }} />
-      <EtapesPartie etapeCourante={2} />
+      <EnTetePage
+        lien={{ libelle: 'Quitter la partie', to: CHEMINS.accueil }}
+        actions={<EtapesPartie etapeCourante={2} />}
+      />
       <TitreArcEnCiel>Choisissez votre personnage</TitreArcEnCiel>
 
       {selection ? (

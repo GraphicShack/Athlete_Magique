@@ -2,9 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { DUREE_PAS } from '@/styles/animations/sautJeton.js';
-
-// Check si le joueur a activé « Réduire les animations » (voir useAnimationsReduites.js).
-const moinsDAnimations = () => document.documentElement.dataset.animations === 'reduites';
+import { moinsDAnimations } from '@/utils/moinsDAnimations.js';
 
 // Renvoie les joueurs comme on les affiche, le saut en cours ({ id, depuis } ou null), pis enMouvement.
 function usePionsAnimes(joueurs) {
@@ -13,7 +11,11 @@ function usePionsAnimes(joueurs) {
 
   // Un joueur qui vient d'arriver dans la partie est affiché tout de suite, sur sa vraie case.
   const joueurAffiche = (joueur) => affiches.find(({ id }) => id === joueur.id) ?? joueur;
-  const estRendu = (joueur) => joueurAffiche(joueur).position === joueur.position;
+  // Un téléporté marche pas : il est déjà rendu (voir useTeleportations.js).
+  const estRendu = (joueur) => {
+    const { position, teleportations } = joueurAffiche(joueur);
+    return position === joueur.position || teleportations !== joueur.teleportations;
+  };
 
   // Tant qu'un pion est pas rendu, on garde l'ancien joueur (sinon on dévoile ses points, sa chute…).
   const aAfficher = joueurs.map((joueur) => (estRendu(joueur) ? joueur : joueurAffiche(joueur)));

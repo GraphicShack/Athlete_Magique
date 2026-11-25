@@ -40,7 +40,7 @@ export const Exemple = styled.span`
 export const Carre = styled.span`
   width: 100%;
   height: 100%;
-  border-radius: 2px;
+  border-radius: 0.125rem;
   background: ${({ $couleur }) => $couleur};
 `;
 

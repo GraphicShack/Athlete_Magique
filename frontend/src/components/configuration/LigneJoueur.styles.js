@@ -12,7 +12,7 @@ export const Carte = styled.li`
   min-height: 4rem;
   padding: ${({ theme }) => theme.espace(3)} ${({ theme }) => theme.espace(4)};
   border: ${({ theme }) => theme.bordures.contour};
-  border-left: 10px solid ${({ $couleur }) => $couleur};
+  border-left: 0.625rem solid ${({ $couleur }) => $couleur};
   border-radius: ${({ theme }) => theme.rayons.md};
   background: ${({ theme }) => theme.couleurs.surface};
 `;
@@ -51,7 +51,7 @@ export const Statut = styled.span`
     width: 0.7rem;
     height: 0.7rem;
     border-radius: 50%;
-    border: 2px solid ${({ theme }) => theme.couleurs.encre};
+    border: 0.125rem solid ${({ theme }) => theme.couleurs.encre};
     background: ${({ theme, $pret }) => ($pret ? theme.palette.vert : theme.couleurs.gris300)};
   }
 `;

@@ -3,7 +3,7 @@
 import styled from 'styled-components';
 import { flottement } from '@/styles/animations/flottement.js';
 
-// La taille suit la largeur de l'écran (6vw), entre 2,25rem pis 4,5rem.
+// Sur ordi, toujours la même taille (il est souvent à côté du logo) ; sur cell, elle suit la largeur (6vw).
 export const Titre = styled.h1`
   margin: 0;
   font-family: ${({ theme }) => theme.polices.titre};
@@ -12,6 +12,10 @@ export const Titre = styled.h1`
   line-height: 0.95;
   letter-spacing: -0.02em;
   text-transform: uppercase;
+
+  @media ${({ theme }) => theme.medias.ordi} {
+    font-size: 3.25rem;
+  }
 `;
 
 // Un mot du titre : un seul bloc, qui passe à la ligne en entier.

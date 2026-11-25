@@ -19,8 +19,8 @@ export const Bascule = styled.input`
   &::before {
     content: '';
     position: absolute;
-    top: 2px;
-    left: 2px;
+    top: 0.125rem;
+    left: 0.125rem;
     width: 1.25rem;
     height: 1.25rem;
     border-radius: ${({ theme }) => theme.rayons.rond};

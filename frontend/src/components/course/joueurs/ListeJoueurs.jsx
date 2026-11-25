@@ -5,13 +5,18 @@ import CarteEnCourse from './CarteEnCourse.jsx';
 import { Joueurs } from './ListeJoueurs.styles.js';
 
 // Affiche une carte par joueur.
-// Props : joueurs, idActif (celui qui joue).
-function ListeJoueurs({ joueurs, idActif }) {
+// Props : joueurs, idActif (celui qui joue), gains (de tous les joueurs).
+function ListeJoueurs({ joueurs, idActif, gains }) {
   return (
     <Panneau titre="Joueurs" teinte="joueurs">
       <Joueurs aria-label="Joueurs, dans l'ordre de jeu">
         {joueurs.map((joueur) => (
-          <CarteEnCourse key={joueur.id} joueur={joueur} actif={joueur.id === idActif} />
+          <CarteEnCourse
+            key={joueur.id}
+            joueur={joueur}
+            actif={joueur.id === idActif}
+            gains={gains.filter(({ idJoueur }) => idJoueur === joueur.id)}
+          />
         ))}
       </Joueurs>
     </Panneau>

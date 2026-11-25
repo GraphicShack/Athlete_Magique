@@ -49,7 +49,7 @@ export const Segment = styled.label`
   }
 
   input:focus-visible + span {
-    outline: 2px solid ${({ theme }) => theme.couleurs.encre};
-    outline-offset: -4px;
+    outline: 0.125rem solid ${({ theme }) => theme.couleurs.encre};
+    outline-offset: -0.25rem;
   }
 `;

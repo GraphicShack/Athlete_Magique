@@ -3,8 +3,9 @@
 
 import { css, keyframes } from 'styled-components';
 
-// Côté d'un carreau du motif, en pixels.
+// Côté d'un carreau du motif, en pixels (pour le dessin) pis en rem (pour l'écran).
 export const TAILLE_MOTIF = 800;
+export const COTE_MOTIF = `${TAILLE_MOTIF / 16}rem`;
 
 // Un carreau vers la droite pis un carreau vers le haut : le motif monte en diagonale.
 const glisser = keyframes`
@@ -12,7 +13,7 @@ const glisser = keyframes`
     transform: translate(0, 0);
   }
   to {
-    transform: translate(${TAILLE_MOTIF}px, -${TAILLE_MOTIF}px);
+    transform: translate(${COTE_MOTIF}, -${COTE_MOTIF});
   }
 `;
 

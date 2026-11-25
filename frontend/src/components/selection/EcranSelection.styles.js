@@ -6,7 +6,7 @@ import CartePersonnage from '@/components/commun/jeu/CartePersonnage.jsx';
 
 // La carte d'un perso : elle flotte de 6 px si $flotte (voir styles/animations/flottement.js), en gris si $pris par un autre.
 export const CarteFlottante = styled(CartePersonnage)`
-  --hauteur-flottement: -6px;
+  --hauteur-flottement: -0.375rem;
   position: relative;
 
   ${({ $pris }) => $pris && 'filter: grayscale(1);'}
@@ -45,6 +45,10 @@ export const Barre = styled.div`
   border: ${({ theme }) => theme.bordures.contour};
   box-shadow: ${({ theme }) => theme.ombres.cadre};
   border-radius: ${({ theme }) => theme.rayons.md};
+
+  @media ${({ theme }) => theme.medias.ordi} {
+    margin-right: 7.5rem; /* la place des boutons Règles pis Paramètres */
+  }
 `;
 
 // « Votre choix : … », pis qui choisit.

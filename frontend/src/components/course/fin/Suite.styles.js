@@ -8,7 +8,7 @@ export const Rangee = styled.div`
   flex-direction: column;
   gap: ${({ theme }) => theme.espace(4)};
 
-  @media (min-width: ${({ theme }) => theme.ecrans.lg}) {
+  @media ${({ theme }) => theme.medias.ordi} {
     flex-direction: row;
     align-items: center;
 
@@ -24,7 +24,7 @@ export const Boutons = styled.div`
   flex-direction: column;
   gap: ${({ theme }) => theme.espace(3)};
 
-  @media (min-width: ${({ theme }) => theme.ecrans.lg}) {
+  @media ${({ theme }) => theme.medias.ordi} {
     flex-direction: row;
   }
 `;

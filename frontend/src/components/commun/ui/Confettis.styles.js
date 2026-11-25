@@ -14,10 +14,10 @@ export const Zone = styled.span`
 // Forme d'un morceau : petit rectangle, ou rond un morceau sur trois ($rond), avec un contour noir comme le reste du jeu.
 export const formeConfetti = css`
   position: absolute;
-  width: 8px;
-  height: ${({ $rond }) => ($rond ? '8px' : '14px')};
+  width: 0.5rem;
+  height: ${({ $rond }) => ($rond ? '0.5rem' : '0.875rem')};
   border: 1px solid ${({ theme }) => theme.couleurs.encre};
-  border-radius: ${({ $rond, theme }) => ($rond ? theme.rayons.rond : '2px')};
+  border-radius: ${({ $rond, theme }) => ($rond ? theme.rayons.rond : '0.125rem')};
 `;
 
 // Un morceau qui explose : posé au centre du calque, puis lancé par l'animation « explosion ».
@@ -25,6 +25,6 @@ export const Morceau = styled.span`
   ${formeConfetti}
   top: 50%;
   left: 50%;
-  margin: ${({ $rond }) => ($rond ? '-4px 0 0 -4px' : '-7px 0 0 -4px')};
+  margin: ${({ $rond }) => ($rond ? '-0.25rem 0 0 -0.25rem' : '-0.4375rem 0 0 -0.25rem')};
   ${explosion}
 `;

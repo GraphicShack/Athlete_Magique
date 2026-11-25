@@ -38,11 +38,7 @@ export const TableauPlein = styled(Tableau)`
   }
 `;
 
-// L'explication des égalités ; cachée sur un ordi à petit écran (la place manque).
+// L'explication des égalités .
 export const Explication = styled.p`
   font-size: ${({ theme }) => theme.texte.xs};
-
-  @media (min-width: ${({ theme }) => theme.ecrans.lg}) and (max-height: 780px) {
-    display: none;
-  }
 `;

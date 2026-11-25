@@ -34,7 +34,7 @@ export const holographique = css`
   @media (hover: hover) {
     &:hover:not(:disabled) {
       scale: 1.02;
-      box-shadow: ${({ theme }) => theme.ombres.blocPetit}, 0 0 20px ${voile('cyan')};
+      box-shadow: ${({ theme }) => theme.ombres.blocPetit}, 0 0 1.25rem ${voile('cyan')};
     }
 
     &:hover:not(:disabled)::before {

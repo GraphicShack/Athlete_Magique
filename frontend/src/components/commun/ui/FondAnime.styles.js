@@ -2,7 +2,7 @@
 // Inspiration : CodePen « CSS Animated Loop Background Image » de Jeong Geum-dam, https://codepen.io/fkaus/pen/mdJVeOz (idée du motif qui glisse en boucle ; code refait).
 
 import styled from 'styled-components';
-import { TAILLE_MOTIF, defilementFond } from '@/styles/animations/defilementFond.js';
+import { COTE_MOTIF, TAILLE_MOTIF, defilementFond } from '@/styles/animations/defilementFond.js';
 
 // Opacité du motif : assez faible pour rester derrière les panneaux, assez forte pour bien voir les formes.
 const OPACITE = 0.14;
@@ -40,7 +40,7 @@ function motif(blanc, gris) {
       ? `<circle cx="${x}" cy="${y}" r="${taille}" fill="${remplissage}"/>`
       : `<polygon points="${pointsEtoile(x, y, taille)}" fill="${remplissage}"/>`;
   }).join('');
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${TAILLE_MOTIF}" height="${TAILLE_MOTIF}">${formes}</svg>`;
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${TAILLE_MOTIF} ${TAILLE_MOTIF}">${formes}</svg>`;
   return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
 }
 
@@ -56,9 +56,9 @@ export const Calque = styled.div`
   &::before {
     content: '';
     position: absolute;
-    inset: -${TAILLE_MOTIF}px;
+    inset: -${COTE_MOTIF};
     background-image: ${({ theme }) => motif(theme.palette.blanc, theme.palette.gris)};
-    background-size: ${TAILLE_MOTIF}px ${TAILLE_MOTIF}px;
+    background-size: ${COTE_MOTIF} ${COTE_MOTIF};
     opacity: ${OPACITE};
     ${defilementFond}
   }

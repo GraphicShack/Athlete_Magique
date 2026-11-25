@@ -22,8 +22,37 @@ const StyleGlobal = createGlobalStyle`
     --bs-focus-ring-color: color-mix(in srgb, ${({ theme }) => theme.couleurs.encre} 25%, transparent);
   }
 
+  /* À la verticale (cell) : tailles normales, la page a la hauteur de l'écran. */
+  :root {
+    --hauteur-ecran: 100dvh;
+    --marge-x: 0px;
+    --marge-y: 0px;
+  }
+
+  /* À l'horizontale : 1rem suit la fenêtre, pour que le dessin (voir theme.js) rentre toujours au complet. */
+  @media ${({ theme }) => theme.medias.ordi} {
+    :root {
+      font-size: min(100vw / ${({ theme }) => theme.dessin.largeur}, 100dvh / ${({ theme }) => theme.dessin.hauteur});
+      --hauteur-ecran: ${({ theme }) => theme.dessin.hauteur}rem;
+      --marge-x: calc((100vw - ${({ theme }) => theme.dessin.largeur}rem) / 2);
+      --marge-y: calc((100dvh - ${({ theme }) => theme.dessin.hauteur}rem) / 2);
+    }
+
+    /* Bootstrap fait dépendre ces tailles de la largeur : ici, elles sont fixes. */
+    h2 { font-size: 2rem; }
+    h3 { font-size: 1.75rem; }
+    h4 { font-size: 1.5rem; }
+  }
+
+  /* Le dessin est centré de haut en bas. */
+  #root {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100dvh;
+  }
+
   body {
-    min-height: 100vh;
     -webkit-font-smoothing: antialiased;
   }
 
@@ -40,8 +69,8 @@ const StyleGlobal = createGlobalStyle`
   ${transitionsDePage}
 
   :focus-visible {
-    outline: 2px solid ${({ theme }) => theme.palette.jaune};
-    outline-offset: 2px;
+    outline: 0.125rem solid ${({ theme }) => theme.palette.jaune};
+    outline-offset: 0.125rem;
   }
 
   /* « Réduire les animations » (voir useAnimationsReduites.js) : tout finit tout de suite, une seule fois.

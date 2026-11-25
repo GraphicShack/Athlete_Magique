@@ -5,7 +5,7 @@
 const ECART_CENTRE = 62; // distance entre la carte du centre et ses voisines
 const ECART_COTE = 20; // distance entre deux cartes empilées sur un côté
 const ROTATION = 55; // angle des cartes de côté, en degrés
-const RECUL = 150; // profondeur des cartes de côté, en pixels
+const RECUL = 9.4; // profondeur des cartes de côté, en rem
 
 // Reste d'une division, toujours positif.
 export function modulo(nombre, total) {
@@ -34,9 +34,9 @@ export function placement(ecart) {
   } else {
     // Plus loin : toutes les cartes ont le même angle, pis s'empilent.
     x = sens * (ECART_CENTRE + (distance - 1) * ECART_COTE);
-    profondeur = -RECUL - (distance - 1) * 10;
+    profondeur = -RECUL - (distance - 1) * 0.6;
     angle = -sens * ROTATION;
   }
 
-  return `translateX(${x}%) translateZ(${profondeur}px) rotateY(${angle}deg)`;
+  return `translateX(${x}%) translateZ(${profondeur}rem) rotateY(${angle}deg)`;
 }

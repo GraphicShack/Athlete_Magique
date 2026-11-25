@@ -10,6 +10,8 @@ import CoursePage from './pages/CoursePage.jsx';
 import FinCoursePage from './pages/FinCoursePage.jsx';
 import ClassementPage from './pages/ClassementPage.jsx';
 import ReglesPage from './pages/ReglesPage.jsx';
+import IntrouvablePage from './pages/IntrouvablePage.jsx';
+import PlantagePage from './pages/PlantagePage.jsx';
 
 // Une ligne par page : son adresse pis le composant à afficher.
 const PAGES = [
@@ -20,13 +22,20 @@ const PAGES = [
   { chemin: CHEMINS.finCourse, Page: FinCoursePage },
   { chemin: CHEMINS.classement, Page: ClassementPage },
   { chemin: CHEMINS.regles, Page: ReglesPage },
+  { chemin: '*', Page: IntrouvablePage }, // toutes les autres adresses
 ];
 
 // App est la route « parente » : chaque page devient l'une de ses « enfants ».
+// errorElement : ce qu'on affiche si une page plante (celui d'App sert si c'est le cadre lui-même).
 const routeur = createBrowserRouter([
   {
     element: <App />,
-    children: PAGES.map(({ chemin, Page }) => ({ path: chemin, element: <Page /> })),
+    errorElement: <PlantagePage />,
+    children: PAGES.map(({ chemin, Page }) => ({
+      path: chemin,
+      element: <Page />,
+      errorElement: <PlantagePage />,
+    })),
   },
 ]);
 

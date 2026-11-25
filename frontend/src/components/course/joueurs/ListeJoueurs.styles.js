@@ -8,5 +8,5 @@ export const Joueurs = styled(Liste)`
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: ${({ theme }) => theme.espace(3)} ${({ theme }) => theme.espace(4)};
-  padding: 10px;
+  padding: 0.625rem;
 `;

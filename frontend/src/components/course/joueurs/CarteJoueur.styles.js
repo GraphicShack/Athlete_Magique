@@ -5,12 +5,13 @@ import { rondCentre } from '@/styles/base/utilitaires.js';
 
 // Rang (s'il y en a un), avatar, infos pis points sur une ligne.
 export const Carte = styled.li`
+  position: relative;
   display: flex;
   align-items: center;
   gap: ${({ theme }) => theme.espace(2.5)};
   padding: ${({ theme }) => theme.espace(2)} ${({ theme }) => theme.espace(3)};
   border: ${({ theme }) => theme.bordures.contour};
-  border-left: 8px solid ${({ $couleur }) => $couleur};
+  border-left: 0.5rem solid ${({ $couleur }) => $couleur};
   border-radius: ${({ theme }) => theme.rayons.md};
   background: ${({ theme }) => theme.couleurs.surface};
   color: ${({ theme }) => theme.couleurs.encre};
@@ -58,4 +59,13 @@ export const Rang = styled.span`
   height: 1.75rem;
   background: ${({ theme }) => theme.couleurs.gris300};
   font-weight: ${({ theme }) => theme.graisses.tresForte};
+`;
+
+// À cheval sur le haut de la carte, au centre.
+export const DessusCarte = styled.div`
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  bottom: 100%;
+  transform: translate(-50%, 50%);
 `;

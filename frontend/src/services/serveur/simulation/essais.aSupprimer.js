@@ -3,7 +3,7 @@
 import PARTIE_EXEMPLE from '@/data/exemples/partieExemple.aSupprimer.js';
 import { changerJoueur } from './jeu/etat.aSupprimer.js';
 import { DEBUT_DE_TOUR, completer } from './jeu/tour.aSupprimer.js';
-import { COURSE_VIDE, NOMBRE_COURSES } from './jeu/course.aSupprimer.js';
+import { COURSE_VIDE, JOUEUR_AU_DEPART, NOMBRE_COURSES } from './jeu/course.aSupprimer.js';
 
 // /course?personnage=scientifique : je joue ce perso.
 // /course?attente : c'est le tour d'un autre (?attente=bot : d'un bot).
@@ -37,7 +37,7 @@ export function partieDEssai() {
     ...PARTIE_EXEMPLE,
     idMoi: attente === null ? PARTIE_EXEMPLE.idMoi : 'j2',
     course: { numero: courseDemandee || 1, nombreCourses: NOMBRE_COURSES },
-    joueurs: PARTIE_EXEMPLE.joueurs.map((joueur) => ({ ...joueur, etoiles: 0, victoires: 0, place: null, pointsCourse: 0 })),
+    joueurs: PARTIE_EXEMPLE.joueurs.map((joueur) => ({ ...JOUEUR_AU_DEPART, victoires: 0, ...joueur })),
     tour: { ...DEBUT_DE_TOUR, numero: 5 },
   };
   const avecPerso = changerSi(perso, partie, partie.idActif, { idPersonnage: perso });

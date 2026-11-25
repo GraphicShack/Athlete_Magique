@@ -89,6 +89,6 @@ export const PlaceDe = styled.div`
   flex-shrink: 0;
   width: 5rem;
   height: 5rem;
-  border: 2px dashed color-mix(in srgb, currentColor 30%, transparent);
+  border: 0.125rem dashed color-mix(in srgb, currentColor 30%, transparent);
   border-radius: 50%;
 `;

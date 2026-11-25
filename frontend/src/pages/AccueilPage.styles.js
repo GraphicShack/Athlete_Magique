@@ -7,6 +7,10 @@ export const Page = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.espace(4)};
+
+  @media ${({ theme }) => theme.medias.ordi} {
+    gap: ${({ theme }) => theme.espace(2)};
+  }
 `;
 
 // Sur cell : une colonne. Dès la taille tablette : deux colonnes, puis les persos en dessous.
@@ -15,7 +19,7 @@ export const Grille = styled.div`
   flex-direction: column;
   gap: ${({ theme }) => theme.espace(8)};
 
-  @media (min-width: ${({ theme }) => theme.ecrans.md}) {
+  @media ${({ theme }) => theme.medias.tablette} {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(19rem, 24rem);
     grid-template-areas:
@@ -30,4 +34,9 @@ export const Grille = styled.div`
 // Chaque bloc occupe la zone de la grille dont on lui donne le nom.
 export const Zone = styled.div`
   grid-area: ${({ $zone }) => $zone};
+
+  @media ${({ theme }) => theme.medias.ordi} {
+    /* La place des boutons Règles pis Paramètres. */
+    margin-right: ${({ $zone }) => ($zone === 'personnages' ? '7.5rem' : 0)};
+  }
 `;

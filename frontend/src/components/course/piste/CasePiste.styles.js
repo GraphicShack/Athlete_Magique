@@ -1,6 +1,7 @@
 // Responsabilité : définir le style de ce composant (styled-components).
 
 import styled, { css } from 'styled-components';
+import { caseQuiBrille } from '@/styles/animations/gain.js';
 
 // Fond pis texte de la case selon son type (le thème donne toutes les couleurs de la piste).
 const couleurs = ({ theme, $type, $repere, $indice }) => {
@@ -22,6 +23,7 @@ export const Carre = styled.div`
   justify-content: center;
   border-radius: min(${({ theme }) => theme.rayons.sm}, 15%);
   ${couleurs}
+  ${({ $brille }) => $brille && caseQuiBrille}
 `;
 
 // Gros numéro (repères pis étoiles) ; sa taille suit la largeur du plateau (cqw).
@@ -62,5 +64,5 @@ export const Jetons = styled.div`
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 2px;
+  gap: 0.125rem;
 `;

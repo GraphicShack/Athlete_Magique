@@ -8,9 +8,9 @@ export const Ecran = styled.div`
   flex-direction: column;
   gap: ${({ theme }) => theme.espace(6)};
 
-  @media (min-width: ${({ theme }) => theme.ecrans.lg}) {
+  @media ${({ theme }) => theme.medias.ordi} {
     display: grid;
-    height: calc(100dvh - 3rem);
+    height: calc(var(--hauteur-ecran) - 3rem);
     grid-template-columns: minmax(0, 1fr) minmax(20rem, min(32rem, 36%));
     grid-template-rows: auto minmax(0, 1fr);
     grid-template-areas:
@@ -34,7 +34,7 @@ export const Colonne = styled.div`
   min-width: 0;
   min-height: 0;
 
-  @media (min-width: ${({ theme }) => theme.ecrans.lg}) {
+  @media ${({ theme }) => theme.medias.ordi} {
     gap: ${({ theme }) => theme.espace(5)};
     padding-bottom: ${({ $cote }) => ($cote === 'droite' ? '4rem' : 0)};
   }
@@ -61,7 +61,7 @@ export const Bloc = styled.div`
     min-height: 0;
   }
 
-  @media (min-width: ${({ theme }) => theme.ecrans.lg}) {
+  @media ${({ theme }) => theme.medias.ordi} {
     ${({ $taille }) => TAILLES[$taille]}
   }
 `;

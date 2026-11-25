@@ -9,6 +9,10 @@ export const ColonneDroite = styled.div`
   gap: ${({ theme }) => theme.espace(8)};
   min-width: 0;
 
+  @media ${({ theme }) => theme.medias.ordi} {
+    padding-bottom: 4rem; /* la place des boutons Règles pis Paramètres */
+  }
+
   & > :last-child {
     flex: 1;
   }

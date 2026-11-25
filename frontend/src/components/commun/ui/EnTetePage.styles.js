@@ -38,5 +38,5 @@ export const Logo = styled.img`
 export const Lien = styled(Link)`
   color: ${({ theme }) => theme.couleurs.texteSurPage};
   font-weight: ${({ theme }) => theme.graisses.moyenne};
-  text-underline-offset: 3px;
+  text-underline-offset: 0.1875rem;
 `;

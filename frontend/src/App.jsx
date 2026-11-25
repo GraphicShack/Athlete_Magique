@@ -8,7 +8,7 @@ import MusiqueMenu from './components/son/MusiqueMenu.jsx';
 import FondAnime from './components/commun/ui/FondAnime.jsx';
 import useRideauAuHasard from './hooks/useRideauAuHasard.js';
 import useAnimationsReduites from './hooks/useAnimationsReduites.js';
-import { CoinFlottant } from './App.styles.js';
+import { Cadre, CoinFlottant } from './App.styles.js';
 
 // Garde les réglages pis place la page courante dans le cadre commun.
 function App() {
@@ -25,8 +25,7 @@ function App() {
   const affichage = { numerosVisibles, setNumerosVisibles, animationsReduites, setAnimationsReduites };
 
   return (
-    // Classes Bootstrap : largeur maximale centrée, marges intérieures, pis au moins toute la hauteur de l'écran (la page peut remplir l'espace restant).
-    <main className="container-xxl px-4 py-4 min-vh-100 d-flex flex-column">
+    <Cadre>
       <FondAnime />
 
       {/* context : ce que les pages peuvent lire avec useOutletContext (voir CoursePage). */}
@@ -38,7 +37,7 @@ function App() {
         <AccesRegles />
         <AccesParametres son={son} affichage={affichage} />
       </CoinFlottant>
-    </main>
+    </Cadre>
   );
 }
 

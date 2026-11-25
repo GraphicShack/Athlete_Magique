@@ -65,6 +65,7 @@ Chaque joueur de la course :
 | `bot` | `false` | « (bot) » |
 | `idPersonnage` | `'magicien'` | son image, son nom, son pouvoir |
 | `position` | `12` | sa case (0 = Départ, plus de 30 = arrivé) |
+| `teleportations` | `0` | augmente à chaque téléportation : le pion disparaît et réapparaît, au lieu de marcher |
 | `etat` | `'tombe'` | `null`, `'tombe'` (couché) ou `'elimine'` (retiré de la piste) |
 | `points` | `3` | ses points |
 

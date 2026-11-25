@@ -40,7 +40,7 @@ export const Base = styled.button`
   ${({ $variante }) => variantes[$variante]}
 
   &:active:not(:disabled) {
-    translate: 2px 2px;
+    translate: 0.125rem 0.125rem;
     box-shadow: ${({ theme }) => theme.ombres.blocEnfonce};
   }
 

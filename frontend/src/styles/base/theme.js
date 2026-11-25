@@ -131,20 +131,20 @@ const rayons = {
 
 const bordures = {
   fine: `1px solid ${PALETTE.gris}`, // séparateurs discrets (tableaux, réglages)
-  contour: `2px solid ${PALETTE.noir}`, // boutons, étiquettes, avatars, dé, cartes
+  contour: `0.125rem solid ${PALETTE.noir}`, // boutons, étiquettes, avatars, dé, cartes
 };
 
 const ombres = {
-  douce: `0 2px 8px color-mix(in srgb, ${PALETTE.noir} 10%, transparent)`, // cartes du carrousel
+  douce: `0 0.125rem 0.5rem color-mix(in srgb, ${PALETTE.noir} 10%, transparent)`, // cartes du carrousel
   // Ombre « carton » : décalée pis sans flou (boutons flottants, bulle).
-  bloc: `4px 4px 0 ${PALETTE.noir}`,
-  blocPetit: `2px 2px 0 ${PALETTE.noir}`,
+  bloc: `0.25rem 0.25rem 0 ${PALETTE.noir}`,
+  blocPetit: `0.125rem 0.125rem 0 ${PALETTE.noir}`,
   // Même ombre, réduite à rien : bouton enfoncé (voir Bouton.jsx).
   blocEnfonce: `0 0 0 ${PALETTE.noir}`,
   // Cadre rétro du livret : fins liserés de couleur autour d'une carte, séparés par du noir.
-  cadre: `0 0 0 3px ${PALETTE.noir}, 0 0 0 5px ${PALETTE.orange}, 0 0 0 7px ${PALETTE.noir}, 0 0 0 9px ${PALETTE.rose}`,
+  cadre: `0 0 0 0.1875rem ${PALETTE.noir}, 0 0 0 0.3125rem ${PALETTE.orange}, 0 0 0 0.4375rem ${PALETTE.noir}, 0 0 0 0.5625rem ${PALETTE.rose}`,
   // Cadre de la carte la plus importante de l'écran : un liseré jaune de plus.
-  cadreFort: `0 0 0 3px ${PALETTE.noir}, 0 0 0 5px ${PALETTE.orange}, 0 0 0 7px ${PALETTE.noir}, 0 0 0 9px ${PALETTE.rose}, 0 0 0 11px ${PALETTE.noir}, 0 0 0 13px ${PALETTE.jaune}`,
+  cadreFort: `0 0 0 0.1875rem ${PALETTE.noir}, 0 0 0 0.3125rem ${PALETTE.orange}, 0 0 0 0.4375rem ${PALETTE.noir}, 0 0 0 0.5625rem ${PALETTE.rose}, 0 0 0 0.6875rem ${PALETTE.noir}, 0 0 0 0.8125rem ${PALETTE.jaune}`,
 };
 
 // Largeurs d'écran où la mise en page change ; les mêmes que Bootstrap, pour que tout s'accorde.
@@ -153,6 +153,18 @@ const ecrans = {
   md: '768px', // tablette
   lg: '992px', // ordinateur portable
   xl: '1200px', // grand écran
+};
+
+// Le dessin de l'app : 90 × 50,625 rem (1440 × 810 px, du 16:9). À l'horizontale, 1rem grossit ou rapetisse
+// pour que ce dessin rentre dans la fenêtre : tous les écrans montrent donc la même chose (voir StyleGlobal.js).
+const dessin = { largeur: 90, hauteur: 50.625 };
+
+// Les mises en page, pour @media. Un écran horizontal est toujours un « ordi » ; les largeurs servent à la verticale.
+const medias = {
+  ordi: '(orientation: landscape)',
+  tablette: `(orientation: landscape), (min-width: ${ecrans.md})`,
+  grandCell: `(orientation: landscape), (min-width: ${ecrans.sm})`,
+  cell: `(orientation: portrait) and (max-width: ${ecrans.sm})`,
 };
 
 // Durée pis courbe des petites transitions (survol, changement de couleur).
@@ -174,6 +186,8 @@ const theme = {
   bordures,
   ombres,
   ecrans,
+  dessin,
+  medias,
   transition,
 };
 

@@ -7,6 +7,10 @@ export const Bloc = styled.section`
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.espace(4)};
+
+  @media ${({ theme }) => theme.medias.ordi} {
+    gap: ${({ theme }) => theme.espace(3)};
+  }
 `;
 
 // Le logo du jeu, en haut de l'accroche : plus grand que dans l'en-tête des autres pages, mais à l'échelle du slogan.

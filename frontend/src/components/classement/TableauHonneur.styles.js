@@ -13,4 +13,13 @@ export const Zone = styled.div`
   height: 31rem;
   overflow-y: auto;
   scrollbar-gutter: stable;
+
+  @media ${({ theme }) => theme.medias.ordi} {
+    height: 27.5rem;
+
+    th,
+    td {
+      padding-block: ${({ theme }) => theme.espace(1)};
+    }
+  }
 `;

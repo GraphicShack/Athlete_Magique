@@ -21,7 +21,7 @@ export const Dialogue = styled.dialog`
   transform-origin: bottom right;
 
   width: min(${({ $largeur }) => $largeur}, calc(100vw - 2rem));
-  max-height: calc(100dvh - 2rem);
+  max-height: calc(var(--hauteur-ecran) - 2rem);
   padding: 0;
   border: ${({ theme }) => theme.bordures.contour};
   border-radius: ${({ theme }) => theme.rayons.lg};
@@ -54,7 +54,7 @@ export const Dialogue = styled.dialog`
 export const Cadre = styled.div`
   display: flex;
   flex-direction: column;
-  max-height: calc(100dvh - 2rem - 4px);
+  max-height: calc(var(--hauteur-ecran) - 2rem - 0.25rem);
   animation: ${fondu} 200ms 120ms backwards;
 `;
 

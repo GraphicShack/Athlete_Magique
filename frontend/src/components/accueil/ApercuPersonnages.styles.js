@@ -10,11 +10,11 @@ export const Grille = styled.ul`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
 
-  @media (min-width: ${({ theme }) => theme.ecrans.sm}) {
+  @media ${({ theme }) => theme.medias.grandCell} {
     grid-template-columns: repeat(5, 1fr);
   }
 
-  @media (min-width: ${({ theme }) => theme.ecrans.lg}) {
+  @media ${({ theme }) => theme.medias.ordi} {
     grid-template-columns: repeat(10, 1fr);
   }
   gap: ${({ theme }) => theme.espace(2)};
@@ -28,7 +28,7 @@ export const Personnage = styled.button`
   gap: ${({ theme }) => theme.espace(1)};
   width: 100%;
   padding: ${({ theme }) => theme.espace(1)};
-  border: 2px solid transparent;
+  border: 0.125rem solid transparent;
   border-radius: ${({ theme }) => theme.rayons.md};
   background: transparent;
   color: inherit;
@@ -93,8 +93,8 @@ export const Bulle = styled.div`
     position: absolute;
     top: 100%;
     left: var(--pointe);
-    width: 14px;
-    height: 14px;
+    width: 0.875rem;
+    height: 0.875rem;
     translate: -50% -50%;
     rotate: 45deg;
     border-right: ${({ theme }) => theme.bordures.contour};

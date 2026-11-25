@@ -28,7 +28,7 @@ const jaillir = keyframes`
     opacity: 1;
   }
   100% {
-    transform: translate(calc(var(--dx) * 1.4), calc(var(--dy) + 240px)) rotate(calc(var(--tour) * 2)) scale(1);
+    transform: translate(calc(var(--dx) * 1.4), calc(var(--dy) + 15rem)) rotate(calc(var(--tour) * 2)) scale(1);
     opacity: 0;
   }
 `;
@@ -43,12 +43,12 @@ export const explosion = css`
 export function trajectoireConfetti(rang, total) {
   const melange = melanger(rang, 0.618);
   const angle = ((-160 + (140 * (rang + 0.5)) / total) * Math.PI) / 180; // en radians
-  const distance = 70 + melange * 70; // entre 70 et 140 px : un petit saut, puis une longue chute
+  const distance = 4.4 + melange * 4.4; // entre 4,4 et 8,8 rem : un petit saut, puis une longue chute
   const sens = rang % 2 === 0 ? 1 : -1; // un morceau sur deux tourne dans l'autre sens
 
   return {
-    '--dx': `${Math.round(Math.cos(angle) * distance)}px`,
-    '--dy': `${Math.round(Math.sin(angle) * distance)}px`,
+    '--dx': `${(Math.cos(angle) * distance).toFixed(2)}rem`,
+    '--dy': `${(Math.sin(angle) * distance).toFixed(2)}rem`,
     '--tour': `${Math.round(sens * (200 + melange * 300))}deg`,
     animationDuration: `${(1.3 + melange * 0.6).toFixed(2)}s`, // entre 1,3 s et 1,9 s
     animationDelay: `${(rang % 4) * 30}ms`, // petits décalages : pas tous exactement ensemble
@@ -60,13 +60,13 @@ export function trajectoireConfetti(rang, total) {
 // Tomber du haut de l'écran jusqu'en bas en se balançant de gauche à droite pis en tournant.
 const tomber = keyframes`
   0% {
-    transform: translate(0, -20px) rotate(0deg);
+    transform: translate(0, -1.25rem) rotate(0deg);
   }
   50% {
     transform: translate(calc(var(--derive) * -1), 50vh) rotate(calc(var(--tour) / 2));
   }
   100% {
-    transform: translate(var(--derive), calc(100vh + 20px)) rotate(var(--tour));
+    transform: translate(var(--derive), calc(100vh + 1.25rem)) rotate(var(--tour));
   }
 `;
 
@@ -83,7 +83,7 @@ export function trajectoirePluie(rang) {
 
   return {
     '--x': `${(melanger(rang, 0.618) * 100).toFixed(1)}%`,
-    '--derive': `${Math.round(sens * (10 + melanger(rang, 0.271) * 30))}px`, // 10 à 40 px
+    '--derive': `${(sens * (0.6 + melanger(rang, 0.271) * 1.9)).toFixed(2)}rem`, // 0,6 à 2,5 rem
     '--tour': `${Math.round(sens * (360 + melanger(rang, 0.618) * 360))}deg`, // 1 à 2 tours
     animationDuration: `${duree.toFixed(2)}s`,
     animationDelay: `${(-duree * melanger(rang, 0.271)).toFixed(2)}s`,

@@ -17,8 +17,8 @@ export const Plateau = styled.div`
   padding: 1.6%;
   background: ${({ theme }) => theme.piste.fond};
   border-radius: ${({ theme }) => theme.rayons.lg};
-  box-shadow: inset 0 0 0 4px ${({ theme }) => theme.piste.fond},
-    inset 0 0 0 6px ${({ theme }) => theme.piste.contour};
+  box-shadow: inset 0 0 0 0.25rem ${({ theme }) => theme.piste.fond},
+    inset 0 0 0 0.375rem ${({ theme }) => theme.piste.contour};
 `;
 
 // Ce qui est commun au Départ pis à l'Arrivée : une case de la grille, à la place donnée.
@@ -54,7 +54,7 @@ export const Arrivee = styled(PlaceSpeciale)`
 export const Nom = styled.span`
   position: absolute;
   top: 6%;
-  padding: 1px 5px;
+  padding: 1px 0.3125rem;
   border-radius: ${({ theme }) => theme.rayons.sm};
   background: ${({ theme }) => theme.piste.arriveeDamier};
   color: ${({ theme }) => theme.piste.departTexte};
@@ -65,6 +65,20 @@ export const Nom = styled.span`
   text-transform: uppercase;
 `;
 
+// Les points gagnés à une place : à cheval sur le haut de la case, par-dessus tout.
+export const PlaceGains = styled.div`
+  grid-column: ${({ $colonne }) => $colonne};
+  grid-row: ${({ $rangee }) => $rangee};
+  z-index: 2;
+  align-self: start;
+  justify-self: center;
+  height: 0;
+  display: flex;
+  align-items: flex-end;
+  translate: 0 0.75rem;
+  pointer-events: none;
+`;
+
 // Les jetons posés sur le Départ ou l'Arrivée, en bas de la case.
 export const Jetons = styled.div`
   position: absolute;
@@ -72,5 +86,5 @@ export const Jetons = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 2px;
+  gap: 0.125rem;
 `;

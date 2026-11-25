@@ -25,7 +25,7 @@ export const COURSE_VIDE = {
   journal: [],
 };
 
-const JOUEUR_AU_DEPART = { position: 0, etat: null, etoiles: 0, place: null, pointsCourse: 0 };
+export const JOUEUR_AU_DEPART = { position: 0, teleportations: 0, etat: null, etoiles: 0, place: null, pointsCourse: 0 };
 
 // joueurs : { id, numero, nom, bot, points, victoires }. choix : { idJoueur, idPersonnage }.
 export function nouvelleCourse(numero, joueurs, choix, idMoi) {

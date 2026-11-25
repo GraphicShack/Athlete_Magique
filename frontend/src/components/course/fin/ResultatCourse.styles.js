@@ -10,16 +10,16 @@ export const Resultats = styled(Liste)`
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: clamp(10px, 1.4vh, 16px);
-  margin: -10px;
-  padding: 10px;
+  gap: 0.7rem;
+  margin: -0.625rem;
+  padding: 0.625rem;
 
   & > li {
     flex: 1;
   }
 
   /* Sur cell, la place manque : pas d'avatar, pis les textes passent à la ligne au lieu d'être coupés. */
-  @media (max-width: ${({ theme }) => theme.ecrans.sm}) {
+  @media ${({ theme }) => theme.medias.cell} {
     li > [aria-hidden] {
       display: none;
     }

@@ -2,9 +2,9 @@
 
 import { Disque, Image } from './Jeton.styles.js';
 
-// Affiche le pion ; avec « saut », il saute depuis la case d'avant.
-// Props : couleur (du joueur), initiales, image, tombe (couché), actif (contour rouge), saut ({ dx, dy } pour l'anim, ou null).
-function Jeton({ couleur, initiales, image, tombe = false, actif = false, saut = null }) {
+// Affiche le pion ; avec « saut », il saute depuis la case d'avant ; avec « fondu », il disparaît ou réapparaît.
+// Props : couleur (du joueur), initiales, image, tombe (couché), actif (contour rouge), saut ({ dx, dy } pour l'anim, ou null), fondu ('sortie', 'entree' ou null).
+function Jeton({ couleur, initiales, image, tombe = false, actif = false, saut = null, fondu = null }) {
   return (
     // title : texte affiché quand on laisse la souris sur le pion.
     <Disque
@@ -13,6 +13,7 @@ function Jeton({ couleur, initiales, image, tombe = false, actif = false, saut =
       $tombe={tombe}
       $actif={actif}
       $saute={saut !== null}
+      $fondu={fondu}
       // saut : d'où vient le pion ({ dx, dy } en cases), pour l'animation (voir sautJeton.js).
       style={saut ? { '--dx': saut.dx, '--dy': saut.dy } : undefined}
       title={tombe ? `${initiales} (tombé)` : initiales}

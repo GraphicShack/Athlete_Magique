@@ -16,12 +16,11 @@ function ClassementPage() {
 
   return (
     <Scene>
-      <EnTetePage lien={{ libelle: "Retour à l'accueil", to: CHEMINS.accueil }} />
-
-      <div>
+      <EnTetePage lien={{ libelle: "Retour à l'accueil", to: CHEMINS.accueil }}>
         <TitreArcEnCiel>Tableau d'honneur</TitreArcEnCiel>
-        <SousTitre>Les meilleurs scores finaux après les 3 courses, joueurs invités et comptes réunis.</SousTitre>
-      </div>
+      </EnTetePage>
+
+      <SousTitre>Les meilleurs scores finaux après les 3 courses, joueurs invités et comptes réunis.</SousTitre>
 
       <Scores>
         <TableauHonneur

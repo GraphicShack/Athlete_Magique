@@ -25,7 +25,7 @@ export const Pastille = styled.span`
   ${rondCentre}
   width: 2rem;
   height: 2rem;
-  border: 2px solid currentColor;
+  border: 0.125rem solid currentColor;
   background: ${({ theme, $courante }) => ($courante ? theme.couleurs.texteSurPage : 'transparent')};
   color: ${({ theme, $courante }) => ($courante ? theme.couleurs.encre : 'inherit')};
   font-family: ${({ theme }) => theme.polices.titre};

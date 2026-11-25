@@ -11,7 +11,7 @@ export const Scene = styled(Page)`
 
 // La phrase sous le titre.
 export const SousTitre = styled.p`
-  margin: ${({ theme }) => theme.espace(3)} 0 0;
+  margin: 0;
   color: ${({ theme }) => theme.couleurs.texteSurPageDoux};
 `;
 

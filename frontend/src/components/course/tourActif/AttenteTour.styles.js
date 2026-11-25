@@ -6,10 +6,10 @@ import styled from 'styled-components';
 // garde la même taille quand c'est le tour d'un autre (plus bas sur tablette, où il est en 2 colonnes).
 export const Contenu = styled.div`
   flex: 1;
-  min-height: 329px;
+  min-height: 20.5625rem;
 
-  @media (min-width: ${({ theme }) => theme.ecrans.md}) and (max-width: 991px) {
-    min-height: 193px;
+  @media (min-width: ${({ theme }) => theme.ecrans.md}) and (orientation: portrait) {
+    min-height: 12.0625rem;
   }
 
   display: flex;

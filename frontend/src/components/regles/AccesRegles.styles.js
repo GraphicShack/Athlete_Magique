@@ -32,7 +32,7 @@ export const EmplacementMascotte = styled.div`
   min-width: 0;
   max-width: 100%;
 
-  @media (min-width: ${({ theme }) => theme.ecrans.lg}) {
+  @media ${({ theme }) => theme.medias.ordi} {
     grid-column: 2;
   }
 `;
@@ -48,5 +48,5 @@ export const LienPage = styled(Link)`
   margin-top: ${({ theme }) => theme.espace(6)};
   color: ${({ theme }) => theme.couleurs.texteSurPage};
   font-weight: ${({ theme }) => theme.graisses.moyenne};
-  text-underline-offset: 3px;
+  text-underline-offset: 0.1875rem;
 `;

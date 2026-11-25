@@ -19,7 +19,7 @@ export const Code = styled.div`
 
 // Une lettre du code dans sa case, qui flotte de 4 px comme les titres (voir styles/animations/flottement.js).
 export const Lettre = styled.span`
-  --hauteur-flottement: -4px;
+  --hauteur-flottement: -0.25rem;
   ${flottement}
   display: grid;
   place-items: center;

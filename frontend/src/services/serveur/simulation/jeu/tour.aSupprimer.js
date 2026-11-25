@@ -1,7 +1,7 @@
 // Responsabilité : le tour d'un joueur (ce qu'il peut faire, pis ce que ça change).
 
 import {
-  actif, autresEnCourse, changerJoueur, changerTour, enCourse, lancerUnDe, noter, parPouvoir, trouver, voisins,
+  actif, autresEnCourse, changerJoueur, changerTour, enCourse, lancerUnDe, noter, parPouvoir, placer, trouver, voisins,
 } from './etat.aSupprimer.js';
 import { deplacer, sArreter, trebucher } from './deplacement.aSupprimer.js';
 import { finirDuel, proposerDuels, repondreAuDuel } from './duel.aSupprimer.js';
@@ -35,7 +35,7 @@ function commencer(partie) {
 
 // Téléporter est pas un déplacement : ça déclenche juste l'arrêt sur la case.
 function teleporter(partie, id, position) {
-  const teleporte = noter(changerJoueur(partie, id, { position }), 'TELEPORTATION', {
+  const teleporte = noter(placer(partie, id, position), 'TELEPORTATION', {
     acteur: id,
     cause: parPouvoir('hypnotiste'),
     details: { a: position },
@@ -92,7 +92,7 @@ function doubler(partie) {
 function echanger(partie, cible) {
   const { id, position } = actif(partie);
   const saCase = trouver(partie, cible).position;
-  const echangee = changerJoueur(changerJoueur(partie, id, { position: saCase }), cible, { position });
+  const echangee = placer(placer(partie, id, saCase), cible, position);
   const notee = noter(echangee, 'ECHANGE', { cible, cause: parPouvoir('flipflop') });
   return changerTour(sArreter(notee, cible), { etape: 'fin' });
 }

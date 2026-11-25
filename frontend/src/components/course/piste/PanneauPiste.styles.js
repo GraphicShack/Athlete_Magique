@@ -9,7 +9,7 @@ export const ZonePlateau = styled.div`
   align-items: center;
   justify-content: center;
 
-  @media (min-width: ${({ theme }) => theme.ecrans.lg}) {
+  @media ${({ theme }) => theme.medias.ordi} {
     flex: 1;
     min-height: 0;
     container-type: size;
@@ -18,7 +18,4 @@ export const ZonePlateau = styled.div`
 
 // La légende, en petit sous le plateau.
 export const ZoneLegende = styled.div`
-  @media (min-width: ${({ theme }) => theme.ecrans.lg}) and (max-height: 700px) {
-    display: none;
-  }
 `;

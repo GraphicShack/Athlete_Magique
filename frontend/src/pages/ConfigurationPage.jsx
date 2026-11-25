@@ -29,9 +29,12 @@ function ConfigurationPage() {
 
   return (
     <Page>
-      <EnTetePage lien={{ libelle: "Retour à l'accueil", to: CHEMINS.accueil }} />
-      <EtapesPartie etapeCourante={1} />
-      <TitreArcEnCiel>Salle d'attente</TitreArcEnCiel>
+      <EnTetePage
+        lien={{ libelle: "Retour à l'accueil", to: CHEMINS.accueil }}
+        actions={<EtapesPartie etapeCourante={1} />}
+      >
+        <TitreArcEnCiel>Salle d'attente</TitreArcEnCiel>
+      </EnTetePage>
 
       <GrilleDeuxColonnes>
         {salon ? (

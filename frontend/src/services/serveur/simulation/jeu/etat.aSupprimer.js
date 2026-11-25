@@ -39,6 +39,10 @@ export const changerJoueur = (partie, id, changements) => ({
   joueurs: partie.joueurs.map((joueur) => (joueur.id === id ? { ...joueur, ...changements } : joueur)),
 });
 
+// Téléporter : changer de case sans se déplacer (le compteur le dit à l'interface).
+export const placer = (partie, id, position) =>
+  changerJoueur(partie, id, { position, teleportations: trouver(partie, id).teleportations + 1 });
+
 // ---------- le journal
 
 export const parPouvoir = (id) => ({ genre: 'pouvoir', id });

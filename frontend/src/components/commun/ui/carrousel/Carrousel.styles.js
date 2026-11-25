@@ -15,8 +15,8 @@ export const Cadre = styled.div`
 // La scène donne la perspective ; les diapositives sont toutes posées au centre, puis décalées.
 export const Scene = styled.div`
   position: relative;
-  height: 30rem;
-  perspective: 1400px;
+  height: 29rem;
+  perspective: 87.5rem;
   overflow: hidden;
   cursor: grab;
   touch-action: pan-y;
@@ -30,7 +30,7 @@ export const Scene = styled.div`
 
   &:focus-visible {
     outline: ${({ theme }) => theme.bordures.contour};
-    outline-offset: 4px;
+    outline-offset: 0.25rem;
   }
 `;
 
