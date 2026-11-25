@@ -20,6 +20,7 @@ export const PHRASES = {
   ECHANGE: ({ acteur, cible }) => `${acteur} échange sa place avec ${cible}.`,
   TREBUCHE: ({ d, acteur }) => `${acteur} trébuche sur la case ${d.case}.`,
   RELEVE: ({ acteur }) => `${acteur} se relève et saute son déplacement.`,
+  SAUTE: ({ acteur }) => `${acteur} est seul en tête et saute son déplacement.`,
   ELIMINE: ({ acteur, cible }) => `${cible} est éliminé par ${acteur}.`,
   DUEL: ({ d, acteur, cible }) =>
     `Duel : ${acteur} ${d.valeurActeur} contre ${cible} ${d.valeurCible}. ${d.gagnant === 'acteur' ? acteur : cible} avance de 2 cases.`,

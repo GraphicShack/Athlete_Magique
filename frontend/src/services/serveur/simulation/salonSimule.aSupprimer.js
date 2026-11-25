@@ -26,6 +26,17 @@ const REPONSES = {
   },
 };
 
+// Au lancement, des bots prennent les places libres.
+export function remplirDeBots(salon) {
+  if (salon.joueurs.length >= salon.placesMax) return salon;
+  return remplirDeBots({ ...salon, joueurs: ajouterBot(salon.joueurs) });
+}
+
+// Les joueurs du salon, prêts à commencer une partie (numero : leur place dans le salon).
+export function joueursDuSalon(salon) {
+  return salon.joueurs.map(({ id, nom, bot }, rang) => ({ id, numero: rang + 1, nom, bot, points: 0, victoires: 0 }));
+}
+
 // Renvoie le salon après cette demande.
 export function repondreSalon(salon, message, donnees) {
   return REPONSES[message](salon, donnees);

@@ -149,7 +149,7 @@ On envoie des données, l'interface écrit la phrase.
 | `type` | `details` |
 |---|---|
 | `COURSE_DEBUT`, `COURSE_FIN` | `{ numero }` |
-| `TOUR_DEBUT`, `TOUR_FIN`, `RELEVE`, `HYPNOSE`, `RASSEMBLEMENT`, `ECHANGE_DEMANDE` | `{}` |
+| `TOUR_DEBUT`, `TOUR_FIN`, `RELEVE`, `SAUTE` (le Lièvre seul en tête), `HYPNOSE`, `RASSEMBLEMENT`, `ECHANGE_DEMANDE` | `{}` |
 | `DE_LANCE`, `DE_GARDE` | `{ valeur }` |
 | `DE_RELANCE` | `{ valeur, relance, maximum }` |
 | `DEPLACEMENT`, `RECUL` | `{ a, cases }` (`de`, la case de départ, n'est pas affichée) |
