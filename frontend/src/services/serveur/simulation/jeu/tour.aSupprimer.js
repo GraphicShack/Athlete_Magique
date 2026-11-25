@@ -101,9 +101,9 @@ function echanger(partie, cible) {
 
 function avancer(partie) {
   const { id, idPersonnage } = actif(partie);
-  const { cases, trebucheApres } = partie.tour;
-  // Un déplacement sans bonus est pas noté dans le journal.
-  const aUnBonus = ['lievre', 'partyanimal'].includes(idPersonnage);
+  const { cases, trebucheApres, de } = partie.tour;
+  // Un déplacement sans bonus est pas noté dans le journal (le double est déjà noté).
+  const aUnBonus = cases > de.valeur && idPersonnage !== 'scientifique';
   const avance = deplacer(partie, id, cases, { cause: parPouvoir(idPersonnage), muet: !aUnBonus });
   const fini = trebucheApres ? trebucher(avance, id, parPouvoir('scientifique')) : avance;
   return changerTour(fini, { etape: 'fin' });
@@ -119,7 +119,7 @@ function finirTour(partie) {
 
 const ACTIONS = {
   COMMENCER: commencer,
-  PASSER_POUVOIR: commencer,
+  PASSER_POUVOIR: (partie) => noter(commencer(partie), 'POUVOIR_PASSE'),
   HYPNOTISER: (partie, cible) => teleporter(commencer(partie), cible, actif(partie).position),
   RASSEMBLER: rassembler,
   LANCER: lancer,

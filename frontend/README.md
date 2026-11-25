@@ -27,7 +27,7 @@ Les règles :
 3. **`idMoi` est dans `salon:etat`, `selection:etat` et `partie:etat`** : le serveur les envoie donc à chaque joueur séparément.
 4. **L'interface anime, elle ne décide pas.** Si un pion passe de 12 à 16, elle le fait avancer ; si le nombre de lancers augmente, elle fait rouler le dé.
 5. **Le résultat du dé n'est pas dévoilé** : pendant que mon dé roule, l'ancien écran reste (boutons, journal, pions).
-6. **Les bots attendent environ 1 seconde** entre deux actions, côté serveur, pour laisser le temps aux animations.
+6. **Les bots attendent** entre deux actions, côté serveur, selon `vitesseBots` : environ 3,5 s (`'lente'`), 2 s (`'normale'`) ou 1 s (`'rapide'`).
 
 | Marque | Veut dire |
 |---|---|
@@ -123,7 +123,7 @@ Encore à faire à l'écran :
 2. L'interface envoie `duel:repondre` avec `{ id, accepter: true }` (ou `false`).
 3. Si c'est non, le serveur envoie `duel: null`.
 4. Si c'est oui, le serveur lance les 2 dés et envoie `valeurs` et `gagnant`, sans bouger les pions. Tout le monde voit les dés.
-5. Environ 5 secondes plus tard, il envoie `duel: null`, la nouvelle position du gagnant et l'événement `DUEL` du journal.
+5. Environ 5 secondes plus tard, il envoie `duel: null`, la nouvelle position du gagnant et l'événement `DUEL` du journal. (`DUEL_DECLARE` ou `DUEL_PASSE` est noté dès la réponse.)
 
 S'il y a plusieurs adversaires possibles, le serveur envoie un duel à la fois.
 
@@ -149,7 +149,7 @@ On envoie des données, l'interface écrit la phrase.
 | `type` | `details` |
 |---|---|
 | `COURSE_DEBUT`, `COURSE_FIN` | `{ numero }` |
-| `TOUR_DEBUT`, `TOUR_FIN`, `RELEVE`, `SAUTE` (le Lièvre seul en tête), `HYPNOSE`, `RASSEMBLEMENT`, `ECHANGE_DEMANDE` | `{}` |
+| `TOUR_DEBUT`, `TOUR_FIN`, `RELEVE`, `SAUTE` (le Lièvre seul en tête), `POUVOIR_PASSE`, `HYPNOSE`, `RASSEMBLEMENT`, `ECHANGE_DEMANDE` | `{}` |
 | `DE_LANCE`, `DE_GARDE` | `{ valeur }` |
 | `DE_RELANCE` | `{ valeur, relance, maximum }` |
 | `DEPLACEMENT`, `RECUL` | `{ a, cases }` (`de`, la case de départ, n'est pas affichée) |
@@ -157,6 +157,7 @@ On envoie des données, l'interface écrit la phrase.
 | `TELEPORTATION` | `{ a }` |
 | `TREBUCHE` | `{ case }` |
 | `ECHANGE`, `ELIMINE` (avec `cible`) | `{}` |
+| `DUEL_DECLARE`, `DUEL_PASSE` (avec `cible`) | `{}` |
 | `DUEL` (avec `cible`) | `{ valeurActeur, valeurCible, gagnant }` (`'acteur'` ou `'cible'`) |
 | `POINTS` | `{ points, raison }` |
 | `ARRIVEE` | `{ rang }` |
@@ -218,6 +219,7 @@ Envoyé après chaque changement, au complet.
 | `placesMax` | `4` | 2, 3 ou 4 places |
 | `idMoi` | `'j2'` | qui je suis (différent pour chaque joueur) |
 | `idHote` | `'j1'` | l'hôte a plus de boutons |
+| `vitesseBots` | `'normale'` | le réglage « Vitesse des bots » : `'lente'`, `'normale'` ou `'rapide'` (l'hôte choisit) |
 | `statut` | `'attente'` | la page de tout le monde : `'attente'`, `'selection'`, `'course'` ou `'fin'` |
 | `joueurs` | une liste de `{ id, nom, hote, bot, pret }` | les joueurs, « Hôte », « Bot », « Prêt » |
 
@@ -228,6 +230,7 @@ L'interface envoie :
 | `salon:creer` | `{ pseudo }` | Branché |
 | `salon:rejoindre` | `{ code, pseudo }` | Branché |
 | `salon:places` | `{ placesMax }` | Branché |
+| `salon:vitesse` | `{ vitesse: 'lente' }` | Branché |
 | `salon:ajouterBot` | `{}` | Branché |
 | `salon:retirer` | `{ idJoueur }` | Branché |
 | `salon:lancer` | `{}` | Branché |

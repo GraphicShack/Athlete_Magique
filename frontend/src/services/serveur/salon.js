@@ -17,6 +17,7 @@ export function creerSalon(pseudo) {
 }
 export const rejoindreSalon = (code) => envoyer('salon:rejoindre', { code, pseudo: monPseudo });
 export const changerPlaces = (placesMax) => envoyer('salon:places', { placesMax });
+export const changerVitesse = (vitesse) => envoyer('salon:vitesse', { vitesse }); // 'lente', 'normale' ou 'rapide'
 export const ajouterBot = () => envoyer('salon:ajouterBot', {});
 export const retirerJoueur = (idJoueur) => envoyer('salon:retirer', { idJoueur });
 export const lancerPartie = () => envoyer('salon:lancer', {});

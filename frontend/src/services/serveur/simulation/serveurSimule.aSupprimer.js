@@ -11,9 +11,12 @@ import { repondreScores } from './scoresSimules.aSupprimer.js';
 
 // En ms.
 const DELAI = 200; // un vrai serveur répond jamais tout de suite
-const PAUSE = rapide ? 150 : 1000; // entre 2 actions des autres, pour laisser le temps aux animations
+const PAUSES = { lente: 3500, normale: 2000, rapide: 1000 }; // entre 2 actions des autres (réglage « Vitesse des bots »)
 const PAUSE_DUEL = 5000; // le temps de voir les dés rouler pis le résultat
 const PAUSE_FIN = 3000; // le temps de voir le dernier pion arriver
+
+// ?rapide dans l'adresse : encore plus vite, pour essayer.
+const pauseBots = () => (rapide ? 150 : PAUSES[salon.vitesseBots]);
 
 const attendre = (duree) => new Promise((continuer) => setTimeout(continuer, duree));
 
@@ -61,7 +64,7 @@ function commencerSelection(numero, joueurs) {
 async function choisirPourLesAutres() {
   while (selection.idChoisit !== selection.idMoi) {
     const avant = selection;
-    await attendre(PAUSE);
+    await attendre(pauseBots());
     if (selection !== avant) return; // une autre sélection a commencé entre-temps
     if (selection.idChoisit === null) {
       commencerCourse();
@@ -91,9 +94,9 @@ function prochaineEtape() {
   if (finie) return { pause: PAUSE_FIN, faire: finirCourse };
   if (duel?.valeurs) return { pause: PAUSE_DUEL, faire: () => changerPartie(jouerFinDuel(partie)) };
   if ((duel?.idDuelliste ?? idActif) === idMoi) return null;
-  if (duel) return { pause: PAUSE, faire: () => changerPartie(jouerReponseDuel(partie, true)) };
+  if (duel) return { pause: pauseBots(), faire: () => changerPartie(jouerReponseDuel(partie, true)) };
   const { type, cible } = choisirAction(partie);
-  return { pause: PAUSE, faire: () => changerPartie(jouerAction(partie, type, cible)) };
+  return { pause: pauseBots(), faire: () => changerPartie(jouerAction(partie, type, cible)) };
 }
 
 // Fait jouer les autres, jusqu'à ce que ça soit à moi ou que la course finisse.

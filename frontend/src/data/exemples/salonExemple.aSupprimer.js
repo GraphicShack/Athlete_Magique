@@ -3,6 +3,7 @@
 const SALON_EXEMPLE = {
   placesMax: 4,
   idHote: 'j1',
+  vitesseBots: 'normale', // 'lente' | 'normale' | 'rapide'
   statut: 'attente', // 'attente' | 'selection' | 'course' | 'fin'
   joueurs: [
     { id: 'j1', nom: 'Félix', hote: true, bot: false, pret: true },

@@ -17,6 +17,7 @@ const nommerHote = (joueurs, pseudo) => joueurs.map((joueur) => (joueur.hote ? {
 const REPONSES = {
   'salon:creer': (salon, { pseudo }) => ({ ...salon, statut: 'attente', joueurs: nommerHote(salon.joueurs, pseudo) }),
   'salon:places': (salon, { placesMax }) => ({ ...salon, placesMax }),
+  'salon:vitesse': (salon, { vitesse }) => ({ ...salon, vitesseBots: vitesse }),
   'salon:ajouterBot': (salon) => ({ ...salon, joueurs: ajouterBot(salon.joueurs) }),
   'salon:retirer': (salon, { idJoueur }) => ({ ...salon, joueurs: retirerJoueur(salon.joueurs, idJoueur) }),
   // Un seul salon existe ici, donc un autre code est refusé.

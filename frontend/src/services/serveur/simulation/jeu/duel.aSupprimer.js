@@ -32,12 +32,14 @@ export function proposerDuels(partie) {
 // La réponse du Duelliste : on passe au suivant, ou on lance les 2 dés (il gagne les égalités).
 export function repondreAuDuel(partie, accepter) {
   if (!partie.duel || partie.duel.valeurs) throw new Error("Il n'y a pas de duel à décider.");
-  if (!accepter) return ouvrirProchain(partie);
-
   const { idDuelliste, idCible } = partie.duel;
+  const adversaires = { acteur: idDuelliste, cible: idCible };
+  if (!accepter) return ouvrirProchain(noter(partie, 'DUEL_PASSE', adversaires));
+
+  const notee = noter(partie, 'DUEL_DECLARE', { ...adversaires, cause: parPouvoir('duelliste') });
   const valeurs = { [idDuelliste]: lancerUnDe(), [idCible]: lancerUnDe() };
   const gagnant = valeurs[idDuelliste] >= valeurs[idCible] ? idDuelliste : idCible;
-  return { ...partie, duel: { ...partie.duel, valeurs, gagnant } };
+  return { ...notee, duel: { ...partie.duel, valeurs, gagnant } };
 }
 
 // Le gagnant avance de 2 cases.
@@ -48,6 +50,11 @@ export function finirDuel(partie) {
     valeurCible: valeurs[idCible],
     gagnant: gagnant === idDuelliste ? 'acteur' : 'cible',
   };
-  const notee = noter({ ...partie, duel: null }, 'DUEL', { acteur: idDuelliste, cible: idCible, details });
+  const notee = noter({ ...partie, duel: null }, 'DUEL', {
+    acteur: idDuelliste,
+    cible: idCible,
+    cause: parPouvoir('duelliste'),
+    details,
+  });
   return deplacer(notee, gagnant, 2, { cause: parPouvoir('duelliste'), muet: true });
 }

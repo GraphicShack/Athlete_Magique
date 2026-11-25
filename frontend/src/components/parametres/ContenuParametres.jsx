@@ -5,10 +5,10 @@ import Bouton from '@/components/commun/ui/Bouton.jsx';
 import ChampTexte from '@/components/commun/ui/ChampTexte.jsx';
 import Interrupteur from '@/components/commun/ui/reglages/Interrupteur.jsx';
 import Curseur from '@/components/commun/ui/reglages/Curseur.jsx';
-import ChoixSegmente from '@/components/commun/ui/reglages/ChoixSegmente.jsx';
+import VitesseBots from './VitesseBots.jsx';
 import { Grille, Actions } from './ContenuParametres.styles.js';
 
-// Affiche les panneaux de réglages (branchés pour l'instant : ceux du son pis de l'affichage).
+// Affiche les panneaux de réglages (branchés pour l'instant : son, affichage pis vitesse des bots).
 // Props : son, affichage (les réglages), onEnregistrer (appelé au clic sur « Enregistrer »).
 function ContenuParametres({ son, affichage, onEnregistrer }) {
   return (
@@ -45,7 +45,7 @@ function ContenuParametres({ son, affichage, onEnregistrer }) {
         </Panneau>
 
         <Panneau titre="Partie" teinte="partie">
-          <ChoixSegmente etiquette="Vitesse des bots" options={['Lente', 'Normale', 'Rapide']} valeurParDefaut="Normale" />
+          <VitesseBots />
           <Interrupteur etiquette="Conseils pendant le tour" description="Rappels des règles au bon moment" defaultChecked />
           <Interrupteur etiquette="Confirmer avant de quitter" description="Pendant une course" defaultChecked />
         </Panneau>

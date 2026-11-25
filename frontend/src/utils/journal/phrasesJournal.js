@@ -1,6 +1,10 @@
 // Responsabilité : la phrase de base de chaque type d'événement.
 
+import { obtenirPiste } from '@/services/regles.js';
 import { nombreDeCases } from '@/utils/nombreDeCases.js';
+
+// « jusqu’à la case 12 », ou « jusqu’à l’arrivée » après la dernière case.
+const jusquA = (numero) => (numero > obtenirPiste().nombreCases ? 'jusqu’à l’arrivée' : `jusqu’à la case ${numero}`);
 
 export const PHRASES = {
   COURSE_DEBUT: ({ d }) => `La course ${d.numero} commence.`,
@@ -14,7 +18,7 @@ export const PHRASES = {
   DE_GARDE: ({ d, acteur }) => `${acteur} garde le ${d.valeur}.`,
   DEPLACEMENT_DOUBLE: ({ d, acteur }) => `${acteur} double son déplacement : ${nombreDeCases(d.cases)}, puis il trébuchera.`,
   ECHANGE_DEMANDE: ({ acteur }) => `${acteur} renonce au dé pour échanger sa place.`,
-  DEPLACEMENT: ({ d, acteur }) => `${acteur} avance de ${nombreDeCases(d.cases)}, jusqu’à la case ${d.a}.`,
+  DEPLACEMENT: ({ d, acteur }) => `${acteur} avance de ${nombreDeCases(d.cases)}, ${jusquA(d.a)}.`,
   RECUL: ({ d, acteur }) => `${acteur} recule de ${nombreDeCases(d.cases)}, jusqu’à la case ${d.a}.`,
   TELEPORTATION: ({ d, acteur }) => `${acteur} est téléporté sur la case ${d.a}.`,
   ECHANGE: ({ acteur, cible }) => `${acteur} échange sa place avec ${cible}.`,
@@ -22,6 +26,9 @@ export const PHRASES = {
   RELEVE: ({ acteur }) => `${acteur} se relève et saute son déplacement.`,
   SAUTE: ({ acteur }) => `${acteur} est seul en tête et saute son déplacement.`,
   ELIMINE: ({ acteur, cible }) => `${cible} est éliminé par ${acteur}.`,
+  POUVOIR_PASSE: ({ acteur }) => `${acteur} n’utilise pas son pouvoir.`,
+  DUEL_DECLARE: ({ acteur, cible }) => `${acteur} déclare un duel à ${cible}.`,
+  DUEL_PASSE: ({ acteur, cible }) => `${acteur} ne déclare pas de duel à ${cible}.`,
   DUEL: ({ d, acteur, cible }) =>
     `Duel : ${acteur} ${d.valeurActeur} contre ${cible} ${d.valeurCible}. ${d.gagnant === 'acteur' ? acteur : cible} avance de 2 cases.`,
   POINTS: ({ d, acteur }) => `${acteur} gagne ${d.points} point${d.points > 1 ? 's' : ''} (${d.raison}).`,
