@@ -3,11 +3,9 @@
 
 import CasePiste from './CasePiste.jsx';
 import Jeton from '@/components/commun/jeu/Jeton.jsx';
-import Gains from '@/components/commun/jeu/Gains.jsx';
 import { obtenirPiste } from '@/services/regles.js';
-import { gainsSurPiste } from '@/utils/piste/gainsSurPiste.js';
 import { positionSurPiste, RANG_DEPART, RANG_ARRIVEE } from '@/utils/piste/dispositionPiste.js';
-import { Plateau, Depart, Arrivee, Nom, Jetons, PlaceGains } from './Piste.styles.js';
+import { Plateau, Depart, Arrivee, Nom, Jetons } from './Piste.styles.js';
 
 // Les chiffres de la piste, fournis par le service.
 const PISTE = obtenirPiste();
@@ -21,12 +19,8 @@ const placeDans = (rang) => {
   return { $colonne: colonne, $rangee: rangee };
 };
 
-// Affiche le Départ, les 30 cases pis l'Arrivée, avec les jetons sur leur case pis les points gagnés par-dessus.
-function Piste({ jetons = [], rochers = [], gains = [], numerosVisibles = true }) {
-  const placesGains = gainsSurPiste(gains, jetons);
-  // Une case brille quand on y gagne des points.
-  const brille = (numero) => placesGains.some(({ rang }) => rang === numero);
-
+// Affiche le Départ, les 30 cases pis l'Arrivée, avec les jetons sur leur case.
+function Piste({ jetons = [], rochers = [], numerosVisibles = true }) {
   // Les jetons posés sur une case (ou null s'il n'y en a aucun).
   const jetonsSur = (position) => {
     const presents = jetons.filter((j) => j.position === position);
@@ -51,7 +45,7 @@ function Piste({ jetons = [], rochers = [], gains = [], numerosVisibles = true }
       </Depart>
 
       {NUMEROS.map((numero) => (
-        <CasePiste key={numero} numero={numero} type={typeCase(numero)} numeroVisible={numerosVisibles} brille={brille(numero)}>
+        <CasePiste key={numero} numero={numero} type={typeCase(numero)} numeroVisible={numerosVisibles}>
           {jetonsSur(numero)}
         </CasePiste>
       ))}
@@ -66,12 +60,6 @@ function Piste({ jetons = [], rochers = [], gains = [], numerosVisibles = true }
           </Jetons>
         )}
       </Arrivee>
-
-      {placesGains.map((place) => (
-        <PlaceGains key={place.rang} $colonne={place.colonne} $rangee={place.rangee}>
-          <Gains gains={place.gains} />
-        </PlaceGains>
-      ))}
     </Plateau>
   );
 }

@@ -65,20 +65,6 @@ export const Nom = styled.span`
   text-transform: uppercase;
 `;
 
-// Les points gagnés à une place : à cheval sur le haut de la case, par-dessus tout.
-export const PlaceGains = styled.div`
-  grid-column: ${({ $colonne }) => $colonne};
-  grid-row: ${({ $rangee }) => $rangee};
-  z-index: 2;
-  align-self: start;
-  justify-self: center;
-  height: 0;
-  display: flex;
-  align-items: flex-end;
-  translate: 0 0.75rem;
-  pointer-events: none;
-`;
-
 // Les jetons posés sur le Départ ou l'Arrivée, en bas de la case.
 export const Jetons = styled.div`
   position: absolute;

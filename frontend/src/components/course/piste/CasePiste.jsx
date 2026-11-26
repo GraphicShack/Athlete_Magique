@@ -5,8 +5,8 @@ import imageRocher from '@/assets/images/rocher.png';
 import { Carre, Numero, PetitNumero, Rocher, Jetons } from './CasePiste.styles.js';
 
 // Affiche la case à sa place dans la grille, avec ses jetons (children).
-// Props : numero, type ('normale', 'etoile' ou 'rocher'), numeroVisible (réglage des paramètres), brille, children.
-function CasePiste({ numero, type = 'normale', numeroVisible = true, brille = false, children }) {
+// Props : numero, type ('normale', 'etoile' ou 'rocher'), numeroVisible (réglage des paramètres), children.
+function CasePiste({ numero, type = 'normale', numeroVisible = true, children }) {
   const { colonne, rangee } = positionCase(numero);
   const repere = estRepere(numero);
   const grosNumero = repere || type === 'etoile'; // sinon, un petit dans le coin
@@ -18,7 +18,6 @@ function CasePiste({ numero, type = 'normale', numeroVisible = true, brille = fa
       $type={type}
       $repere={repere}
       $indice={indiceCouleur(numero)}
-      $brille={brille}
       aria-label={type === 'rocher' ? `Case ${numero}, rocher` : `Case ${numero}`}
     >
       {grosNumero && (

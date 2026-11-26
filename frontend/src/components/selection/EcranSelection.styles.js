@@ -4,6 +4,11 @@ import styled, { css } from 'styled-components';
 import { flottement } from '@/styles/animations/flottement.js';
 import CartePersonnage from '@/components/commun/jeu/CartePersonnage.jsx';
 
+// Le carrousel pis les confettis par-dessus.
+export const Choix = styled.div`
+  position: relative;
+`;
+
 // La carte d'un perso : elle flotte de 6 px si $flotte (voir styles/animations/flottement.js), en gris si $pris par un autre.
 export const CarteFlottante = styled(CartePersonnage)`
   --hauteur-flottement: -0.375rem;

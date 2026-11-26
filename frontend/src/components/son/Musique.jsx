@@ -1,35 +1,30 @@
-// Responsabilité : joue la musique de fond des menus (rien d'affiché).
-// Musique : « Lobby Loop » (assets/musique/musique-menu.mp3), générée avec Suno (IA), https://suno.com
+// Responsabilité : joue une musique en boucle, ou la met en pause (rien d'affiché).
 
 import { useEffect, useRef } from 'react';
-import { useLocation } from 'react-router-dom';
-import musique from '@/assets/musique/musique-menu.mp3';
-import CHEMINS from '@/chemins.js';
 
-// Joue ou met en pause la musique selon la page pis les réglages.
-function MusiqueMenu({ active, volume }) {
+// Props : source (le fichier), joue (true = elle joue), volume (0 à 100).
+function Musique({ source, joue, volume }) {
   const lecteur = useRef(null); // le lecteur audio, créé une seule fois
-  const { pathname } = useLocation(); // adresse de la page actuelle
-  const doitJouer = active && pathname !== CHEMINS.course; // musique voulue, et pas en course
 
   // Création du lecteur au premier affichage ; on l'arrête si le composant disparaît.
   useEffect(() => {
-    const audio = new Audio(musique);
+    const audio = new Audio(source);
+    audio.preload = 'none'; // téléchargée juste quand elle joue
     audio.loop = true;
     lecteur.current = audio;
     return () => audio.pause();
-  }, []);
+  }, [source]);
 
   // Le volume du lecteur va de 0 à 1 ; celui du curseur, de 0 à 100.
   useEffect(() => {
     lecteur.current.volume = volume / 100;
   }, [volume]);
 
-  // À chaque changement de page ou de réglage : on joue, ou on met en pause.
+  // Quand « joue » change : on joue, ou on met en pause.
   useEffect(() => {
     const audio = lecteur.current;
 
-    if (!doitJouer) {
+    if (!joue) {
       audio.pause();
       return undefined;
     }
@@ -48,9 +43,9 @@ function MusiqueMenu({ active, volume }) {
       document.removeEventListener('pointerdown', jouer);
       document.removeEventListener('keydown', jouer);
     };
-  }, [doitJouer]);
+  }, [joue]);
 
   return null;
 }
 
-export default MusiqueMenu;
+export default Musique;

@@ -9,7 +9,7 @@ import { Calque } from './FondAnime.styles.js';
 function FondAnime() {
   const { pathname } = useLocation(); // adresse de la page actuelle
 
-  // Pas de fond animé sur l'écran de course (même règle que la musique, voir MusiqueMenu.jsx).
+  // Pas de fond animé sur l'écran de course.
   if (pathname === CHEMINS.course) return null;
 
   // aria-hidden : purement décoratif, les lecteurs d'écran l'ignorent.

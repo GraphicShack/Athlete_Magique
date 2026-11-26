@@ -8,7 +8,7 @@ const SENSIBILITE_MOLETTE = 1 / 180; // nombre de cartes avancées par pixel de 
 const DELAI_CALAGE = 140; // ms sans mouvement du pavé avant de se caler sur une carte
 const SEUIL_CLIC = 5; // px : un déplacement plus petit est un simple clic
 
-// Renvoie la position du carrousel pis les gestionnaires à mettre sur la scène.
+// Renvoie la position du carrousel, aller (à une place) pis les gestionnaires à mettre sur la scène.
 function useDefilement({ indexActif, total, onChange }) {
   const [position, setPosition] = useState(indexActif); // position affichée (décimale)
   const [enMouvement, setEnMouvement] = useState(false); // true pendant un glisser ou un défilement
@@ -23,15 +23,19 @@ function useDefilement({ indexActif, total, onChange }) {
     setPosition(nouvellePosition);
   }
 
-  // Se caler sur la carte la plus proche, puis prévenir la page.
-  function caler() {
-    const arrondie = Math.round(positionActuelle.current);
-    setEnMouvement(false);
-    deplacer(arrondie);
-    onChange(modulo(arrondie, total));
+  // Aller à une place (elles continuent sans fin de chaque côté), puis prévenir la page.
+  function aller(place) {
+    deplacer(place);
+    onChange(modulo(place, total));
   }
 
-  // Quand la page change de carte (flèches, clic), on s'y rend par le chemin le plus court.
+  // Se caler sur la carte la plus proche.
+  function caler() {
+    setEnMouvement(false);
+    aller(Math.round(positionActuelle.current));
+  }
+
+  // Si la page change elle-même de carte, on s'y rend par le chemin le plus court.
   useEffect(() => {
     if (enMouvement) return;
     const ecart = ecartCirculaire(indexActif - positionActuelle.current, total);
@@ -93,6 +97,7 @@ function useDefilement({ indexActif, total, onChange }) {
   return {
     position,
     enMouvement,
+    aller,
     gestionnaires: {
       onPointerDown: surAppui,
       onPointerMove: surDeplacement,

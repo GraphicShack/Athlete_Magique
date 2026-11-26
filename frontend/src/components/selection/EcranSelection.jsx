@@ -10,7 +10,7 @@ import { choisirPersonnage } from '@/services/serveur/selection.js';
 import { lireSelection } from '@/utils/selection/lireSelection.js';
 import { messageSelection, libelleChoisir, textePris } from '@/utils/selection/textesSelection.js';
 import { texteNom } from '@/utils/textesJoueur.js';
-import { CarteFlottante, Marque, Consigne, Barre, Resume } from './EcranSelection.styles.js';
+import { CarteFlottante, Marque, Choix, Consigne, Barre, Resume } from './EcranSelection.styles.js';
 
 // Props : selection (reçue du serveur, voir README).
 function EcranSelection({ selection }) {
@@ -27,28 +27,31 @@ function EcranSelection({ selection }) {
         Course {course.numero} sur {course.nombreCourses}. Ordre de choix : {joueurs.map(texteNom).join(', ')}.
       </Consigne>
 
-      <Carrousel
-        elements={personnages}
-        indexActif={indexActif}
-        onChange={setIndexActif}
-        libelle={(personnage) => personnage.nom}
-        rendu={(personnage) => (
-          // Seule la carte du centre flotte.
-          <CarteFlottante
-            personnage={personnage}
-            format="portrait"
-            $flotte={personnage.id === auCentre.id}
-            $pris={personnage.prisPar && !personnage.choisiParMoi}
-          >
-            {personnage.prisPar && (
-              <Marque>
-                <Etiquette>{textePris(personnage)}</Etiquette>
-              </Marque>
-            )}
-            {personnage.choisiParMoi && <Confettis declencheur={personnage.id} />}
-          </CarteFlottante>
-        )}
-      />
+      <Choix>
+        <Carrousel
+          elements={personnages}
+          indexActif={indexActif}
+          onChange={setIndexActif}
+          libelle={(personnage) => personnage.nom}
+          rendu={(personnage) => (
+            // Seule la carte du centre flotte.
+            <CarteFlottante
+              personnage={personnage}
+              format="portrait"
+              $flotte={personnage.id === auCentre.id}
+              $pris={personnage.prisPar && !personnage.choisiParMoi}
+            >
+              {personnage.prisPar && (
+                <Marque>
+                  <Etiquette>{textePris(personnage)}</Etiquette>
+                </Marque>
+              )}
+            </CarteFlottante>
+          )}
+        />
+        {/* Par-dessus le centre, où est la carte qu'on vient de choisir. */}
+        <Confettis declencheur={mesPersonnages.at(-1)?.id} />
+      </Choix>
 
       <Barre>
         <Resume aria-live="polite">
